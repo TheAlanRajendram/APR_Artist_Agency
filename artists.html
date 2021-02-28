@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>APR Artist Agency - Artists</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <script src="js/nav.js"></script>
-    <title>APR Artist Agency</title>
 </head>
 <body>
-    <header>
-        <a href="index.html"><img src="img/logo_dark.png" width="147" height="69"></a> 
-    </header>
+    <div class="topnav" id="myTopnav">
+        <div>
+            <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>   
+            <a href="about.html">About</a>
+            <a href="artists.html" active="active">Artists</a>
+            <a href="models.html">Models</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
 
-    <div class="topnav dark" id="myTopnav">
-        <a href="about.html" class="dark">About</a>
-        <a href="artists.html" class="active dark">Artists</a>
-        <a href="models.html" class="dark">Models</a>
-        <a href="contact.html" class="dark">Contact</a>
-        <a href="javascript:void(0);" class="icon dark" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
-    </div>    
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="models.html">Models</a>
+        <a href="contact.html">Contact</a>
+    </div>
 
     <section>
         <!-- Photo Grid -->
@@ -35,6 +44,5 @@
             </div>
         </div>
     </section>
-
 </body>
 </html>

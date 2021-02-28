@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>APR Artist Agency - Nish</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <title>APR Artist Agency</title>
+    <base href="../">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
 
-    <header>
-        <a href="../index.html"><img src="../img/logo_light.png" width="147" height="69"></a> 
-    </header>
+    <div class="topnav" id="myTopnav">
+        <div>
+            <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>   
+            <a href="about.html">About</a>
+            <a href="artists.html">Artists</a>
+            <a href="models.html">Models</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
 
-    <nav id="main">
-        <ul>
-            <li><a href="../about.html">About</a></li>
-            <li><a href="../artists.html">Artists</a></li>
-            <li><a href="../models.html">Models</a></li>
-            <li><a href="../contact.html">Contact</a></li>
-        </ul>
-    </nav>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="models.html">Models</a>
+        <a href="contact.html">Contact</a>
+    </div>
 
     <!-- Photo Grid -->
     <div class="row">
         <div class="column">
-            <img src="../img/Nish.jpg" style="width: 25%;"> 
+            <img src="img/Nish.jpg" style="width: 25%;"> 
         </div>
     </div>
 

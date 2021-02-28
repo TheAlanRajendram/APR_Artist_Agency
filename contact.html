@@ -9,20 +9,27 @@
     <title>APR Artist Agency</title>
 </head>
 <body>
-
-    <header>
-        <a href="index.html"><img src="img/logo_dark.png" width="147" height="69"></a>  
-    </header>
-
-    <div class="topnav dark" id="myTopnav">
-        <a href="about.html" class="dark">About</a>
-        <a href="artists.html" class="dark">Artists</a>
-        <a href="models.html" class="dark">Models</a>
-        <a href="contact.html" class="active dark">Contact</a>
-        <a href="javascript:void(0);" class="icon dark" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
+    <div class="topnav" id="myTopnav">
+        <div>
+            <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>   
+            <a href="about.html">About</a>
+            <a href="artists.html">Artists</a>
+            <a href="models.html">Models</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
     </div>
 
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="models.html">Models</a>
+        <a href="contact.html">Contact</a>
+    </div>
 </body>
 </html>
