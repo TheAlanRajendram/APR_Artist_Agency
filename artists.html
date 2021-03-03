@@ -3,46 +3,55 @@
 <head>
     <title>APR Artist Agency - Artists</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/common.css">
     <script src="js/nav.js"></script>
 </head>
 <body>
-    <div class="topnav" id="myTopnav">
-        <div>
-            <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>   
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <div class="vertical-center">
+                <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>
+                <a href="about.html">About</a>
+                <a href="artists.html" class="active">Artists</a>
+                <a href="models.html">Models</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="vertical-center">
+                <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="about.html">About</a>
-            <a href="artists.html" active="active">Artists</a>
+            <a href="artists.html">Artists</a>
             <a href="models.html">Models</a>
             <a href="contact.html">Contact</a>
         </div>
+    </nav>
+
+    <main>
+        <div class="gallery-grid">
+            <figure class="gallery-frame">
+                <a href="artists/nish.html"><img class="gallery-img" src="img/Nish/Nish_profile.jfif"></a>
+                <figcaption>Nish</figcaption>
+            </figure>
+            <figure class="gallery-frame">
+                <a href="#"><img class="gallery-img" src="img/Ishydee/Ishydee_profile.jfif"></a>
+                <figcaption>Ishydee</figcaption>
+            </figure>
+        </div>
+    </main>
+
+    <div class=footer>
+        <a href="mailto:priyanka.rajendram@apr-artistagency.com">Email Us</a>
         <div>
-            <a href="javascript:void(0);" class="icon" onclick="openNav()">
-                <i class="fa fa-bars"></i>
-            </a>
+            <a href="https://www.instagram.com/priyankarajen/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
     </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="about.html">About</a>
-        <a href="artists.html">Artists</a>
-        <a href="models.html">Models</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
-    <section>
-        <!-- Photo Grid -->
-        <div class="row">
-            <div class="column">
-                <div class="container">
-                    <a href="artists/nish.html"><img src="img/Nish.jpg" class="image"></a>
-                    <div class="name">Nish</div>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 </html>

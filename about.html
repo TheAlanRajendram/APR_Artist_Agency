@@ -1,45 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>APR Artist Agency - About</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/dark_style.css">
+    <link rel="stylesheet" href="css/common.css">
     <script src="js/nav.js"></script>
 </head>
-<body id="background_about">
-    <div class="topnav" id="myTopnav">
-        <div>
-            <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>   
-            <a href="about.html" class="active">About</a>
+
+<body>
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <div class="vertical-center">
+                <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>
+                <a href="about.html" class="active">About</a>
+                <a href="artists.html">Artists</a>
+                <a href="models.html">Models</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="about.html">About</a>
             <a href="artists.html">Artists</a>
             <a href="models.html">Models</a>
             <a href="contact.html">Contact</a>
         </div>
+    </nav>
+
+    <main class="background-white">
+        <article>
+            <h1>About Us</h1>
+            <p>
+                APR Artist Agency is a home for a global roster of some of the world's
+                premier talents, we focus on getting our talent the recognition they deserve.
+                We are passionate and generate opportunities for our clients and partners
+                along with the unique creative visions of the artists we represent.
+            </p>
+            <p>
+                The agency was founded in 2020 by Priyanka Rajendram. With her expertise in
+                client relationships, brand partnerships and events management working for
+                world renowned companies such as Wembley National Stadium, Marriott, Barclays
+                and hosting multiple A list celebrities at the O2 arena, her and her team helps
+                the artist and models shaping an integral part of their career.
+            </p>
+        </article>
+        <article>
+            <h1>Services</h1>
+            <p>
+                Our services focus on bringing our talented artist and models together with the
+                leading global brands through brand partnership. This elevates our client’s
+                careers, while also focusing on our brand partners, helping them shape public
+                perception by connecting them to the world of entertainment and media and drive
+                engagement for both parties. <br> 
+                APR artist agency works globally, getting our clients performances, connecting 
+                our clients to opportunities in print, digital, commercials and campaigns. 
+                With our clients inventing news ways to work, inspire and connect, we help them 
+                shaping their talent, careers and telling stories to inspire the world.
+            </p>
+        </article>
+    </main>
+
+    <div class=footer>
+        <a href="mailto:priyanka.rajendram@apr-artistagency.com">Email Us</a>
         <div>
-            <a href="javascript:void(0);" class="icon" onclick="openNav()">
-                <i class="fa fa-bars"></i>
-            </a>
+            <a href="https://www.instagram.com/priyankarajen/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
     </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="about.html">About</a>
-        <a href="artists.html">Artists</a>
-        <a href="models.html">Models</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
-    <article>
-        <h1 class="show-small">About</h1>
-        <p> APR Artist Agency is a home for a global roster of some of the world's premier talents, 
-            we focus on getting our talent the recognition they deserve. We are passionate and 
-            generate opportunities for our clients and partners along with the unique creative 
-            visions of the artists we represent.
-        </p>
-    </article>
 </body>
+
 </html>

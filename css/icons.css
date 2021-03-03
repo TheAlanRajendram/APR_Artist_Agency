@@ -1,15 +1,15 @@
 /* Container needed to position the overlay. Adjust the width as needed */
 .container {
-  position: relative;
-  width: 50%;
-  max-width: 300px;
+  /* position: relative; */
+  width: 100%;
+  max-height: 100%;
 }
 
 /* Make the image to responsive */
 .image {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 50%;
+  height: 50%;
 }
 
 /* The overlay effect - lays on top of the container and over the image */
@@ -36,41 +36,15 @@
   text-align: center;
 }
 
-.row {
-  display: -ms-flexbox; /* IE 10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE 10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
+.grid-container {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
 }
 
-/* Create two equal columns that sits next to each other */
-.column {
-  -ms-flex: 50%; /* IE 10 */
-  flex: 50%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-}
-
-/* Style the buttons */
-.btn {
-  border: none;
-  outline: none;
-  padding: 10px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.btn:hover {
-  background-color: #ddd;
-}
-
-.btn.active {
-  background-color: #666;
-  color: white;
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+  text-align: center;
 }
