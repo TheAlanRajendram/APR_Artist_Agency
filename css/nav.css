@@ -33,7 +33,7 @@
     display: none;
 }
   
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 615px) {
     .topnav a {display: inline;}
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
