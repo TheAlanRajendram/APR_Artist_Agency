@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+// @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 .contact-form {
     margin-top: 2rem;
@@ -15,7 +15,6 @@ textarea {
     border-radius: 10px;
     background-clip: padding-box;
     display: block;
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     color: #fff;
     padding-left: 1rem;
@@ -23,6 +22,10 @@ textarea {
     padding-top: 12px;
     margin-bottom: 20px;
     overflow: hidden;
+}
+
+#Message {
+    height: 10rem;
 }
 
 select {
@@ -36,7 +39,6 @@ select {
     background-color: rgba(0, 0, 0, .4);
     margin-bottom: 20px;
     display: block;
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     appearance: none;
 }
@@ -53,7 +55,6 @@ select {
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     display: block;
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     color: #fff;
     padding-left: 20px;
@@ -97,7 +98,6 @@ textarea:focus {
 .btn {
     margin-top: 1rem;
     border: none;
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     width: 96px;
     height: 32px;
@@ -106,7 +106,7 @@ textarea:focus {
     cursor: pointer;
     font-weight: 700;
     outline: none;
-    border-radius: 5px;s
+    border-radius: 5px;
 
     &:hover {
         background: #fff;
