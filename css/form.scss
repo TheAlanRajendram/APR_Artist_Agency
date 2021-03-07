@@ -1,0 +1,124 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+.contact-form {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: minmax(300px, 600px);
+    justify-content: center;    
+}
+
+textarea {
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background-clip: padding-box;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 1rem;
+    padding-right: 20px;
+    padding-top: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+select {
+    line-height: 1.5;
+    font-size: 1.4em;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    display: block;
+    background: transparent;
+    background-color: rgba(0, 0, 0, .4);
+    margin-bottom: 20px;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    appearance: none;
+}
+
+.nameinput,
+.emailinput {
+    width: 100%;
+    height: 48px;
+    border: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+input {
+    &.nameinput {
+        background: rgba(0, 0, 0, 0.4);
+        padding-left: 1rem;
+    }
+    &.emailinput {
+        background: rgba(0, 0, 0, 0.4);
+        padding-left: 1rem;
+    }
+    &.message {
+        background: rgba(0, 0, 0, 0.4);
+        padding-left: 1rem;
+    }
+}
+
+select.indent {
+    padding-left: 45px;
+    cursor: pointer;
+}
+
+input:focus,
+textarea:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+    -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+    overflow: hidden;
+}
+
+.btn {
+    margin-top: 1rem;
+    border: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    width: 96px;
+    height: 32px;
+    color: #000;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    outline: none;
+    border-radius: 5px;s
+
+    &:hover {
+        background: #fff;
+        outline: none;
+        box-shadow: 0 4px #cecece;
+        top: 2px;
+    }
+
+    &:active {
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 #cecece;
+        top: 6px;
+    }
+}
