@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -18,8 +20,8 @@
         height: auto;
         object-fit: cover;
 
-        transform-origin: 0 0;
-        transition: transform .25s, visibility .25s ease-in;
+        @include transform-origin(0 0);
+        @include transition(transform .25s visibility .25s ease-in);
 
         &:hover {
             transform: scale(1.2);

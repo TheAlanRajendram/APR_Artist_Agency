@@ -29,6 +29,13 @@
   background-size: cover;
 }
 
+/*
+
+  Mixins
+  Author - Andy Crone | @andycrone_
+  + Popular mixins including vendor prefixes for cross-browser support
+
+*/
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -48,8 +55,12 @@
   width: 100%;
   height: auto;
   object-fit: cover;
+  -o-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
-  transition: transform 0.25s, visibility 0.25s ease-in;
+  -webkit-transition: transform 0.25s visibility 0.25s ease-in;
+  transition: transform 0.25s visibility 0.25s ease-in;
 }
 .gallery-frame img:hover {
   transform: scale(1.2);
