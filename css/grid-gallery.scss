@@ -21,7 +21,7 @@
         object-fit: cover;
 
         @include transform-origin(0 0);
-        @include transition(transform 0.3s ease-in);
+        @include transition(transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000));
         
         &:hover {
             @include transform(scale(1.2));
