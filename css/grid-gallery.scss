@@ -21,10 +21,10 @@
         object-fit: cover;
 
         @include transform-origin(0 0);
-        @include transition(transform .25s visibility .25s ease-in);
-
+        @include transition(transform 0.3s ease-in);
+        
         &:hover {
-            transform: scale(1.2);
+            @include transform(scale(1.2));
             opacity: 0.7;
         }
     }
@@ -34,7 +34,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, 0);
+    @include transform(translate(-50%, 0));
     font-size: 2rem;
     width: 100%;
     background: rgba(black,0.7);
