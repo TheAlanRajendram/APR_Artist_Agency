@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+
+.grid:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.grid-col {
+  float: left;
+  width: 49%;
+  margin-right: 2%;
+}
+
+.grid-col--3 { margin-right: 0; }
+
+/* hide middle */
+.grid-col--2 { display: none; }
+
+@media ( min-width: 768px ) {
+  .grid-col { display: block; }
+}
+
+@media ( min-width: 1000px ) {
+  .grid-col { width: 32%; }
+  .grid-col--2 { display: block; }
+}
+
+.grayscale {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
