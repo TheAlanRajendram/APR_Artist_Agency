@@ -41,3 +41,29 @@
     background: rgba(black,0.7);
     color: rgba(white, 0.6);
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    justify-content: center;
+}
+  .column {
+    flex: 33%;
+    max-width: 33%;
+    padding: 0 4px;
+
+    img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}
