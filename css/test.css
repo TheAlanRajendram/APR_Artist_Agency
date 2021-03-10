@@ -1,0 +1,12 @@
+  .bg-image {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Images used */
+  .about_img1 { background-image: url("../img/About/01_about.jpg"); }
+  .about_img2 { background-image: url("../img/About/02_about.jpg"); }
+  .about_img3 { background-image: url("../img/About/03_about.jpg"); }
+  .about_img4 { background-image: url("../img/About/04_about.jpg"); }
