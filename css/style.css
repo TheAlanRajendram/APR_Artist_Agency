@@ -29,6 +29,13 @@
   background-size: cover;
 }
 
+.bg {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -234,10 +241,13 @@ textarea:focus {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: "Baloo 2", sans-serif;
   margin: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #121212;
@@ -257,8 +267,6 @@ footer {
 }
 
 main {
-  padding: 1rem;
-  max-width: 160ch;
   margin: 0 auto;
 }
 
@@ -278,12 +286,32 @@ a {
 
 .fa {
   text-decoration: none;
-  font-size: 24px;
+  font-size: 32px;
   padding: 4px;
 }
-
 .fa:hover {
   opacity: 0.7;
+}
+
+.tidal {
+  background: url("../img/tidal.svg") no-repeat bottom;
+  background-size: 32px 32px;
+}
+
+.deezer {
+  background: url("../img/deezer.svg") no-repeat center;
+  background-size: 32px 32px;
+}
+
+.apple-music {
+  background: url("../img/apple-music.svg") no-repeat center;
+  background-size: 32px 32px;
+}
+
+.nish-logo {
+  background: url("../img/Nish/Nish_logo.svg") no-repeat center;
+  background-size: 4rem 4rem;
+  margin-right: 2rem;
 }
 
 .topnav, .topnav-transparent {
@@ -371,6 +399,61 @@ a {
   .sidenav a {
     font-size: 18px;
   }
+}
+
+.icon-bar {
+  position: fixed;
+  background-color: rgba(30, 30, 30, 0.7);
+  top: 50%;
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding-top: 1rem;
+  right: 0;
+}
+.icon-bar a {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */
