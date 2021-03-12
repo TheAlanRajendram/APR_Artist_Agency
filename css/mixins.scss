@@ -25,6 +25,15 @@
     background-size: $value;
 }
 
+@mixin radial-gradient2($from, $to1, $to2) {
+    background: -o-radial-gradient($from, $to1, $to2);
+    background: -webkit-radial-gradient($from, $to1, $to2);
+    background: -moz-radial-gradient($from, $to1, $to2);
+    background: radial-gradient($from, $to1, $to2);
+	background-color: $from;
+}
+
+
 @mixin linear-gradient($angle, $gradient1, $gradient2) {
     background-color: $gradient2;
     /* Fallback Color */
@@ -65,17 +74,18 @@
     transform-origin: $value;
 }
 
-@mixin animation($name, $duration, $timing, $type) {
-    -o-animation: $name $duration $timing $type;
-    -moz-animation: $name $duration $timing $type;
-    -webkit-animation: $name $duration $timing $type;
-    animation: $name $duration $timing $type;
+@mixin animation($value) {
+    -o-animation: $value;
+    -moz-animation: $value;
+    -webkit-animation: $value;
+    animation: $value;
 }
 
 @mixin animation-delay($value) {
     -o-animation: $value;
     -moz-animation: $value;
     -webkit-animation: $value;
+    -ms-animation: $value;
     animation: $value;
 }
 

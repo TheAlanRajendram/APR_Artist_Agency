@@ -1,6 +1,7 @@
 @use 'background';
 @use 'grid-gallery';
 @use 'form';
+@use 'text_animation';
 @import 'mixins';
 
 $colorPrimary: white;
@@ -44,7 +45,6 @@ footer {
 }
 
 main {
-    position: relative;
     margin: 0 auto;
 }
 
@@ -208,7 +208,7 @@ a {
     }
 }
 
-.container {
+.grid-container {
     position: relative;
     text-align: center;
     color: white;
