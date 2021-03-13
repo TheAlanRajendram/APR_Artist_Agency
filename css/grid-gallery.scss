@@ -45,10 +45,20 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 4px;
     justify-content: center;
 }
-  .column {
+
+.column-2 {
+    flex: 50%;
+    max-width: 50%;
+
+    img {
+        vertical-align: middle;
+        width: 100%;
+    }
+}
+
+.column-3 {
     flex: 33%;
     max-width: 33%;
     padding: 0 4px;

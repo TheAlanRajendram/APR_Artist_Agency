@@ -52,11 +52,6 @@ h1 {
     font-size: 4rem;
 }
 
-// p {
-//     font-size: 1.125rem;
-//     line-height: 1.5;
-// }
-
 a {
     color: $colorOnBackground;
     text-decoration: none;
@@ -240,4 +235,16 @@ a {
     position: absolute;
     bottom: 8px;
     right: 16px;
+}
+
+.flip-horizontal {
+    transform: scaleX(-1);
+}
+
+article {
+    font-family: Graphik,sans-serif;
+    font-weight: 400;
+    font-size: 1.84874rem;
+    color: #313131;
+    width: 50%;
 }
