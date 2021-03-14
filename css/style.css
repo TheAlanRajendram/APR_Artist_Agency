@@ -1,10 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow");
+@import url("https://fonts.googleapis.com/css?family=Barlow");
 #backgroundVideo {
   position: absolute;
-  top: 0%;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background-position: center;
   object-fit: cover;
   z-index: -1;
 }
@@ -34,34 +32,20 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-.bg.white {
-  background: #714ba4;
-  top: 0%;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.bg-white {
+  background: #f8f8f8;
 }
 
 .fullscreen-ex-nav {
   position: relative;
   height: calc(100vh - 82px);
+  overflow: hidden;
 }
 
 .fullscreen {
   position: relative;
   height: 100vh;
   display: flex;
-}
-
-.overlay {
-  position: absolute;
-  background: black;
-  top: 0%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
 }
 
 .gallery-grid {
@@ -158,6 +142,9 @@
   display: grid;
   grid-template-columns: minmax(300px, 600px);
   justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-family: EurostileNextLTPro-Light, AvenirLTPro-Roman, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 textarea {
@@ -248,28 +235,22 @@ textarea:focus {
 
 .btn {
   margin-top: 1rem;
-  border: none;
-  font-size: 18px;
-  width: 96px;
-  height: 32px;
-  color: #000;
-  background: #fff;
+  color: transparent;
+  text-shadow: 0px 0px 1px #ab8850;
+  padding: 1rem 6rem 1rem;
+  border: 4px #ab8850 solid;
+  text-align: center;
+  background: none;
+  font-size: 24px;
   cursor: pointer;
-  font-weight: 700;
-  outline: none;
-  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.4);
 }
-.btn:hover {
-  background: #fff;
+.btn:hover, .btn:active {
+  background: #ab8850;
   outline: none;
-  box-shadow: 0 4px #cecece;
+  box-shadow: 0 0 #ab8850;
   top: 2px;
-}
-.btn:active {
-  background: #fff;
-  outline: none;
-  box-shadow: 0 0 #cecece;
-  top: 6px;
+  color: white;
 }
 
 .sp-container {
@@ -294,26 +275,26 @@ textarea:focus {
   text-shadow: 0px 0px 1px #868686;
 }
 .sp-container h2.frame-2 span:nth-child(2) {
-  animation-delay: 1.5s;
+  animation-delay: 1.25s;
 }
 .sp-container h2.frame-2 span:nth-child(3) {
-  animation-delay: 2s;
+  animation-delay: 1.5s;
 }
 .sp-container h2.frame-2 span:nth-child(4) {
-  animation-delay: 2.5s;
+  animation-delay: 1.75s;
 }
 .sp-container h2.frame-2 span:nth-child(5) {
-  animation-delay: 3s;
+  animation-delay: 2s;
 }
 .sp-container h2.frame-2 span:nth-child(6) {
-  animation-delay: 3.5s;
+  animation-delay: 2.25s;
 }
 .sp-container h2.frame-2 span:nth-child(7) {
-  animation-delay: 4s;
+  animation-delay: 2.5s;
 }
 .sp-container h2.frame-3 {
-  animation-delay: 4s;
-  margin-top: 10rem;
+  animation-delay: 2.75s;
+  margin-top: 8rem;
 }
 .sp-container h2.frame-3 span {
   color: transparent;
@@ -338,25 +319,23 @@ textarea:focus {
 }
 
 body {
-  font-family: "Baloo 2", sans-serif;
+  font-family: Avenir;
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #121212;
-  color: white;
+  background-color: black;
+  color: #868686;
 }
 
 footer {
   margin-top: auto;
 }
 
-header,
 footer {
   display: grid;
   place-items: center;
   background-color: #1e1e1e;
-  color: white;
 }
 
 main {
@@ -364,11 +343,12 @@ main {
 }
 
 h1 {
-  font-size: 4rem;
+  color: #ab8850;
+  font-size: 3rem;
 }
 
-a {
-  color: white;
+p, a {
+  color: #868686;
   text-decoration: none;
 }
 
@@ -376,6 +356,10 @@ a {
   background: url("../img/Nish/Nish_logo.svg") no-repeat center;
   background-size: 4rem 4rem;
   margin-right: 2rem;
+}
+
+#logo:hover {
+  border-bottom: none;
 }
 
 .topnav, .topnav-transparent {
@@ -391,7 +375,6 @@ a {
 .topnav a, .topnav-transparent a {
   float: left;
   display: block;
-  color: #a8a8a8;
   text-align: center;
   padding: 16px 16px;
   text-decoration: none;
@@ -399,9 +382,10 @@ a {
   font-size: 16px;
 }
 .topnav a:hover, .topnav-transparent a:hover {
-  color: white;
+  border-bottom: 2px solid #ab8850;
 }
 .topnav a.active, .topnav-transparent a.active {
+  border-bottom: 2px solid #ab8850;
   color: white;
 }
 .topnav > div, .topnav-transparent > div {
@@ -469,6 +453,7 @@ a {
   text-decoration: none;
   font-size: 24px;
   align-items: center;
+  color: white;
 }
 .fa:hover {
   opacity: 0.7;
@@ -554,12 +539,109 @@ a {
   transform: scaleX(-1);
 }
 
-article {
-  font-family: Graphik, sans-serif;
-  font-weight: 400;
-  font-size: 1.84874rem;
-  color: #313131;
-  width: 50%;
+.horizontal-gap {
+  padding-left: 1rem;
+}
+
+.new-release {
+  color: white;
+  text-align: center;
+}
+.new-release h1 {
+  color: white;
+  letter-spacing: 0.5em;
+  margin: 1em 1em 0.5em;
+}
+@media screen and (max-width: 12000px) {
+  .new-release h1 {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h1 {
+    font-size: 2em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h1 {
+    font-size: 1.5em;
+  }
+}
+.new-release h2 {
+  letter-spacing: 0.25em;
+  margin: 0 1em 0.5em;
+}
+@media screen and (max-width: 12000px) {
+  .new-release h2 {
+    font-size: 2em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h2 {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h2 {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 12000px) {
+  .new-release h3 {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h3 {
+    font-size: 1.25em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h3 {
+    font-size: 1em;
+  }
+}
+.new-release span {
+  color: white;
+}
+@media screen and (max-width: 12000px) {
+  .new-release span {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release span {
+    font-size: 1.25em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release span {
+    font-size: 1em;
+  }
+}
+
+.site-wrap {
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  text-align: justify;
+}
+
+.card-wrap {
+  display: flex;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+  height: 100vh;
+  overflow: hidden;
+}
+.card-wrap img {
+  width: 100%;
+  padding: 1em;
+}
+.card-wrap p {
+  font-size: 1.5em;
+}
+.card-wrap h1 {
+  font-size: 2em;
 }
 
 /*# sourceMappingURL=style.css.map */

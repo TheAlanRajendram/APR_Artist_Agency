@@ -2,46 +2,31 @@
 @use 'grid-gallery';
 @use 'form';
 @use 'text_animation';
+@use 'variables' as *; 
 @import 'mixins';
-
-$colorPrimary: white;
-$colorPrimaryVariant: rgb(168,168,168);
-$colorSecondary: black;
-$colorSecondaryVariant: black;
-$colorBackground: #121212;
-$colorSurface: rgb(30, 30, 30);
-$colorOnPrimary:black;
-$colorOnSecondary: black;
-$colorOnBackground: white;
-$colorOnSurface:white;
-
-$iconSize: 24px;
-$iconSizeSmall: 16px;
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: "Baloo 2", sans-serif;
+    font-family: $fontText;
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: $colorBackground;
-    color: $colorPrimary;
+    color: $colorSecondary;
 }
 
 footer {
     margin-top: auto;
 }
 
-header,
 footer {
     display: grid;
     place-items: center;
     background-color: $colorSurface;
-    color: $colorPrimary;
 }
 
 main {
@@ -49,11 +34,12 @@ main {
 }
 
 h1 {
-    font-size: 4rem;
+    color: $colorPrimary;
+    font-size: 3rem;
 }
 
-a {
-    color: $colorOnBackground;
+p, a {
+    color: $colorSecondary;
     text-decoration: none;
 }
 
@@ -61,6 +47,12 @@ a {
     background: url("../img/Nish/Nish_logo.svg") no-repeat center;
     background-size: 4rem 4rem;
     margin-right: 2rem;
+}
+
+#logo {
+    &:hover {
+        border-bottom: none;
+    }
 }
 
 .topnav {
@@ -78,7 +70,6 @@ a {
     a {
         float: left;
         display: block;
-        color: $colorPrimaryVariant;
         text-align: center;
         padding: 16px 16px;
         text-decoration: none;
@@ -86,10 +77,11 @@ a {
         font-size: 16px;
 
         &:hover {
-            color: $colorPrimary;
+            border-bottom: 2px solid $colorPrimary;
         }
         &.active {
-            color: $colorPrimary;
+            border-bottom: 2px solid $colorPrimary;
+            color: white;
         }
     }
 
@@ -165,6 +157,7 @@ a {
     text-decoration: none;
     font-size: $iconSize;
     align-items: center;
+    color: $colorPrimaryVariant;
 
     &:hover {
         opacity: 0.7;
@@ -241,10 +234,90 @@ a {
     transform: scaleX(-1);
 }
 
-article {
-    font-family: Graphik,sans-serif;
-    font-weight: 400;
-    font-size: 1.84874rem;
-    color: #313131;
-    width: 50%;
+.horizontal-gap {
+    padding-left: 1rem;
+}
+
+.new-release {
+    color: white;
+    text-align: center; 
+
+    h1 {
+        color: white;
+        letter-spacing: 0.5em;
+        margin: 1em 1em 0.5em;
+        @media screen and (max-width: 12000px) {
+            font-size: 3em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 2em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1.5em;
+        }
+    }
+    h2 {
+        letter-spacing: 0.25em;
+        margin: 0 1em 0.5em;
+        @media screen and (max-width: 12000px) {
+            font-size: 2em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+    h3 {
+        @media screen and (max-width: 12000px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.25em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+    span {
+        color: white;
+        @media screen and (max-width: 12000px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.25em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+
+}
+
+.site-wrap {
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    text-align: justify;
+}
+
+.card-wrap {
+    display: flex;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+    height: 100vh;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        padding: 1em;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
 }

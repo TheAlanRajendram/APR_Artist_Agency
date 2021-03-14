@@ -1,10 +1,14 @@
-// @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@use 'variables' as *;
+@import url('https://fonts.googleapis.com/css?family=Barlow');
 
 .contact-form {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: minmax(300px, 600px);
-    justify-content: center;    
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 }
 
 textarea {
@@ -97,28 +101,22 @@ textarea:focus {
 
 .btn {
     margin-top: 1rem;
-    border: none;
-    font-size: 18px;
-    width: 96px;
-    height: 32px;
-    color: #000;
-    background: #fff;
+    color: transparent;
+    text-shadow: 0px 0px 1px $colorPrimary;
+    padding: 1rem 6rem 1rem;
+    border: 4px $colorPrimary solid;
+    text-align: center;
+    background: none;
+    font-size: 24px;
     cursor: pointer;
-    font-weight: 700;
-    outline: none;
-    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.4); 
 
-    &:hover {
-        background: #fff;
-        outline: none;
-        box-shadow: 0 4px #cecece;
-        top: 2px;
-    }
-
+    &:hover,
     &:active {
-        background: #fff;
+        background: $colorPrimary;
         outline: none;
-        box-shadow: 0 0 #cecece;
-        top: 6px;
+        box-shadow: 0 0 $colorPrimary;
+        top: 2px;
+        color: white;
     }
 }

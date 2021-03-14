@@ -1,9 +1,5 @@
+@use 'variables' as *;
 @import url('https://fonts.googleapis.com/css?family=Barlow');
-@import 'mixins';
-
-$colorPrimary: rgb(171,136,80);
-$colorSecondary: rgb(134,134,134);
-
 
 .sp-container {
   margin: auto;
@@ -16,7 +12,7 @@ $colorSecondary: rgb(134,134,134);
   }  
 
   h2.frame-1 {
-	animation-delay: 0s;	  
+	animation-delay: 0s;
   }
 
   h2.frame-2 {
@@ -28,17 +24,17 @@ $colorSecondary: rgb(134,134,134);
 	  text-shadow: 0px 0px 1px $colorSecondary;
     }
 
-	span:nth-child(2) { animation-delay: 1.5s; }
-	span:nth-child(3) { animation-delay: 2s; }
-	span:nth-child(4) { animation-delay: 2.5s; }
-	span:nth-child(5) { animation-delay: 3s; }
-	span:nth-child(6) { animation-delay: 3.5s; }
-	span:nth-child(7) { animation-delay: 4s; }
+	span:nth-child(2) { animation-delay: 1.25s; }
+	span:nth-child(3) { animation-delay: 1.5s; }
+	span:nth-child(4) { animation-delay: 1.75s; }
+	span:nth-child(5) { animation-delay: 2s; }
+	span:nth-child(6) { animation-delay: 2.25s; }
+	span:nth-child(7) { animation-delay: 2.5s; }
   }
 
   h2.frame-3 {
-	animation-delay: 4s;
-	margin-top: 10rem;
+	animation-delay: 2.75s;
+	margin-top: 8rem;
 	span {
 		color: transparent;
 		text-shadow: 0px 0px 1px $colorPrimary;

@@ -10,22 +10,25 @@
 </head>
 
 <body>
-    <nav>
-        <div class="topnav" id="myTopnav">
-            <div class="vertical-center">
-                <a href="index.html"><img src="img/logo_light.png" width="98" height="46"></a>
-                <a href="about.html">About</a>
-                <a href="artists.html">Artists</a>
-                <a href="models.html">Models</a>
-                <a href="contact.html" class="active">Contact</a>
-            </div>
-            <div>
-                <a href="javascript:void(0);" class="icon" onclick="openNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
+    <nav class="topnav" id="myTopnav">
+        <div>
+            <a href="home.html" id="logo"><img src="img/logo_light.png" width="98px" height="auto"></a>
+            <div class="horizontal-gap"></div>
+            <a href="about.html">About</a>
+            <div class="horizontal-gap"></div>
+            <a href="artists.html">Artists</a>
+            <div class="horizontal-gap"></div>
+            <a href="models.html">Models</a>
+            <div class="horizontal-gap"></div>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="icon" onclick="openNav()">
+                <i class="fa fa-bars"></i>
+            </a>
         </div>
     </nav>
+
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn nav-link" onclick="closeNav()">&times;</a>
@@ -37,7 +40,8 @@
         <a href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
     </div>
 
-    <main class="background_contact">
+    <div class="background_contact">
+        <h1 style="text-align: center;">Get in touch</h1>
         <form class="contact-form" action="https://formspree.io/f/mzbklljo" method="POST">
             <div class="Name">
                 <input type="text" id="Name" name="Name" class="nameinput" placeholder="Name">
@@ -49,10 +53,12 @@
                 <textarea id="Message" name="Message" placeholder="Message"></textarea>
             </div>
             <div>
-                <input type="submit" value="Send" class="btn">
+                <span>
+                    <input type="submit" value="Submit" class="btn">
+                </span>
             </div>
         </form>
-    </main>
+    </div>
 
     <footer>
         <a href="mailto:priyanka.rajendram@apr-artistagency.com">Email Us</a>
