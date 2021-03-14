@@ -9,19 +9,18 @@
 </head>
 
 <body>
-    <nav class="topnav" id="myTopnav">
-        <div>
-            <a href="index.html" id="logo"><img src="img/logo_light.png" width="98px" height="auto"></a>
-            <div class="horizontal-gap"></div>
-            <a href="about.html">About</a>
-            <div class="horizontal-gap"></div>
-            <a href="artists.html">Artists</a>
-            <div class="horizontal-gap"></div>
-            <a href="models.html">Models</a>
-            <div class="horizontal-gap"></div>
-            <a href="contact.html">Contact</a>
+    <nav class="topnav-transparent" id="myTopnav">
+        <div class="color-white">
+            <a href="index.html" id="logo"><img src="img/logo_white.png" width="150px" height="auto"></a>
         </div>
-        <div>
+        <div class="color-white"> 
+            <a href="artists.html" class="intro">Artists</a>
+            <div class="horizontal-gap"></div>
+            <a href="models.html" class="intro">Models</a>
+            <div class="horizontal-gap"></div>
+            <a href="about.html" class="intro">About</a>
+            <div class="horizontal-gap"></div>
+            <a href="contact.html" class="intro">Contact</a>
             <a href="javascript:void(0);" class="icon" onclick="openNav()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -38,12 +37,15 @@
         <a href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
     </div>
 
-    <div class="fullscreen-ex-nav">
+    <div class="video-overlay"></div>
+    <!-- <div class="fullscreen"> -->
         <video autoplay muted loop id="backgroundVideo" >
             <source src="videos/background.mp4" type="video/mp4">
+            <track src="videos/test.vtt" kind="subtitles" srclang="en" label="English" />
             Your browser does not support HTML5 video.
         </video>
-    </div>
+    
+    <!-- </div>  -->
 
 <!-- 
     <footer>

@@ -1,5 +1,6 @@
 @use 'variables' as *;
-@import url('https://fonts.googleapis.com/css?family=Barlow');
+
+$bgColorTextArea: rgba(0, 0, 0, .6);
 
 .contact-form {
     margin-top: 2rem;
@@ -8,11 +9,10 @@
     justify-content: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 }
 
 textarea {
-    background: rgba(0, 0, 0, 0.4);
+    background: $bgColorTextArea;
     width: 100%;
     height: 100%;
     border: none;
@@ -40,7 +40,7 @@ select {
     color: #fff;
     display: block;
     background: transparent;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: $bgColorTextArea;
     margin-bottom: 20px;
     display: block;
     font-size: 18px;
@@ -72,15 +72,15 @@ input[type=submit] {
 
 input {
     &.nameinput {
-        background: rgba(0, 0, 0, 0.4);
+        background: $bgColorTextArea;
         padding-left: 1rem;
     }
     &.emailinput {
-        background: rgba(0, 0, 0, 0.4);
+        background: $bgColorTextArea;
         padding-left: 1rem;
     }
     &.message {
-        background: rgba(0, 0, 0, 0.4);
+        background: $bgColorTextArea;
         padding-left: 1rem;
     }
 }

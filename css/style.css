@@ -2,8 +2,21 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow");
 #backgroundVideo {
   position: absolute;
-  background-position: center;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  z-index: -2;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: -1;
 }
 
@@ -144,11 +157,10 @@
   justify-content: center;
   padding-left: 1rem;
   padding-right: 1rem;
-  font-family: EurostileNextLTPro-Light, AvenirLTPro-Roman, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 textarea {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
   border: none;
@@ -176,7 +188,7 @@ select {
   color: #fff;
   display: block;
   background: transparent;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   margin-bottom: 20px;
   display: block;
   font-size: 18px;
@@ -207,15 +219,15 @@ input[type=submit] {
 }
 
 input.nameinput {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   padding-left: 1rem;
 }
 input.emailinput {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   padding-left: 1rem;
 }
 input.message {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   padding-left: 1rem;
 }
 
@@ -318,13 +330,17 @@ textarea:focus {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: Avenir;
+  font-family: EurostileNextLTPro-Light, AvenirLTPro-Roman, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: #141414;
   color: #868686;
 }
 
@@ -352,6 +368,14 @@ p, a {
   text-decoration: none;
 }
 
+.color-gold a {
+  color: #ab8850;
+}
+
+.color-white a {
+  color: white;
+}
+
 .nish-logo {
   background: url("../img/Nish/Nish_logo.svg") no-repeat center;
   background-size: 4rem 4rem;
@@ -368,6 +392,8 @@ p, a {
   justify-content: space-between;
   align-items: center;
   background: #1e1e1e;
+  margin: 0 1rem 0;
+  background: none;
 }
 .topnav-transparent {
   background: none;
@@ -376,10 +402,10 @@ p, a {
   float: left;
   display: block;
   text-align: center;
-  padding: 16px 16px;
+  padding: 1rem 1rem;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .topnav a:hover, .topnav-transparent a:hover {
   border-bottom: 2px solid #ab8850;
@@ -388,15 +414,15 @@ p, a {
   border-bottom: 2px solid #ab8850;
   color: white;
 }
+.topnav a.intro, .topnav-transparent a.intro {
+  font-size: 1.5em;
+}
 .topnav > div, .topnav-transparent > div {
   display: flex;
   align-items: center;
 }
-@media screen and (max-width: 750px) {
-  .topnav a, .topnav-transparent a {
-    display: inline;
-  }
-  .topnav a:not(:first-child), .topnav-transparent a:not(:first-child) {
+@media screen and (max-width: 775px) {
+  .topnav a:not(#logo, .icon), .topnav-transparent a:not(#logo, .icon) {
     display: none;
   }
   .topnav a.icon, .topnav-transparent a.icon {
@@ -620,6 +646,10 @@ p, a {
   }
 }
 
+.dark-bg-text h1 {
+  color: #868686;
+}
+
 .site-wrap {
   width: 60%;
   height: 100%;
@@ -642,6 +672,34 @@ p, a {
 }
 .card-wrap h1 {
   font-size: 2em;
+}
+
+.scroll {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  animation: down 1.5s infinite;
+}
+.scroll::before {
+  content: "";
+  margin-top: auto;
+  top: 15px;
+  left: 18px;
+  width: 18px;
+  height: 18px;
+  border-left: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(-45deg);
+}
+
+.text-box {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

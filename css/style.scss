@@ -4,13 +4,18 @@
 @use 'text_animation';
 @use 'variables' as *; 
 @import 'mixins';
+@import url('https://fonts.googleapis.com/css?family=Barlow');
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: $fontText;
+    font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -43,6 +48,9 @@ p, a {
     text-decoration: none;
 }
 
+.color-gold {a { color: $colorPrimary;}}
+.color-white {a { color: white;}}
+
 .nish-logo {
     background: url("../img/Nish/Nish_logo.svg") no-repeat center;
     background-size: 4rem 4rem;
@@ -61,7 +69,9 @@ p, a {
     justify-content: space-between;
     align-items: center;
     background: $colorSurface;
-
+    margin: 0 1rem 0;
+    background: none;
+    
     &-transparent {
         @extend .topnav;
         background: none;
@@ -71,10 +81,10 @@ p, a {
         float: left;
         display: block;
         text-align: center;
-        padding: 16px 16px;
+        padding: 1rem 1rem;
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 16px;
+        font-size: 1rem;
 
         &:hover {
             border-bottom: 2px solid $colorPrimary;
@@ -83,6 +93,10 @@ p, a {
             border-bottom: 2px solid $colorPrimary;
             color: white;
         }
+
+        &.intro {
+            font-size: 1.5em;
+        }
     }
 
     > div {
@@ -90,12 +104,12 @@ p, a {
         align-items: center;
     }
 
-    @media screen and (max-width: 750px) {
-        a {
-            display: inline;
-        }
+    @media screen and (max-width: 775px) {
+        // a {
+        //     display: inline;
+        // }
     
-        a:not(:first-child) {
+        a:not(#logo,.icon) {
             display: none;
         }
     
@@ -295,6 +309,10 @@ p, a {
 
 }
 
+.dark-bg-text {
+    h1 {color: $colorSecondary;}
+}
+
 .site-wrap {
     width: 60%;
     height: 100%;
@@ -320,4 +338,34 @@ p, a {
     h1 {
         font-size: 2em;
     }
+}
+
+.scroll {
+	width: 60px;
+	height: 60px;
+	border: 2px solid #333;
+	border-radius: 50%;
+	animation: down 1.5s infinite;
+    
+	&::before {
+		content: '';
+		// position: absolute;
+        margin-top: auto;
+		top: 15px;
+		left: 18px;
+		width: 18px;
+		height: 18px;
+		border-left: 2px solid #333;
+  	    border-bottom: 2px solid #333;
+		transform: rotate(-45deg);
+	}
+}
+
+.text-box {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
 }
