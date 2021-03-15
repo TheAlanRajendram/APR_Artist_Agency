@@ -1,6 +1,8 @@
+@use 'layout';
 @use 'background';
 @use 'grid-gallery';
 @use 'form';
+@use 'artist';
 @use 'text_animation';
 @use 'variables' as *; 
 @import 'mixins';
@@ -16,26 +18,8 @@ html {
 
 body {
     font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     background-color: $colorBackground;
     color: $colorSecondary;
-}
-
-footer {
-    margin-top: auto;
-}
-
-footer {
-    display: grid;
-    place-items: center;
-    background-color: $colorSurface;
-}
-
-main {
-    margin: 0 auto;
 }
 
 h1 {
@@ -202,6 +186,7 @@ p, a {
     top: 50%;
     right: 0px;
     padding-top: 1rem;
+    z-index: 100;
 
     a {
         display: block;
@@ -216,97 +201,12 @@ p, a {
     color: white;
   }
 
-/* Bottom left text */
-    .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-}
-
-/* Top left text */
-    .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-}
-
-/* Top right text */
-    .top-right {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-}
-
-/* Bottom right text */
-    .bottom-right {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
-}
-
 .flip-horizontal {
     transform: scaleX(-1);
 }
 
 .horizontal-gap {
     padding-left: 1rem;
-}
-
-.new-release {
-    color: white;
-    text-align: center; 
-
-    h1 {
-        color: white;
-        letter-spacing: 0.5em;
-        margin: 1em 1em 0.5em;
-        @media screen and (max-width: 12000px) {
-            font-size: 3em;
-        }
-        @media screen and (max-width: 850px) {
-            font-size: 2em;
-        }
-        @media screen and (max-width: 650px) {
-            font-size: 1.5em;
-        }
-    }
-    h2 {
-        letter-spacing: 0.25em;
-        margin: 0 1em 0.5em;
-        @media screen and (max-width: 12000px) {
-            font-size: 2em;
-        }
-        @media screen and (max-width: 850px) {
-            font-size: 1.5em;
-        }
-        @media screen and (max-width: 650px) {
-            font-size: 1em;
-        }
-    }
-    h3 {
-        @media screen and (max-width: 12000px) {
-            font-size: 1.5em;
-        }
-        @media screen and (max-width: 850px) {
-            font-size: 1.25em;
-        }
-        @media screen and (max-width: 650px) {
-            font-size: 1em;
-        }
-    }
-    span {
-        color: white;
-        @media screen and (max-width: 12000px) {
-            font-size: 1.5em;
-        }
-        @media screen and (max-width: 850px) {
-            font-size: 1.25em;
-        }
-        @media screen and (max-width: 650px) {
-            font-size: 1em;
-        }
-    }
-
 }
 
 .dark-bg-text {

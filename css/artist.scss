@@ -1,0 +1,65 @@
+.artist-page {
+    position: relative;
+    text-align: center;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.new-release {
+    color: white;
+    text-align: center;
+    
+    h1 {
+        color: white;
+        letter-spacing: 0.5em;
+        margin: 1em 1em 0.5em;
+        @media screen and (max-width: 12000px) {
+            font-size: 3em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 2em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1.5em;
+        }
+    }
+    h2 {
+        letter-spacing: 0.25em;
+        margin: 0 1em 0.5em;
+        @media screen and (max-width: 12000px) {
+            font-size: 2em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+    h3 {
+        @media screen and (max-width: 12000px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.25em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+    span {
+        color: white;
+        @media screen and (max-width: 12000px) {
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 850px) {
+            font-size: 1.25em;
+        }
+        @media screen and (max-width: 650px) {
+            font-size: 1em;
+        }
+    }
+}

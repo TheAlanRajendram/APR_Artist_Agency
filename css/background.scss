@@ -43,24 +43,11 @@
 
 .bg {
     position: relative;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
 
     &-white {
-        background: rgb(248,248,248);
+        background: white;
     }
-}
-
-.fullscreen-ex-nav {
-    position: relative;
-    height: calc(100vh - 82px);
-    // border: 2px solid red;
-    overflow: hidden;
-}
-
-.fullscreen {
-    position: relative;
-    height: 100vh;
-    display: flex;
 }

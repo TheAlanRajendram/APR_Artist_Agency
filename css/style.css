@@ -1,5 +1,69 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow");
 @import url("https://fonts.googleapis.com/css?family=Barlow");
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  display: grid;
+  place-items: center;
+  margin-top: auto;
+  background-color: #1e1e1e;
+}
+
+.one-page {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.one-page-with-nav {
+  position: relative;
+  height: calc(100vh - 129px);
+  display: flex;
+  overflow: hidden;
+}
+
+.fullscreen {
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #backgroundVideo {
   position: absolute;
   top: 0%;
@@ -41,28 +105,17 @@
 
 .bg {
   position: relative;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .bg-white {
-  background: #f8f8f8;
-}
-
-.fullscreen-ex-nav {
-  position: relative;
-  height: calc(100vh - 82px);
-  overflow: hidden;
-}
-
-.fullscreen {
-  position: relative;
-  height: 100vh;
-  display: flex;
+  background: white;
 }
 
 .gallery-grid {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1rem;
   justify-content: center;
@@ -265,6 +318,92 @@ textarea:focus {
   color: white;
 }
 
+.artist-page {
+  position: relative;
+  text-align: center;
+}
+.artist-page img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.new-release {
+  color: white;
+  text-align: center;
+}
+.new-release h1 {
+  color: white;
+  letter-spacing: 0.5em;
+  margin: 1em 1em 0.5em;
+}
+@media screen and (max-width: 12000px) {
+  .new-release h1 {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h1 {
+    font-size: 2em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h1 {
+    font-size: 1.5em;
+  }
+}
+.new-release h2 {
+  letter-spacing: 0.25em;
+  margin: 0 1em 0.5em;
+}
+@media screen and (max-width: 12000px) {
+  .new-release h2 {
+    font-size: 2em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h2 {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h2 {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 12000px) {
+  .new-release h3 {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release h3 {
+    font-size: 1.25em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release h3 {
+    font-size: 1em;
+  }
+}
+.new-release span {
+  color: white;
+}
+@media screen and (max-width: 12000px) {
+  .new-release span {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 850px) {
+  .new-release span {
+    font-size: 1.25em;
+  }
+}
+@media screen and (max-width: 650px) {
+  .new-release span {
+    font-size: 1em;
+  }
+}
+
 .sp-container {
   margin: auto;
 }
@@ -336,26 +475,8 @@ html {
 
 body {
   font-family: EurostileNextLTPro-Light, AvenirLTPro-Roman, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background-color: #141414;
   color: #868686;
-}
-
-footer {
-  margin-top: auto;
-}
-
-footer {
-  display: grid;
-  place-items: center;
-  background-color: #1e1e1e;
-}
-
-main {
-  margin: 0 auto;
 }
 
 h1 {
@@ -520,6 +641,7 @@ p, a {
   top: 50%;
   right: 0px;
   padding-top: 1rem;
+  z-index: 100;
 }
 .icon-bar a {
   display: block;
@@ -533,117 +655,12 @@ p, a {
   color: white;
 }
 
-/* Bottom left text */
-.bottom-left {
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
-}
-
-/* Top left text */
-.top-left {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-}
-
-/* Top right text */
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-}
-
-/* Bottom right text */
-.bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-}
-
 .flip-horizontal {
   transform: scaleX(-1);
 }
 
 .horizontal-gap {
   padding-left: 1rem;
-}
-
-.new-release {
-  color: white;
-  text-align: center;
-}
-.new-release h1 {
-  color: white;
-  letter-spacing: 0.5em;
-  margin: 1em 1em 0.5em;
-}
-@media screen and (max-width: 12000px) {
-  .new-release h1 {
-    font-size: 3em;
-  }
-}
-@media screen and (max-width: 850px) {
-  .new-release h1 {
-    font-size: 2em;
-  }
-}
-@media screen and (max-width: 650px) {
-  .new-release h1 {
-    font-size: 1.5em;
-  }
-}
-.new-release h2 {
-  letter-spacing: 0.25em;
-  margin: 0 1em 0.5em;
-}
-@media screen and (max-width: 12000px) {
-  .new-release h2 {
-    font-size: 2em;
-  }
-}
-@media screen and (max-width: 850px) {
-  .new-release h2 {
-    font-size: 1.5em;
-  }
-}
-@media screen and (max-width: 650px) {
-  .new-release h2 {
-    font-size: 1em;
-  }
-}
-@media screen and (max-width: 12000px) {
-  .new-release h3 {
-    font-size: 1.5em;
-  }
-}
-@media screen and (max-width: 850px) {
-  .new-release h3 {
-    font-size: 1.25em;
-  }
-}
-@media screen and (max-width: 650px) {
-  .new-release h3 {
-    font-size: 1em;
-  }
-}
-.new-release span {
-  color: white;
-}
-@media screen and (max-width: 12000px) {
-  .new-release span {
-    font-size: 1.5em;
-  }
-}
-@media screen and (max-width: 850px) {
-  .new-release span {
-    font-size: 1.25em;
-  }
-}
-@media screen and (max-width: 650px) {
-  .new-release span {
-    font-size: 1em;
-  }
 }
 
 .dark-bg-text h1 {
