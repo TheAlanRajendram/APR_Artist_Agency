@@ -1,5 +1,6 @@
-@use 'layout';
 @use 'background';
+@use 'layout';
+@use 'nav';
 @use 'grid-gallery';
 @use 'form';
 @use 'artist';
@@ -33,78 +34,11 @@ p, a {
 }
 
 .color-gold {a { color: $colorPrimary;}}
-.color-white {a { color: white;}}
 
 .nish-logo {
     background: url("../img/Nish/Nish_logo.svg") no-repeat center;
     background-size: 4rem 4rem;
     margin-right: 2rem;
-}
-
-#logo {
-    &:hover {
-        border-bottom: none;
-    }
-}
-
-.topnav {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $colorSurface;
-    margin: 0 1rem 0;
-    background: none;
-    
-    &-transparent {
-        @extend .topnav;
-        background: none;
-    }
-
-    a {
-        float: left;
-        display: block;
-        text-align: center;
-        padding: 1rem 1rem;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-size: 1rem;
-
-        &:hover {
-            border-bottom: 2px solid $colorPrimary;
-        }
-        &.active {
-            border-bottom: 2px solid $colorPrimary;
-            color: white;
-        }
-
-        &.intro {
-            font-size: 1.5em;
-        }
-    }
-
-    > div {
-        display: flex;
-        align-items: center;
-    }
-
-    @media screen and (max-width: 775px) {
-        // a {
-        //     display: inline;
-        // }
-    
-        a:not(#logo,.icon) {
-            display: none;
-        }
-    
-        a.icon {
-            display: inline;
-        }
-    }
-
-    & .icon {
-        display: none;
-    }
 }
 
 .sidenav {
