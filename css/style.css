@@ -412,23 +412,20 @@ select.indent {
 input:focus,
 textarea:focus {
   background-color: rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.5);
-  -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.5);
   overflow: hidden;
 }
 
 .btn {
   margin-top: 1rem;
+  padding: 1rem 6rem 1rem;
+  text-align: center;
+  font-size: 24px;
   color: transparent;
   text-shadow: 0px 0px 1px #ab8850;
-  padding: 1rem 6rem 1rem;
   border: 4px #ab8850 solid;
-  text-align: center;
-  background: none;
-  font-size: 24px;
-  cursor: pointer;
   background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 .btn:hover, .btn:active {
   background: #ab8850;
@@ -436,6 +433,13 @@ textarea:focus {
   box-shadow: 0 0 #ab8850;
   top: 2px;
   color: white;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 1;
 }
 
 .artist-page {
