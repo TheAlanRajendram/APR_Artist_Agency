@@ -1,76 +1,63 @@
 @use 'variables' as *;
 
 .topnav {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $colorSurface;
-    margin: 0 0.5rem 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0;
+  background: $colorSurface;
+
+  &-transparent {
+    @extend .topnav;
     background: none;
+  }
 
   a {
-      position: relative;
-      display: block;
-      text-align: center;
-      padding: 1rem 0.5rem;
-      margin: 0 1.5rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 1rem;
+    position: relative;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    margin: 0 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1rem;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%) scaleX(0);
-        transform-origin: 50% 50%;
-        width: 100%;
-        height: 1px;
-        background-color: $colorPrimary;
-        transition: transform 250ms;
-      }
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: 50% 50%;
+      width: 100%;
+      height: 1px;
+      background-color: $colorPrimary;
+      transition: transform 250ms;
+    }
       
-      &:hover:not(.active, #logo) {   
-        &::after {
-          transform: translateX(-50%) scaleX(1);
-        }
-      }
+    &:hover:not(.active, #logo) {   
+      &::after { transform: translateX(-50%) scaleX(1); }
+    }
 
-      &.active {
-        color: white;
-        &::after {
-          transform: translateX(-50%) scaleX(1);
-        }          
-      }
+    &.active {
+      color: white;
+      &::after { transform: translateX(-50%) scaleX(1); }          
+    }
 
-      &.intro {
-        color: white;
-      }
+    &.intro { color: white; }
   }
 
   > div {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
-  @media screen and (max-width: 775px) {
-    a {
-      margin: 0;
-    }
-    a:not(#logo,.icon) {
-      display: none;
-    }
-
-    a.icon {
-      display: inline;
-    }
+  @media screen and (max-width: 950px) {
+    a { margin: 0; }
+    a:not(#logo, .icon) { display: none; }
+    a.icon { display: inline; }
   }
-
-  & .icon {
-    display: none;
-  }
+  & .icon { display: none; }
 }
 
 .sidenav {
@@ -111,8 +98,5 @@
 
   @media screen and (max-height: 450px) {
     padding-top: 15px;
-    a {
-        font-size: 18px;
-    }
-  }
+    a { font-size: 18px; } }
 }

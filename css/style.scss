@@ -4,6 +4,7 @@
 @use 'grid-gallery';
 @use 'form';
 @use 'artist';
+@use 'about';
 @use 'text_animation';
 @use 'variables' as *; 
 @import 'mixins';
@@ -97,54 +98,6 @@ p, a {
 
 .dark-bg-text {
     h1 {color: $colorSecondary;}
-}
-
-.site-wrap {
-    width: 60%;
-    height: 100%;
-    margin: auto;
-    text-align: justify;
-}
-
-.card-wrap {
-    display: flex;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
-    height: 100vh;
-    overflow: hidden;
-
-    img {
-        width: 100%;
-        padding: 1em;
-    }
-
-    p {
-        font-size: 1.5em;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-}
-
-.scroll {
-	width: 60px;
-	height: 60px;
-	border: 2px solid #333;
-	border-radius: 50%;
-	animation: down 1.5s infinite;
-    
-	&::before {
-		content: '';
-		// position: absolute;
-        margin-top: auto;
-		top: 15px;
-		left: 18px;
-		width: 18px;
-		height: 18px;
-		border-left: 2px solid #333;
-  	    border-bottom: 2px solid #333;
-		transform: rotate(-45deg);
-	}
 }
 
 .text-box {

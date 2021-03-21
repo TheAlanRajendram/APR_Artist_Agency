@@ -16,16 +16,14 @@ footer {
 
 .one-page {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  overflow: hidden;
 }
 
 .one-page-with-nav {
   position: relative;
-  height: calc(100vh - 129px);
+  min-height: calc(100vh - 83px);
   display: flex;
-  overflow: hidden;
 }
 
 .fullscreen {

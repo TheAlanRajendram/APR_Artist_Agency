@@ -1,0 +1,57 @@
+@use 'variables' as *;
+
+.card-wrap {
+  width: 90%;
+  margin: auto;
+
+  .textarea { grid-area: textarea; }
+  .image-pos { grid-area: image-pos; }
+
+  .grid-img-l, .grid-img-r {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  .grid-img-l { grid-template: 'image-pos textarea'};
+  .grid-img-r { grid-template: 'textarea image-pos'};
+
+  @media screen and (max-width: 950px) {
+    .grid-img-l, .grid-img-r { 
+        grid-template: 
+          'image-pos'
+          'textarea';
+    }
+  }
+
+  .textarea {
+    padding: 2rem;
+
+    p { font-size: 1.5em; }
+    h1 {
+      position: relative;
+      font-size: 3em;
+      font-weight: 200px;
+      padding-bottom: 32px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0; 
+        left: 0;
+        width: 88px;
+        height: 6px;
+        background-color: $colorPrimary;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 1em;
+  }
+}

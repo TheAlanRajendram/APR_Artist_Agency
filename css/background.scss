@@ -8,7 +8,6 @@
     height: 100%;
     object-fit: cover;
     z-index: -2;
-
 }
 
 .video-overlay {
@@ -46,8 +45,12 @@
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
+}
 
-    &-white {
-        background: white;
-    }
+.bg-white {
+  background: white;
+}
+
+.bg-white2 {
+    background: $colorBgWhite2;
 }
