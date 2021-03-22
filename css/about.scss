@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .card-wrap {
-  width: 90%;
+  max-width: 1750px;
   margin: auto;
 
   .textarea { grid-area: textarea; }
@@ -9,7 +9,6 @@
 
   .grid-img-l, .grid-img-r {
     display: grid;
-    width: 100%;
     grid-template-columns: repeat(auto-fit, 1fr);
     grid-gap: 8px;
     justify-content: center;
@@ -18,21 +17,24 @@
   .grid-img-l { grid-template: 'image-pos textarea'};
   .grid-img-r { grid-template: 'textarea image-pos'};
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1050px) {
     .grid-img-l, .grid-img-r { 
         grid-template: 
           'image-pos'
           'textarea';
+        // grid-template-columns: none;
+        // grid-template-rows: repeat(auto-fit, 1fr);
     }
   }
 
   .textarea {
     padding: 2rem;
+    max-width: 600px;
+    margin: auto;
+    @media screen and (max-width: 1000px) { font-size: 3em; }
 
-    p { font-size: 1.5em; }
     h1 {
       position: relative;
-      font-size: 3em;
       font-weight: 200px;
       padding-bottom: 32px;
 
@@ -46,12 +48,31 @@
         background-color: $colorPrimary;
       }
     }
+
+    h1 {
+      @media screen and (min-width: 1201px) { font-size: 3rem; }
+      @media screen and (max-width: 1200px) { font-size: 3rem; }
+      @media screen and (max-width: 1050px) { font-size: 2.5rem; }
+      @media screen and (max-width: 850px) { font-size: 2rem; }
+      @media screen and (max-width: 650px) { font-size: 1.5rem; }
+    }
+
+    p {
+      @media screen and (min-width: 1201px) { font-size: 1.75rem; }
+      @media screen and (max-width: 1200px) { font-size: 1.5rem; }
+      @media screen and (max-width: 1050px) { font-size: 1.25rem; }
+      @media screen and (max-width: 850px) { font-size: 1.0rem; }
+    }
   }
 
   img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    padding: 1em;
+    height: 100vh;
+    object-fit: contain;
+    padding-top: 1rem;
+
+    @media screen and (max-width: 1050px) {
+      height: 50vh;
+    }
   }
 }
