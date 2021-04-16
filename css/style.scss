@@ -1,120 +1,120 @@
-@use 'background';
-@use 'layout';
-@use 'nav';
-@use 'grid-gallery';
-@use 'form';
-@use 'artist';
-@use 'about';
-@use 'text_animation';
-@use 'variables' as *; 
-@import 'mixins';
-@import url('https://fonts.googleapis.com/css?family=Barlow');
+@use '_base';
+@use '_layouts';
+@use '_themes';
+@use 'modules/_btn';
+@use 'modules/_animation';
+@use 'modules/_nav';
+@use 'modules/_splash_page';
+@use 'modules/_video';
 
-* {
-    box-sizing: border-box;
-}
+// @use 'background';
+// @use 'layout';
+// @use 'nav';
+// @use 'grid-gallery';
+// @use 'form';
+// @use 'artist';
+// @use 'about';
+// @use 'text_animation';
+// @use 'variables' as *; 
+// @import 'mixins';
+// @import url('https://fonts.googleapis.com/css?family=Barlow');
 
-html {
-    scroll-behavior: smooth;
-}
+// body {
+//     font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+//     background-color: $colorBackground;
+//     color: $colorSecondary;
+// }
 
-body {
-    font-family: EurostileNextLTPro-Light,AvenirLTPro-Roman,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-    background-color: $colorBackground;
-    color: $colorSecondary;
-}
+// body { 
+//   animation: fadeInAnimation ease 2s;
+//   animation-iteration-count: 1; 
+//   animation-fill-mode: forwards; 
+// } 
+// @keyframes fadeInAnimation { 
+//   0% { opacity: 0; } 
+//  100% { opacity: 1; } 
+// } 
 
-body { 
-  animation: fadeInAnimation ease 2s;
-  animation-iteration-count: 1; 
-  animation-fill-mode: forwards; 
-} 
-@keyframes fadeInAnimation { 
-  0% { opacity: 0; } 
- 100% { opacity: 1; } 
-} 
+// h1 {
+//     color: $colorPrimary;
+//     font-size: 3rem;
+// }
 
-h1 {
-    color: $colorPrimary;
-    font-size: 3rem;
-}
+// p, a {
+//     color: $colorSecondary;
+// }
 
-p, a {
-    color: $colorSecondary;
-    text-decoration: none;
-}
+// .color-gold {a { color: $colorPrimary;}}
 
-.color-gold {a { color: $colorPrimary;}}
+// .nish-logo {
+//     background: url("../img/Nish/Nish_logo.svg") no-repeat center;
+//     background-size: 4rem 4rem;
+//     margin-right: 2rem;
+// }
 
-.nish-logo {
-    background: url("../img/Nish/Nish_logo.svg") no-repeat center;
-    background-size: 4rem 4rem;
-    margin-right: 2rem;
-}
+// .fa {
+//     text-decoration: none;
+//     font-size: $iconSize;
+//     align-items: center;
+//     color: $colorPrimaryVariant;
 
-.fa {
-    text-decoration: none;
-    font-size: $iconSize;
-    align-items: center;
-    color: $colorPrimaryVariant;
+//     &:hover {
+//         opacity: 0.7;
+//     }
+// }
 
-    &:hover {
-        opacity: 0.7;
-    }
-}
+// .tidal { background: url("../img/tidal.svg") no-repeat bottom; }
+// .deezer { background: url("../img/deezer.svg") no-repeat center; }
+// .apple-music { background: url("../img/apple-music.svg") no-repeat center; }
 
-.tidal { background: url("../img/tidal.svg") no-repeat bottom; }
-.deezer { background: url("../img/deezer.svg") no-repeat center; }
-.apple-music { background: url("../img/apple-music.svg") no-repeat center; }
+// .tidal, .deezer, .apple-music {
+//     background-size: $iconSize $iconSize;
+//     height: $iconSize;
 
-.tidal, .deezer, .apple-music {
-    background-size: $iconSize $iconSize;
-    height: $iconSize;
+//     @media screen and (max-width: 450px) {
+//         background-size: $iconSizeSmall $iconSizeSmall;
+//     }
 
-    @media screen and (max-width: 450px) {
-        background-size: $iconSizeSmall $iconSizeSmall;
-    }
+//     &:hover {
+//         opacity: 0.7;
+//     }
+// }
 
-    &:hover {
-        opacity: 0.7;
-    }
-}
+// .icon-bar {
+//     position: fixed;
+//     background-color: rgba($colorSurface, 0.7);
+//     @include transform(translateY(-50%));
+//     top: 50%;
+//     right: 0px;
+//     padding-top: 1rem;
+//     z-index: 100;
 
-.icon-bar {
-    position: fixed;
-    background-color: rgba($colorSurface, 0.7);
-    @include transform(translateY(-50%));
-    top: 50%;
-    right: 0px;
-    padding-top: 1rem;
-    z-index: 100;
+//     a {
+//         display: block;
+//         align-items: center;
+//         padding: 16px;
+//     }
+// }
 
-    a {
-        display: block;
-        align-items: center;
-        padding: 16px;
-    }
-}
+// .grid-container {
+//     position: relative;
+//     text-align: center;
+//     color: white;
+//   }
 
-.grid-container {
-    position: relative;
-    text-align: center;
-    color: white;
-  }
+// .flip-horizontal {
+//     transform: scaleX(-1);
+// }
 
-.flip-horizontal {
-    transform: scaleX(-1);
-}
+// .dark-bg-text {
+//     h1 {color: $colorSecondary;}
+// }
 
-.dark-bg-text {
-    h1 {color: $colorSecondary;}
-}
-
-.text-box {
-    position: fixed;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    color: #f1f1f1;
-    width: 100%;
-    padding: 20px;
-}
+// .text-box {
+//     position: fixed;
+//     bottom: 0;
+//     background: rgba(0, 0, 0, 0.2);
+//     color: #f1f1f1;
+//     width: 100%;
+//     padding: 20px;
+// }

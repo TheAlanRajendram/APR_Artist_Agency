@@ -1,0 +1,150 @@
+@use '../config/_variables' as *;
+
+.topnav {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem 0;
+  background: $colorSurface;
+
+  &--transparent {
+    background: none;
+  }
+
+  &__link {
+    position: relative;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    margin: 0 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1rem;
+
+    &--white {
+      color: white;
+    }
+  }
+
+  &__icon {
+    display: none;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .topnav__link {
+    display: none; 
+    margin: 0; 
+  }
+  .topnav__icon {
+    display: inline;
+  }
+}
+
+// .sidenav {
+//   position: fixed;
+//   background-color: #111;
+//   z-index: 1;
+//   height: 100%;
+//   width: 0;
+//   top: 0;
+//   right: 0;
+//   padding-top: 90px;
+//   text-align: center;
+//   transition: 0.5s;
+//   overflow-x: hidden;
+
+//   &__link2 {
+//     padding: 8px 8px 8px 32px;
+//     text-decoration: none;
+//     font-size: 32px;
+//     color: #818181;
+//     display: block;
+//     transition: 0.3s;
+//     padding: 0.5em;
+//   }
+// }
+
+.hamburger-menu {
+  position: fixed;
+  top: 29px;
+  right: 16px;
+  width: 23px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger-menu__line {
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background-color: white;
+  transition: transform 0.2s;
+
+  &--top-left {
+    top: 2px;
+    left: 0;
+  }
+  &--top-right { 
+    top: 2px;
+    right: 0;
+  }
+  &--center {
+    width: 100%;
+    top: 50%;
+    left: 0%;
+  }
+  &--bottom-left {
+    bottom: 0%;
+    left: 0;
+  }
+  &--bottom-right { 
+    bottom: 0%;
+    right: 0;
+  }
+}
+
+.active .hamburger-menu__line {  
+  &--top-left { transform: rotateZ(45deg) translate(4px, 1px); }
+  &--top-right { transform: rotateZ(-45deg) translate(-4px, 1px); }
+  &--center { opacity: 0; }
+  &--bottom-left { transform: rotateZ(-45deg) translate(4px, -2px);; }
+  &--bottom-right { transform: rotateZ(45deg) translate(-4px, -2px);; }
+}
+
+.sidenav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  transition: 0.3s;
+
+  &__list { 
+    padding-top: 100px;
+    text-align: center; 
+  }
+
+  &__item {
+    list-style: none;
+    margin: 25px;
+  }
+
+  &__link {
+    position: relative;
+    font-size: 32px;
+    color: #818181;
+    text-transform: uppercase;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .hamburger-menu { visibility: hidden;}  
+}
