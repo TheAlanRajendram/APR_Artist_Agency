@@ -1,0 +1,12 @@
+@use '../config/variables' as *;
+
+.footer {
+  display: grid;
+  place-items: center;
+  margin-top: auto;
+  background-color: $colorSurface;
+
+  &__link {
+    color: white;
+  }
+}

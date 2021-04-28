@@ -1,0 +1,20 @@
+{% macro style(theme='dark', transparent='') %}
+{% if theme == 'dark' %}
+  {% set img = "img/logo/logo_white.png" %}
+  {% set link_color = 'topnav__link--white' %}
+{% elif theme == 'light' %}
+  {% set img = "img/logo/logo_gold.png" %}
+  {% set link_color = 'topnav__link--white' %}
+{% endif %}
+<div id="myTopnav" class="topnav {% if transparent == 'true' %} topnav--transparent {% endif %}">
+  <div>
+    <a href="index.html"><img src="{{ img }}" width="98px" height="auto"></a>
+  </div>
+  <div> 
+    <a class="topnav__link {{ link_color }}" href="artists.html">Artists</a>
+    <a class="topnav__link {{ link_color }}" href="models.html">Models</a>
+    <a class="topnav__link {{ link_color }}" href="about.html">About</a>
+    <a class="topnav__link {{ link_color }}" href="contact.html">Contact</a>
+  </div>
+</div>
+{% endmacro %}

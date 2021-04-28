@@ -1,0 +1,61 @@
+{% extends "base.njk" %}
+
+{% block head %}
+  <title>APR Artist Agency</title>
+  <meta name="description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
+  <meta property="og:url" content="http://apr-artistagency.com" />
+  <meta property="og:description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
+
+  <link rel="canonical" href="http://apr-artistagency.com" />
+  <meta name="google-site-verification" content="uKfJmy1vl573anFDS0RenjrpU2qXnVFgXZ9dHMVMdXA" />
+{% endblock %}
+
+{% block body_class %}class="disable-animation" onload="splashPage()"{% endblock %}
+
+{% block content %}
+  <div id="home" class="disp-none">
+    <video autoplay muted loop class="vid vid--darken layer-m2" >
+        <source src="videos/background.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <nav>
+      {% import "partials/topnav.njk" as nav%}
+      {{ nav.style('dark', transparent='true') }}
+      {% include "partials/sidenav.njk" %}
+    </nav>        
+  </div>
+  <main id="main" class="l-full-page bg-black">
+      <div id="splash-page" class="splash-page">
+          <div class="splash-page__frame-0">
+              <img src="img/logo/logo_gold.png" width="240px" height="auto">
+          </div>
+          <div class="splash-page__frame-1">
+              <span class="splash-page__subtitle">Making</span>
+              <span class="splash-page__subtitle">Sure</span>
+              <span class="splash-page__subtitle">Your</span>
+              <span class="splash-page__subtitle">Talents</span>
+              <span class="splash-page__subtitle">Gets</span>
+              <span class="splash-page__subtitle">Its</span>
+              <span class="splash-page__subtitle">Recognition</span>
+          </div>
+      </div>
+  </main>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function(event) { 
+          if (sessionStorage.getItem('splash-page') == null){
+          setTimeout(() => { dispHome(); }, 4000);
+          sessionStorage.setItem('splash-page', 'false');
+          } else{
+              dispHome();
+          }
+      });
+
+      function dispHome() {
+          document.getElementById('splash-page').style.display = "none";
+          document.getElementById('main').style.zIndex = -1;
+          document.getElementById('main').style.background = "none";
+          document.getElementById('home').style.display = "block";
+      }
+  </script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+
+{% block head %}
+  <title>Artists - APR Artist Agency</title>
+  <meta name="description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
+  <meta property="og:url" content="http://apr-artistagency.com/artists" />
+  <meta property="og:description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
+{% endblock %}
+
+{% block content %}
+  <nav>
+    {% import "partials/topnav.njk" as nav%}
+    {{ nav.style('light', transparent='false') }}
+    {% include "partials/sidenav.njk" %}
+  </nav>
+
+  <main class="fullscreen">
+  {% import 'partials/roster_gallery.njk' as roster %}
+  {{ roster.gallery(['Nish', 'Arjun', 'Ishy Dee'], category='artists' )}}
+  </main>
+
+  <footer class="footer">
+      <a class="footer__link" href="mailto:priyanka.rajendram@apr-artistagency.com">Email Us</a>
+      <div>
+          <a class="footer__link" href="https://www.instagram.com/priyankarajen/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          <a class="footer__link" href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      </div>
+  </footer>
+{% endblock %}

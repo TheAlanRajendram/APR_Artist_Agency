@@ -1,0 +1,30 @@
+@use '../config/_variables' as *;
+
+.splash-page {
+  margin: auto;
+  text-align: center;
+
+  &__frame-0 {
+    animation: fadeIn 1.25s var(--ease-in-cubic);
+  }
+  
+  &__frame-1 {
+    margin-top: 3rem;
+
+    span {
+      animation: fadeIn 1s var(--ease-in-out-quad) 1s backwards;
+      color: transparent;
+      text-shadow: 0px 0px 1px $colorSecondary;
+
+      @for $i from 2 through 7 {
+        &:nth-child(#{$i}) { animation-delay: #{$i*0.25 + 0.75}s; }
+      }
+    }
+  }
+
+  &__subtitle {
+    font-size: 32px;
+    font-family: BebasNeue;
+    padding-right: 4px;
+  }
+}

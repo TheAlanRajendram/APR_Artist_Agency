@@ -1,0 +1,15 @@
+{% macro gallery(roster, category='artists') %}
+<div class="roster__grid">
+    {% for person in roster %}
+    {% set img = [person, '_profile.jpg'] | join %}
+    {% set page = [person, '.html'] | join | lower | replace(' ', '_') %}
+    <div class="roster__frame">
+        <a class="roster__link" href="{{ [category, page] | join('/') }}">
+            <img class="roster__image" src="{{ ['img', person, img] | join('/') }}">
+            <div class="roster__name">{{ person }}</div>
+            <div class="roster__hover-name"> {{ person | upper}} </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endmacro %}

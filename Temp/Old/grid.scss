@@ -1,0 +1,29 @@
+$minColWidth: 15rem;
+$gridGap: 2rem;
+
+.grid-wrap {
+    padding: $gridGap;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($minColWidth, 1fr));
+    grid-gap: 2rem;
+
+    &+.grid {
+        margin-top: $gridGap;
+    }
+}
+
+span {
+    border: 2px dashed currentcolor;
+    border-radius: 4px;
+    min-height: 15vh;
+    padding: 1rem;
+    color: #0178d4;
+    font-size: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
