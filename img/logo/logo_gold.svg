@@ -7,34 +7,34 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="40.130558mm"
+   height="20.072767mm"
+   viewBox="0 0 40.130558 20.072768"
    version="1.1"
    id="svg8"
-   inkscape:export-filename="C:\Git\APR_Artist_Agency\img\logo\logo-gold.png"
+   inkscape:export-filename="C:\Git\APR_Artist_Agency\img\logo\logo_gold.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
-   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
    sodipodi:docname="logo_gold.svg">
   <defs
      id="defs2">
     <rect
        x="109.84778"
-       y="36.081386"
+       y="36.081387"
        width="15.234363"
        height="10.690781"
        id="rect847" />
     <rect
-       x="55.859331"
-       y="48.108515"
+       x="55.859329"
+       y="48.108517"
        width="104.50239"
        height="13.898016"
        id="rect841" />
     <rect
        x="69.757347"
        y="22.183371"
-       width="68.15373"
+       width="68.153732"
        height="39.28862"
        id="rect835" />
     <clipPath
@@ -53,25 +53,27 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="88.633987"
-     inkscape:cy="162.33387"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="73.519706"
+     inkscape:cy="43.066768"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1324"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="true"
      inkscape:snap-to-guides="true"
      inkscape:snap-grids="true"
-     inkscape:snap-text-baseline="false"
-     inkscape:window-width="1857"
-     inkscape:window-height="1057"
-     inkscape:window-x="55"
+     inkscape:snap-text-baseline="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:snap-page="false">
     <inkscape:grid
        type="xygrid"
-       id="grid864" />
+       id="grid864"
+       originx="-34.205969"
+       originy="-22.515196" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -89,17 +91,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-34.205972,-22.515189)">
     <text
        xml:space="preserve"
        id="text839"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect841);fill:#ab8850;fill-opacity:1;stroke:none;"
-       transform="translate(-21.780872,-13.700249)"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Agency FB';-inkscape-font-specification:'Agency FB, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0.264583px;white-space:pre;shape-inside:url(#rect841);fill:#ab8850;fill-opacity:1;stroke:none;"
+       transform="translate(-21.780872,-12.112748)"
+       inkscape:export-xdpi="67.978676"
+       inkscape:export-ydpi="67.978676"><tspan
          x="55.859375"
          y="54.700706"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Agency FB';-inkscape-font-specification:'Agency FB, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ab8850;fill-opacity:1">ARTIST AGENCY</tspan></tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:7.05556px;font-family:'Agency FB';-inkscape-font-specification:'Agency FB Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ab8850;fill-opacity:1">ARTIST AGENCY</tspan></tspan></text>
     <text
        xml:space="preserve"
        id="text845"
@@ -109,14 +112,19 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Layer 3"
-     style="display:none" />
+     style="display:none"
+     transform="translate(-34.205972,-22.515189)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-34.205972,-22.515189)">
     <g
-       id="g1287">
+       id="g1287"
+       transform="translate(3.3548332)"
+       inkscape:export-xdpi="67.978676"
+       inkscape:export-ydpi="67.978676">
       <g
          id="g1324">
         <g
@@ -141,33 +149,30 @@
                  transform="matrix(0.26458333,0,0,0.26458333,0.71009617,-24.487866)" />
             </g>
           </g>
-          <g
-             id="g1350">
-            <text
-               xml:space="preserve"
-               id="text833"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;line-height:1.25;font-family:'Bebas Neue';-inkscape-font-specification:'Bebas Neue, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect835);fill:#ab8850;fill-opacity:1;stroke:none;stroke-width:0.999815;stroke-miterlimit:4;stroke-dasharray:none;"
-               transform="matrix(1,0,0,0.95879547,-28.167576,-1.5955647)"
-               inkscape:export-xdpi="300"
-               inkscape:export-ydpi="300"><tspan
-                 x="69.757812"
-                 y="37.000231"><tspan
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;font-family:'Bebas Neue';-inkscape-font-specification:'Bebas Neue, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ab8850;fill-opacity:1;stroke-width:0.999815;stroke-miterlimit:4;stroke-dasharray:none">   P R</tspan></tspan></text>
-            <rect
-               style="opacity:1;fill:#ab8850;fill-opacity:1;stroke:#808080;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:2.5"
-               id="rect1328"
-               width="1.3229166"
-               height="1.3229166"
-               x="46.302082"
-               y="27.78125" />
-            <rect
-               style="display:inline;opacity:1;fill:#ab8850;fill-opacity:1;stroke:#808080;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:2.5"
-               id="rect1328-7"
-               width="1.3229166"
-               height="1.3229166"
-               x="56.885418"
-               y="27.78125" />
-          </g>
+          <text
+             xml:space="preserve"
+             id="text833"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;line-height:1.25;font-family:'Bebas Neue';-inkscape-font-specification:'Bebas Neue, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect835);fill:#ab8850;fill-opacity:1;stroke:none;stroke-width:0.999815;stroke-miterlimit:4;stroke-dasharray:none;"
+             transform="matrix(1,0,0,0.95879547,-28.167576,-1.5955647)"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               x="69.757812"
+               y="37.000231"><tspan
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;font-family:'Bebas Neue';-inkscape-font-specification:'Bebas Neue, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ab8850;fill-opacity:1;stroke-width:0.999815;stroke-miterlimit:4;stroke-dasharray:none">   P R</tspan></tspan></text>
+          <rect
+             style="fill:#ab8850;fill-opacity:1;stroke:#808080;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:2.5"
+             id="rect1328"
+             width="1.3229166"
+             height="1.3229166"
+             x="46.302082"
+             y="27.78125" />
+          <rect
+             style="display:inline;fill:#ab8850;fill-opacity:1;stroke:#808080;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:2.5"
+             id="rect1328-7"
+             width="1.3229166"
+             height="1.3229166"
+             x="56.885418"
+             y="27.78125" />
         </g>
       </g>
     </g>
