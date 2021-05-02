@@ -143,6 +143,9 @@ a {
 .topnav__link--white {
   color: white;
 }
+.topnav__link--gray {
+  color: gray;
+}
 .topnav__link--dark {
   color: white;
 }
@@ -174,6 +177,7 @@ a {
 }
 .hamburger-menu {
   position: fixed;
+  z-index: 2;
   top: 29px;
   right: 16px;
   width: 23px;
@@ -228,6 +232,7 @@ a {
 
 .sidenav {
   position: fixed;
+  z-index: 1;
   top: 0;
   right: 0;
   width: 0;
@@ -326,10 +331,9 @@ a {
 .roster__grid {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
+  grid-gap: 16px;
   justify-content: center;
-  padding: 1rem;
 }
 .roster__frame {
   position: relative;
@@ -342,11 +346,7 @@ a {
 .roster__image {
   width: 100%;
   height: auto;
-  object-fit: cover;
-  -o-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
+  object-fit: contain;
   -webkit-transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -moz-transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);

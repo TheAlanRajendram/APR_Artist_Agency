@@ -3,7 +3,7 @@
 {% block head %}
   <title>Artists - APR Artist Agency</title>
   <meta name="description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
-  <meta property="og:url" content="http://apr-artistagency.com/artists" />
+  <meta property="og:url" content="http://apr-artistagency.com/models" />
   <meta property="og:description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
 {% endblock %}
 
@@ -11,13 +11,13 @@
 {% block content %}
   <nav>
     {% import "partials/topnav.njk" as nav%}
-    {{ nav.style('light', transparent='false', activePage='Artists') }}
+    {{ nav.style('light', transparent='false', activePage='Models') }}
     {% include "partials/sidenav.njk" %}
   </nav>
 
   <main>
   {% import 'partials/roster_gallery.njk' as roster %}
-{{ roster.gallery([['Nish'], ['Arjun']], category='artists' )}}
+  {{ roster.gallery([['Carlos', 'Carlos Zamora'],['Ram', 'Ram Varia']], category='models' )}}
   </main>
 
   <footer class="footer">

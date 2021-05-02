@@ -1,0 +1,9 @@
+{% macro setColor(activePage, thisPage) %}
+{% if activePage == 'all' %}
+  topnav__link--white
+{% elif activePage == thisPage %}
+  topnav__link--white
+{% else %}
+  topnav__link--gray
+{% endif %}
+{% endmacro %}

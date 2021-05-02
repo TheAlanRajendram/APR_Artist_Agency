@@ -20,7 +20,7 @@
     </video>
     <nav>
       {% import "partials/topnav.njk" as nav%}
-      {{ nav.style('dark', transparent='true') }}
+      {{ nav.style('dark', transparent='true', activePage='all') }}
       {% include "partials/sidenav.njk" %}
     </nav>        
   </div>

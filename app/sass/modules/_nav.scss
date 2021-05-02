@@ -25,6 +25,10 @@
     &--white {
       color: white;
     }
+    
+    &--gray {
+      color: gray;
+    }
 
     &--dark {
       color: white;
@@ -60,6 +64,7 @@
 
 .hamburger-menu {
   position: fixed;
+  z-index: 2;
   top: 29px;
   right: 16px;
   width: 23px;
@@ -107,6 +112,7 @@
 
 .sidenav {
   position: fixed;
+  z-index: 1;
   top: 0;
   right: 0;
   width: 0;

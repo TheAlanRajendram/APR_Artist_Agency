@@ -1,13 +1,21 @@
 {% macro gallery(roster, category='artists') %}
 <div class="roster__grid">
     {% for person in roster %}
-    {% set img = [person, '_profile.jpg'] | join %}
-    {% set page = [person, '.html'] | join | lower | replace(' ', '_') %}
+    {% if  person | length == 2 %}
+    {% set name = person[0] %}
+    {% set hover_name = person[1] %}
+    {% else%}
+    {% set name = person[0] %}
+    {% set hover_name = person[0] %}
+    {% endif %}
+
+    {% set img = [name, '_profile.jpg'] | join %}
+    {% set page = [name, '.html'] | join | lower | replace(' ', '_') %}
     <div class="roster__frame">
         <a class="roster__link" href="{{ [category, page] | join('/') }}">
-            <img class="roster__image" src="{{ ['img', person, img] | join('/') }}">
-            <div class="roster__name">{{ person }}</div>
-            <div class="roster__hover-name"> {{ person | upper}} </div>
+            <img class="roster__image" src="{{ ['img', name, img] | join('/') }}">
+            <div class="roster__name">{{ name }}</div>
+            <div class="roster__hover-name"> {{ hover_name | upper}} </div>
         </a>
     </div>
     {% endfor %}
