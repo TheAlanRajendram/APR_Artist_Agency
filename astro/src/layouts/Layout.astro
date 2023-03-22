@@ -1,0 +1,29 @@
+---
+import Navbar  from '../components/Navbar.astro';
+import '../styles/global.scss';
+
+export interface Props {
+  title?: string;
+}
+
+const { title = 'APR Artist Agency'} = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{title}</title>
+  <meta name="description" content="APR Artist Agency is a home for a global roster of some of the world's premier talents, we focus on getting our talent the recognition they deserve." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <link rel="canonical" href="http://apr-artistagency.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" href="./favicon.ico">
+</head>
+
+<body>
+  <slot />
+</body>
+</html>
