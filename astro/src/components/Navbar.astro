@@ -7,23 +7,23 @@ const currentPath = pathname.slice(1); // remove the first "/"
 
 <nav class="topnav">
   <div>
-    <a href="index.html" id="logo"><img src={apr_logo} width="98px" height="auto"></a>
+    <a href="index.html" id="logo"><img src={apr_logo} width="72px" height="auto"></a>
   </div>
   <div>
     <a href="artists.html" class:list={[ "topnav__link", currentPath ===  "artists.html" ? "topnav__link--white" : "" ]}>Artists</a>
     <a href="models.html" class:list={[ "topnav__link", currentPath ===  "models.html" ? "topnav__link--white" : "" ]}>Models</a>
     <a href="about.html" class:list={[ "topnav__link", currentPath ===  "about.html" ? "topnav__link--white" : "" ]}>About</a>
     <a href="contact.html" class:list={[ "topnav__link", currentPath ===  "contact.html" ? "topnav__link--white" : "" ]}>Contact</a>
+    <div class="hamburger-menu">
+      <div class="hamburger-menu__line hamburger-menu__line--top-left"></div>
+      <div class="hamburger-menu__line hamburger-menu__line--top-right"></div>
+      <div class="hamburger-menu__line hamburger-menu__line--center"></div>
+      <div class="hamburger-menu__line hamburger-menu__line--bottom-left"></div>
+      <div class="hamburger-menu__line hamburger-menu__line--bottom-right"></div>
+    </div>
   </div>
 </nav>
 
-<div class="hamburger-menu">
-  <div class="hamburger-menu__line hamburger-menu__line--top-left"></div>
-  <div class="hamburger-menu__line hamburger-menu__line--top-right"></div>
-  <div class="hamburger-menu__line hamburger-menu__line--center"></div>
-  <div class="hamburger-menu__line hamburger-menu__line--bottom-left"></div>
-  <div class="hamburger-menu__line hamburger-menu__line--bottom-right"></div>
-</div>
 <div class="sidenav">
   <ul class="sidenav__list">
     <li class="sidenav__item">
@@ -56,8 +56,9 @@ const currentPath = pathname.slice(1); // remove the first "/"
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 0;
-    padding: 8px 8px 8px 16px;
+    height: 100%;
+    margin: 0;
+    padding: 16px;
     background: var(--color-surface);
 
     &-transparent {
@@ -151,12 +152,11 @@ const currentPath = pathname.slice(1); // remove the first "/"
   }
 
   .hamburger-menu {
-    position: fixed;
+    position: relative;
     z-index: 5;
-    top: 29px;
-    right: 16px;
-    width: 23px;
+    width: 24px;
     height: 20px;
+    margin: 0;
     cursor: pointer;
 
     &__line {
@@ -200,7 +200,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
     }
 
     @media screen and (min-width: 950px) {
-      visibility: hidden;
+      display: none;
     }
   }
 
