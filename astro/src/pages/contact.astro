@@ -1,7 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Form from "../components/Form.astro";
 
 ---
 
- <Layout>
- </Layout>
+<Layout>
+  <main class="background_contact">
+    <div class="overlay"></div>
+    <section class="form_section">
+      <Form />
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .background_contact {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/background_contact_us.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .form_section {
+    position: relative;
+    z-index: 2;
+  }
+</style>
