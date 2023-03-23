@@ -10,10 +10,10 @@ const currentPath = pathname.slice(1); // remove the first "/"
     <a href="index.html" id="logo"><img src={apr_logo} width="98px" height="auto"></a>
   </div>
   <div>
-    <a href="artists.html" class={currentPath ===  "artists.html" ? "topnav__link topnav__link--white" : "topnav__link"}>Artists</a>
-    <a href="models.html" class={currentPath ===  "models.html" ? "topnav__link topnav__link--white" : "topnav__link"}>Models</a>
-    <a href="about.html" class={currentPath === "about.html" ? "topnav__link topnav__link--white" : "topnav__link"}>About</a>
-    <a href="contact.html" class={currentPath ===  "contact.html" ? "topnav__link topnav__link--white" : "topnav__link"}>Contact</a>
+    <a href="artists.html" class:list={[ "topnav__link", currentPath ===  "artists.html" ? "topnav__link--white" : "" ]}>Artists</a>
+    <a href="models.html" class:list={[ "topnav__link", currentPath ===  "models.html" ? "topnav__link--white" : "" ]}>Models</a>
+    <a href="about.html" class:list={[ "topnav__link", currentPath ===  "about.html" ? "topnav__link--white" : "" ]}>About</a>
+    <a href="contact.html" class:list={[ "topnav__link", currentPath ===  "contact.html" ? "topnav__link--white" : "" ]}>Contact</a>
   </div>
 </nav>
 
