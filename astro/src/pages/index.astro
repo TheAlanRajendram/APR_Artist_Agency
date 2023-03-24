@@ -4,4 +4,26 @@ import Layout from "../layouts/Layout.astro";
 ---
 
  <Layout>
+  <section class="banner">
+    <video class="banner-video" autoplay muted loop id="backgroundVideo" >
+      <source src="videos/background.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  </section>
  </Layout>
+
+ <style lang="scss">
+  .banner {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .banner-video {
+    position: relative;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+ </style>
