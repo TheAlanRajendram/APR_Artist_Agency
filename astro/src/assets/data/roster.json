@@ -1,0 +1,58 @@
+{
+  "artists": [
+    {
+      "name": "Arjun",
+      "profilePhoto": "/images/artists/Arjun/Arjun_profile.jpg",
+      "instagram": "",
+      "spotify": "" 
+    },
+    {
+      "name": "Nish",
+      "profilePhoto": "/images/artists/Nish/Nish_profile.jpg",
+      "instagram": "",
+      "spotify": ""
+    },
+    {
+      "name": "Mumzy Stranger",
+      "profilePhoto": "/images/artists/Mumzy/Mumzy_profile.jpg",
+      "instagram": "",
+      "spotify": ""
+    },
+    {
+      "name": "Inkra Debelle",
+      "profilePhoto": "/images/artists/InkraDebelle/InkraDebelle_profile.jpg",
+      "instagram": "",
+      "spotify": ""
+    },
+    {
+      "name": "Wynts",
+      "profilePhoto": "/images/artists/Wynts/Wynts_profile.jpg",
+      "instagram": "",
+      "spotify": ""
+    },
+    {
+      "name": "Remedy Cure",
+      "profilePhoto": "/images/artists/RemedyCure/RemedyCure_profile.jpg",
+      "instagram": "",
+      "spotify": ""
+    }
+  ],
+  "talents": [
+    {
+      "name": "Jess Baddie",
+      "title": "Dancer, DJ, RJ, Choreographer",
+      "profilePhoto": "/images/talents/JessBaddie/JessBaddie_profile.jpg"
+      
+    },
+    {
+      "name": "Zak Timol",
+      "title": "Stylist, Designer",
+      "profilePhoto": "/images/talents/ZakTimol/ZakTimol_profile.jpg"
+    },
+    {
+      "name": "Sachin Patel",
+      "title": "Videographer, Photographer",
+      "profilePhoto": "/images/talents/SachinPatel/SachinPatel_profile.jpg"
+    }
+  ]
+}
