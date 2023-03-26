@@ -9,12 +9,12 @@ const { artists } = roster;
   <section class="gallery">
     <div class="gallery-grid">
       {artists.map(artist => (
-        <div class="gallery-card">
+        <a class="gallery-card" href={artist.link}>
           <img src={artist.profilePhoto} alt={artist.name} />
           <div class="artist-info">
             <h3 class="artist-name">{artist.name}</h3>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </section>

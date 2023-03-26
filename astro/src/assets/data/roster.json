@@ -3,38 +3,65 @@
     {
       "name": "Arjun",
       "profilePhoto": "/images/artists/Arjun/Arjun_profile.jpg",
-      "instagram": "",
-      "spotify": "" 
+      "instagram": "https://www.instagram.com/arjunartist/",
+      "youtube": "https://www.youtube.com/c/arjuncoom",
+      "spotify": "https://open.spotify.com/artist/5tvfyAT4aOIOkumo6vw1yL?si=JwqweKhARcmh7ncKunf8NQ",
+      "tidal": "https://tidal.com/browse/artist/3960706",
+      "facebook": "https://www.facebook.com/ArjunMusic",
+      "twitter": "https://www.twitter.com/arjunartist",
+      "link": "https://www.youtube.com/c/arjuncoom"
     },
     {
       "name": "Nish",
       "profilePhoto": "/images/artists/Nish/Nish_profile.jpg",
-      "instagram": "",
-      "spotify": ""
+      "instagram": "https://www.instagram.com/musicbynish/?hl=en",
+      "youtube": "https://www.youtube.com/@musicbynish",
+      "spotify": "https://open.spotify.com/artist/3xyfJgRtCzUrNshzo4Deg9",
+      "tidal": "https://listen.tidal.com/artist/3661912/",
+      "facebook": "https://www.facebook.com/musicbynish",
+      "twitter": "https://twitter.com/musicbynish",
+      "link": "https://www.youtube.com/@musicbynish"
     },
     {
       "name": "Mumzy Stranger",
       "profilePhoto": "/images/artists/Mumzy/Mumzy_profile.jpg",
       "instagram": "",
-      "spotify": ""
+      "youtube": "https://www.youtube.com/@MUMZYSTRANGERMUSIC",
+      "spotify": "",
+      "tidal": "",
+      "facebook": "",
+      "twitter": "",
+      "link": "https://www.youtube.com/@MUMZYSTRANGERMUSIC"
     },
     {
       "name": "Inkra Debelle",
       "profilePhoto": "/images/artists/InkraDebelle/InkraDebelle_profile.jpg",
       "instagram": "",
-      "spotify": ""
+      "youtube": "https://www.youtube.com/@InkraDebelle",
+      "spotify": "",
+      "tidal": "",
+      "facebook": "",
+      "twitter": "",
+      "link": "https://www.youtube.com/@InkraDebelle"
     },
     {
       "name": "Wynts",
       "profilePhoto": "/images/artists/Wynts/Wynts_profile.jpg",
       "instagram": "",
-      "spotify": ""
+      "youtube": "https://www.youtube.com/@wyntsonline",
+      "spotify": "",
+      "link": "https://www.youtube.com/@wyntsonline"
     },
     {
       "name": "Remedy Cure",
       "profilePhoto": "/images/artists/RemedyCure/RemedyCure_profile.jpg",
       "instagram": "",
-      "spotify": ""
+      "youtube": "",
+      "spotify": "",
+      "tidal": "",
+      "facebook": "",
+      "twitter": "",
+      "link": "https://distrokid.com/hyperfollow/remedycure/wifey"
     }
   ],
   "talents": [
