@@ -11,9 +11,8 @@ const { roster = [] } =  Astro.props as Props;;
     {roster.map(item => (
       <a class="gallery-card" href={item.link}>
         <img src={item.profilePhoto} alt={item.name} />
-        <div class="artist-info">
-          <h3 class="artist-name">{item.name}</h3>
-        </div>
+        <div class="artist-name"><h3 class="artist-name">{item.name}</h3></div>
+        <div class="artist-name__hover">{item.name}</div>
       </a>
     ))}
   </div>
@@ -55,16 +54,39 @@ const { roster = [] } =  Astro.props as Props;;
       .gallery-info{
         opacity: 1;
       }
+
+      .artist-name {
+        display: none;
+      }
+
+      .artist-name__hover {
+        display: block;
+      }
     }
   }
 
-  .artist-info {
-    text-align: center;
+  .gallery-grid:hover .gallery-card img {
+    opacity: 0.5;
+  }
+
+  .gallery-grid .gallery-card:hover img {
+    opacity: 0.9;
   }
 
   .artist-name {
     color: var(--color-primary);
     text-transform: uppercase;
     margin-top: 0;
+    text-align: center;
+
+    &__hover {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: rgba(255,255,255, 0.9);
+    }
   }
 </style>
