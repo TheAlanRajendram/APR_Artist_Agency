@@ -68,18 +68,24 @@
     {
       "name": "Jess Baddie",
       "title": "Dancer, DJ, RJ, Choreographer",
-      "profilePhoto": "/images/talents/JessBaddie/JessBaddie_profile.jpg"
+      "profilePhoto": "/images/talents/JessBaddie/JessBaddie_profile.jpg",
+      "instagram": "https://www.instagram.com/jess_bee_official/",
+      "link": "https://jessbeeofficial.com"
       
     },
     {
       "name": "Zak Timol",
       "title": "Stylist, Designer",
-      "profilePhoto": "/images/talents/ZakTimol/ZakTimol_profile.jpg"
+      "profilePhoto": "/images/talents/ZakTimol/ZakTimol_profile.jpg",
+      "instagram": "https://www.instagram.com/zakvelsvoir/",
+      "link": "https://www.instagram.com/zakvelsvoir/"
     },
     {
       "name": "Sachin Patel",
       "title": "Videographer, Photographer",
-      "profilePhoto": "/images/talents/SachinPatel/SachinPatel_profile.jpg"
+      "profilePhoto": "/images/talents/SachinPatel/SachinPatel_profile.jpg",
+      "instagram": "https://www.instagram.com/sachinpatel96/",
+      "link": "http://www.sachinpatel.photography"
     }
   ]
 }

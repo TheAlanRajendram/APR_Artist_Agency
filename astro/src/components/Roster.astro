@@ -11,8 +11,9 @@ const { roster = [] } =  Astro.props as Props;;
     {roster.map(item => (
       <a class="gallery-card" href={item.link}>
         <img src={item.profilePhoto} alt={item.name} />
-        <div class="artist-name"><h3 class="artist-name">{item.name}</h3></div>
+        <h3 class="artist-name">{item.name}</h3>
         <div class="artist-name__hover">{item.name}</div>
+        <h4 class="artist-title">{item.title}</h4>
       </a>
     ))}
   </div>
@@ -62,6 +63,10 @@ const { roster = [] } =  Astro.props as Props;;
       .artist-name__hover {
         display: block;
       }
+
+      .artist-title {
+        margin-top: 20px;
+      }
     }
   }
 
@@ -75,8 +80,8 @@ const { roster = [] } =  Astro.props as Props;;
 
   .artist-name {
     color: var(--color-primary);
+    margin: 0;
     text-transform: uppercase;
-    margin-top: 0;
     text-align: center;
 
     &__hover {
@@ -88,5 +93,12 @@ const { roster = [] } =  Astro.props as Props;;
       font-size: 3rem;
       color: rgba(255,255,255, 0.9);
     }
+  }
+
+  .artist-title {
+    color: var(--color-primary);
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
   }
 </style>
