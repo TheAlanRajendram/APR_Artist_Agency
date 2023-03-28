@@ -6,25 +6,47 @@ export interface Props {
 const { roster = [] } =  Astro.props as Props;;
 ---
 
-<section class="gallery">
-  <div class="gallery-grid">
-    {roster.map(item => (
-      <a class="gallery-card" href={item.link}>
+<section class="gallery-grid">
+  {roster.map(item => (
+  <div class="gallery-card">
+      <a class="" href={item.link}>
         <img src={item.profilePhoto} alt={item.name} />
-        <h3 class="artist-name">{item.name}</h3>
         <div class="artist-name__hover">{item.name}</div>
-        <h4 class="artist-title">{item.title}</h4>
       </a>
-    ))}
+      <h3 class="artist-name">{item.name}</h3>
+      <h4 class="artist-title">{item.title}</h4>
+      <div class="social-media">
+        {item.instagram && (
+          <a href={item.instagram} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-instagram"></i>
+          </a>
+        )}
+        {item.youtube && (
+          <a href={item.youtube} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-youtube"></i>
+          </a>
+        )}
+        {item.spotify && (
+          <a href={item.spotify} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-spotify"></i>
+          </a>
+        )}
+        {item.facebook && (
+          <a href={item.facebook} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-facebook"></i>
+          </a>
+        )}
+        {item.twitter && (
+          <a href={item.twitter} target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-twitter"></i>
+          </a>
+        )}
+      </div>
   </div>
+  ))}
 </section>
 
 <style lang="scss">
-  .gallery {
-    display: flex;
-    justify-content: center;
-  }
-
   .gallery-grid {
     display: grid;
     width: 100%;
@@ -100,5 +122,17 @@ const { roster = [] } =  Astro.props as Props;;
     margin: 0;
     text-align: center;
     font-weight: 400;
+  }
+
+  .social-media {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    a {
+      color: var(--color-secondary);
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
   }
 </style>
