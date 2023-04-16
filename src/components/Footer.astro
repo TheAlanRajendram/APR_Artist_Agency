@@ -1,20 +1,63 @@
 <footer class="footer">
-  <a class="footer__link" href="mailto:priyanka.rajendram@apr-artistagency.com">Email Us</a>
-  <div>
-      <a class="footer__link" href="https://www.instagram.com/priyankarajen/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-      <a class="footer__link" href="https://twitter.com/aprartistagency"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <div class="container">
+    <span class="title">FOLLOW US</span>
+    <div class="social-media">
+        <a href="https://www.instagram.com/apr_artistagency/" class="social-icon">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/aprartistagency" class="social-icon">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+    </div>
+  </div>
+  <div class="container">
+    <span class="title">CONTACT US</span>
+    <div class="social-media">
+      <a class="social-media" href="mailto:priyanka.rajendram@apr-artistagency.com">priyanka.rajendram@apr-artistagency.com</a>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
     margin-top: auto;
+    padding: 16px;
+    gap: 32px;
     background-color: var(--color-surface);
+  }
 
-    &__link {
-      color: white;
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+  }
+  
+  .social-media {
+    display: flex;
+    gap: 8px;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-secondary);
+    border-radius: 50%;
+    color: var(--color-secondary);
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    i {
+      font-size: 1.2rem;
     }
   }
 </style>

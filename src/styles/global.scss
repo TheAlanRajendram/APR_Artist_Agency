@@ -14,7 +14,10 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #111;
-  color: white
+}
+
+main {
+  margin-bottom: 16px;
 }
 
 html {
