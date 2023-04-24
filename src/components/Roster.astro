@@ -17,27 +17,27 @@ const { roster = [] } =  Astro.props as Props;;
       <h4 class="artist-title">{item.title}</h4>
       <div class="social-media">
         {item.instagram && (
-          <a href={item.instagram} target="_blank" rel="noopener noreferrer">
+          <a class="social-icon" href={item.instagram} target="_blank" rel="noopener noreferrer">
             <i class="fa fa-instagram"></i>
           </a>
         )}
         {item.youtube && (
-          <a href={item.youtube} target="_blank" rel="noopener noreferrer">
+          <a class="social-icon" href={item.youtube} target="_blank" rel="noopener noreferrer">
             <i class="fa fa-youtube"></i>
           </a>
         )}
         {item.spotify && (
-          <a href={item.spotify} target="_blank" rel="noopener noreferrer">
+          <a class="social-icon" href={item.spotify} target="_blank" rel="noopener noreferrer">
             <i class="fa fa-spotify"></i>
           </a>
         )}
         {item.facebook && (
-          <a href={item.facebook} target="_blank" rel="noopener noreferrer">
+          <a class="social-icon" href={item.facebook} target="_blank" rel="noopener noreferrer">
             <i class="fa fa-facebook"></i>
           </a>
         )}
         {item.twitter && (
-          <a href={item.twitter} target="_blank" rel="noopener noreferrer">
+          <a class="social-icon" href={item.twitter} target="_blank" rel="noopener noreferrer">
             <i class="fa fa-twitter"></i>
           </a>
         )}
@@ -133,6 +133,10 @@ const { roster = [] } =  Astro.props as Props;;
       color: var(--color-secondary);
       text-decoration: none;
       font-size: 1.2rem;
+
+      &.social-icon:hover i {
+        color: var(--color-primary);
+      }
     }
   }
 </style>
