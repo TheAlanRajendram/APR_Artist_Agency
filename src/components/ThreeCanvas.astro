@@ -1,0 +1,186 @@
+---
+// ThreeCanvas.astro
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`three-canvas ${className}`}>
+  <canvas id="three-canvas"></canvas>
+</div>
+
+<style>
+  .three-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  #three-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
+
+<script>
+  import * as THREE from 'three';
+
+  function initThreeScene() {
+    // Initialize Three.js scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const canvas = document.getElementById('three-canvas');
+
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true
+    });
+
+    // Set renderer size and pixel ratio
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Create particles
+    const particleCount = 300;
+    const particles = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+
+    // Gold color in RGB
+    const goldColor = new THREE.Color(0xab8850); // Using the exact gold color from tailwind config
+
+    for (let i = 0; i < particleCount; i++) {
+      // Random positions within a sphere
+      const radius = 8;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = radius * Math.cos(phi);
+
+      // Set colors with slight variations
+      colors[i * 3] = goldColor.r * (0.8 + Math.random() * 0.4);
+      colors[i * 3 + 1] = goldColor.g * (0.8 + Math.random() * 0.4);
+      colors[i * 3 + 2] = goldColor.b * (0.8 + Math.random() * 0.4);
+
+      // Random sizes
+      sizes[i] = 0.05 + Math.random() * 0.1;
+    }
+
+    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    // Create particle material
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.1,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
+    });
+
+    // Create particle system
+    const particleSystem = new THREE.Points(particles, particleMaterial);
+    scene.add(particleSystem);
+
+    // Add geometric patterns
+    const geometry = new THREE.TorusKnotGeometry(3, 1, 100, 16);
+    const material = new THREE.MeshBasicMaterial({
+      color: goldColor,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1
+    });
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
+
+    // Set camera position
+    camera.position.z = 10;
+
+    // Animation variables
+    let time = 0;
+    let isVisible = true;
+    let animationFrameId;
+
+    // Animation loop
+    function animate() {
+      if (!isVisible) return;
+
+      animationFrameId = requestAnimationFrame(animate);
+      time += 0.001;
+
+      // Gentle rotation and movement
+      particleSystem.rotation.y = time * 0.1;
+      particleSystem.rotation.x = time * 0.05;
+
+      // Subtle breathing effect
+      const scale = 1 + Math.sin(time * 2) * 0.05;
+      particleSystem.scale.set(scale, scale, scale);
+
+      // Rotate torus knot
+      torusKnot.rotation.x = time * 0.2;
+      torusKnot.rotation.y = time * 0.3;
+
+      // Subtle position changes
+      particleSystem.position.y = Math.sin(time) * 0.2;
+      torusKnot.position.y = Math.cos(time) * 0.2;
+
+      renderer.render(scene, camera);
+    }
+
+    // Handle window resize
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // Handle visibility change
+    function handleVisibilityChange() {
+      isVisible = !document.hidden;
+      if (isVisible) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    }
+
+    // Add event listeners
+    window.addEventListener('resize', onWindowResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Start animation
+    animate();
+
+    // Return cleanup function
+    return function cleanup() {
+      window.removeEventListener('resize', onWindowResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      cancelAnimationFrame(animationFrameId);
+      renderer.dispose();
+    };
+  }
+
+  // Initialize scene when the component mounts
+  const cleanup = initThreeScene();
+
+  // Clean up when the component unmounts
+  document.addEventListener('astro:unmount', () => {
+    if (cleanup) cleanup();
+  });
+</script>
