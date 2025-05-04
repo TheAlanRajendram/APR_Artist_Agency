@@ -8,7 +8,7 @@ const portfolioItems = await getCollection('portfolio');
 <BaseLayout title="Portfolio">
   <section class="py-20">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-12 text-center">Our Portfolio</h1>
+      <h1 class="text-4xl font-bold mb-12 text-center font-serif">Our Portfolio</h1>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {portfolioItems.map((item) => (
@@ -20,7 +20,7 @@ const portfolioItems = await getCollection('portfolio');
                 class="w-full h-64 object-cover"
               />
               <div class="p-6">
-                <h2 class="text-xl font-bold mb-2 group-hover:text-gold transition-colors">
+                <h2 class="text-xl font-bold mb-2 group-hover:text-gold transition-colors font-serif">
                   {item.data.title}
                 </h2>
                 <p class="text-gray-400 mb-4">
