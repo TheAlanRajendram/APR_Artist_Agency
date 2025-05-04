@@ -49,7 +49,20 @@ tags: ["Tag1", "Tag2", "Tag3"]
 
 ## Deployment
 
-The site is configured for deployment to GitHub Pages. Simply push your changes to the main branch, and GitHub Actions will automatically build and deploy the site.
+The site is configured for deployment to GitHub Pages using GitHub Actions. Here's how to set it up:
+
+1. Make sure your repository is public (required for GitHub Pages)
+2. Go to your repository's Settings > Pages
+3. Under "Build and deployment":
+   - Source: Select "GitHub Actions"
+   - Branch: Select "main"
+4. Push your changes to the main branch
+5. GitHub Actions will automatically:
+   - Build your site
+   - Deploy it to GitHub Pages
+   - Make it available at `https://<your-username>.github.io/<repository-name>`
+
+The deployment process is automated through the `.github/workflows/deploy.yml` file. You can monitor the deployment progress in the "Actions" tab of your repository.
 
 ## Customization
 
