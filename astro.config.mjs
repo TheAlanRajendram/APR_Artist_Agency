@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://thealanrajendram.github.io',
-  base: '/',
+  base: '/webapp-test',
   integrations: [tailwind(), mdx()],
   markdown: {
     syntaxHighlight: 'shiki',
