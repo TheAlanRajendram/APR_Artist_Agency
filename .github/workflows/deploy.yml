@@ -19,21 +19,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }} # Output the deployment URL
-
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Uses the official Astro action to handle setup, build, and deployment
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Install, build, and upload site output
         uses: withastro/action@v2
-        # No 'with:' options needed for standard GitHub Pages deployment
-
-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Output the deployment URL
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
