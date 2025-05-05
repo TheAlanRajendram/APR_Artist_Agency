@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://apr-artist-agency.github.io',
+  site: 'https://thealanrajendram.github.io',
   base: '/',
   integrations: [tailwind(), mdx()],
   markdown: {
