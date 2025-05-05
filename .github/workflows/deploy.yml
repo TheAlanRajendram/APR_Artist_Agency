@@ -1,8 +1,11 @@
+# File: .github/workflows/deploy.yml
+# Description: Build and deploy an Astro site to GitHub Pages using withastro/action.
+
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ] # Adjust branch name if needed
   workflow_dispatch:
 
 permissions:
@@ -10,44 +13,27 @@ permissions:
   pages: write
   id-token: write
 
+# Ensures only one deployment runs at a time for the 'pages' group
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Output the deployment URL
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+      # Uses the official Astro action to handle setup, build, and deployment
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: withastro/action@v2
+        # No 'with:' options needed for standard GitHub Pages deployment
+
+
