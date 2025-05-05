@@ -11,5 +11,8 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-dark'
     }
+  },
+  build: {
+    assets: '_assets'
   }
 });
