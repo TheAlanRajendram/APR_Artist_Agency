@@ -6,14 +6,19 @@ module.exports = {
       colors: {
         gold: '#ab8850',
         dark: {
-          DEFAULT: '#121212',
-          lighter: '#1E1E1E'
+          DEFAULT: '#0A0A0A',
+          lighter: '#242424',
+          card: '#2A2A2A',
+          accent: '#333333'
         }
       },
       fontFamily: {
         sans: ['Montserrat', 'system-ui', 'sans-serif'],
         serif: ['Playfair Display', 'serif'],
       },
+      boxShadow: {
+        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(212, 175, 55, 0.1)',
+      }
     },
   },
   plugins: [],

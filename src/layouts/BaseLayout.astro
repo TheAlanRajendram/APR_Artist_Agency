@@ -21,7 +21,7 @@ const base = '/webapp-test';
     <title>{title} | APR Artist Agency</title>
   </head>
   <body class="bg-dark text-white min-h-screen flex flex-col">
-    <header class="bg-dark-lighter py-4">
+    <header class="bg-dark-lighter py-4 shadow-md">
       <div class="container mx-auto px-4">
         <nav class="flex items-center justify-between">
           <a href={`${base}/`} class="flex items-center" aria-label="APR Artist Agency Home">
@@ -57,12 +57,35 @@ const base = '/webapp-test';
       <slot />
     </main>
 
-    <footer class="bg-dark-lighter py-8">
+    <footer class="bg-dark-lighter py-8 border-t border-dark-accent">
       <div class="container mx-auto px-4 text-center">
         <p class="text-gold font-bold text-xl mb-4 font-serif">APR Artist Agency</p>
         <p class="text-gray-400">© {currentYear} APR Artist Agency. All rights reserved.</p>
       </div>
     </footer>
+
+    <style>
+      /* Global styles for page background */
+      :global(body) {
+        background: linear-gradient(to bottom, #0A0A0A, #121212);
+      }
+
+      /* Add golden accent to active page links */
+      :global(.active-link) {
+        color: #D4AF37;
+        position: relative;
+      }
+
+      :global(.active-link::after) {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #D4AF37;
+      }
+    </style>
 
     <script>
       // Mobile menu functionality
@@ -90,6 +113,17 @@ const base = '/webapp-test';
           });
         });
       }
+
+      // Mark current page as active
+      const currentPath = window.location.pathname;
+      const navLinks = document.querySelectorAll('nav a[href]:not([aria-label="APR Artist Agency Home"])');
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && currentPath.endsWith(href.replace('/webapp-test', ''))) {
+          link.classList.add('active-link');
+        }
+      });
     </script>
   </body>
 </html>

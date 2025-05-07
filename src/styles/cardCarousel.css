@@ -32,13 +32,14 @@
 .card-content {
   backface-visibility: hidden;
   transform: translateZ(0);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.15);
   height: 100%;
   width: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  background-color: var(--card-bg, #2A2A2A); /* Default fallback if CSS var not available */
 }
 
 /* Custom scrollbar for card content */
@@ -52,12 +53,12 @@
 }
 
 .card-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(212, 175, 55, 0.2);
   border-radius: 3px;
 }
 
 .card-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(212, 175, 55, 0.3);
 }
 
 /* Progress bar */
@@ -78,6 +79,16 @@
   transition: width 0.3s ease;
 }
 
+/* Inactive cards get a more distinct dimming effect */
+.carousel-card:not(.active) .card-content {
+  filter: brightness(0.7);
+}
+
+/* Add a subtle gold glow to active card */
+.carousel-card.active .card-content {
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 10px rgba(212, 175, 55, 0.15);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carousel-card {
     transition: opacity 0.5s ease;
@@ -92,5 +103,11 @@
 
   .carousel-card {
     height: 350px; /* Smaller fixed height for mobile */
+  }
+
+  /* Increase contrast even more on mobile */
+  .card-content {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 2px 5px rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.2);
   }
 }
