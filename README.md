@@ -22,11 +22,6 @@ npm install
 npm run dev
 ```
 
-3. Build for production:
-```bash
-npm run build
-```
-
 ## Adding Portfolio Items
 
 To add a new portfolio item:
@@ -49,7 +44,7 @@ tags: ["Tag1", "Tag2", "Tag3"]
 
 ## Deployment
 
-The site is configured for deployment to GitHub Pages using GitHub Actions. Here's how to set it up:
+The site is automatically deployed to GitHub Pages using GitHub Actions. Here's how to set it up:
 
 1. Make sure your repository is public (required for GitHub Pages)
 2. Go to your repository's Settings > Pages
