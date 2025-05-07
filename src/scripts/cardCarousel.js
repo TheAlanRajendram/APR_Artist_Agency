@@ -47,9 +47,9 @@ export function initCardCarousel(options = {}) {
       let opacity = 1 - (Math.abs(distance) * 0.3);
       opacity = Math.max(0, Math.min(1, opacity));
 
-      // Calculate scale
-      let scale = 1 - (Math.abs(distance) * 0.2);
-      scale = Math.max(0.6, Math.min(1, scale));
+      // Calculate scale - but maintain size consistency
+      let scale = 1 - (Math.abs(distance) * 0.15); // Reduced scale difference for size consistency
+      scale = Math.max(0.7, Math.min(1, scale));   // Increased minimum scale for better visibility
 
       // Calculate X position
       const translateX = distance * 100;
@@ -68,6 +68,31 @@ export function initCardCarousel(options = {}) {
     lastScrollTime = now;
     targetIndex = Math.max(0, Math.min(totalCards - 1, index));
     updateCardPositions();
+  }
+
+  // Equal height for all cards
+  function equalizeCardHeights() {
+    let maxHeight = 0;
+
+    // First pass - find maximum content height
+    cards.forEach(card => {
+      const content = card.querySelector('.card-content');
+      if (content) {
+        content.style.height = 'auto'; // Reset to calculate proper height
+        const contentHeight = content.scrollHeight;
+        maxHeight = Math.max(maxHeight, contentHeight);
+      }
+    });
+
+    // Only set fixed heights if there are significant differences
+    if (maxHeight > 0) {
+      cards.forEach(card => {
+        const content = card.querySelector('.card-content');
+        if (content) {
+          content.style.minHeight = maxHeight + 'px';
+        }
+      });
+    }
   }
 
   // Mouse wheel event
@@ -127,6 +152,7 @@ export function initCardCarousel(options = {}) {
   }
 
   // Initialize
+  equalizeCardHeights(); // Make sure cards have equal heights
   updateCardPositions();
   navigateToCard(0);
 
