@@ -61,6 +61,31 @@
   background: rgba(212, 175, 55, 0.3);
 }
 
+/* Markdown Content Styles */
+.markdown-content ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.markdown-content ul li {
+  display: list-item !important;
+  margin-bottom: 0.5rem !important;
+  position: relative !important;
+}
+
+.markdown-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: -1.2rem;
+  color: #ab8850;
+  font-size: 1.2em;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem !important;
+}
+
 /* Progress bar */
 .progress-bar {
   width: 100%;

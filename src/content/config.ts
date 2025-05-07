@@ -18,8 +18,6 @@ const servicesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     order: z.number(), // For controlling the display order
-    description: z.string().optional(),
-    listItems: z.array(z.string()).optional(),
   }),
 });
 

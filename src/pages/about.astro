@@ -2,10 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/cardCarousel.css';
 import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 
 // Get all about sections and sort by order
 const aboutSections = await getCollection('about');
 const sortedSections = aboutSections.sort((a, b) => a.data.order - b.data.order);
+
+// Convert markdown to HTML for proper rendering
+sortedSections.forEach(section => {
+  section.compiledContent = marked.parse(section.body);
+});
 ---
 
 <BaseLayout title="About">
@@ -19,15 +25,8 @@ const sortedSections = aboutSections.sort((a, b) => a.data.order - b.data.order)
             <div class="card-content bg-dark-card p-8 rounded-lg">
               <h2 class="text-2xl font-bold mb-4 text-gold font-serif">{section.data.title}</h2>
 
-              {section.data.listItems ? (
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                  {section.data.listItems.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              ) : (
-                <div class="text-gray-300" set:html={section.body} />
-              )}
+              {/* Display the markdown body content with proper HTML rendering */}
+              <div class="text-gray-300 markdown-content" set:html={section.compiledContent} />
             </div>
           </div>
         ))}

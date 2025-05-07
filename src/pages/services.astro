@@ -2,10 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/cardCarousel.css';
 import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 
 // Get all services and sort by order
 const services = await getCollection('services');
 const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+
+// Convert markdown to HTML for proper rendering
+sortedServices.forEach(service => {
+  service.compiledContent = marked.parse(service.body);
+});
 ---
 
 <BaseLayout title="Services">
@@ -18,18 +24,9 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
           <div class="carousel-card" data-index={index}>
             <div class="card-content bg-dark-card p-8 rounded-lg">
               <h2 class="text-2xl font-bold mb-4 text-gold font-serif">{service.data.title}</h2>
-              {service.data.description && (
-                <p class="text-gray-300 mb-4">
-                  {service.data.description}
-                </p>
-              )}
-              {service.data.listItems && service.data.listItems.length > 0 && (
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                  {service.data.listItems.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              )}
+
+              {/* Display the markdown body content with proper HTML rendering */}
+              <div class="text-gray-300 markdown-content" set:html={service.compiledContent} />
             </div>
           </div>
         ))}

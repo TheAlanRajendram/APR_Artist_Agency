@@ -1,12 +1,12 @@
 ---
 title: "What Makes Us Unique"
 order: 4
-listItems:
-  - "Deep industry expertise across sports, music, and entertainment"
-  - "Personalized approach to each collaboration"
-  - "Extensive network of both brands and artists"
-  - "Commitment to long-term success rather than one-off deals"
-  - "Transparent and ethical business practices"
 ---
 
-Our unique combination of industry knowledge, personalized service, and ethical approach sets us apart in the world of talent representation and brand partnerships.
+Our unique combination of industry knowledge, personalized service, and ethical approach sets us apart in the world of talent representation and brand partnerships:
+
+- Deep industry expertise across sports, music, and entertainment
+- Personalized approach to each collaboration
+- Extensive network of both brands and artists
+- Commitment to long-term success rather than one-off deals
+- Transparent and ethical business practices
