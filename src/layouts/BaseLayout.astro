@@ -24,7 +24,9 @@ const base = '/webapp-test';
     <header class="bg-dark-lighter py-4">
       <div class="container mx-auto px-4">
         <nav class="flex items-center justify-between">
-          <a href={`${base}/`} class="text-2xl font-bold text-gold font-serif">APR Artist Agency</a>
+          <a href={`${base}/`} class="flex items-center" aria-label="APR Artist Agency Home">
+            <img src=`${base}/logo_gold.png` alt="APR Artist Agency Logo" style="height: 48px;" class="mr-3" />
+          </a>
           <div class="hidden md:flex space-x-6">
             <a href={`${base}/`} class="hover:text-gold transition-colors">Home</a>
             <a href={`${base}/about`} class="hover:text-gold transition-colors">About</a>
