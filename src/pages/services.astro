@@ -187,11 +187,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     let touchStartX = 0;
     let lastScrollTime = 0;
     const scrollCooldown = 800; // ms
+    let prevButton: HTMLButtonElement;
+    let nextButton: HTMLButtonElement;
 
     function updateCardPositions() {
       const progress = (targetIndex / (totalCards - 1)) * 100;
       if (progressIndicator) {
         progressIndicator.style.width = `${progress}%`;
+      }
+
+      // Update navigation button visibility
+      if (prevButton && nextButton) {
+        prevButton.style.visibility = targetIndex === 0 ? 'hidden' : 'visible';
+        nextButton.style.visibility = targetIndex === totalCards - 1 ? 'hidden' : 'visible';
       }
 
       cards.forEach((card, index) => {
@@ -279,18 +287,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // Add navigation buttons for better UX
     const gallery = document.querySelector('.service-gallery');
     if (gallery) {
-      const prevButton = document.createElement('button');
+      prevButton = document.createElement('button');
       prevButton.className = 'nav-button prev-button';
       prevButton.innerHTML = '&lt;';
       prevButton.onclick = () => navigateToCard(targetIndex - 1);
 
-      const nextButton = document.createElement('button');
+      nextButton = document.createElement('button');
       nextButton.className = 'nav-button next-button';
       nextButton.innerHTML = '&gt;';
       nextButton.onclick = () => navigateToCard(targetIndex + 1);
 
       gallery.appendChild(prevButton);
       gallery.appendChild(nextButton);
+
+      // Initialize button visibility
+      prevButton.style.visibility = 'hidden'; // Hide left arrow at start
     }
   });
 
