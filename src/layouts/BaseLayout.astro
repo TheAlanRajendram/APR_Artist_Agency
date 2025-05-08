@@ -112,6 +112,14 @@ const base = '/webapp-test';
       #mobile-menu a:hover {
         transform: translateY(-2px);
       }
+
+      /* Prevent scrolling when menu is open */
+      :global(body.menu-open) {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
     </style>
 
     <script>
@@ -119,9 +127,13 @@ const base = '/webapp-test';
       const mobileMenuButton = document.getElementById('mobile-menu-button');
       const closeMenuButton = document.getElementById('close-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
+      const body = document.body;
 
       function openMenu() {
         if (mobileMenu) {
+          // Prevent background scrolling
+          body.classList.add('menu-open');
+
           mobileMenu.classList.remove('hidden');
           // Give time for the browser to process the removal of the hidden class
           setTimeout(() => {
@@ -135,6 +147,9 @@ const base = '/webapp-test';
 
       function closeMenu() {
         if (mobileMenu) {
+          // Re-enable scrolling
+          body.classList.remove('menu-open');
+
           mobileMenu.style.opacity = '0';
           mobileMenu.style.visibility = 'hidden';
           // Wait for transition to complete before adding hidden class
