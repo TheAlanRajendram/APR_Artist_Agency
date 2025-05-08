@@ -22,7 +22,7 @@ const base = '/webapp-test';
   </head>
   <body class="bg-dark text-white min-h-screen flex flex-col">
     <header class="bg-dark-lighter py-4 shadow-md">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-4 relative">
         <nav class="flex items-center justify-between">
           <a href={`${base}/`} class="flex items-center" aria-label="APR Artist Agency Home">
             <img src=`${base}/logo_gold.png` alt="APR Artist Agency Logo" style="height: 48px;" class="mr-3" />
@@ -41,13 +41,18 @@ const base = '/webapp-test';
           </button>
         </nav>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="md:hidden hidden">
-          <div class="py-4 space-y-4 text-right">
-            <a href={`${base}/`} class="block hover:text-gold transition-colors">Home</a>
-            <a href={`${base}/about`} class="block hover:text-gold transition-colors">About</a>
-            <a href={`${base}/services`} class="block hover:text-gold transition-colors">Services</a>
-            <a href={`${base}/portfolio`} class="block hover:text-gold transition-colors">Portfolio</a>
-            <a href={`${base}/contact`} class="block hover:text-gold transition-colors">Contact</a>
+        <div id="mobile-menu" class="md:hidden hidden fixed inset-0 bg-dark-lighter bg-opacity-95 z-50 flex flex-col items-center justify-center">
+          <button id="close-menu-button" class="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors" aria-label="Close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div class="py-8 space-y-8 text-center w-full max-w-md">
+            <a href={`${base}/`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Home</a>
+            <a href={`${base}/about`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">About</a>
+            <a href={`${base}/services`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Services</a>
+            <a href={`${base}/portfolio`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Portfolio</a>
+            <a href={`${base}/contact`} class="block hover:text-gold transition-colors text-2xl font-serif py-3">Contact</a>
           </div>
         </div>
       </div>
@@ -85,32 +90,85 @@ const base = '/webapp-test';
         height: 2px;
         background-color: #D4AF37;
       }
+
+      /* Mobile menu animation */
+      #mobile-menu {
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        backdrop-filter: blur(4px);
+      }
+
+      #mobile-menu:not(.hidden) {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #mobile-menu a {
+        position: relative;
+        transition: transform 0.2s;
+      }
+
+      #mobile-menu a:hover {
+        transform: translateY(-2px);
+      }
     </style>
 
     <script>
       // Mobile menu functionality
       const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const closeMenuButton = document.getElementById('close-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
 
+      function openMenu() {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('hidden');
+          // Give time for the browser to process the removal of the hidden class
+          setTimeout(() => {
+            if (mobileMenu) {
+              mobileMenu.style.opacity = '1';
+              mobileMenu.style.visibility = 'visible';
+            }
+          }, 10);
+        }
+      }
+
+      function closeMenu() {
+        if (mobileMenu) {
+          mobileMenu.style.opacity = '0';
+          mobileMenu.style.visibility = 'hidden';
+          // Wait for transition to complete before adding hidden class
+          setTimeout(() => {
+            if (mobileMenu) {
+              mobileMenu.classList.add('hidden');
+            }
+          }, 300); // Match the transition time
+        }
+      }
+
       if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
+        mobileMenuButton.addEventListener('click', openMenu);
+
+        // Close menu button
+        if (closeMenuButton) {
+          closeMenuButton.addEventListener('click', closeMenu);
+        }
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', (event) => {
           const target = event.target as Node;
-          if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
-            mobileMenu.classList.add('hidden');
+          if (mobileMenu &&
+              !mobileMenuButton?.contains(target) &&
+              !mobileMenu.contains(target) &&
+              !mobileMenu.classList.contains('hidden')) {
+            closeMenu();
           }
         });
 
         // Close mobile menu when clicking a link
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-          });
+          link.addEventListener('click', closeMenu);
         });
       }
 
