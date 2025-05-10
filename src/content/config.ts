@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const portfolioCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    layout: z.string(),
+    layout: z.string().optional(),
     title: z.string(),
     brand: z.string(),
     artist: z.string(),
