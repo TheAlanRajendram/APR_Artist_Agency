@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const portfolioItems = await getCollection('portfolio');
+const base = '/webapp-test';
 ---
 
 <BaseLayout title="Portfolio">
@@ -12,7 +13,7 @@ const portfolioItems = await getCollection('portfolio');
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {portfolioItems.map((item) => (
-          <a href={`/portfolio/${item.slug}`} class="group">
+          <a href={`${base}/portfolio/${item.slug}`} class="group">
             <div class="bg-dark-lighter rounded-lg overflow-hidden transition-transform group-hover:scale-105">
               <img
                 src={item.data.image}
