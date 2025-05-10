@@ -11,6 +11,13 @@ interface Props {
 }
 
 const { title, brand, artist, date, image, tags = [] } = Astro.props;
+
+// Format the date
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
 <div class="min-h-screen bg-dark">
@@ -31,7 +38,7 @@ const { title, brand, artist, date, image, tags = [] } = Astro.props;
           <span>×</span>
           <span>{artist}</span>
           <span>•</span>
-          <span>{new Date(date).toLocaleDateString()}</span>
+          <span>{formattedDate}</span>
         </div>
         {tags.length > 0 && (
           <div class="flex flex-wrap gap-2">
