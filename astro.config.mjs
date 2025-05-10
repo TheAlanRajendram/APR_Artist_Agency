@@ -9,5 +9,10 @@ export default defineConfig({
   build: {
     assets: '_assets'
   },
-  output: 'static'
+  output: 'static',
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark'
+    }
+  }
 });
