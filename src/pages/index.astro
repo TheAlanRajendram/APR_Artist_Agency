@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThreeCanvas from '../components/ThreeCanvas.astro';
+
+const base = '/webapp-test';
 ---
 
 <BaseLayout title="Home">
@@ -9,12 +11,12 @@ import ThreeCanvas from '../components/ThreeCanvas.astro';
     <div class="container mx-auto px-4 relative z-10">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-5xl md:text-7xl font-bold mb-8 font-serif animate-fade-in">
-          Connecting <span class="text-gold">Brands</span> with <span class="text-gold tracking-wider">Artists</span>
+          Connecting<br> <span class="text-gold italic">Brands</span> & <span class="text-gold tracking-wider italic">Artists</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed animate-fade-in-up">
           APR Artist Agency specializes in creating powerful partnerships between brands and exceptional talent across sports, music, and entertainment.
         </p>
-        <a href="/portfolio" class="inline-block bg-gold text-dark font-bold py-4 px-10 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-gold/20 animate-fade-in-up">
+        <a href={`${base}/portfolio`} class="inline-block bg-gold text-dark font-bold py-4 px-10 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-gold/20 animate-fade-in-up">
           Explore Our Work
         </a>
       </div>
