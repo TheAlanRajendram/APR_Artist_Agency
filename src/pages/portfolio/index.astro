@@ -3,7 +3,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const portfolioItems = await getCollection('portfolio');
-const base = '/webapp-test';
+const base = import.meta.env.BASE_URL;
+
+// Add base path to image URLs
+const itemsWithBasePath = portfolioItems.map(item => ({
+  ...item,
+  data: {
+    ...item.data,
+    image: `${base}${item.data.image}`
+  }
+}));
 ---
 
 <BaseLayout title="Portfolio">
@@ -12,7 +21,7 @@ const base = '/webapp-test';
       <h1 class="text-4xl font-bold mb-12 text-center font-serif">Our Portfolio</h1>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {portfolioItems.map((item) => (
+        {itemsWithBasePath.map((item) => (
           <a href={`${base}/portfolio/${item.slug}`} class="group">
             <div class="bg-dark-lighter rounded-lg overflow-hidden transition-transform group-hover:scale-105">
               <img

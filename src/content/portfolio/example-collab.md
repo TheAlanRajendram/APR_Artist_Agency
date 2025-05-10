@@ -4,7 +4,7 @@ title: "Luxury Watch Campaign"
 brand: "TimeMaster"
 artist: "Michael Johnson"
 date: "2023-11-15"
-image: "/webapp-test/images/portfolio/luxury-watch.png"
+image: "/images/portfolio/luxury-watch.png"
 tags: ["Sports", "Luxury", "Branding"]
 ---
 

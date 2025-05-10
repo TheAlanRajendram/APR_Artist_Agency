@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThreeCanvas from '../components/ThreeCanvas.astro';
 
-const base = '/webapp-test';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Home">
