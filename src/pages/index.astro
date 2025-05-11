@@ -1,11 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThreeCanvas from '../components/ThreeCanvas.astro';
+import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
+
+// Get portfolio items
+const portfolioItems = await getCollection('portfolio');
+
+// Add base path to image URLs
+const itemsWithBasePath = portfolioItems.map(item => ({
+  ...item,
+  data: {
+    ...item.data,
+    image: `${base}${item.data.image}`
+  }
+}));
+
+// Use only 5 items for the featured carousel
+const featuredItems = itemsWithBasePath.slice(0, 10);
 ---
 
 <BaseLayout title="Home">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css" />
+
   <section class="relative py-32 bg-dark-lighter overflow-hidden">
     <ThreeCanvas />
     <div class="container mx-auto px-4 relative z-10">
@@ -48,34 +67,109 @@ const base = import.meta.env.BASE_URL;
       animation: fadeInUp 1s ease-out 0.3s forwards;
       opacity: 0;
     }
+
+    /* Swiper custom styles */
+    .swiper {
+      width: 100%;
+      padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+      height: auto;
+      transition: transform 0.3s;
+    }
+
+    .swiper-pagination-bullet {
+      background: #a8a29e;
+      opacity: 0.6;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #d4a150;
+      opacity: 1;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #d4a150;
+    }
   </style>
 
   <section class="py-20">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-12 text-center font-serif">Featured Collaborations</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-dark-lighter rounded-lg overflow-hidden">
-          <img src="https://placehold.co/600x400" alt="Featured Project" class="w-full h-48 object-cover" />
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 font-serif">Brand Campaign</h3>
-            <p class="text-gray-400">Professional Athlete × Luxury Brand</p>
-          </div>
+
+      <!-- Swiper -->
+      <div class="swiper portfolio-swiper">
+        <div class="swiper-wrapper">
+          {featuredItems.map((item) => (
+            <div class="swiper-slide">
+              <a href={`${base}/portfolio/${item.slug}`} class="block group">
+                <div class="bg-dark-lighter rounded-lg overflow-hidden h-full shadow-lg transition-all hover:shadow-gold/10">
+                  <img
+                    src={item.data.image}
+                    alt={item.data.title}
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-gold transition-colors">{item.data.title}</h3>
+                    <p class="text-gray-400 mb-3">{item.data.brand} × {item.data.artist}</p>
+                    <div class="flex flex-wrap gap-2">
+                      {item.data.tags.slice(0, 2).map(tag => (
+                        <span class="bg-dark px-2 py-1 rounded-full text-xs text-gray-400">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
         </div>
-        <div class="bg-dark-lighter rounded-lg overflow-hidden">
-          <img src="https://placehold.co/600x400" alt="Featured Project" class="w-full h-48 object-cover" />
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 font-serif">Music Partnership</h3>
-            <p class="text-gray-400">Recording Artist × Tech Company</p>
-          </div>
-        </div>
-        <div class="bg-dark-lighter rounded-lg overflow-hidden">
-          <img src="https://placehold.co/600x400" alt="Featured Project" class="w-full h-48 object-cover" />
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 font-serif">Entertainment Deal</h3>
-            <p class="text-gray-400">Actor × Global Brand</p>
-          </div>
-        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
     </div>
   </section>
+
+  <!-- Swiper JS -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Swiper('.portfolio-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+          delay: 1500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        effect: 'slide',
+        speed: 600,
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }
+      });
+    });
+  </script>
 </BaseLayout>
