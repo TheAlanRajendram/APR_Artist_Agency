@@ -82,15 +82,17 @@ sortedServices.forEach((service) => {
             id={service.data.id}
           >
             {" "}
+            {/* ID for navigation target */}
             <div class="service-section-content py-24 w-full reveal-animation">
               {" "}
+              {/* py-24 might need adjustment depending on TOC header height */}
               <div class="service-content h-full w-full flex items-center">
                 <div class="container mx-auto px-8">
                   <div class="flex flex-col md:flex-row">
                     <div class="md:w-1/4 mb-8 md:mb-0">
-                      {/* <div class="text-4xl md:text-6xl font-bold text-gold opacity-80">
+                      <div class="text-4xl md:text-6xl font-bold text-gold opacity-80">
                         {(index + 1).toString().padStart(2, "0")}
-                      </div> */}
+                      </div>
                     </div>
                     <div class="md:w-3/4">
                       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gold font-serif">
@@ -201,4 +203,276 @@ sortedServices.forEach((service) => {
   }
 </style>
 
-<script src="../scripts/servicesPage.js"></script>
+<script>
+  // Function to adjust padding-bottom of the services container (from previous step)
+  function adjustServicesContainerPadding() {
+    const servicesContainer = document.querySelector(".services-container");
+    if (!servicesContainer) return;
+    const sections = servicesContainer.querySelectorAll(
+      ".service-sticky-wrapper",
+    );
+    if (sections.length === 0) {
+      servicesContainer.style.paddingBottom = "0px";
+      return;
+    }
+    const lastSection = sections[sections.length - 1];
+    const lastSectionHeight = lastSection.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    let calculatedPadding = viewportHeight - lastSectionHeight;
+    calculatedPadding = Math.max(0, calculatedPadding);
+    servicesContainer.style.paddingBottom = `${calculatedPadding}px`;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocHeader = document.getElementById("services-toc-header");
+    const tocLinks = document.querySelectorAll(".toc-link");
+    const serviceSections = document.querySelectorAll(
+      ".service-sticky-wrapper[id]",
+    ); // Ensure they have an ID
+
+    let tocHeaderHeight = 0;
+    if (tocHeader) {
+      tocHeaderHeight = tocHeader.offsetHeight;
+      // Apply scroll-padding-top to the html element for better scroll-to-anchor behavior
+      document.documentElement.style.scrollPaddingTop = `${tocHeaderHeight + 16}px`; // +16 for some breathing room
+    }
+
+    // --- 1. Smooth Scrolling for TOC links ---
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          // We already set scrollPaddingTop, so direct scrollIntoView should be fine
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    // --- 2. Intersection Observer for TOC Link Highlighting ---
+    // --- Inside your DOMContentLoaded ---
+
+    // ... (tocHeader, tocLinks, serviceSections, tocHeaderHeight setup remains the same) ...
+    // ... (Smooth scrolling for TOC links remains the same) ...
+
+    // --- SIMPLIFIED & REFINED: Intersection Observer for TOC Link Highlighting ---
+    let currentlyActiveTocId = null;
+
+    const highlightTocLink = (entries, observer) => {
+      let entryThatIsIntersecting = null;
+      // Check if any entry from the callback is explicitly intersecting
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          // If multiple are intersecting (should be rare with narrow rootMargin),
+          // pick the one with the smallest top value (highest on screen).
+          if (
+            !entryThatIsIntersecting ||
+            entry.boundingClientRect.top <
+              entryThatIsIntersecting.boundingClientRect.top
+          ) {
+            entryThatIsIntersecting = entry;
+          }
+        }
+      }
+
+      if (entryThatIsIntersecting) {
+        const targetId = entryThatIsIntersecting.target.getAttribute("id");
+        if (targetId !== currentlyActiveTocId) {
+          tocLinks.forEach((link) => link.classList.remove("active"));
+          const correspondingLink = document.querySelector(
+            `.toc-link[data-target-id="${targetId}"]`,
+          );
+          if (correspondingLink) {
+            correspondingLink.classList.add("active");
+          }
+          currentlyActiveTocId = targetId;
+          // console.log(`Observer Active: ${targetId}`);
+        }
+        return; // Processed based on direct intersection, exit
+      }
+
+      // ---- FALLBACK LOGIC: Manually determine active section ----
+      // This runs if no section was 'isIntersecting' from the observer callback entries.
+      // (e.g., scrolled quickly past the narrow detection zone)
+
+      let bestCandidateSection = null;
+      // Represents the ideal top position for an active section (just below the TOC header)
+      const idealActivationLine = tocHeaderHeight + 5; // Small buffer below TOC
+
+      // We want the section whose top is closest to idealActivationLine,
+      // prioritizing sections whose top is AT or ABOVE this line when scrolling up.
+      let smallestDistanceToIdealLine = Infinity;
+
+      for (const section of serviceSections) {
+        const rect = section.getBoundingClientRect();
+
+        // Basic visibility: section's bottom should be below the TOC, top should be above viewport bottom
+        if (rect.bottom < tocHeaderHeight || rect.top > window.innerHeight) {
+          continue; // Skip sections that are clearly not in the running
+        }
+
+        const distance = rect.top - idealActivationLine; // Negative if above, positive if below
+
+        // Prioritize sections whose top is at or just slightly above the ideal line (distance <= 0)
+        // OR sections whose top is just slightly below it (small positive distance)
+        // This should cover both scroll up (section.top <= idealActivationLine)
+        // and scroll down (section.top slightly > idealActivationLine) scenarios
+        // if the observer missed the direct intersection.
+
+        if (Math.abs(distance) < Math.abs(smallestDistanceToIdealLine)) {
+          smallestDistanceToIdealLine = distance; // Store signed distance
+          bestCandidateSection = section;
+        } else if (
+          Math.abs(distance) === Math.abs(smallestDistanceToIdealLine)
+        ) {
+          // If two sections are equidistant, prefer the one whose top is higher (smaller rect.top)
+          // This can happen if idealActivationLine is exactly between two sections.
+          if (
+            bestCandidateSection &&
+            rect.top < bestCandidateSection.getBoundingClientRect().top
+          ) {
+            bestCandidateSection = section;
+          }
+        }
+      }
+
+      if (bestCandidateSection) {
+        const targetId = bestCandidateSection.getAttribute("id");
+        if (targetId !== currentlyActiveTocId) {
+          tocLinks.forEach((link) => link.classList.remove("active"));
+          const correspondingLink = document.querySelector(
+            `.toc-link[data-target-id="${targetId}"]`,
+          );
+          if (correspondingLink) {
+            correspondingLink.classList.add("active");
+          }
+          currentlyActiveTocId = targetId;
+          // console.log(`Fallback Active: ${targetId}, Distance: ${smallestDistanceToIdealLine}`);
+        }
+      }
+      // If bestCandidateSection is null (e.g., all sections are scrolled far away),
+      // currentlyActiveTocId remains on the last known active link.
+    };
+
+    const observerOptionsTocHighlight = {
+      root: null,
+      rootMargin: `-${tocHeaderHeight + 10}px 0px -${window.innerHeight - tocHeaderHeight - 50}px 0px`, // Adjust offsets as needed
+      threshold: 0,
+    };
+
+    const tocHighlightObserver = new IntersectionObserver(
+      highlightTocLink,
+      observerOptionsTocHighlight,
+    );
+
+    serviceSections.forEach((section) => {
+      tocHighlightObserver.observe(section);
+    });
+
+    // ... (Rest of your script: reveal observer, padding adjustment, resize, image loading) ...
+
+    // --- 3. Existing Intersection Observer for section reveal and main stacking ---
+    const revealSections = document.querySelectorAll(".service-sticky-wrapper"); // Re-select for clarity
+
+    revealSections.forEach((section, index) => {
+      section.style.setProperty("--index", String(index)); // For z-index stacking of main sections
+    });
+
+    const revealOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.25, // Original threshold for reveal animation
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const targetElement = entry.target;
+        const index = parseInt(targetElement.getAttribute("data-index") || "0");
+
+        if (entry.isIntersecting) {
+          targetElement.classList.add("active"); // For fade-in animation
+
+          // Stacking logic for main service sections
+          revealSections.forEach((section, i) => {
+            if (i <= index) {
+              // Adjust the 'top' value for .sticky based on TOC header height
+              // This is tricky because position:sticky top is relative to its offset parent.
+              // For now, the .service-sticky-wrapper itself becoming sticky at top:0
+              // will naturally stack. The TOC header is a separate sticky element on top of everything.
+              section.classList.add("sticky");
+
+              // If you want the *content* of the sections to be sticky *below* the TOC,
+              // you'd set .service-sticky-wrapper.sticky { top: value_of_toc_header_height_px; }
+              // And the actual service-section-content would scroll within that.
+              // For this iteration, let's assume the TOC header is always on top,
+              // and the service-sticky-wrapper becoming sticky at top:0 is acceptable
+              // because its z-index is lower than the TOC.
+            } else {
+              section.classList.remove("sticky");
+            }
+          });
+        } else {
+          if (
+            entry.boundingClientRect.top > window.innerHeight ||
+            entry.boundingClientRect.bottom < 0
+          ) {
+            targetElement.classList.remove("sticky");
+          }
+        }
+      });
+    }, revealOptions);
+
+    revealSections.forEach((section) => {
+      revealObserver.observe(section);
+    });
+
+    // --- Call the padding adjustment function ---
+    adjustServicesContainerPadding();
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (tocHeader) {
+          // Recalculate TOC header height on resize
+          tocHeaderHeight = tocHeader.offsetHeight;
+          document.documentElement.style.scrollPaddingTop = `${tocHeaderHeight + 16}px`;
+          // Re-initialize TOC highlight observer if rootMargin depends on dynamic height
+          // For simplicity, we'll assume it's good enough for now or re-init if significant issues
+        }
+        adjustServicesContainerPadding();
+      }, 250);
+    });
+
+    // Image loading adjustments (from previous step)
+    const servicesContainerElement = document.querySelector(
+      ".services-container",
+    );
+    if (servicesContainerElement) {
+      const images = servicesContainerElement.querySelectorAll("img");
+      let loadedImages = 0;
+      const totalImages = images.length;
+      if (totalImages > 0) {
+        images.forEach((img) => {
+          const checkImage = () => {
+            loadedImages++;
+            if (loadedImages === totalImages) {
+              adjustServicesContainerPadding();
+              if (tocHeader) {
+                // Update TOC header height dependent calculations
+                tocHeaderHeight = tocHeader.offsetHeight;
+                document.documentElement.style.scrollPaddingTop = `${tocHeaderHeight + 16}px`;
+                // Consider re-initializing the tocHighlightObserver if its rootMargin is very sensitive
+              }
+            }
+          };
+          if (img.complete) checkImage();
+          else {
+            img.addEventListener("load", checkImage);
+            img.addEventListener("error", checkImage);
+          }
+        });
+      }
+    }
+  });
+</script>
