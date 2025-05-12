@@ -14,43 +14,156 @@ sortedServices.forEach(service => {
 ---
 
 <BaseLayout title="Services">
-  <section class="py-16 relative">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-12 text-center font-serif">Our Services At APR</h1>
+  <section class="services-main relative">
+    <!-- Scroll indicator -->
+    <div class="fixed right-12 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+      <div class="text-gold font-light tracking-widest text-sm rotate-90 origin-center">Scroll</div>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sortedServices.map((service) => (
-          <div class="service-card bg-dark-card p-8 rounded-lg shadow-lg transition-transform hover:scale-105">
-              <h2 class="text-2xl font-bold mb-4 text-gold font-serif">{service.data.title}</h2>
-
-              <div class="prose prose-invert max-w-none" set:html={service.compiledContent} />
-          </div>
-        ))}
+    <!-- Header section -->
+    <div class="hero-section h-screen flex items-center">
+      <div class="container mx-auto px-8">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 font-serif text-white">Our services</h1>
       </div>
+    </div>
+
+    <!-- Services sections -->
+    <div class="services-container relative">
+      {sortedServices.map((service, index) => (
+        <div class="service-section h-screen w-full border-t border-gray-800 reveal-section" data-index={index}>
+          <div class="service-content h-full w-full flex items-center">
+            <div class="container mx-auto px-8">
+              <div class="flex flex-col md:flex-row">
+                <!-- Left column with number -->
+                <div class="md:w-1/4 mb-8 md:mb-0">
+                  <div class="text-4xl md:text-6xl font-bold text-gold opacity-80">
+                    {(index + 1).toString().padStart(2, '0')}
+                  </div>
+                </div>
+                <!-- Right column with content -->
+                <div class="md:w-3/4">
+                  <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gold font-serif">{service.data.title}</h2>
+                  <div class="prose prose-invert prose-lg max-w-3xl" set:html={service.compiledContent} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .service-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .services-main {
+    background-color: rgb(17, 17, 17);
+    color: white;
   }
 
-  .markdown-content ul {
-    margin-top: 1rem;
-    list-style-type: disc;
+  .hero-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-container {
+    position: relative;
+  }
+
+  .service-section {
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    background-color: rgb(17, 17, 17);
+  }
+
+  .service-section.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-section.sticky {
+    position: sticky;
+    top: 0;
+    z-index: calc(1 + var(--index, 0));
+  }
+
+  .service-content {
+    padding: 24px 0;
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    max-width: 90%;
+  }
+
+  .prose ul {
+    margin-top: 1.5rem;
+    list-style-type: none;
+  }
+
+  .prose li {
+    margin-bottom: 0.75rem;
     padding-left: 1.5rem;
+    position: relative;
   }
 
-  .markdown-content li {
-    margin-bottom: 0.5rem;
+  .prose li:before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
   }
 
-  .markdown-content p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
+  .prose p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  /* Define gold color if not already defined elsewhere */
+  :root {
+    --color-gold: #D4AF37;
   }
 </style>
+
+<script>
+  // Initialize Intersection Observer for scroll reveal
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.reveal-section');
+
+    // Set custom CSS property for z-index stacking
+    sections.forEach((section, index) => {
+      section.setAttribute('style', `--index: ${String(index)}`);
+    });
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.25
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add active class for fade-in
+          entry.target.classList.add('active');
+
+          // Create stacking effect
+          const index = parseInt(entry.target.getAttribute('data-index') || '0');
+          sections.forEach((section, i) => {
+            if (i < index) {
+              section.classList.add('sticky');
+            }
+          });
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  });
+</script>
