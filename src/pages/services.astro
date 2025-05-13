@@ -6,9 +6,15 @@ import { marked } from "marked";
 // Helper function to create URL-friendly slugs
 function slugify(text) {
   if (!text) return "";
-  return text.toString().toLowerCase().trim()
-    .replace(/\s+/g, "-").replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-").replace(/^-+/, "").replace(/-+$/, "");
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
 }
 
 const services = await getCollection("services");
@@ -22,10 +28,18 @@ sortedServices.forEach((service) => {
 
 <BaseLayout title="Services">
   <div class="services-page bg-black text-white">
-    <div class="hero-section py-16 md:py-16 bg-gradient-to-b from-neutral-900 to-black">
+    <div
+      class="hero-section py-16 md:py-16 bg-gradient-to-b from-neutral-900 to-black"
+    >
       <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-6xl font-serif text-gold mb-6 animate-fade-in">Our Services</h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in animation-delay-200">
+        <h1
+          class="text-4xl md:text-6xl font-serif text-gold mb-6 animate-fade-in"
+        >
+          Our Services
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in animation-delay-200"
+        >
           We deliver comprehensive solutions tailored to elevate your brand
         </p>
       </div>
@@ -33,44 +47,71 @@ sortedServices.forEach((service) => {
 
     <div class="container mx-auto px-4">
       <div class="accordion-container max-w-4xl mx-auto">
-        {sortedServices.map((service, index) => {
-          // Generate appropriate icon based on service type
-          let serviceIcon = service.data.icon || `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`;
+        {
+          sortedServices.map((service, index) => {
+            // Generate appropriate icon based on service type
+            let serviceIcon =
+              service.data.icon ||
+              `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`;
 
-          return (
-            <div class="accordion-item overflow-hidden shadow-md opacity-0 translate-y-8 animation-item"
-                 id={service.data.id}
-                 style={`animation-delay: ${index * 150}ms`}>
-              <div class="accordion-header flex justify-between items-center p-6 bg-neutral-900 cursor-pointer border-l-4 border-transparent hover:border-gold/80" data-accordion-id={service.data.id}>
-                <h2 class="text-2xl font-serif flex items-center">
-                  <span class="service-icon text-gold" set:html={serviceIcon} />
-                  {service.data.title}
-                </h2>
-                <div class="accordion-icon">
-                  {index === 0 ? (
-                    <svg class="w-6 h-6 text-gold transform rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            return (
+              <div
+                class="accordion-item overflow-hidden shadow-md opacity-0 translate-y-8 animation-item"
+                id={service.data.id}
+                style={`animation-delay: ${index * 150}ms`}
+              >
+                <div
+                  class="accordion-header flex justify-between items-center p-6 bg-neutral-900 cursor-pointer border-l-4 border-transparent hover:border-gold/80"
+                  data-accordion-id={service.data.id}
+                >
+                  <h2 class="text-2xl font-serif flex items-center">
+                    <span
+                      class="service-icon text-gold"
+                      set:html={serviceIcon}
+                    />
+                    {service.data.title}
+                  </h2>
+                  <div class="accordion-icon">
+                    <svg
+                      class="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
-                  ) : (
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  )}
+                  </div>
+                </div>
+                <div
+                  class="accordion-content overflow-hidden transition-all duration-300 max-h-0"
+                  data-content-id={service.data.id}
+                >
+                  <div class="p-6 bg-neutral-800">
+                    {service.data.image && (
+                      <div class="service-image-container mb-8">
+                        <img
+                          src={service.data.image}
+                          alt={service.data.title}
+                          class="w-full rounded-md object-cover h-48 md:h-64"
+                        />
+                      </div>
+                    )}
+                    <div
+                      class="prose prose-invert prose-lg max-w-none"
+                      set:html={service.compiledContent}
+                    />
+                  </div>
                 </div>
               </div>
-              <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0" data-content-id={service.data.id}>
-                <div class="p-6 bg-neutral-800">
-                  {service.data.image && (
-                    <div class="service-image-container mb-8">
-                      <img src={service.data.image} alt={service.data.title} class="w-full rounded-md object-cover h-48 md:h-64" />
-                    </div>
-                  )}
-                  <div class="prose prose-invert prose-lg max-w-none" set:html={service.compiledContent} />
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
     </div>
   </div>
@@ -82,7 +123,7 @@ sortedServices.forEach((service) => {
   }
 
   .accordion-header.active {
-    border-left-color: theme('colors.gold');
+    border-left-color: theme("colors.gold");
     background-color: #262626; /* neutral-800 */
   }
 
@@ -95,7 +136,7 @@ sortedServices.forEach((service) => {
   }
 
   .accordion-header.active .accordion-icon svg {
-    color: theme('colors.gold');
+    color: theme("colors.gold");
   }
 
   .accordion-content {
@@ -127,7 +168,7 @@ sortedServices.forEach((service) => {
   }
 
   .accordion-header.active .service-icon svg {
-    color: theme('colors.gold');
+    color: theme("colors.gold");
   }
 
   /* Animation classes */
@@ -156,54 +197,55 @@ sortedServices.forEach((service) => {
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Restore prose headings styling */
   .prose h3 {
-    color: theme('colors.gold');
+    color: theme("colors.gold");
     margin-top: 1.5rem;
     margin-bottom: 1rem;
   }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
+  document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
 
-    // Open first accordion by default
-    const firstHeader = document.querySelector('.accordion-header');
-    const firstContent = document.querySelector('.accordion-content');
-    if (firstHeader && firstContent) {
-      firstHeader.classList.add('active');
-      firstContent.classList.add('active');
-    }
-
-    accordionHeaders.forEach(header => {
-      header.addEventListener('click', () => {
-        const accordionId = header.getAttribute('data-accordion-id');
-        const content = document.querySelector(`.accordion-content[data-content-id="${accordionId}"]`);
+    accordionHeaders.forEach((header) => {
+      header.addEventListener("click", () => {
+        const accordionId = header.getAttribute("data-accordion-id");
+        const content = document.querySelector(
+          `.accordion-content[data-content-id="${accordionId}"]`,
+        );
 
         // Toggle active state for clicked accordion
-        const isActive = header.classList.contains('active');
+        const isActive = header.classList.contains("active");
 
         // Close all accordions first
-        accordionHeaders.forEach(h => h.classList.remove('active'));
-        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+        accordionHeaders.forEach((h) => h.classList.remove("active"));
+        document
+          .querySelectorAll(".accordion-content")
+          .forEach((c) => c.classList.remove("active"));
 
         // If it wasn't active before, make it active now
         if (!isActive) {
-          header.classList.add('active');
-          content?.classList.add('active');
+          header.classList.add("active");
+          content?.classList.add("active");
 
           // Scroll to the header if it's not fully visible
           setTimeout(() => {
             const headerRect = header.getBoundingClientRect();
-            const isVisible = headerRect.top >= 0 && headerRect.bottom <= window.innerHeight;
+            const isVisible =
+              headerRect.top >= 0 && headerRect.bottom <= window.innerHeight;
 
             if (!isVisible) {
-              header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              header.scrollIntoView({ behavior: "smooth", block: "start" });
             }
           }, 100);
         }
@@ -213,21 +255,27 @@ sortedServices.forEach((service) => {
     // Check for hash in URL and open that accordion
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
-      const header = document.querySelector(`.accordion-header[data-accordion-id="${id}"]`);
-      const content = document.querySelector(`.accordion-content[data-content-id="${id}"]`);
+      const header = document.querySelector(
+        `.accordion-header[data-accordion-id="${id}"]`,
+      );
+      const content = document.querySelector(
+        `.accordion-content[data-content-id="${id}"]`,
+      );
 
       if (header && content) {
         // Close all accordions first
-        accordionHeaders.forEach(h => h.classList.remove('active'));
-        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+        accordionHeaders.forEach((h) => h.classList.remove("active"));
+        document
+          .querySelectorAll(".accordion-content")
+          .forEach((c) => c.classList.remove("active"));
 
         // Open the one matching the hash
-        header.classList.add('active');
-        content.classList.add('active');
+        header.classList.add("active");
+        content.classList.add("active");
 
         // Scroll to it
         setTimeout(() => {
-          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          header.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 300);
       }
     }
