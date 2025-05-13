@@ -9,16 +9,22 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>{title} | APR Artist Agency</title>
+    <script>
+      // Force dark mode only, no theme switching
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    </script>
   </head>
   <body class="bg-dark text-white min-h-screen flex flex-col">
     <header class="bg-dark-lighter py-4 shadow-md">
@@ -71,8 +77,14 @@ const base = import.meta.env.BASE_URL;
 
     <style>
       /* Global styles for page background */
-      :global(body) {
+      :global(body), :global(html) {
         background: black;
+        color-scheme: dark;
+      }
+
+      /* Force dark mode scrollbars in supported browsers */
+      :global(*) {
+        scrollbar-color: #333 #111;
       }
 
       /* Add golden accent to active page links */
