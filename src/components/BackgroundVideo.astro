@@ -8,7 +8,6 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <div class={`background-video-container ${className}`}>
-  <div class="blurred-background"></div>
   <video
     id="background-video"
     autoplay
@@ -36,18 +35,7 @@ const base = import.meta.env.BASE_URL;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .blurred-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('') no-repeat center center;
-    background-size: cover;
-    filter: blur(20px) brightness(0.5);
-    z-index: 0;
+    background-color: black;
   }
 
   .background-video {
@@ -59,7 +47,6 @@ const base = import.meta.env.BASE_URL;
     opacity: 0.9;
     filter: brightness(0.8) contrast(1.1);
     pointer-events: none;
-    z-index: 1;
     position: relative;
   }
 </style>
@@ -68,15 +55,8 @@ const base = import.meta.env.BASE_URL;
   // Ensure video autoplays even if browser policies are strict
   document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('background-video') as HTMLVideoElement;
-    const blurredBg = document.querySelector('.blurred-background') as HTMLElement;
 
-    if (video && blurredBg) {
-      // Set the blurred background to use the same video source
-      const videoSource = video.querySelector('source')?.getAttribute('src');
-      if (videoSource) {
-        blurredBg.style.backgroundImage = `url(${videoSource.replace('.mp4', '.jpg')})`;
-      }
-
+    if (video) {
       // Try to play the video automatically
       const playPromise = video.play();
 
@@ -93,25 +73,6 @@ const base = import.meta.env.BASE_URL;
         console.warn('Video stalled. Attempting to reload.');
         video.load();
         video.play().catch(e => console.error('Error playing video after stall:', e));
-      });
-
-      // Use the first frame as background when video is loaded
-      video.addEventListener('loadeddata', () => {
-        // Create a canvas to capture the first frame
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          try {
-            // Use the canvas image as the background
-            const dataUrl = canvas.toDataURL('image/jpeg');
-            blurredBg.style.backgroundImage = `url(${dataUrl})`;
-          } catch (e) {
-            console.error('Could not create data URL:', e);
-          }
-        }
       });
     }
   });
