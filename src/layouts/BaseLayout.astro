@@ -1,9 +1,10 @@
 ---
 interface Props {
   title: string;
+  transparentNavbar?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, transparentNavbar = false } = Astro.props;
 const currentYear = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 ---
@@ -27,7 +28,7 @@ const base = import.meta.env.BASE_URL;
     </script>
   </head>
   <body class="bg-dark text-white min-h-screen flex flex-col">
-    <header class="bg-dark py-4 shadow-md">
+    <header class={`py-4 border-b border-gold ${transparentNavbar ? 'absolute top-0 left-0 right-0 z-40 bg-transparent' : 'bg-dark shadow-md'}`}>
       <div class="container mx-auto px-4 relative">
         <nav class="flex items-center justify-between">
           <a href={`${base}/`} class="flex items-center" aria-label="APR Artist Agency Home">
@@ -140,6 +141,24 @@ const base = import.meta.env.BASE_URL;
       const closeMenuButton = document.getElementById('close-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
       const body = document.body;
+
+      // Navbar transparency handling
+      const header = document.querySelector('header');
+      const isTransparentNavbar = header?.classList.contains('bg-transparent');
+
+      if (isTransparentNavbar && header) {
+        // Add scroll event listener to make navbar solid when scrolling down
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            header.classList.remove('bg-transparent');
+            header.classList.add('bg-dark', 'shadow-md', 'transition-all', 'duration-300');
+          } else {
+            header.classList.add('bg-transparent');
+            header.classList.remove('bg-dark', 'shadow-md');
+          }
+          // The gold border will remain because we've added it directly to the header class
+        });
+      }
 
       function openMenu() {
         if (mobileMenu) {
