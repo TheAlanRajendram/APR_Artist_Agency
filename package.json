@@ -10,16 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.0",
-    "@astrojs/tailwind": "^5.0.0",
-    "astro": "^4.0.0",
-    "marked": "^15.0.11",
-    "tailwindcss": "^3.3.0",
-    "three": "^0.176.0"
+    "@astrojs/mdx": "latest",
+    "@astrojs/tailwind": "latest",
+    "astro": "latest",
+    "marked": "latest",
+    "tailwindcss": "latest",
+    "three": "latest"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/marked": "^6.0.0",
-    "@types/node": "^22.15.17"
+    "@tailwindcss/typography": "latest",
+    "@types/node": "latest"
   }
 }
