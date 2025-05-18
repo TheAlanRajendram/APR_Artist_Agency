@@ -67,7 +67,7 @@ const base = import.meta.env.BASE_URL;
               loading="eager"
             />
           </a>
-          <div class="hidden md:flex space-x-6">
+          <div class="hidden md:flex space-x-6 items-center">
             <a href={`${base}/about`} class="hover:text-gold transition-colors"
               >About</a
             >
@@ -79,8 +79,9 @@ const base = import.meta.env.BASE_URL;
               >Work</a
             >
             <a
-              href={`${base}/contact`}
-              class="hover:text-gold transition-colors">Contact</a
+              href="mailto:info@apr-artistagency.com"
+              class="border border-gold text-gold px-5 py-0.5 rounded-full hover:bg-gold hover:text-dark transition-colors font-medium inline-flex items-center"
+              >Get in touch</a
             >
           </div>
           <button
@@ -144,9 +145,9 @@ const base = import.meta.env.BASE_URL;
               >Work</a
             >
             <a
-              href={`${base}/contact`}
-              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
-              >Contact</a
+              href="mailto:info@apr-artistagency.com"
+              class="flex items-center border border-gold text-gold px-6 py-2 rounded-full hover:bg-gold hover:text-dark transition-colors font-medium mx-auto w-max mt-6"
+              >Get in touch</a
             >
             <!-- Social Media Links in Mobile Menu -->
             <div class="flex justify-center pt-4">
