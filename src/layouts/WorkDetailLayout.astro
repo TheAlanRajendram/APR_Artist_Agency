@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import "../styles/lazyAnimations.css";
 
 interface Props {
   title: string;
@@ -23,15 +24,18 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 <div class="min-h-screen bg-dark">
   <div class="container mx-auto px-4 py-20">
     <div class="max-w-4xl mx-auto">
-      <!-- Header Image -->
-      <img
-        src={image}
-        alt={title}
-        class="w-full md:h-96 object-cover md:object-contain rounded-lg shadow-card mb-12"
-      />
+      <!-- Header Image with lazy fade animation -->
+      <div class="lazy-fade">
+        <img
+          src={image}
+          alt={title}
+          class="w-full md:h-96 object-cover md:object-contain rounded-lg shadow-card mb-12"
+          loading="lazy"
+        />
+      </div>
 
-      <!-- Title and Metadata -->
-      <div class="mb-12">
+      <!-- Title and Metadata with lazy animation -->
+      <div class="mb-12 lazy-fade" style="transition-delay: 0.1s;">
         <h1 class="text-4xl font-bold mb-4 font-serif">{title}</h1>
         <div class="flex items-center gap-4 text-white opacity-50 mb-6">
           <span>{brand}</span>
@@ -53,8 +57,18 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
         }
       </div>
 
-      <!-- Content -->
-      <slot />
+      <!-- Content with lazy animation -->
+      <div class="lazy-fade" style="transition-delay: 0.2s;">
+        <slot />
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  import { initLazyAnimations } from "../scripts/lazyAnimations.js";
+
+  document.addEventListener("astro:page-load", () => {
+    initLazyAnimations();
+  });
+</script>

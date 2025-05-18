@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import { marked } from "marked";
 import fs from "node:fs";
 import path from "node:path";
+import LazyImage from "../components/LazyImage.astro";
 
 // Get all about sections and sort by order
 const aboutSections = await getCollection("about");
@@ -111,12 +112,54 @@ function getDisplayName(filename) {
       </div>
     </div>
   </section>
+
+  <section class="py-16 md:py-24 bg-dark-lighter">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div>
+          <LazyImage
+            src={`${import.meta.env.BASE_URL}/team/ceo.jpg`}
+            alt="Alan Rajendram, CEO"
+            class="rounded-xl shadow-lg"
+          />
+        </div>
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif">
+            Our Vision
+          </h2>
+          <p class="text-lg mb-4 text-white opacity-80">
+            APR Artist Agency was founded with a simple vision: to bridge the
+            gap between artistic vision and commercial success. We believe that
+            true innovation happens when creators are empowered to express their
+            unique perspectives while connecting with audiences in meaningful
+            ways.
+          </p>
+          <p class="text-lg mb-6 text-white opacity-80">
+            Our team of industry professionals works tirelessly to nurture these
+            connections, creating partnerships that respect artistic integrity
+            while delivering exceptional value to brands and their consumers.
+          </p>
+          <div class="flex items-center mt-8">
+            <LazyImage
+              src={`${import.meta.env.BASE_URL}/team/ceo-signature.png`}
+              alt="Alan Rajendram Signature"
+              class="h-16"
+            />
+            <div class="ml-4">
+              <p class="font-bold">Alan Rajendram</p>
+              <p class="text-sm text-gold">Founder & CEO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <script>
   import { initCardCarousel } from "../scripts/cardCarousel.js";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     initCardCarousel();
   });
 </script>

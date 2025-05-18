@@ -19,5 +19,10 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-dark'
     }
-  }
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
+  },
+  viewTransitions: true
 });

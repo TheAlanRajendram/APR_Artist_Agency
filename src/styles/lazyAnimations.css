@@ -1,0 +1,48 @@
+/*
+ * Lazy Load Animations
+ * Modern fade-in animations for lazy-loaded elements
+ */
+
+.lazy-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, transform;
+}
+
+.lazy-fade.is-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations for grids */
+.lazy-grid .lazy-fade:nth-child(1) { transition-delay: 0.05s; }
+.lazy-grid .lazy-fade:nth-child(2) { transition-delay: 0.1s; }
+.lazy-grid .lazy-fade:nth-child(3) { transition-delay: 0.15s; }
+.lazy-grid .lazy-fade:nth-child(4) { transition-delay: 0.2s; }
+.lazy-grid .lazy-fade:nth-child(5) { transition-delay: 0.25s; }
+.lazy-grid .lazy-fade:nth-child(6) { transition-delay: 0.3s; }
+.lazy-grid .lazy-fade:nth-child(7) { transition-delay: 0.35s; }
+.lazy-grid .lazy-fade:nth-child(8) { transition-delay: 0.4s; }
+.lazy-grid .lazy-fade:nth-child(9) { transition-delay: 0.45s; }
+.lazy-grid .lazy-fade:nth-child(n+10) { transition-delay: 0.5s; }
+
+/* For images specifically */
+img.lazy-fade {
+  transition: opacity 0.7s ease-out, transform 0.5s ease-out;
+  transition-delay: 0.1s; /* Small delay for image loading */
+}
+
+/* For cards */
+.card-lazy {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-lazy.is-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}

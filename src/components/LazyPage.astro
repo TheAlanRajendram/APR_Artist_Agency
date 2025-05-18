@@ -1,0 +1,161 @@
+---
+// LazyPage.astro - A component for lazy loading page content
+
+interface Props {
+  id?: string;
+  class?: string;
+  threshold?: number; // Intersection observer threshold
+  rootMargin?: string; // Intersection observer root margin
+  transition?: string; // For use with view transitions
+}
+
+const {
+  id,
+  class: className = "",
+  threshold = 0.1,
+  rootMargin = "200px 0px",
+  transition
+} = Astro.props;
+---
+
+<div
+  id={id}
+  class={`lazy-page ${className}`}
+  data-loaded="false"
+  transition:name={transition}
+>
+  <div class="lazy-page-placeholder">
+    <div class="placeholder-shimmer"></div>
+  </div>
+  <div class="lazy-page-content" style="opacity: 0;">
+    <slot />
+  </div>
+</div>
+
+<script define:vars={{ threshold, rootMargin }}>
+  // Function to initialize lazy loading for page content
+  function initLazyPageLoading() {
+    const lazyPages = document.querySelectorAll(
+      '.lazy-page[data-loaded="false"]'
+    );
+
+    if ("IntersectionObserver" in window) {
+      const lazyPageObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const lazyPage = entry.target;
+              const placeholder = lazyPage.querySelector(
+                ".lazy-page-placeholder"
+              );
+              const content = lazyPage.querySelector(".lazy-page-content");
+
+              // Fade in content
+              if (content) {
+                // Show the content
+                content.style.opacity = "1";
+
+                // Mark as loaded
+                lazyPage.setAttribute("data-loaded", "true");
+
+                // Remove placeholder after transition completes
+                setTimeout(() => {
+                  if (placeholder) {
+                    placeholder.style.display = "none";
+                  }
+                }, 500); // Match transition duration
+              }
+
+              // Stop observing this element
+              lazyPageObserver.unobserve(lazyPage);
+            }
+          });
+        },
+        {
+          rootMargin, // Load content when it's 200px from viewport by default
+          threshold // Trigger when the specified portion is visible
+        }
+      );
+
+      // Observe each lazy page element
+      lazyPages.forEach((page) => {
+        lazyPageObserver.observe(page);
+      });
+    } else {
+      // Fallback for browsers that don't support IntersectionObserver
+      lazyPages.forEach((page) => {
+        const content = page.querySelector(".lazy-page-content");
+        const placeholder = page.querySelector(".lazy-page-placeholder");
+
+        if (content) {
+          content.style.opacity = "1";
+        }
+
+        if (placeholder) {
+          placeholder.style.display = "none";
+        }
+
+        page.setAttribute("data-loaded", "true");
+      });
+    }
+  }
+
+  // Initialize when the page loads and after navigation
+  document.addEventListener("astro:page-load", initLazyPageLoading);
+</script>
+
+<style>
+  .lazy-page {
+    position: relative;
+    min-height: 200px; /* Minimum height to show placeholder */
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .lazy-page-content {
+    transition: opacity 0.5s ease-in-out;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lazy-page-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #191919;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+  }
+
+  .placeholder-shimmer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(35, 35, 35, 0.1) 0%,
+      rgba(60, 60, 60, 0.3) 50%,
+      rgba(35, 35, 35, 0.1) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* When page is loaded */
+  .lazy-page[data-loaded="true"] .lazy-page-content {
+    z-index: 2;
+    position: relative;
+  }
+</style>

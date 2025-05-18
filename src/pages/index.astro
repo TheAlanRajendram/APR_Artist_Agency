@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BackgroundVideo from "../components/BackgroundVideo.astro";
+import LazyImage from "../components/LazyImage.astro";
+import LazyPage from "../components/LazyPage.astro";
 import { getCollection } from "astro:content";
 
 const base = import.meta.env.BASE_URL;
@@ -28,6 +30,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
   />
 
+  <!-- Hero Section - No lazy loading here to ensure immediate video playback -->
   <section
     class="relative py-48 md:py-72 bg-dark-lighter overflow-hidden hero-section"
   >
@@ -122,51 +125,53 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     }
   </style>
 
-  <section class="py-20">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-12 text-center font-serif">
-        Featured Collaborations
-      </h2>
-      <!-- Swiper -->
-      <div class="swiper portfolio-swiper">
-        <div class="swiper-wrapper">
-          {
-            featuredItems.map((item) => (
-              <div class="swiper-slide">
-                <a href={`${base}/work/${item.slug}`} class="block group">
-                  <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                    <img
-                      src={item.data.image}
-                      alt={item.data.title}
-                      class="w-full h-full object-cover"
-                    />
-                    <div class="p-6">
-                      <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-gold transition-colors">
-                        {item.data.title}
-                      </h3>
-                      <p class="text-white opacity-50 mb-3">
-                        {item.data.brand} × {item.data.artist}
-                      </p>
-                      <div class="flex flex-wrap gap-2">
-                        {item.data.tags.slice(0, 2).map((tag) => (
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-white opacity-50">
-                            {tag}
-                          </span>
-                        ))}
+  <LazyPage id="featured-section" rootMargin="300px 0px">
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-12 text-center font-serif">
+          Featured Collaborations
+        </h2>
+        <!-- Swiper -->
+        <div class="swiper portfolio-swiper">
+          <div class="swiper-wrapper">
+            {
+              featuredItems.map((item) => (
+                <div class="swiper-slide">
+                  <a href={`${base}/work/${item.slug}`} class="block group">
+                    <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
+                      <LazyImage
+                        src={item.data.image}
+                        alt={item.data.title}
+                        class="w-full h-full object-cover"
+                      />
+                      <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-gold transition-colors">
+                          {item.data.title}
+                        </h3>
+                        <p class="text-white opacity-50 mb-3">
+                          {item.data.brand} × {item.data.artist}
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                          {item.data.tags.slice(0, 2).map((tag) => (
+                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-white opacity-50">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a>
-              </div>
-            ))
-          }
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
       </div>
-    </div>
-  </section>
+    </section>
+  </LazyPage>
 
   <!-- Swiper JS -->
   <script
@@ -176,7 +181,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 
   <!-- Initialize Swiper -->
   <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("astro:page-load", function () {
       new Swiper(".portfolio-swiper", {
         slidesPerView: 1,
         spaceBetween: 20,

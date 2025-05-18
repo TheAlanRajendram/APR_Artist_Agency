@@ -53,8 +53,8 @@ const base = import.meta.env.BASE_URL;
 </style>
 
 <script>
-  // Ensure video autoplays even if browser policies are strict
-  document.addEventListener("DOMContentLoaded", () => {
+  // Function to ensure the background video plays
+  function initBackgroundVideo() {
     const video = document.getElementById(
       "background-video"
     ) as HTMLVideoElement;
@@ -85,5 +85,9 @@ const base = import.meta.env.BASE_URL;
           .catch((e) => console.error("Error playing video after stall:", e));
       });
     }
-  });
+  }
+
+  // Initialize on both DOMContentLoaded and astro:page-load to handle both initial load and transitions
+  document.addEventListener("DOMContentLoaded", initBackgroundVideo);
+  document.addEventListener("astro:page-load", initBackgroundVideo);
 </script>

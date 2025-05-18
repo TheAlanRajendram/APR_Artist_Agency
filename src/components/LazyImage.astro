@@ -1,0 +1,59 @@
+---
+// LazyImage.astro - A component for lazy loading images
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: "lazy" | "eager";
+  transition?: string; // For use with view transitions
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = "",
+  loading = "lazy",
+  transition
+} = Astro.props;
+
+// Determine if we should use native lazy loading or our custom implementation
+const useNativeLazy = loading === "lazy";
+---
+
+<img
+  class={`${className} ${useNativeLazy ? "lazy-load" : ""}`}
+  src={useNativeLazy ? undefined : src}
+  data-src={useNativeLazy ? src : undefined}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  transition:name={transition}
+/>
+
+<script>
+  import { initLazyLoading } from "../scripts/lazyLoad.js";
+
+  // Initialize lazy loading when the component is used
+  if (typeof document !== "undefined") {
+    document.addEventListener("astro:page-load", initLazyLoading);
+  }
+</script>
+
+<style>
+  /* Placeholder styling while image is loading */
+  .lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #191919; /* Dark placeholder color matching site theme */
+  }
+
+  img:not(.lazy-load) {
+    opacity: 1;
+  }
+</style>
