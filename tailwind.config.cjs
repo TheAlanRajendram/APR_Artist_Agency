@@ -16,9 +16,9 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
-        display: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
-        serif: [...defaultTheme.fontFamily.serif], // Standard serif fallbacks if font-serif is ever used
+        sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+        serif: ['Cormorant Infant', ...defaultTheme.fontFamily.serif],
+        display: ['Cormorant Infant', ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
         'card': '0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(212, 175, 55, 0.1)',
