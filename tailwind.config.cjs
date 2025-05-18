@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
@@ -14,45 +16,47 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Montserrat', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        sans: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
+        display: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
+        serif: [...defaultTheme.fontFamily.serif], // Standard serif fallbacks if font-serif is ever used
       },
       boxShadow: {
         'card': '0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(212, 175, 55, 0.1)',
       },
-      typography: {
+      typography: (theme) => ({
         DEFAULT: {
           css: {
             color: 'rgba(255, 255, 255, 0.8)',
             maxWidth: 'none',
             a: {
-              color: '#ab8850',
+              color: theme('colors.gold'),
               '&:hover': {
-                color: 'rgba(171, 136, 80, 0.8)',
+                color: theme('colors.gold'),
+                opacity: '0.8',
               },
             },
             h1: {
               color: '#ffffff',
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: theme('fontFamily.display'),
             },
             h2: {
               color: '#ffffff',
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: theme('fontFamily.display'),
             },
             h3: {
               color: '#ffffff',
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: theme('fontFamily.display'),
             },
             blockquote: {
               color: 'rgba(255, 255, 255, 0.8)',
-              borderLeftColor: '#ab8850',
+              borderLeftColor: theme('colors.gold'),
             },
             strong: {
               color: '#ffffff',
             },
           },
         },
-      },
+      }),
     },
   },
   plugins: [
