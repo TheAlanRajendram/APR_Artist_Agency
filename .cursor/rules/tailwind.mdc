@@ -1,0 +1,27 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Rule: Use `tailwind.config.cjs` for Tailwind Customizations
+
+**Purpose:**
+Ensure all design tokens, theme extensions, and customizations for Tailwind CSS are defined in `tailwind.config.cjs` to maintain consistency and scalability.
+
+## Guidelines
+
+- **Centralized Customization:**
+  All custom colors, spacing, font sizes, breakpoints, and other design tokens must be defined or extended in `tailwind.config.cjs`.
+  _Do not hardcode these values in components, CSS, or inline styles._
+
+- **Referencing Tokens:**
+  When generating code, always use the class names or theme keys defined in `tailwind.config.cjs` (e.g., `bg-brand-primary`, `text-accent`, `p-7`), not raw values (e.g., `bg-[#123456]`).
+
+- **Theme Extensions:**
+  If a new design token or utility is needed, first add or extend it in `tailwind.config.cjs` under the appropriate section (e.g., `theme.extend.colors`, `theme.extend.spacing`, etc.).
+
+- **Documentation:**
+  Document any new tokens or extensions in `tailwind.config.cjs` with clear comments for future reference.
+
+- **Astro Projects:**
+  For Astro or other static site generators, ensure all Tailwind customizations remain centralized in `tailwind.config.cjs`.
