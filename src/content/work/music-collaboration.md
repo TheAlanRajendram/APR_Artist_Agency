@@ -1,0 +1,20 @@
+---
+title: "Harmonic Futures Experience"
+brand: "EchoWave"
+artist: "Aria Stone"
+date: "2023-12-05"
+image: "/images/work/neuralink-experience.png"
+tags: ["Music", "Technology", "Immersive"]
+---
+
+APR Artist Agency facilitated a groundbreaking collaboration between
+experimental artist Aria Stone and EchoWave, creating the world's first
+bio-responsive musical experience. This innovative project allowed
+audience brainwaves to directly influence live performances through
+cutting-edge EEG headsets and proprietary algorithms, merging art and
+technology in a unique way.
+
+**Highlights**:
+- Limited edition EEG headsets syncing with exclusive musical content
+- Interactive installation at MoMA's "Future of Expression" exhibition
+- Award-winning documentary "Brainwaves: The New Musical Frontier"
