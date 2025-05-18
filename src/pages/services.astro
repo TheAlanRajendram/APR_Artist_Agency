@@ -28,9 +28,7 @@ sortedServices.forEach((service) => {
 
 <BaseLayout title="Services">
   <div class="services-page text-white">
-    <div
-      class="hero-section py-8 md:py-8"
-    >
+    <div class="hero-section py-8 md:py-8">
       <div class="container mx-auto px-4 text-center">
         <h1
           class="text-4xl md:text-4xl font-serif text-gold mb-6 animate-fade-in"
@@ -38,7 +36,7 @@ sortedServices.forEach((service) => {
           Our Services
         </h1>
         <p
-          class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in animation-delay-200"
+          class="text-lg md:text-xl text-white opacity-80 max-w-3xl mx-auto animate-fade-in animation-delay-200"
         >
           We deliver comprehensive solutions tailored to elevate your brand
         </p>
@@ -56,12 +54,12 @@ sortedServices.forEach((service) => {
 
             return (
               <div
-                class="accordion-item overflow-hidden shadow-md opacity-0 translate-y-8 animation-item"
+                class="accordion-item overflow-hidden shadow-card opacity-0 translate-y-8 animation-item"
                 id={service.data.id}
                 style={`animation-delay: ${index * 150}ms`}
               >
                 <div
-                  class="accordion-header flex justify-between items-center p-6 bg-neutral-900 cursor-pointer border-l-4 border-transparent hover:border-gold/80"
+                  class="accordion-header flex justify-between items-center p-6 bg-dark-lighter cursor-pointer border-l-4 border-transparent hover:border-gold"
                   data-accordion-id={service.data.id}
                 >
                   <h2 class="text-2xl font-serif flex items-center">
@@ -92,7 +90,7 @@ sortedServices.forEach((service) => {
                   class="accordion-content overflow-hidden transition-all duration-300 max-h-0"
                   data-content-id={service.data.id}
                 >
-                  <div class="p-6 bg-neutral-800">
+                  <div class="p-6 bg-dark-card">
                     {service.data.image && (
                       <div class="service-image-container mb-8">
                         <img
@@ -124,7 +122,7 @@ sortedServices.forEach((service) => {
 
   .accordion-header.active {
     border-left-color: theme("colors.gold");
-    background-color: #262626; /* neutral-800 */
+    background-color: theme("colors.dark.card");
   }
 
   .accordion-icon {
@@ -221,7 +219,7 @@ sortedServices.forEach((service) => {
       header.addEventListener("click", () => {
         const accordionId = header.getAttribute("data-accordion-id");
         const content = document.querySelector(
-          `.accordion-content[data-content-id="${accordionId}"]`,
+          `.accordion-content[data-content-id="${accordionId}"]`
         );
 
         // Toggle active state for clicked accordion
@@ -256,10 +254,10 @@ sortedServices.forEach((service) => {
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
       const header = document.querySelector(
-        `.accordion-header[data-accordion-id="${id}"]`,
+        `.accordion-header[data-accordion-id="${id}"]`
       );
       const content = document.querySelector(
-        `.accordion-content[data-content-id="${id}"]`,
+        `.accordion-content[data-content-id="${id}"]`
       );
 
       if (header && content) {

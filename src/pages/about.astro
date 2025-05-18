@@ -1,17 +1,19 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/cardCarousel.css';
-import { getCollection } from 'astro:content';
-import { marked } from 'marked';
-import fs from 'node:fs';
-import path from 'node:path';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/cardCarousel.css";
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import fs from "node:fs";
+import path from "node:path";
 
 // Get all about sections and sort by order
-const aboutSections = await getCollection('about');
-const sortedSections = aboutSections.sort((a, b) => a.data.order - b.data.order);
+const aboutSections = await getCollection("about");
+const sortedSections = aboutSections.sort(
+  (a, b) => a.data.order - b.data.order
+);
 
 // Convert markdown to HTML for proper rendering
-sortedSections.forEach(section => {
+sortedSections.forEach((section) => {
   section.compiledContent = marked.parse(section.body);
 });
 
@@ -19,45 +21,55 @@ sortedSections.forEach(section => {
 const baseUrl = import.meta.env.BASE_URL;
 
 // Get all logo files from the directory
-const logoDir = path.join(process.cwd(), 'public', 'logos');
+const logoDir = path.join(process.cwd(), "public", "logos");
 let logoFiles: string[] = [];
 
 try {
   if (fs.existsSync(logoDir)) {
-    logoFiles = fs.readdirSync(logoDir)
-      .filter(file => !file.startsWith('.') && file !== 'README.md')
-      .filter(file => /\.(svg|png|jpg|jpeg)$/i.test(file));
+    logoFiles = fs
+      .readdirSync(logoDir)
+      .filter((file) => !file.startsWith(".") && file !== "README.md")
+      .filter((file) => /\.(svg|png|jpg|jpeg)$/i.test(file));
   }
 } catch (error) {
-  console.error('Error reading logo directory:', error);
+  console.error("Error reading logo directory:", error);
 }
 
 // Convert logo filename to a display name
 function getDisplayName(filename) {
-  const nameWithoutExt = filename.split('.')[0];
+  const nameWithoutExt = filename.split(".")[0];
   return nameWithoutExt
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 ---
 
 <BaseLayout title="About">
   <section class="py-10">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-8 text-center font-serif">About APR Artist Agency</h1>
+      <h1 class="text-4xl font-bold mb-8 text-center font-serif">
+        About APR Artist Agency
+      </h1>
 
       <div class="card-carousel">
-        {sortedSections.map((section, index) => (
-          <div class="carousel-card" data-index={index}>
-            <div class="card-content bg-dark-card p-8 rounded-lg">
-              <h2 class="text-2xl font-bold mb-4 text-gold font-serif">{section.data.title}</h2>
+        {
+          sortedSections.map((section, index) => (
+            <div class="carousel-card" data-index={index}>
+              <div class="card-content bg-dark-card p-8 rounded-lg shadow-card">
+                <h2 class="text-2xl font-bold mb-4 text-gold font-serif">
+                  {section.data.title}
+                </h2>
 
-              {/* Display the markdown body content with proper HTML rendering */}
-              <div class="text-gray-300 markdown-content" set:html={section.compiledContent} />
+                {/* Display the markdown body content with proper HTML rendering */}
+                <div
+                  class="text-white opacity-80 markdown-content"
+                  set:html={section.compiledContent}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <div class="progress-bar">
@@ -69,35 +81,42 @@ function getDisplayName(filename) {
   <!-- Partners & Clients Section -->
   <section class="py-16 md:py-24 bg-dark-card">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 font-serif">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 font-serif"
+      >
         OUR PARTNERS & CLIENTS
       </h2>
 
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] justify-items-center items-center">
-        {logoFiles.length > 0 ? (
-          logoFiles.map(file => (
-            <div class="p-4">
-              <img
-                src={`${baseUrl}/logos/${file}`}
-                alt={`Logo of ${getDisplayName(file)}`}
-                class="max-h-16 w-auto"
-              />
+      <div
+        class="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] justify-items-center items-center"
+      >
+        {
+          logoFiles.length > 0 ? (
+            logoFiles.map((file) => (
+              <div class="p-4">
+                <img
+                  src={`${baseUrl}/logos/${file}`}
+                  alt={`Logo of ${getDisplayName(file)}`}
+                  class="max-h-16 w-auto"
+                />
+              </div>
+            ))
+          ) : (
+            <div class="col-span-full text-center text-white opacity-50">
+              No client logos found. Add logo files to the public/logos
+              directory.
             </div>
-          ))
-        ) : (
-          <div class="col-span-full text-center text-gray-400">
-            No client logos found. Add logo files to the public/logos directory.
-          </div>
-        )}
+          )
+        }
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  import { initCardCarousel } from '../scripts/cardCarousel.js';
+  import { initCardCarousel } from "../scripts/cardCarousel.js";
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     initCardCarousel();
   });
 </script>

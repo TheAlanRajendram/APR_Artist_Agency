@@ -35,7 +35,7 @@ const base = import.meta.env.BASE_URL;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: theme("colors.dark.DEFAULT");
   }
 
   .background-video {
@@ -54,26 +54,35 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   // Ensure video autoplays even if browser policies are strict
-  document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('background-video') as HTMLVideoElement;
+  document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById(
+      "background-video"
+    ) as HTMLVideoElement;
 
     if (video) {
       // Try to play the video automatically
       const playPromise = video.play();
 
       if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.warn('Auto-play was prevented. Muting video and trying again.', error);
+        playPromise.catch((error) => {
+          console.warn(
+            "Auto-play was prevented. Muting video and trying again.",
+            error
+          );
           video.muted = true;
-          video.play().catch(e => console.error('Still cannot play video:', e));
+          video
+            .play()
+            .catch((e) => console.error("Still cannot play video:", e));
         });
       }
 
       // Reload video if it stalls
-      video.addEventListener('stalled', () => {
-        console.warn('Video stalled. Attempting to reload.');
+      video.addEventListener("stalled", () => {
+        console.warn("Video stalled. Attempting to reload.");
         video.load();
-        video.play().catch(e => console.error('Error playing video after stall:', e));
+        video
+          .play()
+          .catch((e) => console.error("Error playing video after stall:", e));
       });
     }
   });
