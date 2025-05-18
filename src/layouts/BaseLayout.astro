@@ -1,4 +1,7 @@
 ---
+import Footer from "../components/Footer.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+
 interface Props {
   title: string;
   transparentNavbar?: boolean;
@@ -9,57 +12,139 @@ const currentYear = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="color-scheme" content="dark">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>{title} | APR Artist Agency</title>
     <script>
       // Force dark mode only, no theme switching
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     </script>
   </head>
   <body class="bg-dark text-white min-h-screen flex flex-col">
-    <header class={`py-4 border-b border-gold ${transparentNavbar ? 'absolute top-0 left-0 right-0 z-40 bg-transparent' : 'bg-dark shadow-md'}`}>
+    <header
+      class={`py-4 border-b border-gold ${transparentNavbar ? "absolute top-0 left-0 right-0 z-40 bg-transparent" : "bg-dark shadow-md"}`}
+    >
       <div class="container mx-auto px-4 relative">
         <nav class="flex items-center justify-between">
-          <a href={`${base}/`} class="flex items-center" aria-label="APR Artist Agency Home">
-            <img src=`${base}/logo_gold.png` alt="APR Artist Agency Logo" style="height: 48px;" class="mr-3" />
+          <a
+            href={`${base}/`}
+            class="flex items-center"
+            aria-label="APR Artist Agency Home"
+          >
+            <img
+              src=`${base}/logo_gold.png`
+              alt="APR Artist Agency Logo"
+              style="height: 48px;"
+              class="mr-3"
+            />
           </a>
           <div class="hidden md:flex space-x-6">
-            <a href={`${base}/`} class="hover:text-gold transition-colors">Home</a>
-            <a href={`${base}/about`} class="hover:text-gold transition-colors">About</a>
-            <a href={`${base}/services`} class="hover:text-gold transition-colors">Services</a>
-            <a href={`${base}/portfolio`} class="hover:text-gold transition-colors">Portfolio</a>
-            <a href={`${base}/contact`} class="hover:text-gold transition-colors">Contact</a>
+            <a href={`${base}/`} class="hover:text-gold transition-colors"
+              >Home</a
+            >
+            <a href={`${base}/about`} class="hover:text-gold transition-colors"
+              >About</a
+            >
+            <a
+              href={`${base}/services`}
+              class="hover:text-gold transition-colors">Services</a
+            >
+            <a
+              href={`${base}/portfolio`}
+              class="hover:text-gold transition-colors">Portfolio</a
+            >
+            <a
+              href={`${base}/contact`}
+              class="hover:text-gold transition-colors">Contact</a
+            >
           </div>
-          <button id="mobile-menu-button" class="md:hidden p-2 hover:text-gold transition-colors" aria-label="Toggle mobile menu">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <button
+            id="mobile-menu-button"
+            class="md:hidden p-2 hover:text-gold transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
         </nav>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="md:hidden hidden fixed inset-0 bg-dark-lighter bg-opacity-95 z-50 flex flex-col items-center justify-center">
-          <button id="close-menu-button" class="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors" aria-label="Close menu">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <div
+          id="mobile-menu"
+          class="md:hidden hidden fixed inset-0 bg-dark-lighter bg-opacity-95 z-50 flex flex-col items-center justify-center"
+        >
+          <button
+            id="close-menu-button"
+            class="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors"
+            aria-label="Close menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
           <div class="py-8 space-y-8 text-center w-full max-w-md">
-            <a href={`${base}/`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Home</a>
-            <a href={`${base}/about`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">About</a>
-            <a href={`${base}/services`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Services</a>
-            <a href={`${base}/portfolio`} class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent">Portfolio</a>
-            <a href={`${base}/contact`} class="block hover:text-gold transition-colors text-2xl font-serif py-3">Contact</a>
+            <a
+              href={`${base}/`}
+              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
+              >Home</a
+            >
+            <a
+              href={`${base}/about`}
+              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
+              >About</a
+            >
+            <a
+              href={`${base}/services`}
+              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
+              >Services</a
+            >
+            <a
+              href={`${base}/portfolio`}
+              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
+              >Portfolio</a
+            >
+            <a
+              href={`${base}/contact`}
+              class="block hover:text-gold transition-colors text-2xl font-serif py-3 border-b border-dark-accent"
+              >Contact</a
+            >
+            <!-- Social Media Links in Mobile Menu -->
+            <div class="flex justify-center pt-4">
+              <SocialLinks />
+            </div>
           </div>
         </div>
       </div>
@@ -69,16 +154,12 @@ const base = import.meta.env.BASE_URL;
       <slot />
     </main>
 
-    <footer class="bg-dark-lighter py-8 border-t border-dark-accent">
-      <div class="container mx-auto px-4 text-center">
-        <p class="text-gold font-bold text-xl mb-4 font-serif">APR Artist Agency</p>
-        <p class="text-gray-400">© {currentYear} APR Artist Agency. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
 
     <style>
       /* Global styles for page background */
-      :global(body), :global(html) {
+      :global(body),
+      :global(html) {
         background: black;
         color-scheme: dark;
       }
@@ -90,23 +171,25 @@ const base = import.meta.env.BASE_URL;
 
       /* Add golden accent to active page links */
       :global(.active-link) {
-        color: #D4AF37;
+        color: #d4af37;
         position: relative;
       }
 
       :global(.active-link::after) {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
         width: 100%;
         height: 2px;
-        background-color: #D4AF37;
+        background-color: #d4af37;
       }
 
       /* Mobile menu animation */
       #mobile-menu {
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        transition:
+          opacity 0.3s ease-in-out,
+          visibility 0.3s ease-in-out;
         opacity: 0;
         visibility: hidden;
         backdrop-filter: blur(4px);
@@ -137,24 +220,29 @@ const base = import.meta.env.BASE_URL;
 
     <script>
       // Mobile menu functionality
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const closeMenuButton = document.getElementById('close-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const closeMenuButton = document.getElementById("close-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
       const body = document.body;
 
       // Navbar transparency handling
-      const header = document.querySelector('header');
-      const isTransparentNavbar = header?.classList.contains('bg-transparent');
+      const header = document.querySelector("header");
+      const isTransparentNavbar = header?.classList.contains("bg-transparent");
 
       if (isTransparentNavbar && header) {
         // Add scroll event listener to make navbar solid when scrolling down
-        window.addEventListener('scroll', () => {
+        window.addEventListener("scroll", () => {
           if (window.scrollY > 50) {
-            header.classList.remove('bg-transparent');
-            header.classList.add('bg-dark', 'shadow-md', 'transition-all', 'duration-300');
+            header.classList.remove("bg-transparent");
+            header.classList.add(
+              "bg-dark",
+              "shadow-md",
+              "transition-all",
+              "duration-300"
+            );
           } else {
-            header.classList.add('bg-transparent');
-            header.classList.remove('bg-dark', 'shadow-md');
+            header.classList.add("bg-transparent");
+            header.classList.remove("bg-dark", "shadow-md");
           }
           // The gold border will remain because we've added it directly to the header class
         });
@@ -163,14 +251,14 @@ const base = import.meta.env.BASE_URL;
       function openMenu() {
         if (mobileMenu) {
           // Prevent background scrolling
-          body.classList.add('menu-open');
+          body.classList.add("menu-open");
 
-          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.remove("hidden");
           // Give time for the browser to process the removal of the hidden class
           setTimeout(() => {
             if (mobileMenu) {
-              mobileMenu.style.opacity = '1';
-              mobileMenu.style.visibility = 'visible';
+              mobileMenu.style.opacity = "1";
+              mobileMenu.style.visibility = "visible";
             }
           }, 10);
         }
@@ -179,53 +267,57 @@ const base = import.meta.env.BASE_URL;
       function closeMenu() {
         if (mobileMenu) {
           // Re-enable scrolling
-          body.classList.remove('menu-open');
+          body.classList.remove("menu-open");
 
-          mobileMenu.style.opacity = '0';
-          mobileMenu.style.visibility = 'hidden';
+          mobileMenu.style.opacity = "0";
+          mobileMenu.style.visibility = "hidden";
           // Wait for transition to complete before adding hidden class
           setTimeout(() => {
             if (mobileMenu) {
-              mobileMenu.classList.add('hidden');
+              mobileMenu.classList.add("hidden");
             }
           }, 300); // Match the transition time
         }
       }
 
       if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', openMenu);
+        mobileMenuButton.addEventListener("click", openMenu);
 
         // Close menu button
         if (closeMenuButton) {
-          closeMenuButton.addEventListener('click', closeMenu);
+          closeMenuButton.addEventListener("click", closeMenu);
         }
 
         // Close mobile menu when clicking outside
-        document.addEventListener('click', (event) => {
+        document.addEventListener("click", (event) => {
           const target = event.target as Node;
-          if (mobileMenu &&
-              !mobileMenuButton?.contains(target) &&
-              !mobileMenu.contains(target) &&
-              !mobileMenu.classList.contains('hidden')) {
+          if (
+            mobileMenu &&
+            !mobileMenuButton?.contains(target) &&
+            !mobileMenu.contains(target) &&
+            !mobileMenu.classList.contains("hidden")
+          ) {
             closeMenu();
           }
         });
 
         // Close mobile menu when clicking a link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-          link.addEventListener('click', closeMenu);
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        mobileMenuLinks.forEach((link) => {
+          link.addEventListener("click", closeMenu);
         });
       }
 
       // Mark current page as active
       const currentPath = window.location.pathname;
-      const navLinks = document.querySelectorAll('nav a[href]:not([aria-label="APR Artist Agency Home"])');
+      const navLinks = document.querySelectorAll(
+        'nav a[href]:not([aria-label="APR Artist Agency Home"])'
+      );
 
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && currentPath.endsWith(href.replace('/webapp-test', ''))) {
-          link.classList.add('active-link');
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && currentPath.endsWith(href.replace("/webapp-test", ""))) {
+          link.classList.add("active-link");
         }
       });
     </script>
