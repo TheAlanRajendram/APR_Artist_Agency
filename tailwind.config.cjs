@@ -47,6 +47,18 @@ module.exports = {
               color: '#ffffff',
               fontFamily: theme('fontFamily.display'),
             },
+            h4: {
+              color: '#ffffff',
+              fontFamily: theme('fontFamily.display'),
+            },
+            h5: {
+              color: '#ffffff',
+              fontFamily: theme('fontFamily.display'),
+            },
+            h6: {
+              color: '#ffffff',
+              fontFamily: theme('fontFamily.display'),
+            },
             blockquote: {
               color: 'rgba(255, 255, 255, 0.8)',
               borderLeftColor: theme('colors.gold'),
