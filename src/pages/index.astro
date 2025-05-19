@@ -30,12 +30,11 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
   />
 
-  <!-- Hero Section - No lazy loading here to ensure immediate video playback -->
+  <!-- Hero Section -->
   <section
     class="relative py-48 md:py-72 bg-dark-lighter overflow-hidden hero-section"
   >
     <BackgroundVideo>
-      <!-- Content for the slot -->
       <h1
         class="text-3xl md:text-5xl font-bold font-serif animate-fade-in text-center"
       >
@@ -44,14 +43,48 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         <span class="text-primary font-thin">&</span>
         <span class="text-gold tracking-wider italic font-black">ARTISTS</span>
       </h1>
-      {/* "Explore Our Work" Ghost Button - Positioned at bottom */}
-      <a
-        href={`${base}/work`}
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 inline-block border border-gold text-gold px-8 py-3 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-semibold text-lg animate-fade-in whitespace-nowrap"
+      {/* Fluid Bounce Scroll Down Chevron for Desktop in Slot */}
+      <div
+        class="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce-fluid"
+        aria-hidden="true"
       >
-        Explore Our Work
-      </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-10 h-10 text-gold opacity-70"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
+        </svg>
+      </div>
     </BackgroundVideo>
+
+    {
+      /* Fluid Bounce Scroll Down Chevron for Mobile - Centered on Hero Section */
+    }
+    <div
+      class="md:hidden absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce-fluid"
+      aria-hidden="true"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-10 h-10 text-gold opacity-70"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
+      </svg>
+    </div>
   </section>
 
   <style>
@@ -75,13 +108,27 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
       }
     }
 
+    @keyframes bounce-fluid-effect {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px); /* Max bounce height */
+      }
+    }
+
     .animate-fade-in {
       animation: fadeIn 1s ease-out forwards;
     }
 
     .animate-fade-in-up {
       animation: fadeInUp 1s ease-out 0.3s forwards;
-      opacity: 0;
+      opacity: 0; /* Start transparent for fadeInUp */
+    }
+
+    .animate-bounce-fluid {
+      animation: bounce-fluid-effect 1.5s infinite ease-in-out;
     }
 
     .hero-section {
@@ -162,6 +209,15 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
           <div class="swiper-pagination"></div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
+        </div>
+        <!-- "View All Our Work" Button -->
+        <div class="text-center mt-12 animate-fade-in-up">
+          <a
+            href={`${base}/work`}
+            class="border border-gold text-gold px-5 py-0.5 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium inline-flex items-center"
+          >
+            Explore More
+          </a>
         </div>
       </div>
     </section>
