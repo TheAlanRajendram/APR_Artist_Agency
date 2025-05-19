@@ -34,21 +34,17 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
   <section
     class="relative py-48 md:py-72 bg-dark-lighter overflow-hidden hero-section"
   >
-    <BackgroundVideo />
-    <div
-      class="container mx-auto px-4 relative z-10 flex items-center justify-center h-full"
-    >
-      <div class="text-center">
-        <h1
-          class="text-5xl md:text-7xl font-bold mb-8 font-serif animate-fade-in"
-        >
-          <span class="block mb-2">Connecting</span>
-          <span class="text-gold italic">Brands</span>
-          <span class="text-primary">&</span>
-          <span class="text-gold tracking-wider italic">Artists</span>
-        </h1>
-      </div>
-    </div>
+    <BackgroundVideo>
+      <!-- Content for the slot -->
+      <h1
+        class="text-5xl md:text-7xl font-bold mb-8 font-serif animate-fade-in text-center"
+      >
+        <span class="block mb-2 font-normal">CONNECTING</span>
+        <span class="text-gold italic font-black">BRANDS</span>
+        <span class="text-primary font-thin">&</span>
+        <span class="text-gold tracking-wider italic font-black">ARTISTS</span>
+      </h1>
+    </BackgroundVideo>
     <div class="absolute bottom-4 md:bottom-6 left-0 right-0 text-center z-10">
       <a
         href={`${base}/work`}

@@ -8,19 +8,24 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <div class={`background-video-container ${className}`}>
-  <video
-    id="background-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    disablepictureinpicture
-    class="background-video"
-  >
-    <source src={`${base}/videos/hero_page.mp4`} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  <div class="video-area">
+    <video
+      id="background-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      disablepictureinpicture
+      class="background-video"
+    >
+      <source src={`${base}/videos/hero_page.mp4`} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="content-area">
+    <slot />
+  </div>
 </div>
 
 <style>
@@ -32,22 +37,63 @@ const base = import.meta.env.BASE_URL;
     height: 100%;
     z-index: 0;
     overflow: hidden;
-    display: flex;
+    display: flex; /* Default to flex for layout management */
+    flex-direction: column; /* Default to column for portrait (video full, content below/hidden) */
+    background-color: theme("colors.dark.DEFAULT"); /* Fallback background */
+  }
+
+  .video-area {
+    position: relative; /* For positioning the video within */
+    width: 100%;
+    height: 100%; /* Takes full height in portrait, or height of container in landscape row */
+    display: flex; /* To help manage the video element if needed */
     justify-content: center;
     align-items: center;
-    background-color: theme("colors.dark.DEFAULT");
   }
 
   .background-video {
+    position: absolute; /* Positioned within video-area */
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    max-width: none;
-    object-fit: cover;
+    object-fit: cover; /* Cover the video-area */
     object-position: top center;
     opacity: 0.9;
-    filter: brightness(0.8) contrast(1.1);
+    filter: brightness(0.5) contrast(1.1);
     pointer-events: none;
-    position: relative;
+    /* z-index is not strictly necessary here if it's the only child of video-area filling it */
+  }
+
+  .content-area {
+    display: none; /* Hidden by default (for portrait) */
+    /* Styling for landscape will be in the media query */
+    position: relative; /* Ensure it's part of the flex flow correctly */
+    z-index: 5; /* Ensure content is above video if any overlap scenarios develop */
+  }
+
+  @media (orientation: landscape) {
+    .background-video-container {
+      flex-direction: row-reverse; /* Video on the right, content on the left */
+    }
+
+    .video-area {
+      flex: 0 0 60%; /* Video takes 60% of the width, doesn't grow or shrink */
+      height: 100%; /* Full height of the container */
+    }
+    /* .background-video continues to cover its .video-area */
+
+    .content-area {
+      display: flex; /* Make it visible and use flex for content alignment */
+      flex-direction: column;
+      justify-content: center; /* Center content vertically */
+      align-items: center; /* Center content horizontally */
+      flex: 1 1 40%; /* Takes the remaining 40%, can grow/shrink */
+      height: 100%;
+      padding: 2rem; /* Add some padding for the text */
+      color: #fff; /* Example text color, adjust as needed */
+      /* background-color: rgba(0,0,0,0.3); Optional: slight background for readability */
+    }
   }
 </style>
 
