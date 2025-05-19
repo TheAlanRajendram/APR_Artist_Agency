@@ -33,15 +33,15 @@ const itemsWithBasePath = workItems.map((item) => ({
                   loading="lazy"
                 />
                 <div class="p-6">
-                  <h2 class="text-xl font-bold mb-2 group-hover:text-gold transition-colors font-serif">
+                  <h2 class="text-xl font-bold mb-2 group-hover:text-gold transition-colors font-display">
                     {item.data.title}
                   </h2>
-                  <p class="text-white opacity-50 mb-4">
+                  <p class="text-secondary mb-4">
                     {item.data.brand} × {item.data.artist}
                   </p>
                   <div class="flex flex-wrap gap-2">
                     {item.data.tags.map((tag) => (
-                      <span class="bg-dark px-2 py-1 rounded-full text-sm text-white opacity-50">
+                      <span class="bg-dark px-2 py-1 rounded-full text-sm text-secondary">
                         {tag}
                       </span>
                     ))}

@@ -44,7 +44,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         >
           <span class="block mb-2">Connecting</span>
           <span class="text-gold italic">Brands</span>
-          <span class="text-white opacity-80">&</span>
+          <span class="text-primary">&</span>
           <span class="text-gold tracking-wider italic">Artists</span>
         </h1>
       </div>
@@ -52,7 +52,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     <div class="absolute bottom-4 md:bottom-6 left-0 right-0 text-center z-10">
       <a
         href={`${base}/work`}
-        class="inline-block bg-gold text-dark font-bold py-4 px-10 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-card animate-fade-in-up"
+        class="inline-block bg-gold text-on-gold font-bold py-4 px-10 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-card animate-fade-in-up"
       >
         Explore Our Work
       </a>
@@ -148,12 +148,12 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
                         <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-gold transition-colors">
                           {item.data.title}
                         </h3>
-                        <p class="text-white opacity-50 mb-3">
+                        <p class="text-secondary mb-3">
                           {item.data.brand} × {item.data.artist}
                         </p>
                         <div class="flex flex-wrap gap-2">
                           {item.data.tags.slice(0, 2).map((tag) => (
-                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-white opacity-50">
+                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
                               {tag}
                             </span>
                           ))}

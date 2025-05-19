@@ -20,13 +20,19 @@ module.exports = {
         serif: ['Cormorant Infant', ...defaultTheme.fontFamily.serif],
         display: ['Cormorant Infant', ...defaultTheme.fontFamily.sans],
       },
+      textColor: {
+        primary: '#E0E0E0',
+        secondary: '#A0A0A0',
+        'on-gold': '#121212',
+        gold: '#d5ac5b',
+      },
       boxShadow: {
         'card': '0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(212, 175, 55, 0.1)',
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: 'rgba(255, 255, 255, 0.8)',
+            color: theme('textColor.primary'),
             maxWidth: 'none',
             a: {
               color: theme('colors.gold'),
@@ -36,35 +42,35 @@ module.exports = {
               },
             },
             h1: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             h2: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             h3: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             h4: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             h5: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             h6: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
               fontFamily: theme('fontFamily.display'),
             },
             blockquote: {
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: theme('textColor.secondary'),
               borderLeftColor: theme('colors.gold'),
             },
             strong: {
-              color: '#ffffff',
+              color: theme('colors.white', '#ffffff'),
             },
           },
         },

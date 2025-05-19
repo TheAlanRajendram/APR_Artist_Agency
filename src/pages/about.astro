@@ -64,7 +64,7 @@ function getDisplayName(filename) {
 
                 {/* Display the markdown body content with proper HTML rendering */}
                 <div
-                  class="text-white opacity-80 markdown-content"
+                  class="text-primary markdown-content"
                   set:html={section.compiledContent}
                 />
               </div>
@@ -103,7 +103,7 @@ function getDisplayName(filename) {
               </div>
             ))
           ) : (
-            <div class="col-span-full text-center text-white opacity-50">
+            <div class="col-span-full text-center text-secondary">
               No client logos found. Add logo files to the public/logos
               directory.
             </div>
@@ -127,14 +127,14 @@ function getDisplayName(filename) {
           <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif">
             Our Vision
           </h2>
-          <p class="text-lg mb-4 text-white opacity-80">
+          <p class="text-lg mb-4 text-primary">
             APR Artist Agency was founded with a simple vision: to bridge the
             gap between artistic vision and commercial success. We believe that
             true innovation happens when creators are empowered to express their
             unique perspectives while connecting with audiences in meaningful
             ways.
           </p>
-          <p class="text-lg mb-6 text-white opacity-80">
+          <p class="text-lg mb-6 text-primary">
             Our team of industry professionals works tirelessly to nurture these
             connections, creating partnerships that respect artistic integrity
             while delivering exceptional value to brands and their consumers.
@@ -146,7 +146,7 @@ function getDisplayName(filename) {
               class="h-16"
             />
             <div class="ml-4">
-              <p class="font-bold">Alan Rajendram</p>
+              <p class="font-bold text-primary">Alan Rajendram</p>
               <p class="text-sm text-gold">Founder & CEO</p>
             </div>
           </div>
