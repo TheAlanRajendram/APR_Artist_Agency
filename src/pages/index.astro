@@ -87,11 +87,10 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 
     .hero-section {
       margin-top: 0;
-      padding-top: 120px; /* Taller padding to account for navbar */
       min-height: 100vh; /* Ensure hero fills the viewport */
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: center; /* This will center the .button-container vertically if hero-section is tall enough */
     }
 
     /* Swiper custom styles */
