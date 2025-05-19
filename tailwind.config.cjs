@@ -9,11 +9,11 @@ module.exports = {
       colors: {
         gold: '#d5ac5b',
         dark: {
-          DEFAULT: '#0A0A0A',
-          lighter: '#242424',
+          DEFAULT: '#121212',
+          lighter: '#1E1E1E',
           card: '#2A2A2A',
-          accent: '#333333'
-        }
+          accent: '#3F3F3F',
+        },
       },
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
