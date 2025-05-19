@@ -37,22 +37,21 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     <BackgroundVideo>
       <!-- Content for the slot -->
       <h1
-        class="text-5xl md:text-7xl font-bold mb-8 font-serif animate-fade-in text-center"
+        class="text-5xl md:text-7xl font-bold font-serif animate-fade-in text-center"
       >
         <span class="block mb-2 font-normal">CONNECTING</span>
         <span class="text-gold italic font-black">BRANDS</span>
         <span class="text-primary font-thin">&</span>
         <span class="text-gold tracking-wider italic font-black">ARTISTS</span>
       </h1>
-    </BackgroundVideo>
-    <div class="absolute bottom-4 md:bottom-6 left-0 right-0 text-center z-10">
+      {/* "Explore Our Work" Ghost Button - Positioned at bottom */}
       <a
         href={`${base}/work`}
-        class="inline-block bg-gold text-on-gold font-bold py-4 px-10 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-card animate-fade-in-up"
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 inline-block border border-gold text-gold px-8 py-3 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-semibold text-lg animate-fade-in whitespace-nowrap"
       >
         Explore Our Work
       </a>
-    </div>
+    </BackgroundVideo>
   </section>
 
   <style>
@@ -121,7 +120,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
   </style>
 
   <LazyPage id="featured-section" rootMargin="300px 0px">
-    <section class="py-20">
+    <section class="py-20 bg-dark-lighter">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold mb-12 text-center font-serif">
           Featured Collaborations
