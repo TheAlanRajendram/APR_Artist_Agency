@@ -32,7 +32,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 
   <!-- Hero Section -->
   <section
-    class="relative py-48 md:py-72 bg-dark-lighter overflow-hidden hero-section"
+    class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
   >
     <BackgroundVideo>
       <h1
@@ -147,7 +147,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 
     .hero-section {
       margin-top: 0;
-      min-height: 100svh; /* Changed from 100vh to 100dvh */
+      min-height: 100svh; /* Changed from 100vh to 100svh for better mobile support */
       display: flex;
       flex-direction: column;
       justify-content: center; /* This will center the .button-container vertically if hero-section is tall enough */
