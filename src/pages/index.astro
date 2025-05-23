@@ -237,6 +237,100 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </section>
   </LazyPage>
 
+  <!-- Stats Section -->
+  <section class="py-8 bg-dark">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading"
+        >
+          Our Network & Impact
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-heading mb-3">
+              130+
+            </div>
+            <p class="text-secondary text-lg">Global A-List Talents</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-heading mb-3">
+              200+
+            </div>
+            <p class="text-secondary text-lg">Brand Partners</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-heading mb-3">
+              8+
+            </div>
+            <p class="text-secondary text-lg">Figure Commercial Deals</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-heading mb-3">
+              18+
+            </div>
+            <p class="text-secondary text-lg">Years Combined Experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted Partners Section -->
+  <section class="py-8 bg-dark-lighter">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading"
+        >
+          Trusted by Industry Leaders
+        </h2>
+
+        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6">
+          {
+            Array.from({ length: 16 }, (_, i) => (
+              <div class="flex items-center justify-center p-4 transition-opacity hover:opacity-100 opacity-70">
+                <div class="h-8 bg-primary/20 rounded flex items-center justify-center px-3">
+                  <span class="text-xs text-primary font-medium">BRAND</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-8 bg-dark">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading">
+          Ready to Create Something Extraordinary?
+        </h2>
+        <p class="text-lg text-secondary mb-8 leading-relaxed">
+          Whether you're a brand seeking authentic partnerships or an artist
+          looking for meaningful collaborations, we're here to make it happen.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={`${base}/contact`}
+            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg"
+          >
+            Partner With Us
+          </a>
+          <a
+            href={`${base}/work`}
+            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg"
+          >
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Swiper JS -->
   <script
     is:inline
