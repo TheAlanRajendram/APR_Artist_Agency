@@ -32,7 +32,7 @@ sortedServices.forEach((service) => {
     <div class="hero-section py-8 md:py-8">
       <div class="container mx-auto px-4 text-center">
         <h1
-          class="text-4xl md:text-4xl font-serif text-gold mb-6 animate-fade-in"
+          class="text-4xl md:text-4xl font-serif text-heading mb-6 animate-fade-in"
         >
           Our Services
         </h1>
@@ -60,12 +60,12 @@ sortedServices.forEach((service) => {
                 style={`animation-delay: ${index * 150}ms`}
               >
                 <div
-                  class="accordion-header flex justify-between items-center p-6 bg-dark-lighter cursor-pointer border-l-4 border-transparent hover:border-gold"
+                  class="accordion-header flex justify-between items-center p-6 bg-dark-lighter cursor-pointer border-l-4 border-transparent hover:border-primary"
                   data-accordion-id={service.data.id}
                 >
                   <h2 class="text-2xl font-serif flex items-center">
                     <span
-                      class="service-icon text-gold"
+                      class="service-icon text-primary"
                       set:html={serviceIcon}
                     />
                     {service.data.title}

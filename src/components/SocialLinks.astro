@@ -12,7 +12,7 @@ const { includeEmail = false, iconLabels = false } = Astro.props;
     href="https://www.instagram.com/apr_artistagency/"
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center text-primary hover:text-gold transition-colors"
+    class="flex items-center text-primary hover:text-primary transition-colors"
     aria-label="Instagram"
   >
     <svg
@@ -32,7 +32,7 @@ const { includeEmail = false, iconLabels = false } = Astro.props;
     href="https://www.linkedin.com/in/ap-rajendram/recent-activity/all/"
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center text-primary hover:text-gold transition-colors"
+    class="flex items-center text-primary hover:text-primary transition-colors"
     aria-label="LinkedIn"
   >
     <svg
@@ -51,8 +51,9 @@ const { includeEmail = false, iconLabels = false } = Astro.props;
   {
     includeEmail && (
       <a
-        href="mailto:priyanka.rajendram@apr-artistagency.com"
-        class="text-primary hover:text-gold transition-colors font-sans"
+        href="mailto:info@apr-artistagency.com"
+        class="text-primary hover:text-primary transition-colors font-sans"
+        aria-label="Email"
       >
         priyanka.rajendram@apr-artistagency.com
       </a>
