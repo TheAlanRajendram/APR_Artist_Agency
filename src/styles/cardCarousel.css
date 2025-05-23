@@ -1,7 +1,7 @@
 /* Card Carousel Styles */
 :root {
-  --gold-color: #ab8850; /* This should match the gold color in tailwind.config.cjs */
-  --gold-rgb: 171, 136, 80; /* RGB values of #ab8850 */
+  --gold-color: #C9A96E; /* Sophisticated gold from theme */
+  --gold-rgb: 201, 169, 110; /* RGB values of #C9A96E */
 }
 
 .card-carousel {
@@ -44,7 +44,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-bg, #2A2A2A); /* Default fallback if CSS var not available */
+  background-color: var(--card-bg, #242424); /* Default fallback matching theme */
 }
 
 /* Custom scrollbar for card content */

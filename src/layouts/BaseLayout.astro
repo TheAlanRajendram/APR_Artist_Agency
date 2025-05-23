@@ -120,7 +120,7 @@ const base = import.meta.env.BASE_URL;
         >
           <button
             id="close-menu-button"
-            class="absolute top-6 right-6 p-2 text-white hover:text-primary transition-colors"
+            class="absolute top-6 right-6 p-2 text-primary hover:text-primary transition-colors"
             aria-label="Close menu"
           >
             <svg
@@ -178,13 +178,14 @@ const base = import.meta.env.BASE_URL;
       /* Global styles for page background */
       :global(body),
       :global(html) {
-        background: black;
+        background: theme("colors.dark.DEFAULT");
         color-scheme: dark;
       }
 
       /* Force dark mode scrollbars in supported browsers */
       :global(*) {
-        scrollbar-color: #333 #111;
+        scrollbar-color: theme("colors.dark.accent")
+          theme("colors.dark.DEFAULT");
       }
 
       /* Add primary accent to active page links */

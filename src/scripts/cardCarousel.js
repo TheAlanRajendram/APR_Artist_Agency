@@ -167,7 +167,7 @@ export function initCardCarousel(options = {}) {
         transform: translateY(-50%);
         z-index: 10;
         background: rgba(0,0,0,0.5);
-        color: white;
+        color: var(--text-primary, #F5F5F5);
         border: none;
         width: 40px;
         height: 40px;

@@ -31,13 +31,18 @@ const { className = "" } = Astro.props;
 </style>
 
 <script>
-  import * as THREE from 'three';
+  import * as THREE from "three";
 
   function initThreeScene() {
     // Initialize Three.js scene
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const canvas = document.getElementById('three-canvas');
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const canvas = document.getElementById("three-canvas");
 
     if (!canvas) return;
 
@@ -58,8 +63,8 @@ const { className = "" } = Astro.props;
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
 
-    // Gold color in RGB
-    const goldColor = new THREE.Color(0xab8850); // Using the exact gold color from tailwind config
+    // Gold color from theme - should match tailwind config
+    const goldColor = new THREE.Color("#C9A96E"); // Using sophisticated gold from theme
 
     for (let i = 0; i < particleCount; i++) {
       // Random positions within a sphere
@@ -80,9 +85,9 @@ const { className = "" } = Astro.props;
       sizes[i] = 0.05 + Math.random() * 0.1;
     }
 
-    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    particles.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    particles.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    particles.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
     // Create particle material
     const particleMaterial = new THREE.PointsMaterial({
@@ -161,16 +166,16 @@ const { className = "" } = Astro.props;
     }
 
     // Add event listeners
-    window.addEventListener('resize', onWindowResize);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener("resize", onWindowResize);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     // Start animation
     animate();
 
     // Return cleanup function
     return function cleanup() {
-      window.removeEventListener('resize', onWindowResize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener("resize", onWindowResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       renderer.dispose();
     };
@@ -180,7 +185,7 @@ const { className = "" } = Astro.props;
   const cleanup = initThreeScene();
 
   // Clean up when the component unmounts
-  document.addEventListener('astro:unmount', () => {
+  document.addEventListener("astro:unmount", () => {
     if (cleanup) cleanup();
   });
 </script>

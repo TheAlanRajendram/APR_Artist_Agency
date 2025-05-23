@@ -50,7 +50,9 @@ const useNativeLazy = loading === "lazy";
   .lazy-load {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    background-color: #191919; /* Dark placeholder color matching site theme */
+    background-color: theme(
+      "colors.dark.card"
+    ); /* Dark placeholder color matching site theme */
   }
 
   img:not(.lazy-load) {
