@@ -47,7 +47,7 @@ function getDisplayName(filename) {
 
 <BaseLayout title="About">
   <!-- Hero Section -->
-  <section class="relative py-20 md:py-36 bg-dark overflow-hidden fade-in-element">
+  <section class="relative py-20 md:py-36 bg-dark overflow-hidden">
     <!-- Background Video -->
     <div class="absolute inset-0 z-0">
       <video
@@ -55,9 +55,12 @@ function getDisplayName(filename) {
         muted
         loop
         playsinline
+        preload="auto"
         class="w-full h-full object-cover opacity-20"
+        style="background: #000;"
       >
         <source src={`${baseUrl}/videos/hero_page.mp4`} type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       <div class="absolute inset-0 bg-dark/60"></div>
     </div>
@@ -406,12 +409,15 @@ function getDisplayName(filename) {
   // Declare global variable
   let fadeInObserver;
 
-  // Initialize fade-in animations
+    // Initialize fade-in animations
   function initializeFadeInAnimations() {
     // Clean up any existing observers
     if (fadeInObserver) {
       fadeInObserver.disconnect();
     }
+
+    // Initialize hero video
+    initializeHeroVideo();
 
     // Intersection Observer for fade-in animations
     const observerOptions = {
@@ -456,6 +462,24 @@ function getDisplayName(filename) {
       logosGrid.classList.remove('fade-in-visible');
       logosGrid.classList.add('fade-in-stagger');
       fadeInObserver.observe(logosGrid);
+    }
+  }
+
+    // Initialize hero video
+  function initializeHeroVideo() {
+    const heroVideo = document.querySelector('section video') as HTMLVideoElement;
+    if (heroVideo) {
+      // Force video to load and play
+      heroVideo.load();
+
+      // Attempt to play the video
+      const playPromise = heroVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Auto-play was prevented, which is fine for background videos
+          console.log('Video autoplay prevented:', error);
+        });
+      }
     }
   }
 
