@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/cardCarousel.css";
 import { getCollection } from "astro:content";
 import { marked } from "marked";
 import fs from "node:fs";
@@ -47,119 +46,322 @@ function getDisplayName(filename) {
 ---
 
 <BaseLayout title="About">
-  <section class="py-10">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-8 text-center font-serif">
-        About APR Artist Agency
-      </h1>
+  <!-- Hero Section -->
+  <section class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-lighter to-dark-card opacity-60"></div>
 
-      <div class="card-carousel">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold rounded-full blur-3xl animate-pulse delay-1000"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold font-serif mb-6">
+        <span class="block mb-2 text-primary">About</span>
+        <span class="text-gold italic">APR Artist Agency</span>
+      </h1>
+      <p class="text-lg text-secondary opacity-90 mb-8 max-w-2xl mx-auto">
+        PR, Brand Partnership & Talent Management for Global Talents within Music and Sports
+      </p>
+    </div>
+  </section>
+
+  <!-- About Sections -->
+  <section class="py-8 bg-dark-lighter">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
         {
           sortedSections.map((section, index) => (
-            <div class="carousel-card" data-index={index}>
-              <div class="card-content bg-dark-card p-8 rounded-lg shadow-card">
-                <h2 class="text-2xl font-bold mb-4 text-gold font-serif">
-                  {section.data.title}
-                </h2>
+            <div class={`mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex flex-col md:flex items-center gap-8`}>
+              <!-- Content -->
+              <div class="flex-1">
+                <div class="bg-dark-card rounded-lg p-6 shadow-card h-full">
+                  <h2 class="text-2xl font-bold mb-4 font-serif text-gold">
+                    {section.data.title}
+                  </h2>
+                  <div
+                    class="text-primary leading-relaxed"
+                    set:html={section.compiledContent}
+                  />
+                </div>
+              </div>
 
-                {/* Display the markdown body content with proper HTML rendering */}
-                <div
-                  class="text-primary markdown-content"
-                  set:html={section.compiledContent}
-                />
+              <!-- Image placeholder -->
+              <div class="flex-1">
+                <div class="bg-dark-card rounded-lg overflow-hidden shadow-card aspect-square">
+                  <div class="w-full h-full bg-gradient-to-br from-gold/10 to-transparent flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="w-16 h-16 bg-gold/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <p class="text-secondary text-sm">Visual Content</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))
         }
-      </div>
 
-      <div class="progress-bar">
-        <div class="progress-indicator"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partners & Clients Section -->
-  <section class="py-16 md:py-24 bg-dark-card">
-    <div class="container mx-auto px-4">
-      <h2
-        class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 font-serif"
-      >
-        OUR PARTNERS & CLIENTS
-      </h2>
-
-      <div
-        class="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] justify-items-center items-center"
-      >
-        {
-          logoFiles.length > 0 ? (
-            logoFiles.map((file) => (
-              <div class="p-4">
-                <img
-                  src={`${baseUrl}/logos/${file}`}
-                  alt={`Logo of ${getDisplayName(file)}`}
-                  class="max-h-16 w-auto"
-                />
-              </div>
-            ))
-          ) : (
-            <div class="col-span-full text-center text-secondary">
-              No client logos found. Add logo files to the public/logos
-              directory.
-            </div>
-          )
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 md:py-24 bg-dark-lighter">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div>
-          <LazyImage
-            src={`${import.meta.env.BASE_URL}/team/ceo.jpg`}
-            alt="Alan Rajendram, CEO"
-            class="rounded-xl shadow-lg"
-          />
-        </div>
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif">
-            Our Vision
-          </h2>
-          <p class="text-lg mb-4 text-primary">
-            APR Artist Agency was founded with a simple vision: to bridge the
-            gap between artistic vision and commercial success. We believe that
-            true innovation happens when creators are empowered to express their
-            unique perspectives while connecting with audiences in meaningful
-            ways.
-          </p>
-          <p class="text-lg mb-6 text-primary">
-            Our team of industry professionals works tirelessly to nurture these
-            connections, creating partnerships that respect artistic integrity
-            while delivering exceptional value to brands and their consumers.
-          </p>
-          <div class="flex items-center mt-8">
-            <LazyImage
-              src={`${import.meta.env.BASE_URL}/team/ceo-signature.png`}
-              alt="Alan Rajendram Signature"
-              class="h-16"
-            />
-            <div class="ml-4">
-              <p class="font-bold text-primary">Alan Rajendram</p>
-              <p class="text-sm text-gold">Founder & CEO</p>
+        <!-- Strategic Partnership Section -->
+        <div class="mb-12">
+          <div class="bg-dark-card rounded-lg p-6 shadow-card">
+            <div class="text-center">
+              <h2 class="text-2xl font-bold mb-4 font-serif text-gold">
+                Strategic Partnership with GTMG
+              </h2>
+              <p class="text-primary leading-relaxed">
+                We collaborate closely with Golden Talent Management Group (GTMG), bringing together over 18 years of expertise in talent representation and personal brand development. This strategic partnership allows us to leverage combined strengths in connecting talents and brands, delivering exceptional value through our complementary services in talent management and brand partnerships.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Stats Section -->
+  <section class="py-8 bg-dark">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center font-serif">
+        Our Network & Impact
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center bg-dark-card rounded-lg p-6 shadow-card">
+          <div class="text-3xl md:text-4xl font-bold text-gold mb-2">
+            130+
+          </div>
+          <p class="text-secondary">Global A-List Talents</p>
+        </div>
+        <div class="text-center bg-dark-card rounded-lg p-6 shadow-card">
+          <div class="text-3xl md:text-4xl font-bold text-gold mb-2">
+            200+
+          </div>
+          <p class="text-secondary">Brand Partners</p>
+        </div>
+        <div class="text-center bg-dark-card rounded-lg p-6 shadow-card">
+          <div class="text-3xl md:text-4xl font-bold text-gold mb-2">
+            8+
+          </div>
+          <p class="text-secondary">Figure Commercial Deals</p>
+        </div>
+        <div class="text-center bg-dark-card rounded-lg p-6 shadow-card">
+          <div class="text-3xl md:text-4xl font-bold text-gold mb-2">
+            18+
+          </div>
+          <p class="text-secondary">Years Combined Experience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-8 bg-dark-lighter">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center font-serif">
+        Our Expertise
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Brand Partnerships</h3>
+          <p class="text-secondary">Strategic collaborations, endorsement deals, brand licensing, and influencer activations that drive results.</p>
+        </div>
+
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2h4a1 1 0 110 2h-1v10a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 010-2h4z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Public Relations</h3>
+          <p class="text-secondary">Media engagement, reputation management, event appearances, and storytelling that builds lasting connections.</p>
+        </div>
+
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Sponsorship Solutions</h3>
+          <p class="text-secondary">Tours, festivals, sports events, and exclusive experiences tailored to your objectives.</p>
+        </div>
+
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Marketing Strategy</h3>
+          <p class="text-secondary">Product placement, merchandise creation, and comprehensive campaign monitoring and optimization.</p>
+        </div>
+
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+              <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Premium Services</h3>
+          <p class="text-secondary">Access to exclusive locations, studio facilities, and concierge services for seamless experiences.</p>
+        </div>
+
+        <div class="bg-dark-card rounded-lg p-6 shadow-card transition-all group hover:shadow-lg">
+          <div class="text-gold mb-4">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3 font-serif group-hover:text-gold transition-colors">Campaign Excellence</h3>
+          <p class="text-secondary">Social media innovations, B2B partnerships, and VIP event access that boost brand awareness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners & Clients Section -->
+  <section class="py-8 bg-dark">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center font-serif">
+        Trusted by Industry Leaders
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {
+          logoFiles.length > 0 ? (
+            logoFiles.map((file) => (
+              <div class="bg-dark-card rounded-lg p-4 shadow-card transition-all hover:shadow-lg group">
+                <img
+                  src={`${baseUrl}/logos/${file}`}
+                  alt={`Logo of ${getDisplayName(file)}`}
+                  class="max-h-8 w-auto mx-auto opacity-70 group-hover:opacity-100 transition-colors"
+                />
+              </div>
+            ))
+          ) : (
+            <>
+              {Array.from({ length: 12 }, (_, i) => (
+                <div class="bg-dark-card rounded-lg p-4 shadow-card transition-all hover:shadow-lg group">
+                  <div class="h-8 bg-gradient-to-r from-gold/20 to-gold/10 rounded flex items-center justify-center">
+                    <span class="text-xs text-gold font-medium">BRAND {i + 1}</span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Section -->
+  <section class="py-8 bg-dark-lighter">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Image -->
+          <div>
+            <div class="bg-dark-card rounded-lg overflow-hidden shadow-card aspect-[4/5]">
+              <div class="w-full h-full bg-gradient-to-br from-gold/10 to-transparent flex items-center justify-center">
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-gold/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-secondary text-sm">Founder Portrait</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div>
+            <div class="bg-dark-card rounded-lg p-6 shadow-card">
+              <h2 class="text-3xl font-bold mb-6 font-serif text-gold">
+                Pioneering Excellence
+              </h2>
+
+              <div class="space-y-4 text-primary leading-relaxed">
+                <p>
+                  APR Artist Agency takes immense pride in our track record of accomplishments in the world of artist representation, PR, and brand collaborations. We have established direct relationships with over 130 world-renowned A-list music artists and sports personalities, positioning us as a trusted bridge between talent and brands.
+                </p>
+                <p>
+                  Our innovative approach to social media campaigns and seamless brand partnership coordination has significantly boosted brand awareness for multiple clients. We excel at securing exclusive opportunities and creating meaningful connections that drive mutual success for both talents and brands.
+                </p>
+              </div>
+
+              <!-- Founder signature and info -->
+              <div class="pt-6 border-t border-dark mt-6">
+                <div class="flex items-center space-x-4">
+                  <div class="h-12 w-24 bg-gradient-to-r from-gold/20 to-transparent rounded flex items-center justify-center">
+                    <span class="text-gold font-serif italic text-sm">Priyanka R.</span>
+                  </div>
+                  <div>
+                    <p class="font-bold text-primary">Priyanka Rajendram</p>
+                    <p class="text-gold text-sm font-medium">Founder & CEO</p>
+                    <p class="text-xs text-secondary">PR & Global Brand Partnerships for Global Talents</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-8 bg-dark">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 font-serif text-gold">
+          Ready to Create Something Extraordinary?
+        </h2>
+        <p class="text-lg text-secondary mb-8">
+          Whether you're a brand seeking authentic partnerships or an artist looking for meaningful collaborations, we're here to make it happen.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="border border-gold text-gold px-5 py-2 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium">
+            Partner With Us
+          </a>
+          <a href="/work" class="border border-gold text-gold px-5 py-2 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium">
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
-<script>
-  import { initCardCarousel } from "../scripts/cardCarousel.js";
+<style>
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: inherit;
+  }
 
-  document.addEventListener("astro:page-load", () => {
-    initCardCarousel();
-  });
-</script>
+  .prose p {
+    color: inherit;
+  }
+
+  .prose ul li {
+    color: inherit;
+  }
+
+  .prose strong {
+    color: inherit;
+    font-weight: 600;
+  }
+</style>
