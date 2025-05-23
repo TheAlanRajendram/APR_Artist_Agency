@@ -142,6 +142,7 @@ module.exports = {
         primary: currentTheme.text.primary,
         secondary: currentTheme.text.secondary,
         muted: currentTheme.text.muted,
+        heading: currentTheme.primary,          // Brand color for headings
         'on-primary': currentTheme.background.primary,
         'on-gold': currentTheme.background.primary,
         gold: currentTheme.primary,
