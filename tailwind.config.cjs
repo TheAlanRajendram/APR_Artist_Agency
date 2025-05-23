@@ -142,7 +142,9 @@ module.exports = {
         primary: currentTheme.text.primary,
         secondary: currentTheme.text.secondary,
         muted: currentTheme.text.muted,
-        heading: currentTheme.primary,          // Brand color for headings
+        heading: currentTheme.primary,          // Primary gold headings (for hero, main titles)
+        'heading-secondary': currentTheme.text.primary,  // White/neutral headings (for section headings)
+        'heading-subtle': currentTheme.text.secondary,   // Gray headings (for card titles, minor headings)
         'on-primary': currentTheme.background.primary,
         'on-gold': currentTheme.background.primary,
         gold: currentTheme.primary,
