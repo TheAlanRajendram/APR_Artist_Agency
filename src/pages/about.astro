@@ -47,7 +47,7 @@ function getDisplayName(filename) {
 
 <BaseLayout title="About">
   <!-- Hero Section -->
-  <section class="relative py-20 md:py-36 bg-dark overflow-hidden">
+  <section class="relative py-20 md:py-36 bg-dark overflow-hidden fade-in-element">
     <!-- Background Video -->
     <div class="absolute inset-0 z-0">
       <video
@@ -76,7 +76,7 @@ function getDisplayName(filename) {
   <!-- About Sections -->
   {
     sortedSections.map((section, index) => (
-      <section class={`py-16 ${index % 2 === 0 ? 'bg-dark-lighter' : 'bg-dark'}`}>
+      <section class={`py-16 ${index % 2 === 0 ? 'bg-dark-lighter' : 'bg-dark'} fade-in-element`}>
         <div class="container mx-auto px-4">
           <div class="max-w-6xl mx-auto">
             <div class={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-col-dense'}`}>
@@ -116,7 +116,7 @@ function getDisplayName(filename) {
   }
 
   <!-- Strategic Partnership Section -->
-  <section class="py-16 bg-dark-accent">
+  <section class="py-16 bg-dark-accent fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-8 font-serif text-heading-secondary">
@@ -130,7 +130,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Stats Section -->
-  <section class="py-16 bg-dark">
+  <section class="py-16 bg-dark fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
@@ -168,7 +168,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Services Overview -->
-  <section class="py-16 bg-dark-lighter">
+  <section class="py-16 bg-dark-lighter fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
@@ -242,7 +242,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Partners & Clients Section -->
-  <section class="py-16 bg-dark">
+  <section class="py-16 bg-dark fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
@@ -279,7 +279,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Founder Section -->
-  <section class="py-16 bg-dark-lighter">
+  <section class="py-16 bg-dark-lighter fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -329,7 +329,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Call to Action -->
-  <section class="py-16 bg-dark">
+  <section class="py-16 bg-dark fade-in-element">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
@@ -368,4 +368,81 @@ function getDisplayName(filename) {
     color: theme("textColor.heading");
     font-weight: 600;
   }
+
+  /* Fade-in animations */
+  .fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-element.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered animations for grid items */
+  .fade-in-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-stagger.fade-in-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Delay classes for staggered effect */
+  .fade-in-stagger.fade-in-visible > *:nth-child(1) { transition-delay: 0.1s; }
+  .fade-in-stagger.fade-in-visible > *:nth-child(2) { transition-delay: 0.2s; }
+  .fade-in-stagger.fade-in-visible > *:nth-child(3) { transition-delay: 0.3s; }
+  .fade-in-stagger.fade-in-visible > *:nth-child(4) { transition-delay: 0.4s; }
+  .fade-in-stagger.fade-in-visible > *:nth-child(5) { transition-delay: 0.5s; }
+  .fade-in-stagger.fade-in-visible > *:nth-child(6) { transition-delay: 0.6s; }
 </style>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all fade-in elements
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in-element');
+    fadeElements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    // Add stagger effect to grid containers
+    const statsGrid = document.querySelector('.grid.grid-cols-2.md\\:grid-cols-4');
+    const servicesGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
+    const logosGrid = document.querySelector('.grid.grid-cols-3.md\\:grid-cols-6.lg\\:grid-cols-8');
+
+    if (statsGrid) {
+      statsGrid.classList.add('fade-in-stagger');
+      observer.observe(statsGrid);
+    }
+
+    if (servicesGrid) {
+      servicesGrid.classList.add('fade-in-stagger');
+      observer.observe(servicesGrid);
+    }
+
+    if (logosGrid) {
+      logosGrid.classList.add('fade-in-stagger');
+      observer.observe(logosGrid);
+    }
+  });
+</script>
