@@ -63,7 +63,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-10 h-10 text-gold opacity-70"
+            class="w-10 h-10 text-primary opacity-70"
           >
             <path
               stroke-linecap="round"
@@ -90,7 +90,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-10 h-10 text-gold opacity-70"
+          class="w-10 h-10 text-primary opacity-70"
         >
           <path
             stroke-linecap="round"
@@ -170,13 +170,13 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     }
 
     .swiper-pagination-bullet-active {
-      background: theme("colors.gold");
+      background: theme("colors.primary.DEFAULT");
       opacity: 1;
     }
 
     .swiper-button-next,
     .swiper-button-prev {
-      color: theme("colors.gold");
+      color: theme("colors.primary.DEFAULT");
     }
   </style>
 
@@ -200,7 +200,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
                         class="w-full h-full object-cover"
                       />
                       <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-gold transition-colors">
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-primary transition-colors">
                           {item.data.title}
                         </h3>
                         <p class="text-secondary mb-3">
@@ -228,7 +228,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         <div class="text-center mt-8 animate-fade-in-up">
           <a
             href={`${base}/work`}
-            class="border border-gold text-gold px-5 py-0.5 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium inline-flex items-center"
+            class="border border-primary text-primary px-5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium inline-flex items-center"
           >
             Explore More
           </a>

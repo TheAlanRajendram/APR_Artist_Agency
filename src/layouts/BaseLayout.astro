@@ -75,25 +75,27 @@ const base = import.meta.env.BASE_URL;
             />
           </a>
           <div class="hidden md:flex space-x-6 items-center">
-            <a href={`${base}/about`} class="hover:text-gold transition-colors"
-              >About</a
+            <a
+              href={`${base}/about`}
+              class="hover:text-primary transition-colors">About</a
             >
             <a
               href={`${base}/services`}
-              class="hover:text-gold transition-colors">Services</a
+              class="hover:text-primary transition-colors">Services</a
             >
-            <a href={`${base}/work`} class="hover:text-gold transition-colors"
-              >Work</a
+            <a
+              href={`${base}/work`}
+              class="hover:text-primary transition-colors">Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
-              class="border border-gold text-gold px-5 py-0.5 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium inline-flex items-center"
+              class="border border-primary text-primary px-5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium inline-flex items-center"
               >Get in touch</a
             >
           </div>
           <button
             id="mobile-menu-button"
-            class="md:hidden p-2 hover:text-gold transition-colors"
+            class="md:hidden p-2 hover:text-primary transition-colors"
             aria-label="Toggle mobile menu"
           >
             <svg
@@ -118,7 +120,7 @@ const base = import.meta.env.BASE_URL;
         >
           <button
             id="close-menu-button"
-            class="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors"
+            class="absolute top-6 right-6 p-2 text-white hover:text-primary transition-colors"
             aria-label="Close menu"
           >
             <svg
@@ -139,22 +141,22 @@ const base = import.meta.env.BASE_URL;
           <div class="py-8 space-y-8 text-center w-full max-w-md">
             <a
               href={`${base}/about`}
-              class="block hover:text-gold transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >About</a
             >
             <a
               href={`${base}/services`}
-              class="block hover:text-gold transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >Services</a
             >
             <a
               href={`${base}/work`}
-              class="block hover:text-gold transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
-              class="flex items-center border border-gold text-2xl text-gold px-6 py-2 rounded-full hover:bg-gold hover:text-on-gold transition-colors font-medium mx-auto w-max mt-6"
+              class="flex items-center border border-primary text-2xl text-primary px-6 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium mx-auto w-max mt-6"
               >Get in touch</a
             >
             <!-- Social Media Links in Mobile Menu -->
@@ -185,9 +187,9 @@ const base = import.meta.env.BASE_URL;
         scrollbar-color: #333 #111;
       }
 
-      /* Add golden accent to active page links */
+      /* Add primary accent to active page links */
       :global(.active-link) {
-        color: theme("colors.gold");
+        color: theme("colors.primary.DEFAULT");
         position: relative;
       }
 
@@ -198,7 +200,7 @@ const base = import.meta.env.BASE_URL;
         left: 0;
         width: 100%;
         height: 2px;
-        background-color: theme("colors.gold");
+        background-color: theme("colors.primary.DEFAULT");
       }
 
       /* Mobile menu animation */
