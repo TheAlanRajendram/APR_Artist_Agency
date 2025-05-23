@@ -47,16 +47,7 @@ function getDisplayName(filename) {
 
 <BaseLayout title="About">
   <!-- Hero Section -->
-  <section class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-lighter to-dark-card opacity-60"></div>
-
-    <!-- Animated background elements -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold rounded-full blur-3xl animate-pulse delay-1000"></div>
-    </div>
-
+  <section class="relative py-20 md:py-36 bg-dark overflow-hidden">
     <div class="relative z-10 container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold font-serif mb-6">
         <span class="block mb-2 text-primary">About</span>
@@ -69,7 +60,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- About Sections -->
-  <section class="py-8 bg-dark-lighter">
+  <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         {
@@ -91,7 +82,7 @@ function getDisplayName(filename) {
               <!-- Image placeholder -->
               <div class="flex-1">
                 <div class="bg-dark-card rounded-lg overflow-hidden shadow-card aspect-square">
-                  <div class="w-full h-full bg-gradient-to-br from-gold/10 to-transparent flex items-center justify-center">
+                  <div class="w-full h-full bg-dark-accent flex items-center justify-center">
                     <div class="text-center">
                       <div class="w-16 h-16 bg-gold/20 rounded-full mx-auto mb-4 flex items-center justify-center">
                         <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -161,7 +152,7 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Services Overview -->
-  <section class="py-8 bg-dark-lighter">
+  <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-8 text-center font-serif">
         Our Expertise
@@ -255,7 +246,7 @@ function getDisplayName(filename) {
             <>
               {Array.from({ length: 12 }, (_, i) => (
                 <div class="bg-dark-card rounded-lg p-4 shadow-card transition-all hover:shadow-lg group">
-                  <div class="h-8 bg-gradient-to-r from-gold/20 to-gold/10 rounded flex items-center justify-center">
+                  <div class="h-8 bg-gold/20 rounded flex items-center justify-center">
                     <span class="text-xs text-gold font-medium">BRAND {i + 1}</span>
                   </div>
                 </div>
@@ -268,14 +259,14 @@ function getDisplayName(filename) {
   </section>
 
   <!-- Founder Section -->
-  <section class="py-8 bg-dark-lighter">
+  <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <!-- Image -->
           <div>
             <div class="bg-dark-card rounded-lg overflow-hidden shadow-card aspect-[4/5]">
-              <div class="w-full h-full bg-gradient-to-br from-gold/10 to-transparent flex items-center justify-center">
+              <div class="w-full h-full bg-dark-accent flex items-center justify-center">
                 <div class="text-center">
                   <div class="w-16 h-16 bg-gold/20 rounded-full mx-auto mb-4 flex items-center justify-center">
                     <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -307,7 +298,7 @@ function getDisplayName(filename) {
               <!-- Founder signature and info -->
               <div class="pt-6 border-t border-dark mt-6">
                 <div class="flex items-center space-x-4">
-                  <div class="h-12 w-24 bg-gradient-to-r from-gold/20 to-transparent rounded flex items-center justify-center">
+                  <div class="h-12 w-24 bg-gold/20 rounded flex items-center justify-center">
                     <span class="text-gold font-serif italic text-sm">Priyanka R.</span>
                   </div>
                   <div>
