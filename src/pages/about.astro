@@ -403,26 +403,36 @@ function getDisplayName(filename) {
 </style>
 
 <script>
-  // Intersection Observer for fade-in animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  // Declare global variable
+  let fadeInObserver;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
+  // Initialize fade-in animations
+  function initializeFadeInAnimations() {
+    // Clean up any existing observers
+    if (fadeInObserver) {
+      fadeInObserver.disconnect();
+    }
 
-  // Observe all fade-in elements
-  document.addEventListener('DOMContentLoaded', () => {
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    fadeInObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-visible');
+          fadeInObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Reset all elements and observe them
     const fadeElements = document.querySelectorAll('.fade-in-element');
     fadeElements.forEach((element) => {
-      observer.observe(element);
+      element.classList.remove('fade-in-visible');
+      fadeInObserver.observe(element);
     });
 
     // Add stagger effect to grid containers
@@ -431,18 +441,34 @@ function getDisplayName(filename) {
     const logosGrid = document.querySelector('.grid.grid-cols-3.md\\:grid-cols-6.lg\\:grid-cols-8');
 
     if (statsGrid) {
+      statsGrid.classList.remove('fade-in-visible');
       statsGrid.classList.add('fade-in-stagger');
-      observer.observe(statsGrid);
+      fadeInObserver.observe(statsGrid);
     }
 
     if (servicesGrid) {
+      servicesGrid.classList.remove('fade-in-visible');
       servicesGrid.classList.add('fade-in-stagger');
-      observer.observe(servicesGrid);
+      fadeInObserver.observe(servicesGrid);
     }
 
     if (logosGrid) {
+      logosGrid.classList.remove('fade-in-visible');
       logosGrid.classList.add('fade-in-stagger');
-      observer.observe(logosGrid);
+      fadeInObserver.observe(logosGrid);
     }
-  });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFadeInAnimations);
+  } else {
+    initializeFadeInAnimations();
+  }
+
+  // Re-initialize on client-side navigation (for Astro view transitions)
+  document.addEventListener('astro:page-load', initializeFadeInAnimations);
+
+  // Fallback for other navigation events
+  window.addEventListener('load', initializeFadeInAnimations);
 </script>
