@@ -37,9 +37,9 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         class="text-4xl md:text-5xl font-bold font-serif animate-fade-in text-center"
       >
         <span class="block mb-2 text-primary font-normal">CONNECTING</span>
-        <span class="text-secondary italic font-black">BRANDS</span>
-        <span class="text-muted font-thin">&</span>
-        <span class="text-secondary tracking-wider italic font-black">ARTISTS</span>
+        <span class="text-primary italic font-black">BRANDS</span>
+        <span class="inline-block text-primary font-thin mx-2 align-middle text-2xl">&times;</span>
+        <span class="text-primary tracking-wider italic font-black">ARTISTS</span>
       </h1>
       <p
         class="hidden md:block text-lg text-center text-secondary opacity-90 mt-12 mb-8 max-w-2xl animate-fade-in"
@@ -94,10 +94,10 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
             stroke-linecap="round"
             stroke-linejoin="round"
             d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-        </svg>
-      </a>
-    </div>
-  </section>
+          </svg>
+        </a>
+      </div>
+    </section>
 
   <style>
     @keyframes fadeIn {
@@ -201,14 +201,14 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
                           {item.data.title}
                         </h3>
                         <p class="text-secondary mb-3">
-                          {item.data.brand} × {item.data.artist}
+                          {item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}
                         </p>
                         <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-muted">
+                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
                             {item.data.tags[0]}
                           </span>
                           {item.data.tags[1] && (
-                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-muted">
+                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
                               {item.data.tags[1]}
                             </span>
                           )}
@@ -367,4 +367,3 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     });
   </script>
 </BaseLayout>
- 
