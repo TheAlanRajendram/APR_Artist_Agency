@@ -9,7 +9,6 @@ const base = import.meta.env.BASE_URL;
 
 // Get work items
 const workItems = await getCollection("work");
-
 // Add base path to image URLs
 const itemsWithBasePath = workItems.map((item) => ({
   ...item,
@@ -18,8 +17,7 @@ const itemsWithBasePath = workItems.map((item) => ({
     image: `${base}${item.data.image}`
   }
 }));
-
-// Use only 5 items for the featured carousel
+// Use only 10 items for the featured carousel
 const featuredItems = itemsWithBasePath.slice(0, 10);
 ---
 
@@ -33,13 +31,13 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
   >
     <BackgroundVideo>
-<h1
+      <h1
         class="text-4xl md:text-5xl font-bold font-serif animate-fade-in text-center"
       >
-        <span class="block mb-2 text-primary font-normal">CONNECTING</span>
-        <span class="flex items-center justify-center"> {/* New flex container */}
+        <span class="block mb-2 text-heading font-normal">CONNECTING</span>
+        <span class="flex items-center justify-center">
           <span class="text-heading italic font-black">BRANDS</span>
-          <span class="text-heading font-thin mx-2 text-2xl">&times;</span> {/* Removed align-middle, flex items-center handles this */}
+          <span class="text-heading font-thin mx-2 text-2xl">&times;</span>
           <span class="text-heading tracking-wider italic font-black">ARTISTS</span>
         </span>
       </h1>
@@ -78,7 +76,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
       /* Fluid Bounce Scroll Down Chevron for Mobile - Centered on Hero Section */
     }
     <div
-      class="md:hidden md:block absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
+      class="md:hidden absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
     >
       <a
         href="#featured-section"
@@ -150,7 +148,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
       min-height: 100svh; /* Changed from 100vh to 100svh for better mobile support */
       display: flex;
       flex-direction: column;
-      justify-content: center; /* This will center the .button-container vertically if hero-section is tall enough */
+      justify-content: center; /* This will center the content vertically if hero-section is tall enough */
     }
 
     /* Swiper custom styles */
@@ -277,7 +275,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <section class="py-8 bg-dark-lighter">
+  <section class="py-8 bg-dark-accent">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <h2
@@ -291,7 +289,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
             Array.from({ length: 16 }, (_, i) => (
               <div class="flex items-center justify-center p-4 transition-opacity hover:opacity-100 opacity-70">
                 <div class="h-8 bg-primary/20 rounded flex items-center justify-center px-3">
-                  <span class="text-xs text-primary font-medium">BRAND</span>
+                  <span class="text-xs text-on-primary font-medium">BRAND</span>
                 </div>
               </div>
             ))
