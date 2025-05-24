@@ -24,13 +24,11 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 ---
 
 <BaseLayout title="Home" transparentNavbar={true}>
-  <!-- Swiper CSS -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
   />
 
-  <!-- Hero Section -->
   <section
     class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
   >
@@ -39,9 +37,9 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         class="text-4xl md:text-5xl font-bold font-serif animate-fade-in text-center"
       >
         <span class="block mb-2 text-primary font-normal">CONNECTING</span>
-        <span class="text-gold italic font-black">BRANDS</span>
-        <span class="text-secondary font-thin">&</span>
-        <span class="text-gold tracking-wider italic font-black">ARTISTS</span>
+        <span class="text-secondary italic font-black">BRANDS</span>
+        <span class="text-muted font-thin">&</span>
+        <span class="text-secondary tracking-wider italic font-black">ARTISTS</span>
       </h1>
       <p
         class="hidden md:block text-lg text-center text-secondary opacity-90 mt-12 mb-8 max-w-2xl animate-fade-in"
@@ -186,7 +184,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading">
           Featured Collaborations
         </h2>
-        <!-- Swiper -->
         <div class="swiper portfolio-swiper">
           <div class="swiper-wrapper">
             {
@@ -207,11 +204,14 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
                           {item.data.brand} × {item.data.artist}
                         </p>
                         <div class="flex flex-wrap gap-2">
-                          {item.data.tags.slice(0, 2).map((tag) => (
-                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
-                              {tag}
+                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-muted">
+                            {item.data.tags[0]}
+                          </span>
+                          {item.data.tags[1] && (
+                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-muted">
+                              {item.data.tags[1]}
                             </span>
-                          ))}
+                          )}
                         </div>
                       </div>
                     </div>
@@ -224,7 +224,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
-        <!-- "View All Our Work" Button -->
         <div class="text-center mt-8 animate-fade-in-up">
           <a
             href={`${base}/work`}
@@ -237,7 +236,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </section>
   </LazyPage>
 
-  <!-- Stats Section -->
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
@@ -277,7 +275,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <!-- Trusted Partners Section -->
   <section class="py-8 bg-dark-lighter">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
@@ -302,7 +299,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <!-- Call to Action -->
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
@@ -331,13 +327,11 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <!-- Swiper JS -->
   <script
     is:inline
     src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"
   ></script>
 
-  <!-- Initialize Swiper -->
   <script is:inline>
     document.addEventListener("astro:page-load", function () {
       new Swiper(".portfolio-swiper", {
@@ -373,3 +367,4 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     });
   </script>
 </BaseLayout>
+ 
