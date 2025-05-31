@@ -9,7 +9,6 @@ const base = import.meta.env.BASE_URL;
 
 // Get work items
 const workItems = await getCollection("work");
-// Add base path to image URLs
 const itemsWithBasePath = workItems.map((item) => ({
   ...item,
   data: {
@@ -17,8 +16,17 @@ const itemsWithBasePath = workItems.map((item) => ({
     image: `${base}${item.data.image}`
   }
 }));
-// Use only 10 items for the featured carousel
 const featuredItems = itemsWithBasePath.slice(0, 10);
+
+// Define the brand placeholders
+const totalUniqueBrands = 16; // Assuming 16 unique brands
+const allBrandNames = Array.from({ length: totalUniqueBrands }, (_, i) => `BRAND ${i + 1}`);
+
+// Create a shifted order for the bottom row to minimize simultaneous brand appearance
+const midPoint = Math.ceil(totalUniqueBrands / 2);
+const firstHalfBrands = allBrandNames.slice(0, midPoint);
+const secondHalfBrands = allBrandNames.slice(midPoint);
+const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g., B9-B16 then B1-B8
 ---
 
 <BaseLayout title="Home" transparentNavbar={true}>
@@ -47,7 +55,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
         APR Artist Agency specializes in creating powerful partnerships between
         brands and exceptional talent across sports, music, and entertainment.
       </p>
-      {/* Fluid Bounce Scroll Down Chevron for Desktop in Slot */}
       <div
         class="hidden md:block absolute bottom-20 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
       >
@@ -72,9 +79,6 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
       </div>
     </BackgroundVideo>
 
-    {
-      /* Fluid Bounce Scroll Down Chevron for Mobile - Centered on Hero Section */
-    }
     <div
       class="md:hidden absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
     >
@@ -100,166 +104,48 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </section>
 
   <style>
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes bounce-fluid-effect {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px); /* Max bounce height */
-      }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-
-    .animate-fade-in-up {
-      animation: fadeInUp 1s ease-out 0.3s forwards;
-      opacity: 0; /* Start transparent for fadeInUp */
-    }
-
-    .animate-bounce-fluid {
-      animation: bounce-fluid-effect 1.5s infinite ease-in-out;
-    }
-
-    .hero-section {
-      margin-top: 0;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce-fluid-effect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+    .animate-fade-in-up { animation: fadeInUp 1s ease-out 0.3s forwards; opacity: 0; }
+    .animate-bounce-fluid { animation: bounce-fluid-effect 1.5s infinite ease-in-out; }
+    .hero-section { margin-top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
 
     /* Swiper custom styles */
-    .swiper {
-      width: 100%;
-      padding-bottom: 50px;
-    }
-
-    .swiper-slide {
-      height: auto;
-      transition: transform 0.3s;
-    }
-
-    .swiper-pagination-bullet {
-      background: theme("colors.secondary.DEFAULT");
-      opacity: 0.6;
-    }
-
-    .swiper-pagination-bullet-active {
-      background: theme("colors.primary.DEFAULT");
-      opacity: 1;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: theme("colors.primary.DEFAULT");
-    }
+    .swiper { width: 100%; padding-bottom: 50px; }
+    .swiper-slide { height: auto; transition: transform 0.3s; }
+    .swiper-pagination-bullet { background: theme("colors.secondary.DEFAULT"); opacity: 0.6; }
+    .swiper-pagination-bullet-active { background: theme("colors.primary.DEFAULT"); opacity: 1; }
+    .swiper-button-next, .swiper-button-prev { color: theme("colors.primary.DEFAULT"); }
 
     /* Styles for scrolling brand logos */
-    .scrolling-row-wrapper {
-      overflow: hidden;
-      /* Optional: Add a mask for fading edges if desired. Requires vendor prefixes.
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      */
-    }
-
-    .scrolling-row-inner {
-      display: flex; /* Aligns brand items in a row */
-      flex-shrink: 0; /* Prevents shrinking of the inner container */
-    }
-
-    .scroll-l-to-r { /* Content moves left, appears as scrolling left-to-right */
-      animation: scroll-l-to-r-animation 10s linear infinite;
-    }
-
-    .scroll-r-to-l { /* Content moves right, appears as scrolling right-to-left */
-      animation: scroll-r-to-l-animation 10s linear infinite;
-    }
-
-    @keyframes scroll-l-to-r-animation {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-50%); /* Assumes content is duplicated once */
-      }
-    }
-
-    @keyframes scroll-r-to-l-animation {
-      0% {
-        transform: translateX(-50%); /* Start "halfway" through the duplicated content */
-      }
-      100% {
-        transform: translateX(0%); /* Scroll back to the beginning of the first set */
-      }
-    }
-
-    .scrolling-row-inner:hover {
-      animation-play-state: paused; /* Optional: Pause animation on hover */
-    }
-
-    .brand-item {
-      /* Using Tailwind classes directly in HTML for this, e.g., w-28, shrink-0 */
-    }
+    .scrolling-row-wrapper { overflow: hidden; }
+    .scrolling-row-inner { display: flex; flex-shrink: 0; }
+    .scroll-l-to-r { animation: scroll-l-to-r-animation 5s linear infinite; }
+    .scroll-r-to-l { animation: scroll-r-to-l-animation 5s linear infinite; animation-delay: -2.5s; /* Start halfway through its cycle */ }
+    @keyframes scroll-l-to-r-animation { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+    @keyframes scroll-r-to-l-animation { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+    .scrolling-row-inner:hover { animation-play-state: paused; }
   </style>
 
   <LazyPage id="featured-section" rootMargin="300px 0px">
     <section class="py-8 bg-dark-lighter">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">
-          Featured Collaborations
-        </h2>
+        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">Featured Collaborations</h2>
         <div class="swiper portfolio-swiper">
           <div class="swiper-wrapper">
-            {
-              featuredItems.map((item) => (
+            { featuredItems.map((item) => (
                 <div class="swiper-slide">
                   <a href={`${base}/work/${item.slug}`} class="block group">
                     <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                      <LazyImage
-                        src={item.data.image}
-                        alt={item.data.title}
-                        class="w-full h-full object-cover"
-                      />
+                      <LazyImage src={item.data.image} alt={item.data.title} class="w-full h-full object-cover" />
                       <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">
-                          {item.data.title}
-                        </h3>
-                        <p class="text-secondary mb-3">
-                          {item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}
-                        </p>
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">{item.data.title}</h3>
+                        <p class="text-secondary mb-3">{item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}</p>
                         <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
-                            {item.data.tags[0]}
-                          </span>
-                          {item.data.tags[1] && (
-                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
-                              {item.data.tags[1]}
-                            </span>
-                          )}
+                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[0]}</span>
+                          {item.data.tags[1] && (<span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[1]}</span>)}
                         </div>
                       </div>
                     </div>
@@ -279,93 +165,66 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
-          Our Network & Impact
-        </h2>
-
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">Our Network & Impact</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
-              130+
-            </div>
-            <p class="text-secondary text-lg">Global A-List Talents</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
-              200+
-            </div>
-            <p class="text-secondary text-lg">Brand Partners</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
-              8+
-            </div>
-            <p class="text-secondary text-lg">Figure Commercial Deals</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
-              18+
-            </div>
-            <p class="text-secondary text-lg">Years Combined Experience</p>
-          </div>
+          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">130+</div><p class="text-secondary text-lg">Global A-List Talents</p></div>
+          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">200+</div><p class="text-secondary text-lg">Brand Partners</p></div>
+          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">8+</div><p class="text-secondary text-lg">Figure Commercial Deals</p></div>
+          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">18+</div><p class="text-secondary text-lg">Years Combined Experience</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  {/* MODIFIED: Trusted by Industry Leaders Section */}
-  <section class="py-16 bg-dark-accent overflow-hidden"> {/* Added overflow-hidden and increased py */}
+  <section class="py-16 bg-dark-accent overflow-hidden">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
         Trusted by Industry Leaders
       </h2>
     </div>
 
-    {/* Top row: scrolls content to the left (appears as LTR scroll) */}
+    {/* Top row: scrolls LTR. Contains all brands (e.g., B1...B16), then duplicated. */}
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-l-to-r flex">
-        {/* Brands 1-8 (Example with 8 unique items per row, duplicated) */}
-        {Array.from({ length: 8 }, (_, i) => (
+        {allBrandNames.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">BRAND {i + 1}</span>
+              <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
-        {/* Duplicate Brands 1-8 for seamless loop */}
-        {Array.from({ length: 8 }, (_, i) => (
+        {/* Duplicate all unique brands for seamless loop */}
+        {allBrandNames.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">BRAND {i + 1}</span>
+              <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
       </div>
     </div>
 
-    {/* Bottom row: scrolls content to the right (appears as RTL scroll) */}
+    {/* Bottom row: scrolls RTL. Contains all brands but in a shifted order (e.g., B9...B16, then B1...B8), then duplicated. */}
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-r-to-l flex">
-        {/* Brands 9-16 */}
-        {Array.from({ length: 8 }, (_, i) => (
+        {bottomRowInitialOrder.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">BRAND {i + 9}</span>
+              <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
-        {/* Duplicate Brands 9-16 for seamless loop */}
-        {Array.from({ length: 8 }, (_, i) => (
+        {/* Duplicate the shifted order for seamless loop */}
+        {bottomRowInitialOrder.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">BRAND {i + 9}</span>
+              <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
       </div>
     </div>
   </section>
-  {/* END OF MODIFIED SECTION */}
 
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4 text-center">
@@ -378,16 +237,10 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
           looking for meaningful collaborations, we're here to make it happen.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href={`${base}/contact`}
-            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg"
-          >
+          <a href={`${base}/contact`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg">
             Partner With Us
           </a>
-          <a
-            href={`${base}/work`}
-            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg"
-          >
+          <a href={`${base}/work`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg">
             View Our Work
           </a>
         </div>
@@ -395,44 +248,20 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <script
-    is:inline
-    src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"
-  ></script>
-
+  <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"></script>
   <script is:inline>
     document.addEventListener("astro:page-load", function () {
       new Swiper(".portfolio-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-          delay: 1500,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        },
-        effect: "slide",
-        speed: 600,
+        slidesPerView: 1, spaceBetween: 20, loop: true, centeredSlides: true,
+        autoplay: { delay: 1500, disableOnInteraction: false },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        effect: "slide", speed: 600,
         breakpoints: {
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30
-          }
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 30 }
         }
       });
     });
   </script>
 </BaseLayout>
- 
