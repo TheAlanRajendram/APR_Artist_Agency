@@ -26,7 +26,7 @@ const allBrandNames = Array.from({ length: totalUniqueBrands }, (_, i) => `BRAND
 const midPoint = Math.ceil(totalUniqueBrands / 2);
 const firstHalfBrands = allBrandNames.slice(0, midPoint);
 const secondHalfBrands = allBrandNames.slice(midPoint);
-const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g., B9-B16 then B1-B8
+const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
 ---
 
 <BaseLayout title="Home" transparentNavbar={true}>
@@ -120,13 +120,36 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g.
     .swiper-button-next, .swiper-button-prev { color: theme("colors.primary.DEFAULT"); }
 
     /* Styles for scrolling brand logos */
-    .scrolling-row-wrapper { overflow: hidden; }
-    .scrolling-row-inner { display: flex; flex-shrink: 0; }
-    .scroll-l-to-r { animation: scroll-l-to-r-animation 5s linear infinite; }
-    .scroll-r-to-l { animation: scroll-r-to-l-animation 5s linear infinite; animation-delay: -2.5s; /* Start halfway through its cycle */ }
-    @keyframes scroll-l-to-r-animation { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-    @keyframes scroll-r-to-l-animation { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
-    .scrolling-row-inner:hover { animation-play-state: paused; }
+    .scrolling-row-wrapper { 
+      overflow: hidden; 
+    }
+    .scrolling-row-inner { 
+      display: flex; 
+      flex-shrink: 0; 
+      will-change: transform; /* Added for performance optimization */
+    }
+
+    .scroll-l-to-r {
+      /* Temporarily slower for testing - adjust back to 5s or preferred speed if this works */
+      animation: scroll-l-to-r-animation 30s linear infinite; 
+    }
+    .scroll-r-to-l {
+      /* Temporarily slower for testing - adjust back to 5s or preferred speed if this works */
+      animation: scroll-r-to-l-animation 30s linear infinite; 
+      animation-delay: -15s; /* Half of the current test duration */
+    }
+
+    @keyframes scroll-l-to-r-animation { 
+      0% { transform: translateX(0%); } 
+      100% { transform: translateX(-50%); } 
+    }
+    @keyframes scroll-r-to-l-animation { 
+      0% { transform: translateX(-50%); } 
+      100% { transform: translateX(0%); } 
+    }
+    .scrolling-row-inner:hover { 
+      animation-play-state: paused; 
+    }
   </style>
 
   <LazyPage id="featured-section" rootMargin="300px 0px">
@@ -183,7 +206,6 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g.
       </h2>
     </div>
 
-    {/* Top row: scrolls LTR. Contains all brands (e.g., B1...B16), then duplicated. */}
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-l-to-r flex">
         {allBrandNames.map((brandName) => (
@@ -193,7 +215,6 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g.
             </div>
           </div>
         ))}
-        {/* Duplicate all unique brands for seamless loop */}
         {allBrandNames.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
@@ -204,7 +225,6 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g.
       </div>
     </div>
 
-    {/* Bottom row: scrolls RTL. Contains all brands but in a shifted order (e.g., B9...B16, then B1...B8), then duplicated. */}
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-r-to-l flex">
         {bottomRowInitialOrder.map((brandName) => (
@@ -214,7 +234,6 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands]; // e.g.
             </div>
           </div>
         ))}
-        {/* Duplicate the shifted order for seamless loop */}
         {bottomRowInitialOrder.map((brandName) => (
           <div class="brand-item shrink-0 mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
