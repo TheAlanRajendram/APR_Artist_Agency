@@ -1,286 +1,107 @@
----
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BackgroundVideo from "../components/BackgroundVideo.astro";
-import LazyImage from "../components/LazyImage.astro";
-import LazyPage from "../components/LazyPage.astro";
-import { getCollection } from "astro:content";
-
-const base = import.meta.env.BASE_URL;
-
-// Get work items
-const workItems = await getCollection("work");
-const itemsWithBasePath = workItems.map((item) => ({
-  ...item,
-  data: {
-    ...item.data,
-    image: `${base}${item.data.image}`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conveyor Belt Brand Scroll</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh; /* For demonstration purposes */
+    background-color: #f0f0f0; /* For demonstration purposes */
+    margin: 0;
   }
-}));
-const featuredItems = itemsWithBasePath.slice(0, 10);
 
-// Define the brand placeholders
-const totalUniqueBrands = 16; // Assuming 16 unique brands
-const allBrandNames = Array.from({ length: totalUniqueBrands }, (_, i) => `BRAND ${i + 1}`);
+  .conveyor-belt-wrapper {
+    max-width: 800px; /* Adjust to your desired max width */
+    margin: 20px auto;
+  }
 
-// Create a shifted order for the bottom row to minimize simultaneous brand appearance
-const midPoint = Math.ceil(totalUniqueBrands / 2);
-const firstHalfBrands = allBrandNames.slice(0, midPoint);
-const secondHalfBrands = allBrandNames.slice(midPoint);
-const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
----
+  .conveyor-belt-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-<BaseLayout title="Home" transparentNavbar={true}>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
-  />
+  .conveyor-belt {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ddd; /* Optional: for visualization */
+    background-color: #fff; /* Optional: background for the belt */
+    padding: 10px 0; /* Optional: padding inside the belt */
+  }
 
-  <section
-    class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
-  >
-    <BackgroundVideo>
-      <h1
-        class="text-4xl md:text-4xl font-bold font-serif animate-fade-in text-center"
-      >
-        <span class="block mb-2 text-heading-secondary font-normal">CONNECTING</span>
-        <span class="flex items-center justify-center">
-          <span class="text-heading italic font-black">BRANDS</span>
-          <span class="text-heading font-medium mx-4 mb-2">&times;</span>
-          <span class="text-heading italic font-black">ARTISTS</span>
-        </span>
-      </h1>
-      <p
-        class="hidden md:block text-lg text-center text-secondary opacity-90 mt-12 mb-8 max-w-2xl animate-fade-in"
-      >
-        APR Artist Agency specializes in creating powerful partnerships between
-        brands and exceptional talent across sports, music, and entertainment.
-      </p>
-      <div
-        class="hidden md:block absolute bottom-20 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
-      >
-        <a
-          href="#featured-section"
-          aria-label="Scroll to featured collaborations"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-10 h-10 text-primary opacity-70"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-          </svg>
-        </a>
-      </div>
-    </BackgroundVideo>
+  .conveyor-track {
+    display: flex;
+    width: fit-content; /* Allows the track to be as wide as its content */
+    animation: scroll 20s linear infinite; /* Adjust duration for speed */
+  }
 
-    <div
-      class="md:hidden absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
-    >
-      <a
-        href="#featured-section"
-        aria-label="Scroll to featured collaborations"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-10 h-10 text-primary opacity-70"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-          </svg>
-        </a>
-      </div>
-    </section>
+  .brand-item {
+    flex-shrink: 0; /* Prevent items from shrinking */
+    padding: 0 25px; /* Adjust spacing between items */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
 
-  <style>
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounce-fluid-effect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-    .animate-fade-in-up { animation: fadeInUp 1s ease-out 0.3s forwards; opacity: 0; }
-    .animate-bounce-fluid { animation: bounce-fluid-effect 1.5s infinite ease-in-out; }
-    .hero-section { margin-top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+  .brand-item img {
+    max-width: 120px; /* Adjust max brand logo width */
+    max-height: 60px; /* Adjust max brand logo height */
+    display: block;
+    object-fit: contain; /* Ensures the whole logo is visible */
+    opacity: 0.8; /* Optional: visual style for logos */
+    transition: opacity 0.3s ease;
+  }
 
-    /* Swiper custom styles */
-    .swiper { width: 100%; padding-bottom: 50px; }
-    .swiper-slide { height: auto; transition: transform 0.3s; }
-    .swiper-pagination-bullet { background: theme("colors.secondary.DEFAULT"); opacity: 0.6; }
-    .swiper-pagination-bullet-active { background: theme("colors.primary.DEFAULT"); opacity: 1; }
-    .swiper-button-next, .swiper-button-prev { color: theme("colors.primary.DEFAULT"); }
+  .brand-item img:hover {
+    opacity: 1; /* Optional: highlight logo on hover */
+  }
 
-    /* Styles for scrolling brand logos */
-    .scrolling-row-wrapper { 
-      overflow: hidden; 
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
     }
-    .scrolling-row-inner { 
-      display: flex; 
-      flex-shrink: 0; 
-      will-change: transform; /* Added for performance optimization */
+    100% {
+      /* Move the track by the width of the first set of items.
+         If you have N original items, and you duplicate them once,
+         the track moves by N * (width_of_one_item_including_padding).
+         translateX(-50%) works because the track becomes 200% of the
+         width of the original set of items after duplication. */
+      transform: translateX(-50%);
     }
+  }
 
-    .scroll-l-to-r {
-      /* Temporarily slower for testing - adjust back to 5s or preferred speed if this works */
-      animation: scroll-l-to-r-animation 5s linear infinite; 
-    }
-    .scroll-r-to-l {
-      /* Temporarily slower for testing - adjust back to 5s or preferred speed if this works */
-      animation: scroll-r-to-l-animation 5s linear infinite; 
-      animation-delay: -2.5s; /* Half of the current test duration */
-    }
+  /* Optional: Pause animation on hover */
+  .conveyor-belt:hover .conveyor-track {
+    animation-play-state: paused;
+  }
+</style>
+</head>
+<body>
 
-    @keyframes scroll-l-to-r-animation { 
-      0% { transform: translateX(0%); } 
-      100% { transform: translateX(-50%); } 
-    }
-    @keyframes scroll-r-to-l-animation { 
-      0% { transform: translateX(-50%); } 
-      100% { transform: translateX(0%); } 
-    }
-    .scrolling-row-inner:hover { 
-      animation-play-state: paused; 
-    }
-  </style>
+<div class="conveyor-belt-wrapper">
+  <h2>Our Brands</h2>
+  <div class="conveyor-belt">
+    <div class="conveyor-track">
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/007bff/ffffff?text=Brand+1" alt="Brand 1"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/28a745/ffffff?text=Brand+2" alt="Brand 2"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/ffc107/000000?text=Brand+3" alt="Brand 3"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/dc3545/ffffff?text=Brand+4" alt="Brand 4"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/17a2b8/ffffff?text=Brand+5" alt="Brand 5"></div>
 
-  <LazyPage id="featured-section" rootMargin="300px 0px">
-    <section class="py-8 bg-dark-lighter">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">Featured Collaborations</h2>
-        <div class="swiper portfolio-swiper">
-          <div class="swiper-wrapper">
-            { featuredItems.map((item) => (
-                <div class="swiper-slide">
-                  <a href={`${base}/work/${item.slug}`} class="block group">
-                    <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                      <LazyImage src={item.data.image} alt={item.data.title} class="w-full h-full object-cover" />
-                      <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">{item.data.title}</h3>
-                        <p class="text-secondary mb-3">{item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}</p>
-                        <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[0]}</span>
-                          {item.data.tags[1] && (<span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[1]}</span>)}
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              ))
-            }
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-      </div>
-    </section>
-  </LazyPage>
-
-  <section class="py-8 bg-dark">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">Our Network & Impact</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">130+</div><p class="text-secondary text-lg">Global A-List Talents</p></div>
-          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">200+</div><p class="text-secondary text-lg">Brand Partners</p></div>
-          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">8+</div><p class="text-secondary text-lg">Figure Commercial Deals</p></div>
-          <div class="text-center"><div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">18+</div><p class="text-secondary text-lg">Years Combined Experience</p></div>
-        </div>
-      </div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/007bff/ffffff?text=Brand+1" alt="Brand 1"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/28a745/ffffff?text=Brand+2" alt="Brand 2"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/ffc107/000000?text=Brand+3" alt="Brand 3"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/dc3545/ffffff?text=Brand+4" alt="Brand 4"></div>
+      <div class="brand-item"><img src="https://via.placeholder.com/120x60/17a2b8/ffffff?text=Brand+5" alt="Brand 5"></div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section class="py-16 bg-dark-accent overflow-hidden">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
-        Trusted by Industry Leaders
-      </h2>
-    </div>
-
-    <div class="scrolling-row-wrapper py-3">
-      <div class="scrolling-row-inner scroll-l-to-r flex">
-        {allBrandNames.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
-            </div>
-          </div>
-        ))}
-        {allBrandNames.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="scrolling-row-wrapper py-3">
-      <div class="scrolling-row-inner scroll-r-to-l flex">
-        {bottomRowInitialOrder.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
-            </div>
-          </div>
-        ))}
-        {bottomRowInitialOrder.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="py-8 bg-dark">
-    <div class="container mx-auto px-4 text-center">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading">
-          Ready to Create Something Extraordinary?
-        </h2>
-        <p class="text-lg text-secondary mb-8 leading-relaxed">
-          Whether you're a brand seeking authentic partnerships or an artist
-          looking for meaningful collaborations, we're here to make it happen.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={`${base}/contact`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg">
-            Partner With Us
-          </a>
-          <a href={`${base}/work`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium text-lg">
-            View Our Work
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"></script>
-  <script is:inline>
-    document.addEventListener("astro:page-load", function () {
-      new Swiper(".portfolio-swiper", {
-        slidesPerView: 1, spaceBetween: 20, loop: true, centeredSlides: true,
-        autoplay: { delay: 1500, disableOnInteraction: false },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        effect: "slide", speed: 600,
-        breakpoints: {
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 30 }
-        }
-      });
-    });
-  </script>
-</BaseLayout>
+</body>
+</html>
