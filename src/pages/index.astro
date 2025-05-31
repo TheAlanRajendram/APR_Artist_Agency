@@ -22,7 +22,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 const totalUniqueBrands = 16; // Assuming 16 unique brands
 const allBrandNames = Array.from({ length: totalUniqueBrands }, (_, i) => `BRAND ${i + 1}`);
 
-// Create a shifted order for the bottom row to minimize simultaneous brand appearance
+// Create a shifted order for the bottom row
 const midPoint = Math.ceil(totalUniqueBrands / 2);
 const firstHalfBrands = allBrandNames.slice(0, midPoint);
 const secondHalfBrands = allBrandNames.slice(midPoint);
@@ -119,30 +119,34 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     .swiper-pagination-bullet-active { background: theme("colors.primary.DEFAULT"); opacity: 1; }
     .swiper-button-next, .swiper-button-prev { color: theme("colors.primary.DEFAULT"); }
 
-    /* Styles for scrolling brand logos */
+    /* Styles for scrolling brand logos - REDESIGNED */
     .scrolling-row-wrapper { 
       overflow: hidden; 
+      width: 100%; /* Ensure wrapper takes available width */
     }
     .scrolling-row-inner { 
-      display: flex; 
-      flex-shrink: 0; 
-      will-change: transform; /* Added for performance optimization */
+      display: inline-block; /* Key change: allows content to determine width */
+      white-space: nowrap;   /* Key change: keeps all items in a single line */
+      will-change: transform; 
     }
 
+    /* Individual brand items will be inline-flex via Tailwind classes */
+    /* .brand-item {} */ /* No specific style needed here if using Tailwind for display */
+
     .scroll-l-to-r {
-      animation: scroll-l-to-r-animation 5s linear infinite; 
+      animation: scroll-l-to-r-animation 20s linear infinite; /* Moderate speed for testing */
     }
     .scroll-r-to-l {
-      animation: scroll-r-to-l-animation 5s linear infinite; 
-      animation-delay: -2.5s; /* Half of the 5s duration */
+      animation: scroll-r-to-l-animation 20s linear infinite; /* Moderate speed for testing */
+      animation-delay: -10s; /* Half of duration */
     }
 
     @keyframes scroll-l-to-r-animation { 
       0% { transform: translateX(0%); } 
-      100% { transform: translateX(-50%); } 
+      100% { transform: translateX(-50%); } /* Assumes duplicated content */
     }
     @keyframes scroll-r-to-l-animation { 
-      0% { transform: translateX(-50%); } 
+      0% { transform: translateX(-50%); } /* Assumes duplicated content */
       100% { transform: translateX(0%); } 
     }
     .scrolling-row-inner:hover { 
@@ -204,17 +208,18 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       </h2>
     </div>
 
+    {/* Top row: scrolls LTR */}
     <div class="scrolling-row-wrapper py-3">
-      <div class="scrolling-row-inner scroll-l-to-r flex">
+      <div class="scrolling-row-inner scroll-l-to-r"> {/* Removed 'flex' class */}
         {allBrandNames.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
+          <div class="inline-flex items-center mx-4 py-2"> {/* Changed to inline-flex, removed shrink-0 */}
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
               <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
         {allBrandNames.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
+          <div class="inline-flex items-center mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
               <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
@@ -223,17 +228,18 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       </div>
     </div>
 
+    {/* Bottom row: scrolls RTL */}
     <div class="scrolling-row-wrapper py-3">
-      <div class="scrolling-row-inner scroll-r-to-l flex">
+      <div class="scrolling-row-inner scroll-r-to-l"> {/* Removed 'flex' class */}
         {bottomRowInitialOrder.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
+          <div class="inline-flex items-center mx-4 py-2"> {/* Changed to inline-flex, removed shrink-0 */}
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
               <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
           </div>
         ))}
         {bottomRowInitialOrder.map((brandName) => (
-          <div class="brand-item shrink-0 mx-4 py-2">
+          <div class="inline-flex items-center mx-4 py-2">
             <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
               <span class="text-sm text-on-primary font-medium">{brandName}</span>
             </div>
