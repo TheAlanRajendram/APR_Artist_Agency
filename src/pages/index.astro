@@ -34,7 +34,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
       <h1
         class="text-4xl md:text-4xl font-bold font-serif animate-fade-in text-center"
       >
-        <span class="block mb-2 text-heading-secondary font-normal">CONNECTING</span> {/* Changed to near-white */}
+        <span class="block mb-2 text-heading-secondary font-normal">CONNECTING</span>
         <span class="flex items-center justify-center">
           <span class="text-heading italic font-black">BRANDS</span>
           <span class="text-heading font-medium mx-4 mb-2">&times;</span>
@@ -145,10 +145,10 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
 
     .hero-section {
       margin-top: 0;
-      min-height: 100svh; /* Changed from 100vh to 100svh for better mobile support */
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* This will center the content vertically if hero-section is tall enough */
+      justify-content: center;
     }
 
     /* Swiper custom styles */
@@ -176,12 +176,60 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     .swiper-button-prev {
       color: theme("colors.primary.DEFAULT");
     }
+
+    /* Styles for scrolling brand logos */
+    .scrolling-row-wrapper {
+      overflow: hidden;
+      /* Optional: Add a mask for fading edges if desired. Requires vendor prefixes.
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      */
+    }
+
+    .scrolling-row-inner {
+      display: flex; /* Aligns brand items in a row */
+      flex-shrink: 0; /* Prevents shrinking of the inner container */
+    }
+
+    .scroll-l-to-r { /* Content moves left, appears as scrolling left-to-right */
+      animation: scroll-l-to-r-animation 40s linear infinite;
+    }
+
+    .scroll-r-to-l { /* Content moves right, appears as scrolling right-to-left */
+      animation: scroll-r-to-l-animation 40s linear infinite;
+    }
+
+    @keyframes scroll-l-to-r-animation {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%); /* Assumes content is duplicated once */
+      }
+    }
+
+    @keyframes scroll-r-to-l-animation {
+      0% {
+        transform: translateX(-50%); /* Start "halfway" through the duplicated content */
+      }
+      100% {
+        transform: translateX(0%); /* Scroll back to the beginning of the first set */
+      }
+    }
+
+    .scrolling-row-inner:hover {
+      animation-play-state: paused; /* Optional: Pause animation on hover */
+    }
+
+    .brand-item {
+      /* Using Tailwind classes directly in HTML for this, e.g., w-28, shrink-0 */
+    }
   </style>
 
   <LazyPage id="featured-section" rootMargin="300px 0px">
     <section class="py-8 bg-dark-lighter">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary"> {/* Changed to near-white */}
+        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">
           Featured Collaborations
         </h2>
         <div class="swiper portfolio-swiper">
@@ -197,7 +245,7 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
                         class="w-full h-full object-cover"
                       />
                       <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary"> {/* Default near-white, hover gold */}
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">
                           {item.data.title}
                         </h3>
                         <p class="text-secondary mb-3">
@@ -231,31 +279,31 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary"> {/* Changed to near-white */}
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
           Our Network & Impact
         </h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"> {/* Changed to near-white */}
+            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
               130+
             </div>
             <p class="text-secondary text-lg">Global A-List Talents</p>
           </div>
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"> {/* Changed to near-white */}
+            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
               200+
             </div>
             <p class="text-secondary text-lg">Brand Partners</p>
           </div>
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"> {/* Changed to near-white */}
+            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
               8+
             </div>
             <p class="text-secondary text-lg">Figure Commercial Deals</p>
           </div>
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"> {/* Changed to near-white */}
+            <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">
               18+
             </div>
             <p class="text-secondary text-lg">Years Combined Experience</p>
@@ -265,32 +313,64 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     </div>
   </section>
 
-  <section class="py-8 bg-dark-accent">
+  {/* MODIFIED: Trusted by Industry Leaders Section */}
+  <section class="py-16 bg-dark-accent overflow-hidden"> {/* Added overflow-hidden and increased py */}
     <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary"> {/* Changed to near-white */}
-          Trusted by Industry Leaders
-        </h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center font-serif text-heading-secondary">
+        Trusted by Industry Leaders
+      </h2>
+    </div>
 
-        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6">
-          {
-            Array.from({ length: 16 }, (_, i) => (
-              <div class="flex items-center justify-center p-4 transition-opacity hover:opacity-100 opacity-70">
-                <div class="h-8 bg-primary/20 rounded flex items-center justify-center px-3">
-                  <span class="text-xs text-on-primary font-medium">BRAND</span>
-                </div>
-              </div>
-            ))
-          }
-        </div>
+    {/* Top row: scrolls content to the left (appears as LTR scroll) */}
+    <div class="scrolling-row-wrapper py-3">
+      <div class="scrolling-row-inner scroll-l-to-r flex">
+        {/* Brands 1-8 (Example with 8 unique items per row, duplicated) */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div class="brand-item shrink-0 mx-4 py-2">
+            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+              <span class="text-sm text-on-primary font-medium">BRAND {i + 1}</span>
+            </div>
+          </div>
+        ))}
+        {/* Duplicate Brands 1-8 for seamless loop */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div class="brand-item shrink-0 mx-4 py-2">
+            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+              <span class="text-sm text-on-primary font-medium">BRAND {i + 1}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Bottom row: scrolls content to the right (appears as RTL scroll) */}
+    <div class="scrolling-row-wrapper py-3">
+      <div class="scrolling-row-inner scroll-r-to-l flex">
+        {/* Brands 9-16 */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div class="brand-item shrink-0 mx-4 py-2">
+            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+              <span class="text-sm text-on-primary font-medium">BRAND {i + 9}</span>
+            </div>
+          </div>
+        ))}
+        {/* Duplicate Brands 9-16 for seamless loop */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div class="brand-item shrink-0 mx-4 py-2">
+            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+              <span class="text-sm text-on-primary font-medium">BRAND {i + 9}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
+  {/* END OF MODIFIED SECTION */}
 
   <section class="py-8 bg-dark">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading"> {/* Kept as gold for CTA emphasis */}
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading">
           Ready to Create Something Extraordinary?
         </h2>
         <p class="text-lg text-secondary mb-8 leading-relaxed">
@@ -355,3 +435,4 @@ const featuredItems = itemsWithBasePath.slice(0, 10);
     });
   </script>
 </BaseLayout>
+ 
