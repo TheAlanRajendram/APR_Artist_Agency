@@ -131,48 +131,14 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     .scrolling-row-inner:hover { animation-play-state: paused; }
   </style>
 
-  <LazyPage id="featured-section" rootMargin="300px 0px">
-    <section class="py-8 bg-dark-lighter"> {/* Featured Collaborations */}
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">Featured Collaborations</h2>
-        <div class="swiper portfolio-swiper">
-          <div class="swiper-wrapper">
-            { featuredItems.map((item) => (
-                <div class="swiper-slide">
-                  <a href={`${base}/work/${item.slug}`} class="block group">
-                    <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                      <LazyImage src={item.data.image} alt={item.data.title} class="w-full h-full object-cover" />
-                      <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">{item.data.title}</h3>
-                        <p class="text-secondary mb-3">{item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}</p>
-                        <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[0]}</span>
-                          {item.data.tags[1] && (<span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[1]}</span>)}
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              ))
-            }
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-        {/* "Explore More" button container REMOVED from here */}
-      </div>
-    </section>
-  </LazyPage>
+  {/* SECTION ORDER CHANGED: Proof of Impact now comes before Featured Collaborations */}
 
   {/* UNIFIED SECTION: Proof of Impact */}
   <section class="py-16 bg-dark-accent overflow-hidden">
     <div class="container mx-auto px-4 text-center">
-      {/* Main Heading - "Backed by Results." REMOVED */}
       <h2 class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up">
         Trusted by Industry Leaders
       </h2>
-      {/* Subtext was previously removed */}
     </div>
 
     {/* Row 1: Scrolling brand logos */}
@@ -237,6 +203,39 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     </div>
   </section>
   {/* END OF UNIFIED SECTION */}
+
+  <LazyPage id="featured-section" rootMargin="300px 0px">
+    <section class="py-8 bg-dark-lighter"> {/* Featured Collaborations */}
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">Featured Collaborations</h2>
+        <div class="swiper portfolio-swiper">
+          <div class="swiper-wrapper">
+            { featuredItems.map((item) => (
+                <div class="swiper-slide">
+                  <a href={`${base}/work/${item.slug}`} class="block group">
+                    <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
+                      <LazyImage src={item.data.image} alt={item.data.title} class="w-full h-full object-cover" />
+                      <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">{item.data.title}</h3>
+                        <p class="text-secondary mb-3">{item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}</p>
+                        <div class="flex flex-wrap gap-2">
+                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[0]}</span>
+                          {item.data.tags[1] && (<span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[1]}</span>)}
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </section>
+  </LazyPage>
 
   {/* REVERTED CTA Section */}
   <section class="py-16 bg-dark"> 
