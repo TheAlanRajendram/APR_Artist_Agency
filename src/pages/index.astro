@@ -56,9 +56,10 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       <div
         class="hidden md:block absolute bottom-20 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
       >
+        {/* MODIFIED CHEVRON LINK */}
         <a
-          href="#featured-section"
-          aria-label="Scroll to featured collaborations"
+          href="#proof-of-impact-section" 
+          aria-label="Scroll to proof of impact section"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -80,9 +81,10 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     <div
       class="md:hidden absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
     >
+      {/* MODIFIED CHEVRON LINK */}
       <a
-        href="#featured-section"
-        aria-label="Scroll to featured collaborations"
+        href="#proof-of-impact-section"
+        aria-label="Scroll to proof of impact section"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -131,10 +133,9 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     .scrolling-row-inner:hover { animation-play-state: paused; }
   </style>
 
-  {/* SECTION ORDER CHANGED: Proof of Impact now comes before Featured Collaborations */}
-
   {/* UNIFIED SECTION: Proof of Impact */}
-  <section class="py-16 bg-dark-accent overflow-hidden">
+  {/* ADDED ID HERE */}
+  <section id="proof-of-impact-section" class="py-16 bg-dark-accent overflow-hidden"> 
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up">
         Trusted by Industry Leaders
@@ -237,7 +238,7 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     </section>
   </LazyPage>
 
-  {/* REVERTED CTA Section */}
+  {/* CTA Section */}
   <section class="py-16 bg-dark"> 
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
@@ -249,10 +250,17 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
           looking for meaningful collaborations, we're here to make it happen.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
-          <a href={`${base}/contact`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg">
+          {/* MODIFIED "PARTNER WITH US" LINK */}
+          <a
+            href="mailto:info@apr-artistagency.com" 
+            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg"
+          >
             Partner With Us
           </a>
-          <a href={`${base}/work`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg">
+          <a
+            href={`${base}/work`}
+            class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg"
+          >
             View Our Work
           </a>
         </div>
