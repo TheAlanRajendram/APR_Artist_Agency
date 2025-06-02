@@ -4,37 +4,33 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 // Professional color themes using color theory
 const themes = {
-  // Theme 1: Sophisticated Gold, now adjusted for Apple HIG-like dark mode neutrals
+  // Theme 1: Sophisticated Gold, with darker Reddit-inspired backgrounds
   sophisticatedGold: {
     primary: '#C9A96E',      // Gold Accent (Retained Brand Primary)
     secondary: '#8B7355',    // Muted Gold (Retained Brand Secondary)
     accent: '#E4D4B7',       // Light Gold (Retained Brand Accent)
 
     background: {
-      primary: '#1C1C1E',    // Apple HIG systemGray6Dark equivalent (Main app/page background)
-      secondary: '#2C2C2E',  // Apple HIG systemGray5Dark equivalent (Lighter background elements, e.g., grouped content)
-      tertiary: '#3A3A3C',   // Apple HIG systemGray4Dark equivalent (Subtle borders, or tertiary backgrounds)
-      card: '#2C2C2E',       // Card background (same as secondary for grouped content feel)
+      primary: '#0B0E11',    // Very deep, slightly cool charcoal (main background)
+      secondary: '#1A1D21',  // Dark charcoal (cards, secondary surfaces)
+      tertiary: '#24282E',   // Medium-dark charcoal (other UI elements, borders)
+      card: '#1A1D21',       // Card background (same as secondary)
     },
     text: {
-      primary: '#FFFFFF',    // Apple HIG labelColor equivalent (Pure White for high emphasis)
-      secondary: '#AEAEB2',  // Apple HIG secondaryLabelColor equivalent (e.g., systemGray for dark mode)
-      muted: '#8E8E93',      // Apple HIG tertiaryLabelColor equivalent (e.g., systemGray2 for dark mode)
+      primary: '#FFFFFF',    // Primary text (Pure White)
+      secondary: '#AEAEB2',  // Secondary text (Light Gray)
+      muted: '#98989F',      // Muted text (Adjusted for better contrast on new dark backgrounds)
     }
   },
 
   // ... (Your other themes, if any, remain unchanged) ...
-  // Theme 2: Platinum Elegance ...
-  // Theme 3: Midnight Blue Professional ...
-  // Theme 4: Rose Gold Luxury ...
-  // Theme 5: Emerald Professional ...
 };
 
-// Select active theme (change this to switch themes)
-const activeTheme = 'sophisticatedGold'; // This now points to the Apple HIG-inspired version
+// Select active theme
+const activeTheme = 'sophisticatedGold';
 const currentTheme = themes[activeTheme];
 
-// Helper function (ensure this is defined in your actual file if not already)
+// Helper function (ensure this is defined in your actual file)
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (result) {
@@ -49,26 +45,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary brand colors (Your gold palette)
         primary: {
           DEFAULT: currentTheme.primary,
           dark: currentTheme.secondary,
           light: currentTheme.accent,
         },
-        secondary: { // This refers to your brand's secondary color (muted gold)
+        secondary: {
           DEFAULT: currentTheme.secondary,
           light: currentTheme.accent,
         },
-        accent: currentTheme.accent, // Your brand's light gold accent
-
-        // Background colors (Now Apple HIG inspired)
-        dark: {
-          DEFAULT: currentTheme.background.primary,     // e.g., #1C1C1E
-          lighter: currentTheme.background.secondary,   // e.g., #2C2C2E
-          card: currentTheme.background.card,           // e.g., #2C2C2E
-          accent: currentTheme.background.tertiary,     // e.g., #3A3A3C (use for accent backgrounds)
+        accent: currentTheme.accent,
+        dark: { // These will now use the new darker background values
+          DEFAULT: currentTheme.background.primary,
+          lighter: currentTheme.background.secondary, // 'lighter' is now a very dark grey
+          card: currentTheme.background.card,
+          accent: currentTheme.background.tertiary,   // 'accent' background
         },
-        gold: currentTheme.primary, // Legacy or direct gold access
+        gold: currentTheme.primary,
       },
 
       fontFamily: {
@@ -78,23 +71,21 @@ module.exports = {
       },
 
       textColor: {
-        // Text colors (Now Apple HIG inspired for neutrals)
-        primary: currentTheme.text.primary,             // e.g., #FFFFFF
-        secondary: currentTheme.text.secondary,         // e.g., #AEAEB2
-        muted: currentTheme.text.muted,                 // e.g., #8E8E93
+        // These will now use the new text values (muted is updated)
+        primary: currentTheme.text.primary,
+        secondary: currentTheme.text.secondary,
+        muted: currentTheme.text.muted,
         
-        // Heading colors using your brand's gold
-        heading: currentTheme.primary,                  // Gold for main headings
-        'heading-secondary': currentTheme.text.primary, // Now White for secondary headings
-        'heading-subtle': currentTheme.text.secondary,  // Now Apple-like gray for subtle headings
+        heading: currentTheme.primary,
+        'heading-secondary': currentTheme.text.primary, // White for secondary headings
+        'heading-subtle': currentTheme.text.secondary,  // New lighter gray for subtle headings
         
-        // On-color text
-        'on-primary': currentTheme.background.primary, // Text on gold buttons will be the new dark background
-        'on-gold': currentTheme.background.primary,    // (Same as above)
-        gold: currentTheme.primary,                    // Direct gold text access
+        'on-primary': currentTheme.background.primary, // Text on gold buttons will be the new very dark background
+        'on-gold': currentTheme.background.primary,
+        gold: currentTheme.primary,
       },
 
-      boxShadow: { // Assuming hexToRgb helper is available
+      boxShadow: {
         'card': `0 10px 30px -5px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(${hexToRgb(currentTheme.primary)}, 0.1)`,
         'card-hover': `0 20px 40px -5px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(${hexToRgb(currentTheme.primary)}, 0.2)`,
         'glow': `0 0 20px rgba(${hexToRgb(currentTheme.primary)}, 0.3)`,
@@ -109,22 +100,18 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: currentTheme.text.primary, // Main prose text will be new primary text (White)
+            color: currentTheme.text.primary,
             maxWidth: 'none',
             a: {
-              color: currentTheme.primary, // Links remain gold
+              color: currentTheme.primary,
               '&:hover': {
                 color: currentTheme.accent,
                 opacity: '0.8',
               },
             },
-            // Adjust heading colors within prose if needed, they might default to currentTheme.text.primary
-            // The global heading classes like 'text-heading' will use your gold.
-            // Prose specific headings might need targeting if you want them different from body text.
             h1: { color: currentTheme.text.primary, fontFamily: theme('fontFamily.display'), fontWeight: '700' },
             h2: { color: currentTheme.text.primary, fontFamily: theme('fontFamily.display'), fontWeight: '600' },
             h3: { color: currentTheme.text.primary, fontFamily: theme('fontFamily.display'), fontWeight: '600' },
-            // ... and so on for h4, h5, h6
             blockquote: { color: currentTheme.text.secondary, borderLeftColor: currentTheme.primary },
             strong: { color: currentTheme.text.primary, fontWeight: '600' },
             code: { color: currentTheme.primary, backgroundColor: currentTheme.background.card },
