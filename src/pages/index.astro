@@ -107,11 +107,10 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     @keyframes bounce-fluid-effect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     
     .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-    /* General fadeInUp, can be used by sections that still want it */
-    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; } 
     .animate-fade-in-up.delay-150 { animation-delay: 0.15s; }
     .animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
-    
+        
     .animate-bounce-fluid { animation: bounce-fluid-effect 1.5s infinite ease-in-out; }
     .hero-section { margin-top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
 
@@ -125,8 +124,8 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     /* Styles for scrolling brand logos */
     .scrolling-row-wrapper { overflow: hidden; width: 100%; }
     .scrolling-row-inner { display: inline-block; white-space: nowrap; will-change: transform; }
-    .scroll-l-to-r { animation: scroll-l-to-r-animation 30s linear infinite; } /* Slower speed */
-    .scroll-r-to-l { animation: scroll-r-to-l-animation 30s linear infinite; animation-delay: -15s; } /* Slower speed & adjusted delay */
+    .scroll-l-to-r { animation: scroll-l-to-r-animation 30s linear infinite; } 
+    .scroll-r-to-l { animation: scroll-r-to-l-animation 30s linear infinite; animation-delay: -15s; } 
     @keyframes scroll-l-to-r-animation { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     @keyframes scroll-r-to-l-animation { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
     .scrolling-row-inner:hover { animation-play-state: paused; }
@@ -161,14 +160,7 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
-        <div class="text-center mt-8"> {/* Removed animation from this button for now, can be added back if desired */}
-          <a
-            href={`${base}/work`}
-            class="border border-primary text-primary px-5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium inline-flex items-center"
-          >
-            Explore More
-          </a>
-        </div>
+        {/* "Explore More" button container REMOVED from here */}
       </div>
     </section>
   </LazyPage>
@@ -176,11 +168,11 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
   {/* UNIFIED SECTION: Proof of Impact */}
   <section class="py-16 bg-dark-accent overflow-hidden">
     <div class="container mx-auto px-4 text-center">
-      {/* Main Heading - Punctuation removed, subtext removed */}
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up"> {/* mb-12 to give space before logos */}
-        Trusted by Industry Leaders Backed by Results
+      {/* Main Heading - "Backed by Results." REMOVED */}
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up">
+        Trusted by Industry Leaders
       </h2>
-      {/* Subtext REMOVED */}
+      {/* Subtext was previously removed */}
     </div>
 
     {/* Row 1: Scrolling brand logos */}
@@ -203,7 +195,7 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       </div>
     </div>
     {/* Bottom row: scrolls RTL */}
-    <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16"> {/* Added bottom margin before stats */}
+    <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
       <div class="scrolling-row-inner scroll-r-to-l">
         {bottomRowInitialOrder.map((brandName) => (
           <div class="inline-flex items-center mx-4 py-2">
@@ -221,10 +213,9 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
         ))}
       </div>
     </div>
-    
+        
     {/* Row 2: Stats Grid */}
     <div class="container mx-auto px-4">
-      {/* Added animation to stats grid, can be adjusted/removed if too much */}
       <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up delay-300">
         <div class="text-center">
           <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">130+</div>
@@ -248,24 +239,22 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
   {/* END OF UNIFIED SECTION */}
 
   {/* REVERTED CTA Section */}
-  <section class="py-16 bg-dark"> {/* Kept py-16 from your proposal, bg-dark is original */}
+  <section class="py-16 bg-dark"> 
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
-        {/* Heading reverted to original, animations removed from H2 and P */}
         <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading">
           Ready to Create Something Extraordinary?
         </h2>
-        <p class="text-lg text-secondary mb-10 leading-relaxed"> {/* mb-10 and leading-relaxed kept from your proposal */}
+        <p class="text-lg text-secondary mb-10 leading-relaxed"> 
           Whether you're a brand seeking authentic partnerships or an artist
           looking for meaningful collaborations, we're here to make it happen.
         </p>
-        {/* Buttons kept from your proposal as they are an improvement, including animations */}
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
           <a href={`${base}/contact`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg">
             Partner With Us
           </a>
           <a href={`${base}/work`} class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg">
-            See the Work
+            View Our Work
           </a>
         </div>
       </div>
