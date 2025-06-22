@@ -6,16 +6,24 @@ import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export default defineConfig({
   site: 'https://thealanrajendram.github.io',
   base: '/.',
-  integrations: [tailwind({
-    config: { darkMode: 'class' }
-  }), mdx(), react(), markdoc(), keystatic()],
+  integrations: [
+    tailwind({
+      config: { darkMode: 'class' },
+    }),
+    mdx(),
+    react(),
+    markdoc(),
+    ...(isDev ? [keystatic()] : []),
+  ],
   build: {
     assets: '_assets'
   },
-  output: 'static',
+  output: isDev ? 'hybrid' : 'static',
   markdown: {
     shikiConfig: {
       theme: 'github-dark'
