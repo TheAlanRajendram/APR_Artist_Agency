@@ -23,7 +23,7 @@ export default defineConfig({
   build: {
     assets: '_assets'
   },
-  output: isDev ? 'hybrid' : 'static',
+  output: 'static',
   markdown: {
     shikiConfig: {
       theme: 'github-dark'
