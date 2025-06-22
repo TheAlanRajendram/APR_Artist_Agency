@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
   site: 'https://thealanrajendram.github.io',
-  base: '/.',
+  base: isDev ? '/' : '/webapp-test',
   integrations: [
     tailwind({
       config: { darkMode: 'class' },
