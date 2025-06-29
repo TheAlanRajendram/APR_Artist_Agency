@@ -4,16 +4,6 @@ import { getCollection } from "astro:content";
 import "../../styles/lazyAnimations.css";
 
 const workItems = await getCollection("work");
-const base = import.meta.env.BASE_URL;
-
-// Add base path to image URLs
-const itemsWithBasePath = workItems.map((item) => ({
-  ...item,
-  data: {
-    ...item.data,
-    image: `${base}${item.data.image}`
-  }
-}));
 ---
 
 <BaseLayout title="Work">
@@ -23,8 +13,8 @@ const itemsWithBasePath = workItems.map((item) => ({
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lazy-grid">
         {
-          itemsWithBasePath.map((item) => (
-            <a href={`${base}/work/${item.slug}`} class="group card-lazy">
+          workItems.map((item) => (
+            <a href={`/work/${item.slug}`} class="group card-lazy">
               <div class="bg-dark-card rounded-lg overflow-hidden shadow-card transition-transform group-hover:scale-105">
                 <img
                   src={item.data.image}

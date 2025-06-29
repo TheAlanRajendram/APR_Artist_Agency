@@ -4,7 +4,6 @@ interface Props {
 }
 
 const { className = "" } = Astro.props;
-const base = import.meta.env.BASE_URL;
 ---
 
 <div class={`background-video-container ${className}`}>
@@ -19,7 +18,7 @@ const base = import.meta.env.BASE_URL;
       disablepictureinpicture
       class="background-video"
     >
-      <source src={`${base}/videos/hero_page.mp4`} type="video/mp4" />
+      <source src="/videos/hero_page.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </div>

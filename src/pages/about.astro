@@ -17,8 +17,7 @@ sortedSections.forEach((section) => {
   section.compiledContent = marked.parse(section.body);
 });
 
-// Base URL for assets
-const baseUrl = import.meta.env.BASE_URL;
+// Base URL for assets (now using root paths)
 
 // Get all logo files from the directory
 const logoDir = path.join(process.cwd(), "public", "logos");
@@ -59,7 +58,7 @@ function getDisplayName(filename) {
         class="w-full h-full object-cover opacity-20"
         style="background: #000;"
       >
-        <source src={`${baseUrl}/videos/hero_page.mp4`} type="video/mp4" />
+        <source src="/videos/hero_page.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div class="absolute inset-0 bg-dark/60"></div>
@@ -98,7 +97,7 @@ function getDisplayName(filename) {
               <div class={index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
                 <div class="aspect-[4/3] rounded-lg overflow-hidden">
                   <LazyImage
-                    src={`${baseUrl}/images/work/${
+                    src={`/images/work/${
                       index === 0 ? 'luxury-watch.png' :
                       index === 1 ? 'neuralink-experience.png' :
                       index === 2 ? 'tastefusion.png' :
@@ -147,7 +146,7 @@ function getDisplayName(filename) {
           <div>
             <div class="aspect-[4/5] rounded-lg overflow-hidden">
               <LazyImage
-                src={`${baseUrl}/images/work/luxury-watch.png`}
+                src="/images/work/luxury-watch.png"
                 alt="Priyanka Rajendram - Founder & CEO"
                 class="w-full h-full object-cover"
               />

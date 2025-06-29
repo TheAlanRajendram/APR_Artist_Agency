@@ -11,7 +11,6 @@ interface Props {
 
 const { title, transparentNavbar = false } = Astro.props;
 const currentYear = new Date().getFullYear();
-const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -40,7 +39,7 @@ const base = import.meta.env.BASE_URL;
       title === "Home" && (
         <link
           rel="preload"
-          href={`${base}/videos/hero_page.mp4`}
+          href="/videos/hero_page.mp4"
           as="video"
           type="video/mp4"
           fetchpriority="high"
@@ -62,12 +61,12 @@ const base = import.meta.env.BASE_URL;
       <div class="container mx-auto px-4 relative">
         <nav class="flex items-center justify-between">
           <a
-            href={`${base}/`}
+            href="/"
             class="flex items-center"
             aria-label="APR Artist Agency Home"
           >
             <img
-              src={`${base}/logo_gold.png`}
+              src="/logo_gold.png"
               alt="APR Artist Agency Logo"
               style="height: 48px;"
               class="mr-3"
@@ -75,17 +74,13 @@ const base = import.meta.env.BASE_URL;
             />
           </a>
           <div class="hidden md:flex space-x-6 items-center">
-            <a
-              href={`${base}/about`}
-              class="hover:text-primary transition-colors">About</a
+            <a href="/about" class="hover:text-primary transition-colors"
+              >About</a
             >
-            <a
-              href={`${base}/services`}
-              class="hover:text-primary transition-colors">Services</a
+            <a href="/services" class="hover:text-primary transition-colors"
+              >Services</a
             >
-            <a
-              href={`${base}/work`}
-              class="hover:text-primary transition-colors">Work</a
+            <a href="/work" class="hover:text-primary transition-colors">Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
@@ -140,17 +135,17 @@ const base = import.meta.env.BASE_URL;
           </button>
           <div class="py-8 space-y-8 text-center w-full max-w-md">
             <a
-              href={`${base}/about`}
+              href="/about"
               class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >About</a
             >
             <a
-              href={`${base}/services`}
+              href="/services"
               class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >Services</a
             >
             <a
-              href={`${base}/work`}
+              href="/work"
               class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
               >Work</a
             >
@@ -351,7 +346,7 @@ const base = import.meta.env.BASE_URL;
 
         navLinks.forEach((link) => {
           const href = link.getAttribute("href");
-          if (href && currentPath.endsWith(href.replace("/webapp-test", ""))) {
+          if (href && currentPath.endsWith(href)) {
             link.classList.add("active-link");
           }
         });

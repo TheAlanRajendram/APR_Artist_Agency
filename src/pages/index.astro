@@ -5,22 +5,16 @@ import LazyImage from "../components/LazyImage.astro";
 import LazyPage from "../components/LazyPage.astro";
 import { getCollection } from "astro:content";
 
-const base = import.meta.env.BASE_URL;
-
 // Get work items
 const workItems = await getCollection("work");
-const itemsWithBasePath = workItems.map((item) => ({
-  ...item,
-  data: {
-    ...item.data,
-    image: `${base}${item.data.image}`
-  }
-}));
-const featuredItems = itemsWithBasePath.slice(0, 10);
+const featuredItems = workItems.slice(0, 10);
 
 // Define the brand placeholders for scrolling section
 const totalUniqueBrands = 16;
-const allBrandNames = Array.from({ length: totalUniqueBrands }, (_, i) => `BRAND ${i + 1}`);
+const allBrandNames = Array.from(
+  { length: totalUniqueBrands },
+  (_, i) => `BRAND ${i + 1}`
+);
 const midPoint = Math.ceil(totalUniqueBrands / 2);
 const firstHalfBrands = allBrandNames.slice(0, midPoint);
 const secondHalfBrands = allBrandNames.slice(midPoint);
@@ -40,7 +34,9 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       <h1
         class="text-4xl md:text-4xl font-bold font-serif animate-fade-in text-center"
       >
-        <span class="block mb-2 text-heading-secondary font-normal">CONNECTING</span>
+        <span class="block mb-2 text-heading-secondary font-normal"
+          >CONNECTING</span
+        >
         <span class="flex items-center justify-center">
           <span class="text-heading italic font-black">BRANDS</span>
           <span class="text-heading font-medium mx-4 mb-2">&times;</span>
@@ -58,7 +54,7 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
       >
         {/* MODIFIED CHEVRON LINK */}
         <a
-          href="#proof-of-impact-section" 
+          href="#proof-of-impact-section"
           aria-label="Scroll to proof of impact section"
         >
           <svg
@@ -98,46 +94,135 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
             stroke-linecap="round"
             stroke-linejoin="round"
             d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-          </svg>
-        </a>
-      </div>
-    </section>
+        </svg>
+      </a>
+    </div>
+  </section>
 
   <style>
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounce-fluid-effect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    
-    .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; } 
-    .animate-fade-in-up.delay-150 { animation-delay: 0.15s; }
-    .animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
-        
-    .animate-bounce-fluid { animation: bounce-fluid-effect 1.5s infinite ease-in-out; }
-    .hero-section { margin-top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes bounce-fluid-effect {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    .animate-fade-in-up.delay-150 {
+      animation-delay: 0.15s;
+    }
+    .animate-fade-in-up.delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .animate-bounce-fluid {
+      animation: bounce-fluid-effect 1.5s infinite ease-in-out;
+    }
+    .hero-section {
+      margin-top: 0;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     /* Swiper custom styles */
-    .swiper { width: 100%; padding-bottom: 50px; }
-    .swiper-slide { height: auto; transition: transform 0.3s; }
-    .swiper-pagination-bullet { background: theme("colors.secondary.DEFAULT"); opacity: 0.6; }
-    .swiper-pagination-bullet-active { background: theme("colors.primary.DEFAULT"); opacity: 1; }
-    .swiper-button-next, .swiper-button-prev { color: theme("colors.primary.DEFAULT"); }
+    .swiper {
+      width: 100%;
+      padding-bottom: 50px;
+    }
+    .swiper-slide {
+      height: auto;
+      transition: transform 0.3s;
+    }
+    .swiper-pagination-bullet {
+      background: theme("colors.secondary.DEFAULT");
+      opacity: 0.6;
+    }
+    .swiper-pagination-bullet-active {
+      background: theme("colors.primary.DEFAULT");
+      opacity: 1;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: theme("colors.primary.DEFAULT");
+    }
 
     /* Styles for scrolling brand logos */
-    .scrolling-row-wrapper { overflow: hidden; width: 100%; }
-    .scrolling-row-inner { display: inline-block; white-space: nowrap; will-change: transform; }
-    .scroll-l-to-r { animation: scroll-l-to-r-animation 30s linear infinite; } 
-    .scroll-r-to-l { animation: scroll-r-to-l-animation 30s linear infinite; animation-delay: -15s; } 
-    @keyframes scroll-l-to-r-animation { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-    @keyframes scroll-r-to-l-animation { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
-    .scrolling-row-inner:hover { animation-play-state: paused; }
+    .scrolling-row-wrapper {
+      overflow: hidden;
+      width: 100%;
+    }
+    .scrolling-row-inner {
+      display: inline-block;
+      white-space: nowrap;
+      will-change: transform;
+    }
+    .scroll-l-to-r {
+      animation: scroll-l-to-r-animation 30s linear infinite;
+    }
+    .scroll-r-to-l {
+      animation: scroll-r-to-l-animation 30s linear infinite;
+      animation-delay: -15s;
+    }
+    @keyframes scroll-l-to-r-animation {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    @keyframes scroll-r-to-l-animation {
+      0% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+    .scrolling-row-inner:hover {
+      animation-play-state: paused;
+    }
   </style>
 
   {/* UNIFIED SECTION: Proof of Impact */}
   {/* ADDED ID HERE */}
-  <section id="proof-of-impact-section" class="py-16 bg-dark-accent overflow-hidden"> 
+  <section
+    id="proof-of-impact-section"
+    class="py-16 bg-dark-accent overflow-hidden"
+  >
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up">
+      <h2
+        class="text-3xl md:text-4xl font-bold mb-12 font-serif text-heading animate-fade-in-up"
+      >
         Trusted by Industry Leaders
       </h2>
     </div>
@@ -145,59 +230,93 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     {/* Row 1: Scrolling brand logos */}
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-l-to-r">
-        {allBrandNames.map((brandName) => (
-          <div class="inline-flex items-center mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
+        {
+          allBrandNames.map((brandName) => (
+            <div class="inline-flex items-center mx-4 py-2">
+              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <span class="text-sm text-on-primary font-medium">
+                  {brandName}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-        {allBrandNames.map((brandName) => (
-          <div class="inline-flex items-center mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
+          ))
+        }
+        {
+          allBrandNames.map((brandName) => (
+            <div class="inline-flex items-center mx-4 py-2">
+              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <span class="text-sm text-on-primary font-medium">
+                  {brandName}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
     {/* Bottom row: scrolls RTL */}
     <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
       <div class="scrolling-row-inner scroll-r-to-l">
-        {bottomRowInitialOrder.map((brandName) => (
-          <div class="inline-flex items-center mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
+        {
+          bottomRowInitialOrder.map((brandName) => (
+            <div class="inline-flex items-center mx-4 py-2">
+              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <span class="text-sm text-on-primary font-medium">
+                  {brandName}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-        {bottomRowInitialOrder.map((brandName) => (
-          <div class="inline-flex items-center mx-4 py-2">
-            <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-              <span class="text-sm text-on-primary font-medium">{brandName}</span>
+          ))
+        }
+        {
+          bottomRowInitialOrder.map((brandName) => (
+            <div class="inline-flex items-center mx-4 py-2">
+              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <span class="text-sm text-on-primary font-medium">
+                  {brandName}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
-        
+
     {/* Row 2: Stats Grid */}
     <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up delay-300">
+      <div
+        class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up delay-300"
+      >
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">130+</div>
+          <div
+            class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"
+          >
+            130+
+          </div>
           <p class="text-secondary text-lg">Global A-List Talents</p>
         </div>
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">200+</div>
+          <div
+            class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"
+          >
+            200+
+          </div>
           <p class="text-secondary text-lg">Brand Partners</p>
         </div>
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">8+</div>
+          <div
+            class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"
+          >
+            8+
+          </div>
           <p class="text-secondary text-lg">Figure Commercial Deals</p>
         </div>
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3">18+</div>
+          <div
+            class="text-4xl md:text-5xl font-bold text-heading-secondary mb-3"
+          >
+            18+
+          </div>
           <p class="text-secondary text-lg">Years Combined Experience</p>
         </div>
       </div>
@@ -206,22 +325,46 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
   {/* END OF UNIFIED SECTION */}
 
   <LazyPage id="featured-section" rootMargin="300px 0px">
-    <section class="py-8 bg-dark-lighter"> {/* Featured Collaborations */}
+    <section class="py-8 bg-dark-lighter">
+      {/* Featured Collaborations */}
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary">Featured Collaborations</h2>
+        <h2
+          class="text-3xl font-bold mb-8 text-center font-serif text-heading-secondary"
+        >
+          Featured Collaborations
+        </h2>
         <div class="swiper portfolio-swiper">
           <div class="swiper-wrapper">
-            { featuredItems.map((item) => (
+            {
+              featuredItems.map((item) => (
                 <div class="swiper-slide">
-                  <a href={`${base}/work/${item.slug}`} class="block group">
+                  <a href={`/work/${item.slug}`} class="block group">
                     <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                      <LazyImage src={item.data.image} alt={item.data.title} class="w-full h-full object-cover" />
+                      <LazyImage
+                        src={item.data.image}
+                        alt={item.data.title}
+                        class="w-full h-full object-cover"
+                      />
                       <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">{item.data.title}</h3>
-                        <p class="text-secondary mb-3">{item.data.brand} <span class="inline-block text-primary align-middle text-lg">&times;</span> {item.data.artist}</p>
+                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">
+                          {item.data.title}
+                        </h3>
+                        <p class="text-secondary mb-3">
+                          {item.data.brand}{" "}
+                          <span class="inline-block text-primary align-middle text-lg">
+                            &times;
+                          </span>{" "}
+                          {item.data.artist}
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[0]}</span>
-                          {item.data.tags[1] && (<span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">{item.data.tags[1]}</span>)}
+                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
+                            {item.data.tags[0]}
+                          </span>
+                          {item.data.tags[1] && (
+                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
+                              {item.data.tags[1]}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -239,26 +382,28 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
   </LazyPage>
 
   {/* CTA Section */}
-  <section class="py-16 bg-dark"> 
+  <section class="py-16 bg-dark">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading">
           Ready to Create Something Extraordinary?
         </h2>
-        <p class="text-lg text-secondary mb-10 leading-relaxed"> 
+        <p class="text-lg text-secondary mb-10 leading-relaxed">
           Whether you're a brand seeking authentic partnerships or an artist
           looking for meaningful collaborations, we're here to make it happen.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300"
+        >
           {/* MODIFIED "PARTNER WITH US" LINK */}
           <a
-            href="mailto:info@apr-artistagency.com" 
+            href="mailto:info@apr-artistagency.com"
             class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg"
           >
             Partner With Us
           </a>
           <a
-            href={`${base}/work`}
+            href="/work"
             class="border border-primary text-primary px-8 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out transform hover:scale-105 font-medium text-lg"
           >
             View Our Work
@@ -268,15 +413,25 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     </div>
   </section>
 
-  <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"></script>
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js"
+  ></script>
   <script is:inline>
     document.addEventListener("astro:page-load", function () {
       new Swiper(".portfolio-swiper", {
-        slidesPerView: 1, spaceBetween: 20, loop: true, centeredSlides: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        centeredSlides: true,
         autoplay: { delay: 1500, disableOnInteraction: false },
         pagination: { el: ".swiper-pagination", clickable: true },
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        effect: "slide", speed: 600,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        effect: "slide",
+        speed: 600,
         breakpoints: {
           640: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 }
