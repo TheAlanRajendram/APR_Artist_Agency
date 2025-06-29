@@ -33,9 +33,8 @@ export default config({
             itemLabel: props => props.value
           }
         ),
-        content: fields.document({
+        content: fields.mdx({
           label: 'Project Description',
-          formatting: true,
         }),
       },
     }),
@@ -54,9 +53,8 @@ export default config({
           label: 'SVG Icon Code',
           multiline: true
         }),
-        content: fields.document({
+        content: fields.mdx({
           label: 'Service Description',
-          formatting: true,
         }),
       },
     }),
@@ -71,9 +69,8 @@ export default config({
           label: 'Display Order',
           validation: { min: 1 }
         }),
-        content: fields.document({
+        content: fields.mdx({
           label: 'Page Content',
-          formatting: true,
         }),
       },
     }),
@@ -84,9 +81,8 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        content: fields.document({
+        content: fields.mdx({
           label: 'Content',
-          formatting: true,
         }),
       },
     }),
