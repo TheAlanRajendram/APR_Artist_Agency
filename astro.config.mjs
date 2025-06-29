@@ -38,6 +38,9 @@ export default defineConfig({
   vite: {
     define: {
       global: 'globalThis'
+    },
+    ssr: {
+      noExternal: ['@keystatic/core', '@keystatic/astro']
     }
   }
 });
