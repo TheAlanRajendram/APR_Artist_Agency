@@ -9,8 +9,7 @@ import keystatic from '@keystatic/astro';
 const isDev = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
-  site: 'https://thealanrajendram.github.io',
-  base: isDev ? '/.' : '/webapp-test',
+  site: 'https://apr-artist-agency.pages.dev',
   integrations: [
     tailwind({
       config: { darkMode: 'class' },
