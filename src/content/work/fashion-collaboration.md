@@ -1,10 +1,17 @@
 ---
-title: "Urban Elegance Campaign"
-brand: "Fiora"
-artist: "Lila Hart"
-date: "2023-09-18"
-image: "/images/work/fiora-urban.png"
-tags: ["Fashion", "Luxury", "Streetwear"]
+title:
+  name:
+    name: Urban Elegance Campaign
+    slug: fashion-collaboration
+  slug: fashion-collaboration
+brand: Fiora
+artist: Lila Hart
+date: '2023-09-18'
+image: /images/work/fiora-urban.png
+tags:
+  - Fashion
+  - Luxury
+  - Streetwear
 ---
 
 APR Artist Agency orchestrated a groundbreaking partnership between iconic fashion house Fiora and multi-talented artist Lila Hart. This collaboration redefined urban elegance through a campaign that merged high fashion with contemporary street culture, appealing to both traditional luxury consumers and younger fashion enthusiasts.

@@ -1,10 +1,17 @@
 ---
-title: "Luxury Watch Campaign"
-brand: "TimeMaster"
-artist: "Michael Johnson"
-date: "2023-11-15"
-image: "/images/work/luxury-watch.png"
-tags: ["Sports", "Luxury", "Branding"]
+title:
+  name:
+    name: Luxury Watch Campaign
+    slug: example-collab
+  slug: example-collab
+brand: TimeMaster
+artist: Michael Johnson
+date: '2023-11-15'
+image: /images/work/luxury-watch.png
+tags:
+  - Sports
+  - Luxury
+  - Branding
 ---
 
 APR Artist Agency facilitated a groundbreaking partnership between TimeMaster, a prestigious luxury watch brand, and Olympic gold medalist Michael Johnson. This collaboration resulted in a high-profile campaign that perfectly aligned TimeMaster's commitment to precision and excellence with Michael's athletic achievements and personal brand.

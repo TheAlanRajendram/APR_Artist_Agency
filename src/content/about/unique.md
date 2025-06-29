@@ -1,5 +1,7 @@
 ---
-title: "What Makes Us Unique"
+title:
+  name: What Makes Us Unique
+  slug: unique
 order: 4
 ---
 

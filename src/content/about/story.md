@@ -1,5 +1,7 @@
 ---
-title: "Our Story"
+title:
+  name: Our Story
+  slug: story
 order: 3
 ---
 

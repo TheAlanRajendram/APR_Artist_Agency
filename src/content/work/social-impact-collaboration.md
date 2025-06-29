@@ -1,10 +1,17 @@
 ---
-title: "Water Access Initiative"
-brand: "AquaGuard"
-artist: "Liam Brooks"
-date: "2023-07-03"
-image: "/images/work/water-access-initiative.png"
-tags: ["Humanitarian", "Documentary", "Africa"]
+title:
+  name:
+    name: Water Access Initiative
+    slug: social-impact-collaboration
+  slug: social-impact-collaboration
+brand: AquaGuard
+artist: Liam Brooks
+date: '2023-07-03'
+image: /images/work/water-access-initiative.png
+tags:
+  - Humanitarian
+  - Documentary
+  - Africa
 ---
 
 APR Artist Agency facilitated a transformative partnership between acclaimed actor Liam Brooks and the AquaGuard Foundation. This collaboration transcended traditional celebrity advocacy by creating a sustainable, community-led water infrastructure program across drought-affected regions of East Africa, combined with a groundbreaking documentary series that reframed the narrative around water scarcity.

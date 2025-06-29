@@ -1,10 +1,17 @@
 ---
-title: "Heritage Reimagined Series"
-brand: "TasteFusion"
-artist: "Chef Mia Rivera"
-date: "2023-08-14"
-image: "/images/work/tastefusion.png"
-tags: ["Culinary", "Television", "Cultural Fusion"]
+title:
+  name:
+    name: Heritage Reimagined Series
+    slug: culinary-collaboration
+  slug: culinary-collaboration
+brand: TasteFusion
+artist: Chef Mia Rivera
+date: '2023-08-14'
+image: /images/work/tastefusion.png
+tags:
+  - Culinary
+  - Television
+  - Cultural Fusion
 ---
 
 APR Artist Agency brought together legendary Chef Mia Rivera and soy sauce pioneer TasteFusion for the groundbreaking "Heritage Reimagined" series. This multifaceted collaboration explored the intersection of Japanese brewing traditions and global culinary techniques, creating a cultural dialogue through food that spanned continents and generations.

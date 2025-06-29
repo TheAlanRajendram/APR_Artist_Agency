@@ -1,10 +1,17 @@
 ---
-title: "Ocean Guardian Collection"
-brand: "EcoRun"
-artist: "Sophie Chen"
-date: "2023-10-22"
-image: "/images/work/eco-athletic-ocean.png"
-tags: ["Sports", "Sustainability", "Tennis"]
+title:
+  name:
+    name: Ocean Guardian Collection
+    slug: sports-collaboration
+  slug: sports-collaboration
+brand: EcoRun
+artist: Sophie Chen
+date: '2023-10-22'
+image: /images/work/eco-athletic-ocean.png
+tags:
+  - Sports
+  - Sustainability
+  - Tennis
 ---
 
 APR Artist Agency conceptualized and executed a first-of-its-kind partnership between tennis superstar Sophie Chen and sustainable sportswear pioneer EcoRun. The collaboration produced the "Ocean Guardian" collection — performance tennis apparel made entirely from recovered ocean plastics, with each piece representing endangered marine species.

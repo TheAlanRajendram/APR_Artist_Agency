@@ -1,10 +1,17 @@
 ---
-title: "Harmonic Futures Experience"
-brand: "EchoWave"
-artist: "Aria Stone"
-date: "2023-12-05"
-image: "/images/work/neuralink-experience.png"
-tags: ["Music", "Technology", "Immersive"]
+title:
+  name:
+    name: Harmonic Futures Experience
+    slug: music-collaboration
+  slug: music-collaboration
+brand: EchoWave
+artist: Aria Stone
+date: '2023-12-05'
+image: /images/work/neuralink-experience.png
+tags:
+  - Music
+  - Technology
+  - Immersive
 ---
 
 APR Artist Agency facilitated a groundbreaking collaboration between
