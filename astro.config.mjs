@@ -1,15 +1,17 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
+import cloudflare from '@astrojs/cloudflare';
 
 import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 
-const isDev = process.env.NODE_ENV === 'development';
-
 export default defineConfig({
   site: 'https://apr-artist-agency.pages.dev',
+  adapter: cloudflare({
+    mode: 'directory'
+  }),
   integrations: [
     tailwind({
       config: { darkMode: 'class' },
@@ -17,7 +19,7 @@ export default defineConfig({
     mdx(),
     react(),
     markdoc(),
-    ...(isDev ? [keystatic()] : []),
+    keystatic(),
   ],
   build: {
     assets: '_assets'
@@ -32,5 +34,10 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'viewport'
   },
-  viewTransitions: true
+  viewTransitions: true,
+  vite: {
+    define: {
+      global: 'globalThis'
+    }
+  }
 });
