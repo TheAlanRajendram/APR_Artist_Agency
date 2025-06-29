@@ -3,7 +3,7 @@ import { config, fields, collection } from '@keystatic/core';
 export default config({
   storage: {
     kind: 'github',
-    repo: 'thealanrajendram/webapp-test'
+    repo: 'thealanrajendram/APR_Artist_Agency'
   },
 
   collections: {
