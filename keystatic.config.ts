@@ -3,8 +3,7 @@ import { config, fields, collection } from '@keystatic/core';
 export default config({
   storage: {
     kind: 'github',
-    repo: 'thealanrajendram/APR_Artist_Agency',
-    branchPrefix: 'feature/redesign'
+    repo: 'thealanrajendram/APR_Artist_Agency'
   },
   ui: {
     brand: {
