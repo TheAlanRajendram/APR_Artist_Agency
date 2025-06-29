@@ -5,7 +5,11 @@ export default config({
     kind: 'github',
     repo: 'thealanrajendram/APR_Artist_Agency'
   },
-
+  ui: {
+    brand: {
+      name: 'APR Artist Agency CMS'
+    }
+  },
   collections: {
     posts: collection({
       label: 'Posts',

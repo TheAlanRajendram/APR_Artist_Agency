@@ -5,3 +5,5 @@ pages_build_output_dir = "dist"
 
 [vars]
 NODE_ENV = "production"
+KEYSTATIC_GITHUB_CLIENT_ID = "Iv23liwzQw2up9aHVlWj"
+PUBLIC_KEYSTATIC_GITHUB_APP_SLUG = "apr-artist-agency-cms"
