@@ -1,0 +1,28 @@
+---
+import LazyImage from "./LazyImage.astro";
+
+export interface Props {
+  brand: any;
+  hasBrands: boolean;
+}
+
+const { brand, hasBrands } = Astro.props;
+---
+
+<div class="inline-flex items-center mx-4 py-2">
+  <div
+    class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100"
+  >
+    {
+      hasBrands ? (
+        <LazyImage
+          src={brand.data.logo}
+          alt={brand.data.name}
+          class="h-10 w-auto max-w-36 object-contain"
+        />
+      ) : (
+        <span class="text-base text-on-primary font-medium">{brand}</span>
+      )
+    }
+  </div>
+</div>

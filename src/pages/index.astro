@@ -3,6 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BackgroundVideo from "../components/BackgroundVideo.astro";
 import LazyImage from "../components/LazyImage.astro";
 import LazyPage from "../components/LazyPage.astro";
+import ScrollChevron from "../components/ScrollChevron.astro";
+import BrandScrollRow from "../components/BrandScrollRow.astro";
 import { getCollection } from "astro:content";
 
 // Get work items
@@ -29,13 +31,7 @@ const midPoint = Math.ceil(brandsToShow.length / 2);
 const firstRowBrands = brandsToShow.slice(0, midPoint);
 const secondRowBrands = brandsToShow.slice(midPoint);
 
-// Define the brand placeholders for scrolling section
-const totalUniqueBrands = 16;
-const allBrandNames = Array.from(
-  { length: totalUniqueBrands },
-  (_, i) => `BRAND ${i + 1}`
-);
-const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
+// Variables for brand placeholders are now handled in components
 ---
 
 <BaseLayout title="Home" transparentNavbar={true}>
@@ -43,6 +39,7 @@ const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
   />
+  <link rel="stylesheet" href="/src/styles/animations.css" />
 
   <section
     class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
@@ -66,102 +63,21 @@ const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
         APR Artist Agency specializes in creating powerful partnerships between
         brands and exceptional talent across sports, music, and entertainment.
       </p>
-      <div
-        class="hidden md:block absolute bottom-20 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
-      >
-        {/* MODIFIED CHEVRON LINK */}
-        <a
-          href="#proof-of-impact-section"
-          aria-label="Scroll to proof of impact section"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-10 h-10 text-primary opacity-70"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-          </svg>
-        </a>
-      </div>
+      <ScrollChevron
+        href="#proof-of-impact-section"
+        ariaLabel="Scroll to proof of impact section"
+        class="hidden md:block bottom-20"
+      />
     </BackgroundVideo>
 
-    <div
-      class="md:hidden absolute bottom-8 inset-x-0 mx-auto w-10 z-10 animate-bounce-fluid"
-    >
-      {/* MODIFIED CHEVRON LINK */}
-      <a
-        href="#proof-of-impact-section"
-        aria-label="Scroll to proof of impact section"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-10 h-10 text-primary opacity-70"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-        </svg>
-      </a>
-    </div>
+    <ScrollChevron
+      href="#proof-of-impact-section"
+      ariaLabel="Scroll to proof of impact section"
+      class="md:hidden bottom-8"
+    />
   </section>
 
   <style>
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes bounce-fluid-effect {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease-out forwards;
-    }
-    .animate-fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-    }
-    .animate-fade-in-up.delay-150 {
-      animation-delay: 0.15s;
-    }
-    .animate-fade-in-up.delay-300 {
-      animation-delay: 0.3s;
-    }
-
-    .animate-bounce-fluid {
-      animation: bounce-fluid-effect 1.5s infinite ease-in-out;
-    }
     .hero-section {
       margin-top: 0;
       min-height: 100svh;
@@ -191,43 +107,6 @@ const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
     .swiper-button-prev {
       color: theme("colors.primary.DEFAULT");
     }
-
-    /* Styles for scrolling brand logos */
-    .scrolling-row-wrapper {
-      overflow: hidden;
-      width: 100%;
-    }
-    .scrolling-row-inner {
-      display: inline-block;
-      white-space: nowrap;
-      will-change: transform;
-    }
-    .scroll-l-to-r {
-      animation: scroll-l-to-r-animation 30s linear infinite;
-    }
-    .scroll-r-to-l {
-      animation: scroll-r-to-l-animation 30s linear infinite;
-      animation-delay: -15s;
-    }
-    @keyframes scroll-l-to-r-animation {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-    @keyframes scroll-r-to-l-animation {
-      0% {
-        transform: translateX(-50%);
-      }
-      100% {
-        transform: translateX(0%);
-      }
-    }
-    .scrolling-row-inner:hover {
-      animation-play-state: paused;
-    }
   </style>
 
   {/* UNIFIED SECTION: Proof of Impact */}
@@ -248,91 +127,18 @@ const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
     <div class="w-full flex justify-center">
       <div class="w-full max-w-6xl">
         {/* Row 1: Scrolling brand logos */}
-        <div class="scrolling-row-wrapper py-3">
-          <div class="scrolling-row-inner scroll-l-to-r">
-            {
-              firstRowBrands.map((brand) => (
-                <div class="inline-flex items-center mx-4 py-2">
-                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                    {hasBrands ? (
-                      <LazyImage
-                        src={brand.data.logo}
-                        alt={brand.data.name}
-                        class="h-10 w-auto max-w-36 object-contain"
-                      />
-                    ) : (
-                      <span class="text-base text-on-primary font-medium">
-                        {brand}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))
-            }
-            {
-              firstRowBrands.map((brand) => (
-                <div class="inline-flex items-center mx-4 py-2">
-                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                    {hasBrands ? (
-                      <LazyImage
-                        src={brand.data.logo}
-                        alt={brand.data.name}
-                        class="h-10 w-auto max-w-36 object-contain"
-                      />
-                    ) : (
-                      <span class="text-base text-on-primary font-medium">
-                        {brand}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-        {/* Bottom row: scrolls RTL */}
-        <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
-          <div class="scrolling-row-inner scroll-r-to-l">
-            {
-              secondRowBrands.map((brand) => (
-                <div class="inline-flex items-center mx-4 py-2">
-                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                    {hasBrands ? (
-                      <LazyImage
-                        src={brand.data.logo}
-                        alt={brand.data.name}
-                        class="h-10 w-auto max-w-36 object-contain"
-                      />
-                    ) : (
-                      <span class="text-base text-on-primary font-medium">
-                        {brand}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))
-            }
-            {
-              secondRowBrands.map((brand) => (
-                <div class="inline-flex items-center mx-4 py-2">
-                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                    {hasBrands ? (
-                      <LazyImage
-                        src={brand.data.logo}
-                        alt={brand.data.name}
-                        class="h-10 w-auto max-w-36 object-contain"
-                      />
-                    ) : (
-                      <span class="text-base text-on-primary font-medium">
-                        {brand}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+        <BrandScrollRow
+          brands={firstRowBrands}
+          hasBrands={hasBrands}
+          direction="left-to-right"
+        />
+        {/* Row 2: Scrolling brand logos RTL */}
+        <BrandScrollRow
+          brands={secondRowBrands}
+          hasBrands={hasBrands}
+          direction="right-to-left"
+          className="mb-12 md:mb-16"
+        />
       </div>
     </div>
 

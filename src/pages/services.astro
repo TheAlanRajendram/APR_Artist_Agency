@@ -28,6 +28,7 @@ sortedServices.forEach((service) => {
 ---
 
 <BaseLayout title="Services">
+  <link rel="stylesheet" href="/src/styles/animations.css" />
   <div class="services-page">
     <div class="hero-section py-8 md:py-8">
       <div class="container mx-auto px-4 text-center">
@@ -46,7 +47,8 @@ sortedServices.forEach((service) => {
 
     {/* "Services Overview Grid" (Our Expertise) section has been REMOVED */}
 
-    <div class="container mx-auto px-4 py-8"> {/* Added py-8 for spacing after removing the section above */}
+    <div class="container mx-auto px-4 py-8">
+      {/* Added py-8 for spacing after removing the section above */}
       <div class="services-accordion max-w-4xl mx-auto">
         {
           sortedServices.map((service, index) => {
@@ -187,38 +189,13 @@ sortedServices.forEach((service) => {
     color: theme("colors.primary.DEFAULT");
   }
 
-  /* Animation classes */
+  /* Custom animation classes for services page */
   .animation-item {
-    animation: fadeUp 0.8s ease forwards;
-  }
-
-  .animate-fade-in {
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
+    animation: fadeInUp 0.8s ease forwards;
   }
 
   .animation-delay-200 {
     animation-delay: 200ms;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 
   /* Restore prose headings styling */

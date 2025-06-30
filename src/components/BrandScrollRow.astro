@@ -1,0 +1,29 @@
+---
+import BrandScrollItem from "./BrandScrollItem.astro";
+
+export interface Props {
+  brands: any[];
+  hasBrands: boolean;
+  direction: "left-to-right" | "right-to-left";
+  className?: string;
+}
+
+const { brands, hasBrands, direction, className = "" } = Astro.props;
+const scrollClass =
+  direction === "left-to-right" ? "scroll-l-to-r" : "scroll-r-to-l";
+---
+
+<div class={`scrolling-row-wrapper py-3 ${className}`}>
+  <div class={`scrolling-row-inner ${scrollClass}`}>
+    {
+      brands.map((brand) => (
+        <BrandScrollItem brand={brand} hasBrands={hasBrands} />
+      ))
+    }
+    {
+      brands.map((brand) => (
+        <BrandScrollItem brand={brand} hasBrands={hasBrands} />
+      ))
+    }
+  </div>
+</div>
