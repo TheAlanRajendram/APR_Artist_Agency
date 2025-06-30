@@ -15,7 +15,7 @@ export default config({
   },
   collections: {
     work: collection({
-      label: 'Work Portfolio',
+      label: 'Work',
       slugField: 'title',
       path: 'src/content/work/*',
       format: { contentField: 'content' },
@@ -62,7 +62,7 @@ export default config({
       },
     }),
     about: collection({
-      label: 'About Pages',
+      label: 'About',
       slugField: 'title',
       path: 'src/content/about/*',
       format: { contentField: 'content' },
