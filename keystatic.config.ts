@@ -28,7 +28,10 @@ export default config({
               label: 'Brand Logo',
               description: 'Upload the brand logo image (SVG or PNG format recommended)',
               directory: 'public/images/brands',
-              publicPath: '/images/brands/'
+              publicPath: '/images/brands/',
+              validation: {
+                isRequired: true
+              }
             }),
             isActive: fields.checkbox({
               label: 'Show in Animation',
