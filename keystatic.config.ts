@@ -14,6 +14,39 @@ export default config({
     }
   },
   collections: {
+    brands: collection({
+      label: 'Brand Logos',
+      slugField: 'name',
+      path: 'src/content/brands/*',
+      format: { contentField: 'content' },
+      schema: {
+        name: fields.slug({
+          name: {
+            label: 'Brand Name',
+            description: 'The name of the brand as it will appear in the scrolling animation',
+          },
+          slug: {
+            label: 'URL-friendly name',
+            description: 'This creates the file name for this brand (auto-generated from name)'
+          }
+        }),
+        logo: fields.image({
+          label: 'Brand Logo',
+          description: 'Upload the brand logo image (SVG or PNG format recommended)',
+          directory: 'public/images/brands',
+          publicPath: '/images/brands/'
+        }),
+        isActive: fields.checkbox({
+          label: 'Show in Animation',
+          description: 'Check this box to include this brand in the scrolling animation',
+          defaultValue: true
+        }),
+        content: fields.mdx({
+          label: 'Brand Description',
+          description: 'Optional description or notes about this brand partnership',
+        }),
+      },
+    }),
     work: collection({
       label: 'Work',
       slugField: 'title',

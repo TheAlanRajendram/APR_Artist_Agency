@@ -9,16 +9,24 @@ import { getCollection } from "astro:content";
 const workItems = await getCollection("work");
 const featuredItems = workItems.slice(0, 10);
 
+// Get brand logos for scrolling animation
+const allBrands = (await getCollection("brands" as any)) as any;
+const activeBrands = allBrands
+  .filter((brand) => brand.data.isActive)
+  .sort(() => Math.random() - 0.5); // Random shuffle
+
+// Split brands into two rows for the scrolling animation
+const midPoint = Math.ceil(activeBrands.length / 2);
+const firstRowBrands = activeBrands.slice(0, midPoint);
+const secondRowBrands = activeBrands.slice(midPoint);
+
 // Define the brand placeholders for scrolling section
 const totalUniqueBrands = 16;
 const allBrandNames = Array.from(
   { length: totalUniqueBrands },
   (_, i) => `BRAND ${i + 1}`
 );
-const midPoint = Math.ceil(totalUniqueBrands / 2);
-const firstHalfBrands = allBrandNames.slice(0, midPoint);
-const secondHalfBrands = allBrandNames.slice(midPoint);
-const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
+const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
 ---
 
 <BaseLayout title="Home" transparentNavbar={true}>
@@ -231,23 +239,27 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     <div class="scrolling-row-wrapper py-3">
       <div class="scrolling-row-inner scroll-l-to-r">
         {
-          allBrandNames.map((brandName) => (
+          firstRowBrands.map((brand) => (
             <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <span class="text-sm text-on-primary font-medium">
-                  {brandName}
-                </span>
+              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <LazyImage
+                  src={brand.data.logo}
+                  alt={brand.data.name}
+                  class="h-8 w-auto max-w-full object-contain"
+                />
               </div>
             </div>
           ))
         }
         {
-          allBrandNames.map((brandName) => (
+          firstRowBrands.map((brand) => (
             <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <span class="text-sm text-on-primary font-medium">
-                  {brandName}
-                </span>
+              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <LazyImage
+                  src={brand.data.logo}
+                  alt={brand.data.name}
+                  class="h-8 w-auto max-w-full object-contain"
+                />
               </div>
             </div>
           ))
@@ -258,23 +270,27 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
     <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
       <div class="scrolling-row-inner scroll-r-to-l">
         {
-          bottomRowInitialOrder.map((brandName) => (
+          secondRowBrands.map((brand) => (
             <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <span class="text-sm text-on-primary font-medium">
-                  {brandName}
-                </span>
+              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <LazyImage
+                  src={brand.data.logo}
+                  alt={brand.data.name}
+                  class="h-8 w-auto max-w-full object-contain"
+                />
               </div>
             </div>
           ))
         }
         {
-          bottomRowInitialOrder.map((brandName) => (
+          secondRowBrands.map((brand) => (
             <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-primary/20 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <span class="text-sm text-on-primary font-medium">
-                  {brandName}
-                </span>
+              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                <LazyImage
+                  src={brand.data.logo}
+                  alt={brand.data.name}
+                  class="h-8 w-auto max-w-full object-contain"
+                />
               </div>
             </div>
           ))
@@ -338,7 +354,7 @@ const bottomRowInitialOrder = [...secondHalfBrands, ...firstHalfBrands];
             {
               featuredItems.map((item) => (
                 <div class="swiper-slide">
-                  <a href={`/work/${item.slug}`} class="block group">
+                  <a href={`/work/${item.id}`} class="block group">
                     <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
                       <LazyImage
                         src={item.data.image}
