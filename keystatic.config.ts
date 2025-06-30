@@ -72,6 +72,11 @@ export default config({
           label: 'Display Order',
           validation: { min: 1 }
         }),
+        image: fields.image({
+          label: 'Page Image',
+          directory: 'public/images/about',
+          publicPath: '/images/about/'
+        }),
         content: fields.mdx({
           label: 'Page Content',
         }),

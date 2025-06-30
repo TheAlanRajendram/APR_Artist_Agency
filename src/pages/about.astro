@@ -8,14 +8,20 @@ import LazyImage from "../components/LazyImage.astro";
 
 // Get all about sections and sort by order
 const aboutSections = await getCollection("about");
-const sortedSections = aboutSections.sort(
+const sortedSectionsData = aboutSections.sort(
   (a, b) => a.data.order - b.data.order
 );
 
 // Convert markdown to HTML for proper rendering
-sortedSections.forEach((section) => {
-  section.compiledContent = marked.parse(section.body);
-});
+const sortedSections = await Promise.all(
+  sortedSectionsData.map(async (section) => {
+    const compiledContent = await marked.parse(section.body);
+    return {
+      ...section,
+      compiledContent,
+    };
+  })
+);
 
 // Base URL for assets (now using root paths)
 
@@ -78,42 +84,84 @@ function getDisplayName(filename) {
   <!-- About Sections -->
   {
     sortedSections.map((section, index) => (
-      <section class={`py-16 ${index % 2 === 0 ? 'bg-dark-lighter' : 'bg-dark'} fade-in-element`}>
-        <div class="container mx-auto px-4">
-          <div class="max-w-6xl mx-auto">
-            <div class={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-col-dense'}`}>
-              <!-- Content -->
-              <div class={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
-                  {section.data.title}
-                </h2>
-                <div
-                  class="text-secondary leading-relaxed text-lg"
-                  set:html={section.compiledContent}
-                />
-              </div>
+      section.data.title === "Pioneering Excellence" ? (
+        <!-- Founder Section -->
+        <section class="py-16 bg-dark-lighter fade-in-element">
+          <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image -->
+                <div>
+                  <div class="aspect-[4/5] rounded-lg overflow-hidden">
+                    <LazyImage
+                      src={section.data.image}
+                      alt="Priyanka Rajendram - Founder & CEO"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
 
-              <!-- Image -->
-              <div class={index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
-                <div class="aspect-[4/3] rounded-lg overflow-hidden">
-                  <LazyImage
-                    src={`/images/work/${
-                      index === 0 ? 'luxury-watch.png' :
-                      index === 1 ? 'neuralink-experience.png' :
-                      index === 2 ? 'tastefusion.png' :
-                      index === 3 ? 'fiora-urban.png' :
-                      index === 4 ? 'eco-athletic-ocean.png' :
-                      'water-access-initiative.png'
-                    }`}
-                    alt={`${section.data.title} visual representation`}
-                    class="w-full h-full object-cover"
+                <!-- Content -->
+                <div>
+                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
+                    {section.data.title}
+                  </h2>
+
+                  <div
+                    class="space-y-6 text-secondary leading-relaxed text-lg mb-8"
+                    set:html={section.compiledContent}
                   />
+
+                  <!-- Founder info -->
+                  <div class="pt-6 border-t border-dark-accent">
+                    <div class="flex items-center space-x-4">
+                      <div class="h-12 w-24 bg-primary/20 rounded flex items-center justify-center">
+                        <span class="text-primary font-serif italic text-sm">Priyanka R.</span>
+                      </div>
+                      <div>
+                        <p class="font-bold text-heading-secondary text-lg">Priyanka Rajendram</p>
+                        <p class="text-primary font-medium">Founder & CEO</p>
+                        <p class="text-xs text-muted">PR & Global Brand Partnerships for Global Talents</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <!-- Regular About Section -->
+        <section class={`py-16 ${index % 2 === 0 ? 'bg-dark-lighter' : 'bg-dark'} fade-in-element`}>
+          <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+              <div class={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-col-dense'}`}>
+                <!-- Content -->
+                <div class={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
+                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
+                    {section.data.title}
+                  </h2>
+                  <div
+                    class="text-secondary leading-relaxed text-lg"
+                    set:html={section.compiledContent}
+                  />
+                </div>
+
+                <!-- Image -->
+                <div class={index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
+                  <div class="aspect-[4/3] rounded-lg overflow-hidden">
+                    <LazyImage
+                      src={section.data.image}
+                      alt={`${section.data.title} visual representation`}
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )
     ))
   }
 
@@ -130,64 +178,6 @@ function getDisplayName(filename) {
       </div>
     </div>
   </section>
-
-
-
-
-
-
-
-  <!-- Founder Section -->
-  <section class="py-16 bg-dark-lighter fade-in-element">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <!-- Image -->
-          <div>
-            <div class="aspect-[4/5] rounded-lg overflow-hidden">
-              <LazyImage
-                src="/images/work/luxury-watch.png"
-                alt="Priyanka Rajendram - Founder & CEO"
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
-              Pioneering Excellence
-            </h2>
-
-            <div class="space-y-6 text-secondary leading-relaxed text-lg mb-8">
-              <p>
-                APR Artist Agency takes immense pride in our track record of accomplishments in the world of artist representation, PR, and brand collaborations. We have established direct relationships with over 130 world-renowned A-list music artists and sports personalities, positioning us as a trusted bridge between talent and brands.
-              </p>
-              <p>
-                Our innovative approach to social media campaigns and seamless brand partnership coordination has significantly boosted brand awareness for multiple clients. We excel at securing exclusive opportunities and creating meaningful connections that drive mutual success for both talents and brands.
-              </p>
-            </div>
-
-            <!-- Founder signature and info -->
-            <div class="pt-6 border-t border-dark-accent">
-              <div class="flex items-center space-x-4">
-                <div class="h-12 w-24 bg-primary/20 rounded flex items-center justify-center">
-                  <span class="text-primary font-serif italic text-sm">Priyanka R.</span>
-                </div>
-                <div>
-                  <p class="font-bold text-heading-secondary text-lg">Priyanka Rajendram</p>
-                  <p class="text-primary font-medium">Founder & CEO</p>
-                  <p class="text-xs text-muted">PR & Global Brand Partnerships for Global Talents</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
 </BaseLayout>
 
 <style>
