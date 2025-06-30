@@ -5,16 +5,23 @@ import LazyImage from "../components/LazyImage.astro";
 import LazyPage from "../components/LazyPage.astro";
 import ScrollChevron from "../components/ScrollChevron.astro";
 import BrandScrollRow from "../components/BrandScrollRow.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 // Get work items
 const workItems = await getCollection("work");
 const featuredItems = workItems.slice(0, 10);
 
 // Get brand logos for scrolling animation
-const allBrands = (await getCollection("brands" as any)) as any;
+let allBrands = [];
+try {
+  const brandsData = await getEntry("brands", "brands");
+  allBrands = brandsData?.data?.brands || [];
+} catch (error) {
+  console.log("No brands file found, using fallback");
+}
+
 const activeBrands = allBrands
-  .filter((brand) => brand.data.isActive)
+  .filter((brand) => brand.isActive)
   .sort(() => Math.random() - 0.5); // Random shuffle
 
 // If no brands in CMS, fall back to placeholder text

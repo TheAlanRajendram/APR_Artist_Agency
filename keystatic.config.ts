@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
   storage:
@@ -13,29 +13,38 @@ export default config({
       name: 'APR Artist Agency CMS'
     }
   },
-  collections: {
-    brands: collection({
+  singletons: {
+    brands: singleton({
       label: 'Brand Logos',
-      slugField: 'name',
-      path: 'src/content/brands/*',
+      path: 'src/content/brands/brands',
       schema: {
-        name: fields.text({
-          label: 'Brand Name',
-          description: 'The name of the brand (used for alt text and identification)',
-        }),
-        logo: fields.image({
-          label: 'Brand Logo',
-          description: 'Upload the brand logo image (SVG or PNG format recommended)',
-          directory: 'public/images/brands',
-          publicPath: '/images/brands/'
-        }),
-        isActive: fields.checkbox({
-          label: 'Show in Animation',
-          description: 'Check this box to include this brand in the scrolling animation',
-          defaultValue: true
-        }),
+        brands: fields.array(
+          fields.object({
+            name: fields.text({
+              label: 'Brand Name',
+              description: 'The name of the brand (used for alt text and identification)',
+            }),
+            logo: fields.image({
+              label: 'Brand Logo',
+              description: 'Upload the brand logo image (SVG or PNG format recommended)',
+              directory: 'public/images/brands',
+              publicPath: '/images/brands/'
+            }),
+            isActive: fields.checkbox({
+              label: 'Show in Animation',
+              description: 'Check this box to include this brand in the scrolling animation',
+              defaultValue: true
+            }),
+          }),
+          {
+            label: 'Brand List',
+            itemLabel: props => props.fields.name.value || 'New Brand'
+          }
+        ),
       },
     }),
+  },
+  collections: {
     work: collection({
       label: 'Work',
       slugField: 'title',

@@ -1,0 +1,10 @@
+brands:
+  - name: Champion
+    logo: /images/brands/brands/0/logo.svg
+    isActive: true
+  - name: Mercedes-Benz
+    logo: /images/brands/brands/1/logo.svg
+    isActive: true
+  - name: KFC
+    logo: /images/brands/brands/2/logo.svg
+    isActive: true
