@@ -1,10 +1,13 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-  storage: {
-    kind: 'github',
-    repo: 'thealanrajendram/APR_Artist_Agency'
-  },
+  storage:
+    process.env.NODE_ENV === 'development'
+      ? { kind: 'local' }
+      : {
+          kind: 'github',
+          repo: 'thealanrajendram/APR_Artist_Agency',
+        },
   ui: {
     brand: {
       name: 'APR Artist Agency CMS'
