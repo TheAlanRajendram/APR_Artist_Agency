@@ -15,10 +15,19 @@ const activeBrands = allBrands
   .filter((brand) => brand.data.isActive)
   .sort(() => Math.random() - 0.5); // Random shuffle
 
+// If no brands in CMS, fall back to placeholder text
+const hasBrands = activeBrands.length > 0;
+
+// Fallback for when no brands are available
+const fallbackBrands = Array.from({ length: 6 }, (_, i) => `BRAND ${i + 1}`);
+
+// Use brands from CMS or fallback
+const brandsToShow = hasBrands ? activeBrands : fallbackBrands;
+
 // Split brands into two rows for the scrolling animation
-const midPoint = Math.ceil(activeBrands.length / 2);
-const firstRowBrands = activeBrands.slice(0, midPoint);
-const secondRowBrands = activeBrands.slice(midPoint);
+const midPoint = Math.ceil(brandsToShow.length / 2);
+const firstRowBrands = brandsToShow.slice(0, midPoint);
+const secondRowBrands = brandsToShow.slice(midPoint);
 
 // Define the brand placeholders for scrolling section
 const totalUniqueBrands = 16;
@@ -235,66 +244,95 @@ const bottomRowInitialOrder = [...secondRowBrands, ...firstRowBrands];
       </h2>
     </div>
 
-    {/* Row 1: Scrolling brand logos */}
-    <div class="scrolling-row-wrapper py-3">
-      <div class="scrolling-row-inner scroll-l-to-r">
-        {
-          firstRowBrands.map((brand) => (
-            <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <LazyImage
-                  src={brand.data.logo}
-                  alt={brand.data.name}
-                  class="h-8 w-auto max-w-full object-contain"
-                />
-              </div>
-            </div>
-          ))
-        }
-        {
-          firstRowBrands.map((brand) => (
-            <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <LazyImage
-                  src={brand.data.logo}
-                  alt={brand.data.name}
-                  class="h-8 w-auto max-w-full object-contain"
-                />
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-    {/* Bottom row: scrolls RTL */}
-    <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
-      <div class="scrolling-row-inner scroll-r-to-l">
-        {
-          secondRowBrands.map((brand) => (
-            <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <LazyImage
-                  src={brand.data.logo}
-                  alt={brand.data.name}
-                  class="h-8 w-auto max-w-full object-contain"
-                />
-              </div>
-            </div>
-          ))
-        }
-        {
-          secondRowBrands.map((brand) => (
-            <div class="inline-flex items-center mx-4 py-2">
-              <div class="h-10 w-32 bg-white/10 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
-                <LazyImage
-                  src={brand.data.logo}
-                  alt={brand.data.name}
-                  class="h-8 w-auto max-w-full object-contain"
-                />
-              </div>
-            </div>
-          ))
-        }
+    {/* Center the scrolling brand logos */}
+    <div class="w-full flex justify-center">
+      <div class="w-full max-w-6xl">
+        {/* Row 1: Scrolling brand logos */}
+        <div class="scrolling-row-wrapper py-3">
+          <div class="scrolling-row-inner scroll-l-to-r">
+            {
+              firstRowBrands.map((brand) => (
+                <div class="inline-flex items-center mx-4 py-2">
+                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                    {hasBrands ? (
+                      <LazyImage
+                        src={brand.data.logo}
+                        alt={brand.data.name}
+                        class="h-10 w-auto max-w-36 object-contain"
+                      />
+                    ) : (
+                      <span class="text-base text-on-primary font-medium">
+                        {brand}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+            {
+              firstRowBrands.map((brand) => (
+                <div class="inline-flex items-center mx-4 py-2">
+                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                    {hasBrands ? (
+                      <LazyImage
+                        src={brand.data.logo}
+                        alt={brand.data.name}
+                        class="h-10 w-auto max-w-36 object-contain"
+                      />
+                    ) : (
+                      <span class="text-base text-on-primary font-medium">
+                        {brand}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        {/* Bottom row: scrolls RTL */}
+        <div class="scrolling-row-wrapper py-3 mb-12 md:mb-16">
+          <div class="scrolling-row-inner scroll-r-to-l">
+            {
+              secondRowBrands.map((brand) => (
+                <div class="inline-flex items-center mx-4 py-2">
+                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                    {hasBrands ? (
+                      <LazyImage
+                        src={brand.data.logo}
+                        alt={brand.data.name}
+                        class="h-10 w-auto max-w-36 object-contain"
+                      />
+                    ) : (
+                      <span class="text-base text-on-primary font-medium">
+                        {brand}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+            {
+              secondRowBrands.map((brand) => (
+                <div class="inline-flex items-center mx-4 py-2">
+                  <div class="h-16 w-40 rounded flex items-center justify-center px-4 filter grayscale hover:grayscale-0 transition-all duration-300 ease-in-out opacity-70 hover:opacity-100">
+                    {hasBrands ? (
+                      <LazyImage
+                        src={brand.data.logo}
+                        alt={brand.data.name}
+                        class="h-10 w-auto max-w-36 object-contain"
+                      />
+                    ) : (
+                      <span class="text-base text-on-primary font-medium">
+                        {brand}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
 

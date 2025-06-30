@@ -18,17 +18,10 @@ export default config({
       label: 'Brand Logos',
       slugField: 'name',
       path: 'src/content/brands/*',
-      format: { contentField: 'content' },
       schema: {
-        name: fields.slug({
-          name: {
-            label: 'Brand Name',
-            description: 'The name of the brand as it will appear in the scrolling animation',
-          },
-          slug: {
-            label: 'URL-friendly name',
-            description: 'This creates the file name for this brand (auto-generated from name)'
-          }
+        name: fields.text({
+          label: 'Brand Name',
+          description: 'The name of the brand (used for alt text and identification)',
         }),
         logo: fields.image({
           label: 'Brand Logo',
@@ -40,10 +33,6 @@ export default config({
           label: 'Show in Animation',
           description: 'Check this box to include this brand in the scrolling animation',
           defaultValue: true
-        }),
-        content: fields.mdx({
-          label: 'Brand Description',
-          description: 'Optional description or notes about this brand partnership',
         }),
       },
     }),
