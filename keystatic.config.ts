@@ -20,7 +20,16 @@ export default config({
       path: 'src/content/work/*',
       format: { contentField: 'content' },
       schema: {
-        title: fields.slug({ name: { label: 'Project Title' } }),
+        title: fields.slug({
+          name: {
+            label: 'Project Title',
+            description: 'The name of this project as it will appear on the website',
+          },
+          slug: {
+            label: 'URL-friendly name',
+            description: 'This creates the web address for this project (auto-generated from title)'
+          }
+        }),
         brand: fields.text({ label: 'Brand Name' }),
         artist: fields.text({ label: 'Artist Name' }),
         date: fields.date({ label: 'Project Date' }),
@@ -47,7 +56,16 @@ export default config({
       path: 'src/content/services/*',
       format: { contentField: 'content' },
       schema: {
-        title: fields.slug({ name: { label: 'Service Title' } }),
+        title: fields.slug({
+          name: {
+            label: 'Service Title',
+            description: 'The name of this service as it will appear on the website',
+          },
+          slug: {
+            label: 'URL-friendly name',
+            description: 'This creates the web address for this service (auto-generated from title)'
+          }
+        }),
         order: fields.integer({
           label: 'Display Order',
           validation: { min: 1 }
@@ -67,7 +85,16 @@ export default config({
       path: 'src/content/about/*',
       format: { contentField: 'content' },
       schema: {
-        title: fields.slug({ name: { label: 'Page Title' } }),
+        title: fields.slug({
+          name: {
+            label: 'Page Title',
+            description: 'The title of this about section as it will appear on the website',
+          },
+          slug: {
+            label: 'URL-friendly name',
+            description: 'This creates the file name for this section (auto-generated from title)'
+          }
+        }),
         order: fields.integer({
           label: 'Display Order',
           validation: { min: 1 }
