@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LazyImage from "../components/LazyImage.astro";
 import { getCollection } from "astro:content";
-import { marked } from "marked";
+import "../styles/animations.css";
 
 // Helper function to create URL-friendly slugs
 function slugify(text) {
@@ -19,16 +19,24 @@ function slugify(text) {
 }
 
 const services = await getCollection("services");
-const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+const sortedServices = services.sort(
+  (a, b) => (a.data.order || 0) - (b.data.order || 0)
+);
 
-sortedServices.forEach((service) => {
-  service.data.id = slugify(service.data.title);
-  service.compiledContent = marked.parse(service.body);
-});
+// Process services to add slugs and render content
+const processedServices = await Promise.all(
+  sortedServices.map(async (service) => {
+    const { Content } = await service.render();
+    return {
+      ...service,
+      id: slugify(service.data.title || ""),
+      Content
+    };
+  })
+);
 ---
 
 <BaseLayout title="Services">
-  <link rel="stylesheet" href="/src/styles/animations.css" />
   <div class="services-page">
     <div class="hero-section py-8 md:py-8">
       <div class="container mx-auto px-4 text-center">
@@ -51,7 +59,7 @@ sortedServices.forEach((service) => {
       {/* Added py-8 for spacing after removing the section above */}
       <div class="services-accordion max-w-4xl mx-auto">
         {
-          sortedServices.map((service, index) => {
+          processedServices.map((service, index) => {
             // Generate appropriate icon based on service type
             let serviceIcon =
               service.data.icon ||
@@ -60,12 +68,12 @@ sortedServices.forEach((service) => {
             return (
               <div
                 class="accordion-item shadow-card mb-4 opacity-0 translate-y-8 animation-item"
-                id={service.data.id}
+                id={service.id}
                 style={`animation-delay: ${index * 150}ms`}
               >
                 <div
                   class="accordion-header flex justify-between items-center p-6 bg-dark-lighter cursor-pointer border-l-4 border-transparent hover:border-primary"
-                  data-accordion-id={service.data.id}
+                  data-accordion-id={service.id}
                 >
                   <h2 class="text-2xl font-serif flex items-center">
                     <span
@@ -93,7 +101,7 @@ sortedServices.forEach((service) => {
                 </div>
                 <div
                   class="accordion-content overflow-hidden transition-all duration-300 max-h-0"
-                  data-content-id={service.data.id}
+                  data-content-id={service.id}
                 >
                   <div class="p-6 bg-dark-card">
                     {service.data.image && (
@@ -105,10 +113,9 @@ sortedServices.forEach((service) => {
                         />
                       </div>
                     )}
-                    <div
-                      class="prose prose-invert prose-lg max-w-none"
-                      set:html={service.compiledContent}
-                    />
+                    <div class="prose prose-invert prose-lg max-w-none">
+                      <service.Content />
+                    </div>
                   </div>
                 </div>
               </div>
