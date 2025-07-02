@@ -6,6 +6,7 @@ import LazyPage from "../components/LazyPage.astro";
 import ScrollChevron from "../components/ScrollChevron.astro";
 import BrandScrollRow from "../components/BrandScrollRow.astro";
 import { getCollection, getEntry } from "astro:content";
+import "../styles/animations.css";
 
 // Get work items
 const workItems = await getCollection("work");
@@ -46,7 +47,6 @@ const secondRowBrands = brandsToShow.slice(midPoint);
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css"
   />
-  <link rel="stylesheet" href="/src/styles/animations.css" />
 
   <section
     class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
@@ -205,7 +205,7 @@ const secondRowBrands = brandsToShow.slice(midPoint);
             {
               featuredItems.map((item) => (
                 <div class="swiper-slide">
-                  <a href={`/work/${item.id}`} class="block group">
+                  <a href={`/work/${item.slug}`} class="block group">
                     <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
                       <LazyImage
                         src={item.data.image}
