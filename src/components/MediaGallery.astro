@@ -1,0 +1,135 @@
+---
+export interface Props {
+  gallery?: Array<{
+    media: {
+      discriminant: "image" | "video";
+      value:
+        | string
+        | {
+            file: string;
+            thumbnail?: string;
+          };
+    };
+    caption?: string;
+  }>;
+}
+
+const { gallery } = Astro.props;
+
+if (!gallery || gallery.length === 0) {
+  return null;
+}
+
+// Helper function to get file name without extension for alt text
+function getFileName(filePath: string): string {
+  return filePath.split("/").pop()?.split(".")[0] || "Media";
+}
+---
+
+<div class="mt-12">
+  <h3 class="text-2xl font-bold mb-6 text-gray-800">Project Gallery</h3>
+
+  <div class="flex flex-col gap-8">
+    {
+      gallery.map((mediaItem) => (
+        <div class="gallery-item relative overflow-hidden rounded-lg shadow-lg">
+          {mediaItem.media.discriminant === "video" ? (
+            <video
+              class="w-full h-auto"
+              preload="metadata"
+              muted
+              autoplay
+              loop
+              playsinline
+              poster={
+                typeof mediaItem.media.value === "object"
+                  ? mediaItem.media.value.thumbnail
+                  : undefined
+              }
+            >
+              <source
+                src={
+                  typeof mediaItem.media.value === "object"
+                    ? mediaItem.media.value.file
+                    : mediaItem.media.value
+                }
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              class="w-full h-auto"
+              src={
+                typeof mediaItem.media.value === "string"
+                  ? mediaItem.media.value
+                  : ""
+              }
+              alt={
+                mediaItem.caption ||
+                getFileName(
+                  typeof mediaItem.media.value === "string"
+                    ? mediaItem.media.value
+                    : ""
+                )
+              }
+              loading="lazy"
+            />
+          )}
+          {mediaItem.caption && (
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-3 text-sm">
+              {mediaItem.caption}
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .gallery-item {
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+    max-width: 100%;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item img,
+  .gallery-item video {
+    transition: transform 0.3s ease-in-out;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .gallery-item:hover img,
+  .gallery-item:hover video {
+    transform: scale(1.02);
+  }
+
+  /* Ensure videos maintain aspect ratio */
+  .gallery-item video {
+    object-fit: contain;
+  }
+
+  /* Better caption visibility */
+  .gallery-item .absolute {
+    backdrop-filter: blur(4px);
+  }
+
+  @media (max-width: 768px) {
+    .gallery-item {
+      margin-bottom: 1rem;
+    }
+
+    .gallery-item:hover {
+      transform: none;
+    }
+  }
+</style>

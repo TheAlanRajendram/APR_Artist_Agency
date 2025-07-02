@@ -89,6 +89,50 @@ export default config({
             itemLabel: props => props.value
           }
         ),
+        gallery: fields.array(
+          fields.object({
+            media: fields.conditional(
+              fields.select({
+                label: 'Media Type',
+                options: [
+                  { label: 'Image', value: 'image' },
+                  { label: 'Video', value: 'video' }
+                ],
+                defaultValue: 'image'
+              }),
+              {
+                image: fields.image({
+                  label: 'Image File',
+                  description: 'Upload an image file (JPG, PNG, WebP)',
+                  directory: 'public/images/work/gallery',
+                  publicPath: '/images/work/gallery/',
+                }),
+                video: fields.object({
+                  file: fields.file({
+                    label: 'Video File',
+                    description: 'Upload a video file (MP4, WebM, MOV)',
+                    directory: 'public/videos/work/gallery',
+                    publicPath: '/videos/work/gallery/',
+                  }),
+                  thumbnail: fields.image({
+                    label: 'Video Thumbnail/Preview',
+                    description: 'Upload a preview image for this video (optional - helps identify video in CMS)',
+                    directory: 'public/images/work/gallery',
+                    publicPath: '/images/work/gallery/',
+                  }),
+                })
+              }
+            ),
+            caption: fields.text({
+              label: 'Caption/Description',
+              description: 'Brief description of this media (optional - helps identify in CMS)',
+            }),
+          }),
+          {
+            label: 'Project Gallery',
+            itemLabel: props => props.fields.caption.value || 'Media Item'
+          }
+        ),
         content: fields.mdx({
           label: 'Project Description',
         }),

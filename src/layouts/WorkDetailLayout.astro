@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import MediaGallery from "../components/MediaGallery.astro";
 import "../styles/lazyAnimations.css";
 
 interface Props {
@@ -9,9 +10,10 @@ interface Props {
   date: string;
   image: string;
   tags?: string[];
+  gallery?: string[];
 }
 
-const { title, brand, artist, date, image, tags = [] } = Astro.props;
+const { title, brand, artist, date, image, tags = [], gallery } = Astro.props;
 
 // Format the date
 const formattedDate = new Date(date).toLocaleDateString("en-US", {
@@ -61,6 +63,15 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
       <div class="lazy-fade" style="transition-delay: 0.2s;">
         <slot />
       </div>
+
+      <!-- Media Gallery -->
+      {
+        gallery && gallery.length > 0 && (
+          <div class="lazy-fade" style="transition-delay: 0.3s;">
+            <MediaGallery gallery={gallery} />
+          </div>
+        )
+      }
     </div>
   </div>
 </div>

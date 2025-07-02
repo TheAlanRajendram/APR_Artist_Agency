@@ -21,6 +21,22 @@ const workCollection = defineCollection({
     date: z.string(),
     image: z.string(),
     tags: z.array(z.string()),
+    gallery: z.array(z.object({
+      media: z.discriminatedUnion('discriminant', [
+        z.object({
+          discriminant: z.literal('image'),
+          value: z.string(),
+        }),
+        z.object({
+          discriminant: z.literal('video'),
+          value: z.object({
+            file: z.string(),
+            thumbnail: z.string().optional(),
+          }),
+        }),
+      ]),
+      caption: z.string().optional(),
+    })).optional(),
   }),
 });
 
