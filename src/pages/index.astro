@@ -34,10 +34,8 @@ const fallbackBrands = Array.from({ length: 6 }, (_, i) => `BRAND ${i + 1}`);
 // Use brands from CMS or fallback
 const brandsToShow = hasBrands ? activeBrands : fallbackBrands;
 
-// Split brands into two rows for the scrolling animation
-const midPoint = Math.ceil(brandsToShow.length / 2);
-const firstRowBrands = brandsToShow.slice(0, midPoint);
-const secondRowBrands = brandsToShow.slice(midPoint);
+// Use all brands in a single row for the scrolling animation
+const singleRowBrands = brandsToShow;
 
 // Variables for brand placeholders are now handled in components
 ---
@@ -133,17 +131,11 @@ const secondRowBrands = brandsToShow.slice(midPoint);
     {/* Center the scrolling brand logos */}
     <div class="w-full flex justify-center">
       <div class="w-full max-w-6xl">
-        {/* Row 1: Scrolling brand logos */}
+        {/* Single row: Scrolling brand logos */}
         <BrandScrollRow
-          brands={firstRowBrands}
+          brands={singleRowBrands}
           hasBrands={hasBrands}
           direction="left-to-right"
-        />
-        {/* Row 2: Scrolling brand logos RTL */}
-        <BrandScrollRow
-          brands={secondRowBrands}
-          hasBrands={hasBrands}
-          direction="right-to-left"
           className="mb-12 md:mb-16"
         />
       </div>

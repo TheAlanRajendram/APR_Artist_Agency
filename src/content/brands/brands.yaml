@@ -1,22 +1,7 @@
 brands:
   - name: Champion
-    logo: /images/brands/champion/champion-logo.svg
+    logo: /images/brands/brands/0/logo.png
     isActive: true
   - name: Mercedes-Benz
-    logo: /images/brands/mercedes-benz/mercedes-benz-logo.svg
+    logo: /images/brands/brands/1/logo.svg
     isActive: true
-  - name: KFC
-    logo: /images/brands/kfc/kfc-logo.svg
-    isActive: true
-  - name: Nike
-    logo: /images/brands/nike/nike-logo.svg
-    isActive: false
-  - name: Adidas
-    logo: /images/brands/adidas/adidas-logo.svg
-    isActive: false
-  - name: Apple
-    logo: /images/brands/apple/apple-logo.svg
-    isActive: false
-  - name: Coca-Cola
-    logo: /images/brands/coca-cola/coca-cola-logo.svg
-    isActive: false
