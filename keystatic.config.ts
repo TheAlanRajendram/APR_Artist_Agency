@@ -66,7 +66,17 @@ export default config({
         }),
         brand: fields.text({ label: 'Brand Name' }),
         artist: fields.text({ label: 'Artist Name' }),
-        date: fields.date({ label: 'Project Date' }),
+        date: fields.text({ 
+          label: 'Project Date',
+          description: 'Enter date in YYYY-MM-DD format (e.g., 2025-01-15)',
+          validation: {
+            isRequired: true,
+            pattern: {
+              regex: /^\d{4}-\d{2}-\d{2}$/,
+              message: 'Date must be in YYYY-MM-DD format'
+            }
+          }
+        }),
         image: fields.image({
           label: 'Project Image',
           directory: 'public/images/work',
