@@ -43,6 +43,15 @@
   }
 }
 
+@keyframes scroll-l-to-r-animation {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
@@ -78,7 +87,11 @@
 }
 
 .scroll-r-to-l {
-  animation: scroll-r-to-l-animation 45s linear infinite;
+  animation: scroll-r-to-l-animation 90s linear infinite;
+}
+
+.scroll-l-to-r {
+  animation: scroll-l-to-r-animation 90s linear infinite;
 }
 
 .scrolling-row-inner:hover {
