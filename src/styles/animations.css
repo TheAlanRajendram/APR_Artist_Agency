@@ -34,21 +34,12 @@
   }
 }
 
-@keyframes scroll-l-to-r-animation {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes scroll-r-to-l-animation {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 }
 
@@ -86,13 +77,8 @@
   will-change: transform;
 }
 
-.scroll-l-to-r {
-  animation: scroll-l-to-r-animation 30s linear infinite;
-}
-
 .scroll-r-to-l {
-  animation: scroll-r-to-l-animation 30s linear infinite;
-  animation-delay: -15s;
+  animation: scroll-r-to-l-animation 45s linear infinite;
 }
 
 .scrolling-row-inner:hover {
