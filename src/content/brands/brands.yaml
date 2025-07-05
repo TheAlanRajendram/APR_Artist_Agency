@@ -5,3 +5,144 @@ brands:
   - name: Mercedes-Benz
     logo: /images/brands/brands/1/logo.svg
     isActive: true
+  - name: Clash
+    logo: /images/brands/brands/2/logo.webp
+    isActive: true
+  - name: +44 amazon music
+    logo: /images/brands/brands/3/logo.png
+    isActive: true
+  - name: Hype
+    logo: /images/brands/brands/4/logo.jpg
+    isActive: true
+  - name: London lions
+    logo: /images/brands/brands/5/logo.webp
+    isActive: true
+  - name: SW magazine
+    logo: /images/brands/brands/6/logo.png
+    isActive: true
+  - name: XIX
+    logo: /images/brands/brands/7/logo.png
+    isActive: true
+  - name: Ksubi
+    logo: /images/brands/brands/8/logo.jpg
+    isActive: true
+  - name: Avirex
+    logo: /images/brands/brands/9/logo.png
+    isActive: true
+  - name: Kurt Geiger
+    logo: /images/brands/brands/10/logo.png
+    isActive: true
+  - name: Sky sports
+    logo: /images/brands/brands/11/logo.png
+    isActive: true
+  - name: KEF
+    logo: /images/brands/brands/12/logo.png
+    isActive: true
+  - name: Neumann
+    logo: /images/brands/brands/13/logo.svg
+    isActive: true
+  - name: Rode
+    logo: /images/brands/brands/14/logo.png
+    isActive: true
+  - name: Arsenal
+    logo: /images/brands/brands/15/logo.webp
+    isActive: true
+  - name: NFL
+    logo: /images/brands/brands/16/logo.webp
+    isActive: true
+  - name: MLB
+    logo: /images/brands/brands/17/logo.png
+    isActive: true
+  - name: England Cricket Board
+    logo: /images/brands/brands/18/logo.png
+    isActive: true
+  - name: Red Bull
+    logo: /images/brands/brands/19/logo.png
+    isActive: true
+  - name: Chickenshop
+    logo: /images/brands/brands/20/logo.png
+    isActive: true
+  - name: 'Nova '
+    logo: /images/brands/brands/21/logo.png
+    isActive: true
+  - name: Four seasons
+    logo: /images/brands/brands/22/logo.png
+    isActive: true
+  - name: Sunnamusk
+    logo: /images/brands/brands/23/logo.png
+    isActive: true
+  - name: Jagermeister
+    logo: /images/brands/brands/24/logo.png
+    isActive: true
+  - name: Amazon
+    logo: /images/brands/brands/25/logo.png
+    isActive: true
+  - name: Cancer research uk
+    logo: /images/brands/brands/26/logo.png
+    isActive: true
+  - name: Steph's packed lunch
+    logo: /images/brands/brands/27/logo.jpg
+    isActive: true
+  - name: BBC Asian network
+    logo: /images/brands/brands/28/logo.png
+    isActive: true
+  - name: Footasylum
+    logo: /images/brands/brands/29/logo.png
+    isActive: true
+  - name: Crep Protect
+    logo: /images/brands/brands/30/logo.svg
+    isActive: true
+  - name: JD sports
+    logo: /images/brands/brands/31/logo.svg
+    isActive: true
+  - name: Bape
+    logo: /images/brands/brands/32/logo.png
+    isActive: true
+  - name: Villon
+    logo: /images/brands/brands/33/logo.png
+    isActive: true
+  - name: Don Julio
+    logo: /images/brands/brands/34/logo.png
+    isActive: true
+  - name: Duppy Share
+    logo: /images/brands/brands/35/logo.webp
+    isActive: true
+  - name: Bucherer
+    logo: /images/brands/brands/36/logo.png
+    isActive: true
+  - name: Johnnie Walker
+    logo: /images/brands/brands/37/logo.jpg
+    isActive: true
+  - name: Hugo Boss
+    logo: /images/brands/brands/38/logo.svg
+    isActive: true
+  - name: Afrikana
+    logo: /images/brands/brands/39/logo.webp
+    isActive: true
+  - name: Five guys
+    logo: /images/brands/brands/40/logo.png
+    isActive: true
+  - name: Tottenham hotspur stadium
+    logo: /images/brands/brands/41/logo.png
+    isActive: true
+  - name: Drip
+    logo: /images/brands/brands/42/logo.jpg
+    isActive: true
+  - name: Dyson
+    logo: /images/brands/brands/43/logo.png
+    isActive: true
+  - name: Montcalm
+    logo: /images/brands/brands/44/logo.png
+    isActive: true
+  - name: Hakkasan
+    logo: /images/brands/brands/45/logo.png
+    isActive: true
+  - name: Madhus
+    logo: /images/brands/brands/46/logo.png
+    isActive: true
+  - name: Baller League
+    logo: /images/brands/brands/47/logo.png
+    isActive: true
+  - name: Loci
+    logo: /images/brands/brands/48/logo.png
+    isActive: true
