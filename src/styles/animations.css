@@ -87,11 +87,11 @@
 }
 
 .scroll-r-to-l {
-  animation: scroll-r-to-l-animation 90s linear infinite;
+  animation: scroll-r-to-l-animation 180s linear infinite;
 }
 
 .scroll-l-to-r {
-  animation: scroll-l-to-r-animation 90s linear infinite;
+  animation: scroll-l-to-r-animation 180s linear infinite;
 }
 
 .scrolling-row-inner:hover {
