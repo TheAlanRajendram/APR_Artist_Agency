@@ -66,7 +66,7 @@ export default config({
         }),
         brand: fields.text({ label: 'Brand Name' }),
         artist: fields.text({ label: 'Artist Name' }),
-        date: fields.text({ 
+        date: fields.text({
           label: 'Project Date',
           description: 'Enter date in YYYY-MM-DD format (e.g., 2025-01-15)',
           validation: {
@@ -103,7 +103,7 @@ export default config({
               {
                 image: fields.image({
                   label: 'Image File',
-                  description: 'Upload an image file (JPG, PNG, WebP)',
+                  description: 'Upload an image file (JPG, PNG, WebP). Add a caption below for better CMS preview.',
                   directory: 'public/images/work/gallery',
                   publicPath: '/images/work/gallery/',
                 }),
@@ -116,21 +116,39 @@ export default config({
                   }),
                   thumbnail: fields.image({
                     label: 'Video Thumbnail/Preview',
-                    description: 'Upload a preview image for this video (optional - helps identify video in CMS)',
+                    description: 'Upload a preview image for this video (RECOMMENDED - shows as preview in CMS)',
                     directory: 'public/images/work/gallery',
                     publicPath: '/images/work/gallery/',
+                    validation: {
+                      isRequired: false
+                    }
                   }),
                 })
               }
             ),
             caption: fields.text({
               label: 'Caption/Description',
-              description: 'Brief description of this media (optional - helps identify in CMS)',
+              description: 'Brief description of this media (RECOMMENDED - shows as preview text in CMS list)',
             }),
           }),
-          {
+                              {
             label: 'Project Gallery',
-            itemLabel: props => props.fields.caption.value || 'Media Item'
+            itemLabel: props => {
+              const mediaType = props.fields.media.discriminant;
+              const caption = props.fields.caption.value;
+
+              if (mediaType === 'image') {
+                return caption
+                  ? `📷 ${caption}`
+                  : `📷 Image (add caption for better preview)`;
+              } else if (mediaType === 'video') {
+                return caption
+                  ? `🎬 ${caption}`
+                  : `🎬 Video (add caption & thumbnail for better preview)`;
+              }
+
+              return caption || 'Media Item';
+            }
           }
         ),
         content: fields.mdx({
