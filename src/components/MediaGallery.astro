@@ -27,8 +27,6 @@ function getFileName(filePath: string): string {
 ---
 
 <div class="mt-12">
-  <h3 class="text-2xl font-bold mb-6 text-gray-800">Project Gallery</h3>
-
   <div class="flex flex-col gap-8">
     {
       gallery.map((mediaItem) => (
@@ -133,3 +131,33 @@ function getFileName(filePath: string): string {
     }
   }
 </style>
+
+<script>
+  function initializeVideos() {
+    // Find all video elements and ensure they're properly initialized
+    const videos = document.querySelectorAll(
+      ".gallery-item video"
+    ) as NodeListOf<HTMLVideoElement>;
+    videos.forEach((video) => {
+      // Force video to load and play
+      video.load();
+
+      // Ensure autoplay works after navigation
+      if (video.autoplay) {
+        video.play().catch((err) => {
+          // If autoplay fails, that's okay - browser restrictions
+          console.log("Autoplay prevented:", err);
+        });
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    initializeVideos();
+  });
+
+  // Also initialize on after-swap for client-side navigation
+  document.addEventListener("astro:after-swap", () => {
+    initializeVideos();
+  });
+</script>
