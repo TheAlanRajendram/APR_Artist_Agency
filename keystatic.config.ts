@@ -110,13 +110,13 @@ export default config({
                 video: fields.object({
                   file: fields.file({
                     label: 'Video File',
-                    description: 'Upload a video file (MP4, WebM, MOV)',
+                    description: 'Upload a video file (MP4, WebM, MOV). A thumbnail will be automatically generated from the first frame during build/deploy.',
                     directory: 'public/videos/work/gallery',
                     publicPath: '/videos/work/gallery/',
                   }),
                   thumbnail: fields.image({
                     label: 'Video Thumbnail/Preview',
-                    description: 'Upload a preview image for this video (RECOMMENDED - shows as preview in CMS)',
+                    description: '🎬 AUTO-GENERATED: Thumbnails are automatically created from video first frames during build/deploy. You can optionally upload a custom thumbnail here to override the auto-generated one. (Shows as preview in CMS)',
                     directory: 'public/images/work/gallery',
                     publicPath: '/images/work/gallery/',
                     validation: {
@@ -133,6 +133,7 @@ export default config({
           }),
                               {
             label: 'Project Gallery',
+            description: '🎬 AUTO-THUMBNAIL: Video thumbnails are automatically generated from first frames during build/deploy. Upload custom thumbnails to override auto-generated ones.',
             itemLabel: props => {
               const mediaType = props.fields.media.discriminant;
               const caption = props.fields.caption.value;
@@ -144,7 +145,7 @@ export default config({
               } else if (mediaType === 'video') {
                 return caption
                   ? `🎬 ${caption}`
-                  : `🎬 Video (add caption & thumbnail for better preview)`;
+                  : `🎬 Video (thumbnail auto-generated on build)`;
               }
 
               return caption || 'Media Item';
