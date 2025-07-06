@@ -72,11 +72,10 @@ function getDisplayName(filename) {
 
     <div class="relative z-10 container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold font-serif mb-6">
-        <span class="block mb-2 text-heading-secondary">About</span>
-        <span class="text-heading italic">APR Artist Agency</span>
+        <span class="text-gold italic">APR ARTIST AGENCY</span>
       </h1>
       <p class="text-lg text-secondary opacity-90 mb-8 max-w-2xl mx-auto">
-        PR, Brand Partnership & Talent Management for Global Talents within Music and Sports
+        PR, Brand Partnership & Talent Management for Global Talents within Music, Sports and Entertainment
       </p>
     </div>
   </section>
@@ -84,47 +83,38 @@ function getDisplayName(filename) {
   <!-- About Sections -->
   {
     sortedSections.map((section, index) => (
-      section.data.title === "Pioneering Excellence" ? (
+      section.data.title === "Founder" ? (
         <!-- Founder Section -->
         <section class="py-16 bg-dark-lighter fade-in-element">
           <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Image -->
-                <div>
-                  <div class="aspect-[4/5] rounded-lg overflow-hidden">
+                <div class="flex flex-col items-center">
+                  <div class="w-80 h-80 rounded-full overflow-hidden shadow-lg mb-6">
                     <LazyImage
                       src={section.data.image}
                       alt="Priyanka Rajendram - Founder & CEO"
                       class="w-full h-full object-cover"
                     />
                   </div>
+                  <!-- Founder info under image -->
+                  <div class="text-center">
+                    <p class="font-bold text-heading-secondary text-xl mb-2">Priyanka Rajendram</p>
+                    <p class="text-primary font-medium text-lg">Founder & CEO</p>
+                  </div>
                 </div>
 
                 <!-- Content -->
                 <div>
-                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
+                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-gold">
                     {section.data.title}
                   </h2>
 
                   <div
-                    class="space-y-6 text-secondary leading-relaxed text-lg mb-8"
+                    class="space-y-6 text-secondary leading-relaxed text-lg"
                     set:html={section.compiledContent}
                   />
-
-                  <!-- Founder info -->
-                  <div class="pt-6 border-t border-dark-accent">
-                    <div class="flex items-center space-x-4">
-                      <div class="h-12 w-24 bg-primary/20 rounded flex items-center justify-center">
-                        <span class="text-primary font-serif italic text-sm">Priyanka R.</span>
-                      </div>
-                      <div>
-                        <p class="font-bold text-heading-secondary text-lg">Priyanka Rajendram</p>
-                        <p class="text-primary font-medium">Founder & CEO</p>
-                        <p class="text-xs text-muted">PR & Global Brand Partnerships for Global Talents</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -138,7 +128,7 @@ function getDisplayName(filename) {
               <div class={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-col-dense'}`}>
                 <!-- Content -->
                 <div class={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
-                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-heading-secondary">
+                  <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-gold">
                     {section.data.title}
                   </h2>
                   <div
@@ -169,7 +159,7 @@ function getDisplayName(filename) {
   <section class="py-16 bg-dark-accent fade-in-element">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8 font-serif text-heading-secondary">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 font-serif text-gold">
           Strategic Partnership with GTMG
         </h2>
         <p class="text-secondary leading-relaxed text-lg">
@@ -182,7 +172,7 @@ function getDisplayName(filename) {
 
 <style>
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-    color: theme("textColor.heading");
+    color: theme("textColor.gold");
   }
 
   .prose p {
@@ -194,7 +184,7 @@ function getDisplayName(filename) {
   }
 
   .prose strong {
-    color: theme("textColor.heading");
+    color: theme("textColor.gold");
     font-weight: 600;
   }
 
