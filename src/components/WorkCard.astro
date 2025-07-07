@@ -80,72 +80,75 @@ const { title, image, brand, artist, tags, date, video } = data;
 
 {video && (
   <script>
-    // Extend the Window interface to avoid TypeScript errors
+    // Extend the Window interface to avoid TypeScript errors for our global properties
     interface MyWindow extends Window {
-      videoCardListenerAttached?: boolean;
+      videoCardObserver?: IntersectionObserver;
+      videoAutoplayUnlocked?: boolean;
     }
     declare let window: MyWindow;
 
     const initVideoCards = () => {
-      // Check if the script has already run and attached the global listener
-      if (window.videoCardListenerAttached) {
-        return;
-      }
-      window.videoCardListenerAttached = true;
+      // --- One-time setup ---
+      // This part runs only once to create the observer and set up mobile autoplay.
+      if (!window.videoCardObserver) {
+        const isMobile =
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
 
-      const isMobile =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        );
+        window.videoAutoplayUnlocked = !isMobile;
 
-      // This flag will be true for desktop, and for mobile after first interaction
-      let canAutoplay = !isMobile;
+        if (isMobile) {
+          const unlockAutoplay = () => {
+            window.videoAutoplayUnlocked = true;
+            document.removeEventListener('touchstart', unlockAutoplay);
+          };
+          document.addEventListener('touchstart', unlockAutoplay, { once: true, passive: true });
+        }
 
-      // Unlock autoplay on mobile after the first touch
-      if (isMobile) {
-        const unlockAutoplay = () => {
-          canAutoplay = true;
-          document.removeEventListener('touchstart', unlockAutoplay);
-        };
-        document.addEventListener('touchstart', unlockAutoplay, { once: true, passive: true });
-      }
+        window.videoCardObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const video = entry.target.querySelector('video');
+              if (!video) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const video = entry.target.querySelector('video');
-            if (!video) return;
+              const playVideo = async () => {
+                try {
+                  // Check right before playing if interaction has happened on mobile
+                  if (window.videoAutoplayUnlocked) {
+                    await video.play();
+                    video.style.opacity = '1';
+                  }
+                } catch (err) {
+                  // Autoplay was prevented. This is expected on mobile before the first touch.
+                }
+              };
 
-            const playVideo = async () => {
-              try {
-                await video.play();
-                // Show the video when it starts playing
-                video.style.opacity = '1';
-              } catch (err) {
-                console.log('Video autoplay failed:', err.name);
-              }
-            };
+              const pauseVideo = () => {
+                video.pause();
+                video.currentTime = 0;
+                video.style.opacity = '0';
+              };
 
-            const pauseVideo = () => {
-              video.pause();
-              video.currentTime = 0;
-              // Hide the video when it's paused
-              video.style.opacity = '0';
-            };
-
-            if (entry.isIntersecting) {
-              if (canAutoplay) {
+              if (entry.isIntersecting) {
                 playVideo();
+              } else {
+                pauseVideo();
               }
-            } else {
-              pauseVideo();
-            }
-          });
-        },
-        { threshold: 0.5 } // 50% of the card must be visible
-      );
+            });
+          },
+          { threshold: 0.5 } // 50% of the card must be visible
+        );
+      }
 
-      // Observe all cards with videos
+      // --- Per-page logic ---
+      // This runs on every page load to connect cards to the central observer.
+      const observer = window.videoCardObserver;
+
+      // Disconnect from any cards that might have been observed on a previous page.
+      observer.disconnect();
+
+      // Observe all valid video cards on the current page.
       document.querySelectorAll('a[href*="/work/"]').forEach((card) => {
         if (card.querySelector('video')) {
           observer.observe(card);
@@ -153,6 +156,7 @@ const { title, image, brand, artist, tags, date, video } = data;
       });
     };
 
+    // astro:page-load fires on initial page load and after every client-side navigation
     document.addEventListener('astro:page-load', initVideoCards);
   </script>
 )}
