@@ -37,6 +37,8 @@ const { title, image, brand, artist, tags, date, video } = data;
           loop
           playsinline
           preload="metadata"
+          webkit-playsinline
+          x5-playsinline
         >
           <source src={video} type="video/mp4" />
         </video>
@@ -107,21 +109,55 @@ const { title, image, brand, artist, tags, date, video } = data;
           video.currentTime = 0;
         };
 
-        if (isMobile) {
-          // Mobile: Use Intersection Observer for auto-play when in focus
+                if (isMobile) {
+          // Mobile: Use Intersection Observer with user activation
+          let canAutoplay = false;
+
+          // Check if we can autoplay (after user interaction)
+          const checkAutoplaySupport = async () => {
+            try {
+              await video.play();
+              video.pause();
+              canAutoplay = true;
+              console.log('Autoplay enabled for mobile videos');
+            } catch (error) {
+              console.log('Autoplay requires user interaction:', error);
+            }
+          };
+
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
-                playVideo();
+                if (canAutoplay) {
+                  playVideo();
+                } else {
+                  // Show video immediately but don't play until interaction
+                  video.style.opacity = '1';
+                }
               } else {
                 pauseVideo();
+                video.style.opacity = '0';
               }
             });
           }, {
-            threshold: 0.5 // Play when 50% of the card is visible
+            threshold: 0.3 // Lower threshold for better mobile experience
           });
 
+          // Enable autoplay after first user interaction anywhere on page
+          const enableMobileAutoplay = () => {
+            canAutoplay = true;
+            checkAutoplaySupport();
+          };
+
+          // Listen for any user interaction
+          document.addEventListener('touchstart', enableMobileAutoplay, { once: true });
+          document.addEventListener('click', enableMobileAutoplay, { once: true });
+
+          // Start observing immediately
           observer.observe(card);
+
+          // Try initial autoplay check
+          checkAutoplaySupport();
         } else {
           // Desktop: Use hover events
           card.addEventListener('mouseenter', () => {
