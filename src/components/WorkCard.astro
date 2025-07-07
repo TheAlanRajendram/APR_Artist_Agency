@@ -81,35 +81,39 @@ const { title, image, brand, artist, tags, date, video } = data;
   <script>
     document.addEventListener('astro:page-load', () => {
       const cards = document.querySelectorAll('a[href*="/work/"]');
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       cards.forEach(card => {
         const video = card.querySelector('video');
         if (!video) return;
 
-        // Desktop hover events
-        card.addEventListener('mouseenter', () => {
-          video.play();
-        });
+        if (isMobile) {
+          // Mobile: Use Intersection Observer for auto-play when in focus
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                video.play();
+              } else {
+                video.pause();
+                video.currentTime = 0;
+              }
+            });
+          }, {
+            threshold: 0.5 // Play when 50% of the card is visible
+          });
 
-        card.addEventListener('mouseleave', () => {
-          video.pause();
-          video.currentTime = 0;
-        });
+          observer.observe(card);
+        } else {
+          // Desktop: Use hover events
+          card.addEventListener('mouseenter', () => {
+            video.play();
+          });
 
-        // Mobile touch events
-        let touchTimeout;
-
-        card.addEventListener('touchstart', () => {
-          clearTimeout(touchTimeout);
-          video.play();
-        });
-
-        card.addEventListener('touchend', () => {
-          touchTimeout = setTimeout(() => {
+          card.addEventListener('mouseleave', () => {
             video.pause();
             video.currentTime = 0;
-          }, 1000); // Keep video playing for 1 second after touch ends
-        });
+          });
+        }
 
         // Prevent video from interfering with link clicks
         video.addEventListener('click', (e) => {
