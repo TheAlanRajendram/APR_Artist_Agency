@@ -11,7 +11,7 @@ interface Props {
 
 const { item, class: className, loading = "lazy" } = Astro.props;
 const { slug, data } = item;
-const { title, image, brand, artist, tags } = data;
+const { title, image, brand, artist, tags, date } = data;
 ---
 
 <a
@@ -37,8 +37,17 @@ const { title, image, brand, artist, tags } = data;
       >
         {title}
       </h3>
-      <p class="text-sm text-gray-300 mb-3">
+      <p class="text-sm text-gray-300 mb-2">
         {brand} &times; {artist}
+      </p>
+      <p class="text-xs text-gray-400 mb-3">
+        {
+          new Date(date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+          })
+        }
       </p>
       {
         tags && tags.length > 0 && (
