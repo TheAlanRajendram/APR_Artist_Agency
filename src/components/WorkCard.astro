@@ -32,7 +32,7 @@ const { title, image, brand, artist, tags, date, video } = data;
     {
       video && (
         <video
-          class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           muted
           loop
           preload="metadata"
@@ -86,6 +86,7 @@ const { title, image, brand, artist, tags, date, video } = data;
         const video = card.querySelector('video');
         if (!video) return;
 
+        // Desktop hover events
         card.addEventListener('mouseenter', () => {
           video.play();
         });
@@ -93,6 +94,27 @@ const { title, image, brand, artist, tags, date, video } = data;
         card.addEventListener('mouseleave', () => {
           video.pause();
           video.currentTime = 0;
+        });
+
+        // Mobile touch events
+        let touchTimeout;
+
+        card.addEventListener('touchstart', () => {
+          clearTimeout(touchTimeout);
+          video.play();
+        });
+
+        card.addEventListener('touchend', () => {
+          touchTimeout = setTimeout(() => {
+            video.pause();
+            video.currentTime = 0;
+          }, 1000); // Keep video playing for 1 second after touch ends
+        });
+
+        // Prevent video from interfering with link clicks
+        video.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
         });
       });
     });
