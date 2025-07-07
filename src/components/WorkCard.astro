@@ -80,32 +80,53 @@ const { title, image, brand, artist, tags, date, video } = data;
 
 {video && (
   <script>
-    // Extend the Window interface to avoid TypeScript errors for our global properties
+    // Extend Window for global properties
     interface MyWindow extends Window {
       videoCardObserver?: IntersectionObserver;
       videoAutoplayUnlocked?: boolean;
     }
     declare let window: MyWindow;
 
-    const initVideoCards = () => {
-      // --- One-time setup ---
-      // This part runs only once to create the observer and set up mobile autoplay.
+    const setupDesktopHover = () => {
+      // Clean up observer if it exists from a previous mobile view
+      if (window.videoCardObserver) {
+        window.videoCardObserver.disconnect();
+      }
+
+      document.querySelectorAll('a[href*="/work/"]').forEach(card => {
+        const video = card.querySelector('video');
+        if (!video) return;
+
+        const playVideo = async () => {
+          try {
+            await video.play();
+            video.style.opacity = '1';
+          } catch (err) { /* Autoplay was prevented. */ }
+        };
+
+        const pauseVideo = () => {
+          video.pause();
+          video.currentTime = 0;
+          video.style.opacity = '0';
+        };
+
+        card.addEventListener('mouseenter', playVideo);
+        card.addEventListener('mouseleave', pauseVideo);
+      });
+    };
+
+    const setupMobileObserver = () => {
+      // --- One-time setup for mobile ---
+      if (typeof window.videoAutoplayUnlocked === 'undefined') {
+        window.videoAutoplayUnlocked = false; // Locked by default on mobile
+        const unlockAutoplay = () => {
+          window.videoAutoplayUnlocked = true;
+          document.removeEventListener('touchstart', unlockAutoplay);
+        };
+        document.addEventListener('touchstart', unlockAutoplay, { once: true, passive: true });
+      }
+
       if (!window.videoCardObserver) {
-        const isMobile =
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          );
-
-        window.videoAutoplayUnlocked = !isMobile;
-
-        if (isMobile) {
-          const unlockAutoplay = () => {
-            window.videoAutoplayUnlocked = true;
-            document.removeEventListener('touchstart', unlockAutoplay);
-          };
-          document.addEventListener('touchstart', unlockAutoplay, { once: true, passive: true });
-        }
-
         window.videoCardObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -113,14 +134,12 @@ const { title, image, brand, artist, tags, date, video } = data;
               if (!video) return;
 
               const playVideo = async () => {
-                try {
-                  // Check right before playing if interaction has happened on mobile
-                  if (window.videoAutoplayUnlocked) {
+                // Check for unlock right before playing
+                if (window.videoAutoplayUnlocked) {
+                  try {
                     await video.play();
                     video.style.opacity = '1';
-                  }
-                } catch (err) {
-                  // Autoplay was prevented. This is expected on mobile before the first touch.
+                  } catch (err) { /* Autoplay was prevented */ }
                 }
               };
 
@@ -137,23 +156,28 @@ const { title, image, brand, artist, tags, date, video } = data;
               }
             });
           },
-          { threshold: 0.5 } // 50% of the card must be visible
+          { threshold: 0.5 }
         );
       }
 
-      // --- Per-page logic ---
-      // This runs on every page load to connect cards to the central observer.
+      // --- Per-page logic for mobile ---
       const observer = window.videoCardObserver;
-
-      // Disconnect from any cards that might have been observed on a previous page.
       observer.disconnect();
 
-      // Observe all valid video cards on the current page.
       document.querySelectorAll('a[href*="/work/"]').forEach((card) => {
         if (card.querySelector('video')) {
           observer.observe(card);
         }
       });
+    };
+
+    const initVideoCards = () => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) {
+        setupMobileObserver();
+      } else {
+        setupDesktopHover();
+      }
     };
 
     // astro:page-load fires on initial page load and after every client-side navigation
