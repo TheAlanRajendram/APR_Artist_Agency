@@ -252,12 +252,33 @@ const singleRowBrands = brandsToShow;
   ></script>
   <script is:inline>
     document.addEventListener("astro:page-load", function () {
-      new Swiper(".portfolio-swiper", {
+      function playOnlyFocusedVideo(swiperInstance) {
+        const allVideos = swiperInstance.el.querySelectorAll("video");
+        allVideos.forEach((video) => {
+          video.pause();
+          video.currentTime = 0;
+          video.style.opacity = "0";
+        });
+        const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
+        const video = activeSlide.querySelector("video");
+        if (video) {
+          video.muted = true;
+          video.playbackRate = 1;
+          video
+            .play()
+            .then(() => {
+              video.style.opacity = "1";
+            })
+            .catch(() => {});
+        }
+      }
+
+      const swiper = new Swiper(".portfolio-swiper", {
         slidesPerView: 1,
         spaceBetween: 20,
         loop: true,
         centeredSlides: true,
-        autoplay: { delay: 1500, disableOnInteraction: false },
+        autoplay: { delay: 3000, disableOnInteraction: false },
         pagination: { el: ".swiper-pagination", clickable: true },
         navigation: {
           nextEl: ".swiper-button-next",
@@ -268,8 +289,27 @@ const singleRowBrands = brandsToShow;
         breakpoints: {
           640: { slidesPerView: 2, spaceBetween: 20 },
           1024: { slidesPerView: 3, spaceBetween: 30 }
+        },
+        on: {
+          init: function (swiper) {
+            playOnlyFocusedVideo(swiper);
+          },
+          slideChangeTransitionEnd: function (swiper) {
+            playOnlyFocusedVideo(swiper);
+          }
         }
       });
+
+      // Pause/resume autoplay on hover
+      const sliderEl = document.querySelector(".portfolio-swiper");
+      if (sliderEl) {
+        sliderEl.addEventListener("mouseenter", () => {
+          swiper.autoplay.stop();
+        });
+        sliderEl.addEventListener("mouseleave", () => {
+          swiper.autoplay.start();
+        });
+      }
     });
   </script>
 </BaseLayout>
