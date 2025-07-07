@@ -7,6 +7,7 @@ import ScrollChevron from "../components/ScrollChevron.astro";
 import BrandScrollRow from "../components/BrandScrollRow.astro";
 import { getCollection, getEntry } from "astro:content";
 import "../styles/animations.css";
+import WorkCard from "../components/WorkCard.astro";
 
 // Get work items
 const workItems = await getCollection("work");
@@ -195,39 +196,12 @@ const singleRowBrands = brandsToShow;
         <div class="swiper portfolio-swiper">
           <div class="swiper-wrapper">
             {
-              featuredItems.map((item) => (
-                <div class="swiper-slide">
-                  <a href={`/work/${item.slug}`} class="block group">
-                    <div class="bg-dark-card rounded-lg overflow-hidden h-full shadow-card transition-all">
-                      <LazyImage
-                        src={item.data.image}
-                        alt={item.data.title}
-                        class="w-full h-full object-cover"
-                      />
-                      <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 font-serif group-hover:text-heading transition-colors text-heading-secondary">
-                          {item.data.title}
-                        </h3>
-                        <p class="text-secondary mb-3">
-                          {item.data.brand}{" "}
-                          <span class="inline-block text-primary align-middle text-lg">
-                            &times;
-                          </span>{" "}
-                          {item.data.artist}
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                          <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
-                            {item.data.tags[0]}
-                          </span>
-                          {item.data.tags[1] && (
-                            <span class="bg-dark px-2 py-1 rounded-full text-xs text-secondary">
-                              {item.data.tags[1]}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </a>
+              featuredItems.map((item, index) => (
+                <div class="swiper-slide h-auto">
+                  <WorkCard
+                    item={item}
+                    loading={index < 3 ? "eager" : "lazy"}
+                  />
                 </div>
               ))
             }

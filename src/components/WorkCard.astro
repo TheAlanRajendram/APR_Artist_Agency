@@ -1,0 +1,56 @@
+---
+// src/components/WorkCard.astro
+import type { CollectionEntry } from "astro:content";
+import LazyImage from "./LazyImage.astro";
+
+interface Props {
+  item: CollectionEntry<"work">;
+  class?: string;
+  loading?: "lazy" | "eager";
+}
+
+const { item, class: className, loading = "lazy" } = Astro.props;
+const { slug, data } = item;
+const { title, image, brand, artist, tags } = data;
+---
+
+<a
+  href={`/work/${slug}`}
+  class:list={[
+    "group block overflow-hidden rounded-lg transition-transform duration-300 ease-in-out hover:scale-105",
+    className
+  ]}
+>
+  <div class="relative">
+    <LazyImage
+      src={image}
+      alt={title}
+      class="w-full h-auto"
+      loading={loading}
+    />
+
+    <div
+      class="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white shadow-card bg-black/60"
+    >
+      <h3
+        class="text-lg md:text-xl font-bold font-display mb-2 group-hover:text-primary transition-colors"
+      >
+        {title}
+      </h3>
+      <p class="text-sm text-gray-300 mb-3">
+        {brand} &times; {artist}
+      </p>
+      {
+        tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {tags.slice(0, 2).map((tag) => (
+              <span class="bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full text-xs text-white border border-white/20">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</a>
