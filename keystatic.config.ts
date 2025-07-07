@@ -82,6 +82,15 @@ export default config({
           directory: 'public/images/work',
           publicPath: '/images/work/'
         }),
+        video: fields.file({
+          label: 'Project Video (Optional)',
+          description: 'Optional video that will play on hover over the card. Leave empty to only show the image.',
+          directory: 'public/videos/work',
+          publicPath: '/videos/work/',
+          validation: {
+            isRequired: false
+          }
+        }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),
           {

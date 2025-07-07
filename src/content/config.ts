@@ -20,6 +20,7 @@ const workCollection = defineCollection({
     artist: z.string(),
     date: z.string(),
     image: z.string(),
+    video: z.string().optional(),
     tags: z.array(z.string()),
     gallery: z.array(z.object({
       media: z.discriminatedUnion('discriminant', [

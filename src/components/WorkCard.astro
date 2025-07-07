@@ -11,7 +11,7 @@ interface Props {
 
 const { item, class: className, loading = "lazy" } = Astro.props;
 const { slug, data } = item;
-const { title, image, brand, artist, tags, date } = data;
+const { title, image, brand, artist, tags, date, video } = data;
 ---
 
 <a
@@ -25,9 +25,22 @@ const { title, image, brand, artist, tags, date } = data;
     <LazyImage
       src={image}
       alt={title}
-      class="w-full h-auto"
+      class="w-full h-auto transition-opacity duration-300"
       loading={loading}
     />
+
+    {
+      video && (
+        <video
+          class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          muted
+          loop
+          preload="metadata"
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      )
+    }
 
     <div
       class="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white shadow-card bg-black/60"
@@ -63,3 +76,25 @@ const { title, image, brand, artist, tags, date } = data;
     </div>
   </div>
 </a>
+
+{video && (
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const cards = document.querySelectorAll('a[href*="/work/"]');
+
+      cards.forEach(card => {
+        const video = card.querySelector('video');
+        if (!video) return;
+
+        card.addEventListener('mouseenter', () => {
+          video.play();
+        });
+
+        card.addEventListener('mouseleave', () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      });
+    });
+  </script>
+)}
