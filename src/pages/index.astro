@@ -9,6 +9,10 @@ import { getCollection, getEntry } from "astro:content";
 import "../styles/animations.css";
 import WorkCard from "../components/WorkCard.astro";
 
+// Get homepage content
+const homepage = await getEntry("homepage", "homepage");
+const heroVideo = homepage.data.heroVideo;
+
 // Get work items
 const workItems = await getCollection("work");
 const featuredItems = workItems.slice(0, 10);
@@ -50,7 +54,7 @@ const singleRowBrands = brandsToShow;
   <section
     class="relative py-20 md:py-36 bg-dark-lighter overflow-hidden hero-section"
   >
-    <BackgroundVideo>
+    <BackgroundVideo src={heroVideo}>
       <h1
         class="text-4xl md:text-4xl font-bold font-serif animate-fade-in text-center"
       >

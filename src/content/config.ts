@@ -63,9 +63,18 @@ const brandsCollection = defineCollection({
   }),
 });
 
+// Homepage singleton
+const homepageCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    heroVideo: z.string().nullable().optional(),
+  }),
+});
+
 export const collections = {
   services: servicesCollection,
   work: workCollection,
   about: aboutCollection,
   brands: brandsCollection,
+  homepage: homepageCollection,
 };

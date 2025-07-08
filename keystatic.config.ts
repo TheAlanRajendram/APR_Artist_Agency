@@ -14,6 +14,18 @@ export default config({
     }
   },
   singletons: {
+    homepage: singleton({
+      label: 'Home Page',
+      path: 'src/content/homepage/homepage',
+      schema: {
+        heroVideo: fields.file({
+          label: 'Hero Video',
+          description: 'The background video for the hero section on the homepage.',
+          directory: 'public/videos',
+          publicPath: '/videos/',
+        }),
+      },
+    }),
     brands: singleton({
       label: 'Brand Logos',
       path: 'src/content/brands/brands',

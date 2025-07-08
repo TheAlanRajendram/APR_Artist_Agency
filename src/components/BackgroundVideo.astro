@@ -1,9 +1,11 @@
 ---
 interface Props {
   className?: string;
+  src?: string | null;
 }
 
 const { className = "" } = Astro.props;
+const videoSrc = Astro.props.src || "/videos/heroVideo.mp4";
 ---
 
 <div class={`background-video-container ${className}`}>
@@ -18,7 +20,7 @@ const { className = "" } = Astro.props;
       disablepictureinpicture
       class="background-video"
     >
-      <source src="/videos/hero_page.mp4" type="video/mp4" />
+      <source src={videoSrc} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </div>
