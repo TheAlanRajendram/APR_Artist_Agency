@@ -73,6 +73,12 @@ const currentYear = new Date().getFullYear();
               loading="eager"
             />
           </a>
+          
+          <!-- Mobile center title - only show on work page -->
+          <div class="md:hidden flex-1 text-center">
+            <span id="mobile-page-title" class="text-2xl font-serif font-medium text-primary"></span>
+          </div>
+          
           <div class="hidden md:flex space-x-6 items-center">
             <a href="/about" class="hover:text-primary transition-colors"
               >About</a
@@ -338,11 +344,25 @@ const currentYear = new Date().getFullYear();
           });
         }
 
-        // Mark current page as active
+        // Mark current page as active and set mobile page title
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll(
           'nav a[href]:not([aria-label="APR Artist Agency Home"])'
         );
+        const mobilePageTitle = document.getElementById("mobile-page-title");
+
+        // Set mobile page title based on current page
+        if (mobilePageTitle) {
+          if (currentPath.includes("/work")) {
+            mobilePageTitle.textContent = "Work";
+          } else if (currentPath.includes("/about")) {
+            mobilePageTitle.textContent = "About";
+          } else if (currentPath.includes("/services")) {
+            mobilePageTitle.textContent = "Services";
+          } else {
+            mobilePageTitle.textContent = ""; // Hide on home page
+          }
+        }
 
         navLinks.forEach((link) => {
           const href = link.getAttribute("href");
