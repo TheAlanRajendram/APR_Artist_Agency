@@ -73,24 +73,24 @@ const currentYear = new Date().getFullYear();
               loading="eager"
             />
           </a>
-          <div class="hidden md:flex space-x-6 items-center">
-            <a href="/about" class="hover:text-primary transition-colors"
+          <div class="hidden md:flex space-x-6 items-center relative z-10">
+            <a href="/about" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
               >About</a
             >
-            <a href="/services" class="hover:text-primary transition-colors"
+            <a href="/services" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
               >Services</a
             >
-            <a href="/work" class="hover:text-primary transition-colors">Work</a
+            <a href="/work" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer">Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
-              class="border border-primary text-primary px-5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium inline-flex items-center"
+              class="border border-primary text-primary px-5 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium inline-flex items-center cursor-pointer"
               >Get in touch</a
             >
           </div>
           <button
             id="mobile-menu-button"
-            class="md:hidden p-2 hover:text-primary transition-colors"
+            class="md:hidden p-2 hover:text-primary transition-colors relative z-50 touch-manipulation"
             aria-label="Toggle mobile menu"
           >
             <svg
@@ -111,7 +111,7 @@ const currentYear = new Date().getFullYear();
         <!-- Mobile menu -->
         <div
           id="mobile-menu"
-          class="md:hidden hidden fixed inset-0 bg-dark-lighter bg-opacity-95 z-50 flex flex-col items-center justify-center"
+          class="md:hidden hidden fixed inset-0 bg-dark-lighter bg-opacity-95 z-[9999] flex flex-col items-center justify-center"
         >
           <button
             id="close-menu-button"
@@ -230,6 +230,43 @@ const currentYear = new Date().getFullYear();
         width: 100%;
         height: 100%;
       }
+
+      /* Ensure navigation links are always clickable */
+      nav a {
+        position: relative;
+        z-index: 10;
+        display: block;
+        text-decoration: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Improve mobile menu button interaction */
+      #mobile-menu-button {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      /* Ensure mobile menu is above everything */
+      #mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+      }
     </style>
 
     <script>
@@ -247,8 +284,33 @@ const currentYear = new Date().getFullYear();
         }
       });
 
+      // Global variables to track current event listeners
+      let mobileMenuInitialized = false;
+      let currentEventListeners = [];
+
+      // Helper function to remove all current event listeners
+      function removeAllEventListeners() {
+        currentEventListeners.forEach(({ element, event, handler }) => {
+          if (element) {
+            element.removeEventListener(event, handler);
+          }
+        });
+        currentEventListeners = [];
+      }
+
+      // Helper function to add tracked event listeners
+      function addTrackedEventListener(element, event, handler) {
+        if (element) {
+          element.addEventListener(event, handler);
+          currentEventListeners.push({ element, event, handler });
+        }
+      }
+
       // Listen for astro:page-load event instead of DOMContentLoaded
       document.addEventListener("astro:page-load", () => {
+        // Clean up previous event listeners to prevent accumulation
+        removeAllEventListeners();
+        
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById("mobile-menu-button");
         const closeMenuButton = document.getElementById("close-menu-button");
@@ -261,8 +323,8 @@ const currentYear = new Date().getFullYear();
           header?.classList.contains("bg-transparent");
 
         if (isTransparentNavbar && header) {
-          // Add scroll event listener to make navbar solid when scrolling down
-          window.addEventListener("scroll", () => {
+          // Scroll handler for transparent navbar
+          const scrollHandler = () => {
             if (window.scrollY > 50) {
               header.classList.remove("bg-transparent");
               header.classList.add(
@@ -275,67 +337,110 @@ const currentYear = new Date().getFullYear();
               header.classList.add("bg-transparent");
               header.classList.remove("bg-dark", "shadow-md");
             }
-          });
+          };
+          
+          addTrackedEventListener(window, "scroll", scrollHandler);
         }
 
+        // Mobile menu state management
+        let isMenuOpen = false;
+        let menuAnimationTimeout = null;
+
         function openMenu() {
-          if (mobileMenu) {
+          if (mobileMenu && !isMenuOpen) {
+            isMenuOpen = true;
+            
+            // Clear any pending animation timeout
+            if (menuAnimationTimeout) {
+              clearTimeout(menuAnimationTimeout);
+              menuAnimationTimeout = null;
+            }
+
             // Prevent background scrolling
             body.classList.add("menu-open");
-
+            
+            // Show menu immediately
             mobileMenu.classList.remove("hidden");
-            // Give time for the browser to process the removal of the hidden class
-            setTimeout(() => {
-              if (mobileMenu) {
-                mobileMenu.style.opacity = "1";
-                mobileMenu.style.visibility = "visible";
-              }
-            }, 10);
+            mobileMenu.style.opacity = "1";
+            mobileMenu.style.visibility = "visible";
           }
         }
 
         function closeMenu() {
-          if (mobileMenu) {
+          if (mobileMenu && isMenuOpen) {
+            isMenuOpen = false;
+            
+            // Clear any pending animation timeout
+            if (menuAnimationTimeout) {
+              clearTimeout(menuAnimationTimeout);
+            }
+
             // Re-enable scrolling
             body.classList.remove("menu-open");
 
+            // Start hide animation
             mobileMenu.style.opacity = "0";
             mobileMenu.style.visibility = "hidden";
-            // Wait for transition to complete before adding hidden class
-            setTimeout(() => {
-              if (mobileMenu) {
+            
+            // Hide menu after animation completes
+            menuAnimationTimeout = setTimeout(() => {
+              if (mobileMenu && !isMenuOpen) {
                 mobileMenu.classList.add("hidden");
               }
-            }, 300); // Match the transition time
+              menuAnimationTimeout = null;
+            }, 300); // Match the CSS transition time
           }
         }
 
+        // Mobile menu button handlers
         if (mobileMenuButton && mobileMenu) {
-          mobileMenuButton.addEventListener("click", openMenu);
+          addTrackedEventListener(mobileMenuButton, "click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openMenu();
+          });
 
           // Close menu button
           if (closeMenuButton) {
-            closeMenuButton.addEventListener("click", closeMenu);
+            addTrackedEventListener(closeMenuButton, "click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              closeMenu();
+            });
           }
 
           // Close mobile menu when clicking outside
-          document.addEventListener("click", (event) => {
-            const target = event.target as Node;
+          const outsideClickHandler = (event) => {
+            const target = event.target;
             if (
+              isMenuOpen &&
               mobileMenu &&
-              !mobileMenuButton?.contains(target) &&
-              !mobileMenu.contains(target) &&
-              !mobileMenu.classList.contains("hidden")
+              !mobileMenuButton.contains(target) &&
+              !mobileMenu.contains(target)
             ) {
               closeMenu();
             }
-          });
+          };
+          
+          addTrackedEventListener(document, "click", outsideClickHandler);
 
-          // Close mobile menu when clicking a link
+          // Close mobile menu when clicking a navigation link
           const mobileMenuLinks = mobileMenu.querySelectorAll("a");
           mobileMenuLinks.forEach((link) => {
-            link.addEventListener("click", closeMenu);
+            addTrackedEventListener(link, "click", () => {
+              // Small delay to allow navigation to start before closing menu
+              setTimeout(closeMenu, 50);
+            });
           });
+
+          // Handle escape key to close menu
+          const escapeHandler = (event) => {
+            if (event.key === "Escape" && isMenuOpen) {
+              closeMenu();
+            }
+          };
+          
+          addTrackedEventListener(document, "keydown", escapeHandler);
         }
 
         // Mark current page as active
@@ -346,7 +451,11 @@ const currentYear = new Date().getFullYear();
 
         navLinks.forEach((link) => {
           const href = link.getAttribute("href");
-          if (href && currentPath.endsWith(href)) {
+          // Remove active class from all links first
+          link.classList.remove("active-link");
+          
+          // Add active class to current page link
+          if (href && (currentPath === href || (href !== "/" && currentPath.startsWith(href)))) {
             link.classList.add("active-link");
           }
         });
