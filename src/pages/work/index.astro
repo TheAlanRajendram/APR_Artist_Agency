@@ -8,10 +8,9 @@ const workItems = await getCollection("work");
 ---
 
 <BaseLayout title="Work">
-  <section class="py-20">
+  <section class="py-5">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-12 text-center font-serif">Our Work</h1>
-
+      <h1 class="text-xl font-bold mb-8 text-center md:hidden">OUR WORK</h1>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lazy-grid">
         {workItems.map((item) => <WorkCard item={item} class="card-lazy" />)}
       </div>
