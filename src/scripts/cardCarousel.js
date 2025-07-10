@@ -166,8 +166,8 @@ export function initCardCarousel(options = {}) {
         top: 50%;
         transform: translateY(-50%);
         z-index: 10;
-        background: rgba(0,0,0,0.5);
-        color: var(--text-primary, #F5F5F5);
+        background: color-mix(in srgb, black 50%, transparent);
+        color: var(--text-primary, theme("textColor.primary"));
         border: none;
         width: 40px;
         height: 40px;
@@ -181,7 +181,7 @@ export function initCardCarousel(options = {}) {
       }
 
       .nav-button:hover {
-        background: rgba(0,0,0,0.8);
+        background: color-mix(in srgb, black 80%, transparent);
       }
 
       .prev-button {

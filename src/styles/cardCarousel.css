@@ -1,7 +1,8 @@
 /* Card Carousel Styles */
 :root {
-  --gold-color: #C9A96E; /* Sophisticated gold from theme */
-  --gold-rgb: 201, 169, 110; /* RGB values of #C9A96E */
+  --gold-color: theme("colors.gold");
+  --gold-rgb: theme("colors.gold");
+  --card-bg: theme("colors.dark.card");
 }
 
 .card-carousel {
@@ -37,14 +38,14 @@
 .card-content {
   backface-visibility: hidden;
   transform: translateZ(0);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(var(--gold-rgb), 0.1);
-  border: 1px solid rgba(var(--gold-rgb), 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 1px 3px color-mix(in srgb, theme("colors.gold") 10%, transparent);
+  border: 1px solid color-mix(in srgb, theme("colors.gold") 15%, transparent);
   height: 100%;
   width: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-bg, #242424); /* Default fallback matching theme */
+  background-color: theme("colors.dark.card");
 }
 
 /* Custom scrollbar for card content */
@@ -53,17 +54,17 @@
 }
 
 .card-content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in srgb, theme("textColor.primary") 5%, transparent);
   border-radius: 3px;
 }
 
 .card-content::-webkit-scrollbar-thumb {
-  background: rgba(var(--gold-rgb), 0.2);
+  background: color-mix(in srgb, theme("colors.gold") 20%, transparent);
   border-radius: 3px;
 }
 
 .card-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--gold-rgb), 0.3);
+  background: color-mix(in srgb, theme("colors.gold") 30%, transparent);
 }
 
 /* Markdown Content Styles */
@@ -83,7 +84,7 @@
   content: "•";
   position: absolute;
   left: -1.2rem;
-  color: var(--gold-color);
+  color: theme("colors.gold");
   font-size: 1.2em;
 }
 
@@ -96,7 +97,7 @@
   width: 100%;
   max-width: 300px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: color-mix(in srgb, theme("textColor.primary") 10%, transparent);
   border-radius: 2px;
   margin: 20px auto 10px;
   overflow: hidden;
@@ -105,7 +106,7 @@
 .progress-indicator {
   height: 100%;
   width: 0%;
-  background-color: var(--gold-color);
+  background-color: theme("colors.gold");
   transition: width 0.3s ease;
 }
 
@@ -116,7 +117,7 @@
 
 /* Add a subtle gold glow to active card */
 .carousel-card.active .card-content {
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 10px rgba(var(--gold-rgb), 0.15);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 10px color-mix(in srgb, theme("colors.gold") 15%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -137,7 +138,7 @@
 
   /* Increase contrast even more on mobile */
   .card-content {
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 2px 5px rgba(var(--gold-rgb), 0.15);
-    border: 1px solid rgba(var(--gold-rgb), 0.2);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 2px 5px color-mix(in srgb, theme("colors.gold") 15%, transparent);
+    border: 1px solid color-mix(in srgb, theme("colors.gold") 20%, transparent);
   }
 }

@@ -21,6 +21,7 @@ const { className = "" } = Astro.props;
     z-index: 0;
     pointer-events: none;
     opacity: 0.3;
+    --gold-color: theme("colors.gold");
   }
 
   #three-canvas {
@@ -63,8 +64,12 @@ const { className = "" } = Astro.props;
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
 
-    // Gold color from theme - should match tailwind config
-    const goldColor = new THREE.Color("#C9A96E"); // Using sophisticated gold from theme
+    // Gold color from theme - using CSS custom property that references Tailwind config
+    const goldColorHex =
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--gold-color"
+      ) || "#C9A96E";
+    const goldColor = new THREE.Color(goldColorHex);
 
     for (let i = 0; i < particleCount; i++) {
       // Random positions within a sphere
