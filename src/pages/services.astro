@@ -77,7 +77,7 @@ const processedServices = await Promise.all(
                 >
                   <h2 class="text-2xl font-serif flex items-center">
                     <span
-                      class="service-icon text-primary"
+                      class="service-icon text-gold"
                       set:html={serviceIcon}
                     />
                     {service.data.title}
@@ -193,7 +193,7 @@ const processedServices = await Promise.all(
   }
 
   .accordion-header.active .service-icon svg {
-    color: theme("colors.primary.DEFAULT");
+    color: theme("colors.gold");
   }
 
   /* Custom animation classes for services page */
