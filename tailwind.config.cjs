@@ -42,10 +42,6 @@ function hexToRgb(hex) {
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   theme: {
     extend: {
       colors: {
@@ -79,11 +75,11 @@ module.exports = {
         primary: currentTheme.text.primary,
         secondary: currentTheme.text.secondary,
         muted: currentTheme.text.muted,
-
+        
         heading: currentTheme.primary,
         'heading-secondary': currentTheme.text.primary, // White for secondary headings
         'heading-subtle': currentTheme.text.secondary,  // New lighter gray for subtle headings
-
+        
         'on-primary': currentTheme.background.primary, // Text on gold buttons will be the new very dark background
         'on-gold': currentTheme.background.primary,
         gold: currentTheme.primary,
