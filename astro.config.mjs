@@ -12,6 +12,7 @@ export default defineConfig({
   adapter: cloudflare({
     mode: 'directory'
   }),
+  output: 'static',
   integrations: [
     tailwind({
       config: { darkMode: 'class' },
@@ -22,22 +23,38 @@ export default defineConfig({
     keystatic(),
   ],
   build: {
-    assets: '_assets'
+    assets: '_assets',
+    inlineStylesheets: 'auto'
   },
-  output: 'static',
   markdown: {
     shikiConfig: {
       theme: 'github-dark'
     }
   },
   prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport'
+    prefetchAll: false,
+    defaultStrategy: 'hover'
+  },
+  image: {
+    domains: ['apr-artist-agency.pages.dev'],
+    remotePatterns: [{
+      protocol: 'https'
+    }]
   },
   viewTransitions: true,
   vite: {
     define: {
       global: 'globalThis'
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': ['react', 'react-dom'],
+            'cms': ['@keystatic/core', '@keystatic/astro']
+          }
+        }
+      }
     },
     ssr: {
       noExternal: ['@keystatic/core', '@keystatic/astro']

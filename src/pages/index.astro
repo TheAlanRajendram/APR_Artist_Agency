@@ -244,88 +244,117 @@ const singleRowBrands = brandsToShow;
 
   <script is:inline>
     document.addEventListener("astro:page-load", async function () {
-      // Load Swiper CSS and JS asynchronously
+      // Only load Swiper when portfolio section is visible or user scrolls near it
+      const portfolioSection = document.querySelector(".portfolio-swiper");
+      if (!portfolioSection) return;
+
       const loadSwiper = async () => {
         if (typeof Swiper === "undefined") {
-          // Load CSS
+          // Load CSS with optimized priority
           const link = document.createElement("link");
           link.rel = "stylesheet";
           link.href =
             "https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css";
+          link.media = "print";
+          link.onload = function () {
+            this.media = "all";
+          };
           document.head.appendChild(link);
 
-          // Load JS
+          // Load JS with defer
           const script = document.createElement("script");
           script.src =
             "https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js";
+          script.defer = true;
           document.head.appendChild(script);
 
-          // Wait for script to load
           await new Promise((resolve) => {
             script.onload = resolve;
           });
         }
       };
 
-      await loadSwiper();
+      // Use intersection observer to load Swiper only when needed
+      const observer = new IntersectionObserver(
+        async (entries) => {
+          if (entries[0].isIntersecting) {
+            await loadSwiper();
+            observer.disconnect();
+            initSwiper();
+          }
+        },
+        { rootMargin: "100px" }
+      );
 
-      function playOnlyFocusedVideo(swiperInstance) {
-        const allVideos = swiperInstance.el.querySelectorAll("video");
-        allVideos.forEach((video) => {
-          video.pause();
-          video.currentTime = 0;
-          video.style.opacity = "0";
-        });
-        const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
-        const video = activeSlide.querySelector("video");
-        if (video) {
-          video.muted = true;
-          video.playbackRate = 1;
-          video
-            .play()
-            .then(() => {
-              video.style.opacity = "1";
-            })
-            .catch(() => {});
+      observer.observe(portfolioSection);
+
+      // Fallback: load after 3 seconds if not observed
+      setTimeout(async () => {
+        if (typeof Swiper === "undefined") {
+          await loadSwiper();
+          initSwiper();
         }
-      }
+      }, 3000);
 
-      const swiper = new Swiper(".portfolio-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        centeredSlides: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        },
-        effect: "slide",
-        speed: 600,
-        breakpoints: {
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 30 }
-        },
-        on: {
-          init: function (swiper) {
-            playOnlyFocusedVideo(swiper);
-          },
-          slideChangeTransitionEnd: function (swiper) {
-            playOnlyFocusedVideo(swiper);
+      function initSwiper() {
+        function playOnlyFocusedVideo(swiperInstance) {
+          const allVideos = swiperInstance.el.querySelectorAll("video");
+          allVideos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+            video.style.opacity = "0";
+          });
+          const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
+          const video = activeSlide.querySelector("video");
+          if (video) {
+            video.muted = true;
+            video.playbackRate = 1;
+            video
+              .play()
+              .then(() => {
+                video.style.opacity = "1";
+              })
+              .catch(() => {});
           }
         }
-      });
 
-      // Pause/resume autoplay on hover
-      const sliderEl = document.querySelector(".portfolio-swiper");
-      if (sliderEl) {
-        sliderEl.addEventListener("mouseenter", () => {
-          swiper.autoplay.stop();
+        const swiper = new Swiper(".portfolio-swiper", {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: true,
+          centeredSlides: true,
+          autoplay: { delay: 3000, disableOnInteraction: false },
+          pagination: { el: ".swiper-pagination", clickable: true },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev"
+          },
+          effect: "slide",
+          speed: 600,
+          breakpoints: {
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 }
+          },
+          on: {
+            init: function (swiper) {
+              playOnlyFocusedVideo(swiper);
+            },
+            slideChangeTransitionEnd: function (swiper) {
+              playOnlyFocusedVideo(swiper);
+            }
+          }
         });
-        sliderEl.addEventListener("mouseleave", () => {
-          swiper.autoplay.start();
-        });
+
+        // Pause/resume autoplay on hover
+        const sliderEl = document.querySelector(".portfolio-swiper");
+        if (sliderEl) {
+          sliderEl.addEventListener("mouseenter", () => {
+            swiper.autoplay.stop();
+          });
+          sliderEl.addEventListener("mouseleave", () => {
+            swiper.autoplay.start();
+          });
+        }
       }
     });
   </script>

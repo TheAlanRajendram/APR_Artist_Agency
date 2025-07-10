@@ -189,6 +189,8 @@ const { title, transparentNavbar = false } = Astro.props;
               style="height: 48px;"
               class="mr-3"
               loading="eager"
+              width="72"
+              height="48"
             />
           </a>
           <div class="hidden md:flex space-x-6 items-center relative z-10">
@@ -394,20 +396,29 @@ const { title, transparentNavbar = false } = Astro.props;
       }
     </style>
 
-    <script>
-      // Initialize global lazy loading enhancement
-      import("../scripts/enhanceLazyLoading.js").then((module) => {
-        if (module.initAllLazyLoading) {
-          module.initAllLazyLoading();
-        }
-      });
+    <script defer>
+      // Initialize global lazy loading enhancement with slight delay for better performance
+      const initLazyFeatures = () => {
+        import("../scripts/enhanceLazyLoading.js").then((module) => {
+          if (module.initAllLazyLoading) {
+            module.initAllLazyLoading();
+          }
+        });
 
-      // Initialize lazy animations
-      import("../scripts/lazyAnimations.js").then((module) => {
-        if (module.initLazyAnimations) {
-          module.initLazyAnimations();
-        }
-      });
+        // Initialize lazy animations
+        import("../scripts/lazyAnimations.js").then((module) => {
+          if (module.initLazyAnimations) {
+            module.initLazyAnimations();
+          }
+        });
+      };
+
+      // Use requestIdleCallback with fallback for older browsers
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(initLazyFeatures, { timeout: 2000 });
+      } else {
+        setTimeout(initLazyFeatures, 100);
+      }
 
       // Global variables to track current event listeners
       let mobileMenuInitialized = false;
