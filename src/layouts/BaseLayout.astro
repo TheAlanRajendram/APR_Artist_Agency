@@ -10,7 +10,6 @@ interface Props {
 }
 
 const { title, transparentNavbar = false } = Astro.props;
-const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -21,9 +20,6 @@ const currentYear = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -74,13 +70,20 @@ const currentYear = new Date().getFullYear();
             />
           </a>
           <div class="hidden md:flex space-x-6 items-center relative z-10">
-            <a href="/about" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
+            <a
+              href="/about"
+              class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
               >About</a
             >
-            <a href="/services" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
+            <a
+              href="/services"
+              class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
               >Services</a
             >
-            <a href="/work" class="hover:text-primary transition-colors py-2 px-1 cursor-pointer">Work</a
+            <a
+              href="/work"
+              class="hover:text-primary transition-colors py-2 px-1 cursor-pointer"
+              >Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
@@ -310,7 +313,7 @@ const currentYear = new Date().getFullYear();
       document.addEventListener("astro:page-load", () => {
         // Clean up previous event listeners to prevent accumulation
         removeAllEventListeners();
-        
+
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById("mobile-menu-button");
         const closeMenuButton = document.getElementById("close-menu-button");
@@ -338,7 +341,7 @@ const currentYear = new Date().getFullYear();
               header.classList.remove("bg-dark", "shadow-md");
             }
           };
-          
+
           addTrackedEventListener(window, "scroll", scrollHandler);
         }
 
@@ -349,7 +352,7 @@ const currentYear = new Date().getFullYear();
         function openMenu() {
           if (mobileMenu && !isMenuOpen) {
             isMenuOpen = true;
-            
+
             // Clear any pending animation timeout
             if (menuAnimationTimeout) {
               clearTimeout(menuAnimationTimeout);
@@ -358,7 +361,7 @@ const currentYear = new Date().getFullYear();
 
             // Prevent background scrolling
             body.classList.add("menu-open");
-            
+
             // Show menu immediately
             mobileMenu.classList.remove("hidden");
             mobileMenu.style.opacity = "1";
@@ -369,7 +372,7 @@ const currentYear = new Date().getFullYear();
         function closeMenu() {
           if (mobileMenu && isMenuOpen) {
             isMenuOpen = false;
-            
+
             // Clear any pending animation timeout
             if (menuAnimationTimeout) {
               clearTimeout(menuAnimationTimeout);
@@ -381,7 +384,7 @@ const currentYear = new Date().getFullYear();
             // Start hide animation
             mobileMenu.style.opacity = "0";
             mobileMenu.style.visibility = "hidden";
-            
+
             // Hide menu after animation completes
             menuAnimationTimeout = setTimeout(() => {
               if (mobileMenu && !isMenuOpen) {
@@ -421,7 +424,7 @@ const currentYear = new Date().getFullYear();
               closeMenu();
             }
           };
-          
+
           addTrackedEventListener(document, "click", outsideClickHandler);
 
           // Close mobile menu when clicking a navigation link
@@ -439,7 +442,7 @@ const currentYear = new Date().getFullYear();
               closeMenu();
             }
           };
-          
+
           addTrackedEventListener(document, "keydown", escapeHandler);
         }
 
@@ -453,9 +456,13 @@ const currentYear = new Date().getFullYear();
           const href = link.getAttribute("href");
           // Remove active class from all links first
           link.classList.remove("active-link");
-          
+
           // Add active class to current page link
-          if (href && (currentPath === href || (href !== "/" && currentPath.startsWith(href)))) {
+          if (
+            href &&
+            (currentPath === href ||
+              (href !== "/" && currentPath.startsWith(href)))
+          ) {
             link.classList.add("active-link");
           }
         });

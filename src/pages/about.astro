@@ -2,8 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { marked } from "marked";
-import fs from "node:fs";
-import path from "node:path";
+
 import LazyImage from "../components/LazyImage.astro";
 
 // Get all about sections and sort by order
@@ -23,31 +22,7 @@ const sortedSections = await Promise.all(
   })
 );
 
-// Base URL for assets (now using root paths)
 
-// Get all logo files from the directory
-const logoDir = path.join(process.cwd(), "public", "logos");
-let logoFiles: string[] = [];
-
-try {
-  if (fs.existsSync(logoDir)) {
-    logoFiles = fs
-      .readdirSync(logoDir)
-      .filter((file) => !file.startsWith(".") && file !== "README.md")
-      .filter((file) => /\.(svg|png|jpg|jpeg)$/i.test(file));
-  }
-} catch (error) {
-  console.error("Error reading logo directory:", error);
-}
-
-// Convert logo filename to a display name
-function getDisplayName(filename) {
-  const nameWithoutExt = filename.split(".")[0];
-  return nameWithoutExt
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
 ---
 
 <BaseLayout title="About">

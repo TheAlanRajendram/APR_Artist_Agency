@@ -1,9 +1,4 @@
 /* Card Carousel Styles */
-:root {
-  --gold-color: theme("colors.gold");
-  --gold-rgb: theme("colors.gold");
-  --card-bg: theme("colors.dark.card");
-}
 
 .card-carousel {
   height: 500px;
