@@ -274,6 +274,19 @@ const { title, transparentNavbar = false } = Astro.props;
         -webkit-tap-highlight-color: rgba(255, 215, 0, 0.2);
       }
 
+      /* Add visual feedback when menu link is clicked */
+      #mobile-menu a:active,
+      #mobile-menu a.clicking {
+        background-color: rgba(255, 215, 0, 0.15) !important;
+        transform: scale(0.95) !important;
+      }
+
+      /* Prevent menu from opening during navigation */
+      body[data-navigating="true"] #mobile-menu-button {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+
       /* Improve mobile menu button interaction */
       #mobile-menu-button {
         -webkit-touch-callout: none;
@@ -338,6 +351,19 @@ const { title, transparentNavbar = false } = Astro.props;
       document.addEventListener("astro:page-load", () => {
         // Clean up previous event listeners to prevent accumulation
         removeAllEventListeners();
+
+        // Force reset mobile menu state on page load
+        const pageBody = document.body;
+        const pageMobileMenu = document.getElementById("mobile-menu");
+        if (pageBody) {
+          pageBody.classList.remove("menu-open");
+          pageBody.removeAttribute('data-navigating');
+        }
+        if (pageMobileMenu) {
+          pageMobileMenu.classList.add("hidden");
+          pageMobileMenu.style.opacity = "0";
+          pageMobileMenu.style.visibility = "hidden";
+        }
 
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -425,6 +451,12 @@ const { title, transparentNavbar = false } = Astro.props;
           addTrackedEventListener(mobileMenuButton, "click", (e) => {
             e.preventDefault();
             e.stopPropagation();
+            
+            // Don't open menu if currently navigating
+            if (document.body.getAttribute('data-navigating') === 'true') {
+              return;
+            }
+            
             openMenu();
           });
 
@@ -456,16 +488,24 @@ const { title, transparentNavbar = false } = Astro.props;
           const mobileMenuLinks = mobileMenu.querySelectorAll("a");
           mobileMenuLinks.forEach((link) => {
             addTrackedEventListener(link, "click", (e) => {
-              // Don't prevent default behavior - let the link navigate normally
-              // Only close the menu after a small delay to allow navigation
               const href = link.getAttribute("href");
               
-              // For external links (like mailto), close immediately
-              if (href && (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("http"))) {
-                setTimeout(closeMenu, 100);
-              } else {
-                // For internal navigation, close menu and let Astro handle the transition
-                setTimeout(closeMenu, 50);
+              // Add visual feedback class
+              link.classList.add('clicking');
+              setTimeout(() => link.classList.remove('clicking'), 200);
+              
+              // Close menu immediately for all links
+              closeMenu();
+              
+              // For internal navigation, ensure the menu stays closed
+              if (href && !href.startsWith("mailto:") && !href.startsWith("tel:") && !href.startsWith("http")) {
+                // Add a flag to prevent the menu from reopening during navigation
+                document.body.setAttribute('data-navigating', 'true');
+                
+                // Remove the flag after navigation should be complete
+                setTimeout(() => {
+                  document.body.removeAttribute('data-navigating');
+                }, 1000);
               }
             });
           });
@@ -479,6 +519,31 @@ const { title, transparentNavbar = false } = Astro.props;
 
           addTrackedEventListener(document, "keydown", escapeHandler);
         }
+
+        // Additional handlers for Astro view transitions
+        const beforeSwapHandler = () => {
+          // Ensure menu is closed before page transitions
+          if (isMenuOpen) {
+            closeMenu();
+          }
+        };
+
+        const afterSwapHandler = () => {
+          // Ensure menu stays closed after page transitions
+          if (mobileMenu) {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.style.opacity = "0";
+            mobileMenu.style.visibility = "hidden";
+          }
+          if (body) {
+            body.classList.remove("menu-open");
+          }
+          isMenuOpen = false;
+        };
+
+        // Listen for Astro's view transition events
+        addTrackedEventListener(document, "astro:before-swap", beforeSwapHandler);
+        addTrackedEventListener(document, "astro:after-swap", afterSwapHandler);
 
         // Mark current page as active
         const currentPath = window.location.pathname;
