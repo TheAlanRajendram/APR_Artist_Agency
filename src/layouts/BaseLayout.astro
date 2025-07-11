@@ -520,30 +520,7 @@ const { title, transparentNavbar = false } = Astro.props;
           addTrackedEventListener(document, "keydown", escapeHandler);
         }
 
-        // Additional handlers for Astro view transitions
-        const beforeSwapHandler = () => {
-          // Ensure menu is closed before page transitions
-          if (isMenuOpen) {
-            closeMenu();
-          }
-        };
-
-        const afterSwapHandler = () => {
-          // Ensure menu stays closed after page transitions
-          if (mobileMenu) {
-            mobileMenu.classList.add("hidden");
-            mobileMenu.style.opacity = "0";
-            mobileMenu.style.visibility = "hidden";
-          }
-          if (body) {
-            body.classList.remove("menu-open");
-          }
-          isMenuOpen = false;
-        };
-
-        // Listen for Astro's view transition events
-        addTrackedEventListener(document, "astro:before-swap", beforeSwapHandler);
-        addTrackedEventListener(document, "astro:after-swap", afterSwapHandler);
+        // Additional handlers for Astro view transitions are moved outside to avoid scope issues
 
         // Mark current page as active
         const currentPath = window.location.pathname;
@@ -566,6 +543,45 @@ const { title, transparentNavbar = false } = Astro.props;
           }
         });
       });
+
+      // Astro view transition handlers - outside of page-load scope to avoid variable access issues
+      const beforeSwapHandler = () => {
+        // Find current DOM elements to avoid stale references
+        const currentMobileMenu = document.getElementById("mobile-menu");
+        const currentBody = document.body;
+        
+        // Force close the mobile menu before page transitions
+        if (currentMobileMenu) {
+          currentMobileMenu.classList.add("hidden");
+          currentMobileMenu.style.opacity = "0";
+          currentMobileMenu.style.visibility = "hidden";
+        }
+        if (currentBody) {
+          currentBody.classList.remove("menu-open");
+          currentBody.removeAttribute('data-navigating');
+        }
+      };
+
+      const afterSwapHandler = () => {
+        // Find fresh DOM elements after page swap
+        const freshMobileMenu = document.getElementById("mobile-menu");
+        const freshBody = document.body;
+        
+        // Ensure menu stays closed after page transitions with fresh DOM references
+        if (freshMobileMenu) {
+          freshMobileMenu.classList.add("hidden");
+          freshMobileMenu.style.opacity = "0";
+          freshMobileMenu.style.visibility = "hidden";
+        }
+        if (freshBody) {
+          freshBody.classList.remove("menu-open");
+          freshBody.removeAttribute('data-navigating');
+        }
+      };
+
+      // Listen for Astro's view transition events at document level
+      document.addEventListener("astro:before-swap", beforeSwapHandler);
+      document.addEventListener("astro:after-swap", afterSwapHandler);
 
       // Force dark mode only, no theme switching
       document.documentElement.classList.add("dark");
