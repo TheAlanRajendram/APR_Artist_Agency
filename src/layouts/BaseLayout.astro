@@ -139,22 +139,22 @@ const { title, transparentNavbar = false } = Astro.props;
           <div class="py-8 space-y-8 text-center w-full max-w-md">
             <a
               href="/about"
-              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-4 px-4 border-b border-dark-accent touch-manipulation min-h-[60px] flex items-center justify-center"
               >About</a
             >
             <a
               href="/services"
-              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-4 px-4 border-b border-dark-accent touch-manipulation min-h-[60px] flex items-center justify-center"
               >Services</a
             >
             <a
               href="/work"
-              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-3 border-b border-dark-accent"
+              class="block hover:text-primary transition-colors text-4xl font-serif font-medium py-4 px-4 border-b border-dark-accent touch-manipulation min-h-[60px] flex items-center justify-center"
               >Work</a
             >
             <a
               href="mailto:info@apr-artistagency.com"
-              class="flex items-center border border-primary text-2xl text-primary px-6 py-2 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium mx-auto w-max mt-6"
+              class="flex items-center justify-center border border-primary text-2xl text-primary px-6 py-4 rounded-full hover:bg-primary hover:text-on-primary transition-colors font-medium mx-auto w-max mt-6 touch-manipulation min-h-[60px]"
               >Get in touch</a
             >
             <!-- Social Media Links in Mobile Menu -->
@@ -226,6 +226,23 @@ const { title, transparentNavbar = false } = Astro.props;
         transform: translateY(-2px);
       }
 
+      /* Improve mobile menu touch targets */
+      #mobile-menu a {
+        min-height: 44px; /* Minimum touch target size */
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.2);
+        background-color: transparent;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      #mobile-menu a:active {
+        background-color: rgba(255, 215, 0, 0.1);
+        transform: scale(0.98);
+      }
+
       /* Prevent scrolling when menu is open */
       :global(body.menu-open) {
         overflow: hidden;
@@ -241,12 +258,20 @@ const { title, transparentNavbar = false } = Astro.props;
         display: block;
         text-decoration: none;
         -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+        touch-action: manipulation;
+      }
+
+      /* Mobile menu links need different handling */
+      #mobile-menu a {
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.2);
       }
 
       /* Improve mobile menu button interaction */
@@ -430,9 +455,18 @@ const { title, transparentNavbar = false } = Astro.props;
           // Close mobile menu when clicking a navigation link
           const mobileMenuLinks = mobileMenu.querySelectorAll("a");
           mobileMenuLinks.forEach((link) => {
-            addTrackedEventListener(link, "click", () => {
-              // Small delay to allow navigation to start before closing menu
-              setTimeout(closeMenu, 50);
+            addTrackedEventListener(link, "click", (e) => {
+              // Don't prevent default behavior - let the link navigate normally
+              // Only close the menu after a small delay to allow navigation
+              const href = link.getAttribute("href");
+              
+              // For external links (like mailto), close immediately
+              if (href && (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("http"))) {
+                setTimeout(closeMenu, 100);
+              } else {
+                // For internal navigation, close menu and let Astro handle the transition
+                setTimeout(closeMenu, 50);
+              }
             });
           });
 
